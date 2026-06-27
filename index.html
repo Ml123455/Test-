@@ -3,428 +3,479 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BotForge — Boostez votre serveur Discord avec l'IA</title>
-<meta name="description" content="Un bot IA pour votre serveur Discord. IA conversationnelle, modération, commandes gaming. Hébergé en France. Essai gratuit 7 jours.">
+<title>BotForge — Bots Discord IA pour votre communauté</title>
+<meta name="description" content="Donnez une IA à votre serveur Discord. Conversation naturelle, modération automatique, commandes gaming. Hébergé en France. Essai gratuit 7 jours.">
 <meta property="og:title" content="BotForge — Bots Discord IA">
-<meta property="og:description" content="Votre serveur Discord mérite une IA. 24h/24, modération auto, commandes gaming. France.">
+<meta property="og:description" content="Votre serveur Discord mérite une IA. 24h/24, modération, gaming. France.">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#08080a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-    --bg: #0a0a0b; --bg-card: #141416; --bg-hover: #1a1a1d;
-    --border: #2a2a2e; --text: #e4e4e7; --text-dim: #888892;
-    --accent: #6366f1; --accent-hover: #818cf8;
-    --green: #22c55e; --green-bg: #052e16;
-    --yellow: #f59e0b; --red: #ef4444; --red-bg: #2d0b0b;
-    --radius: 8px;
+/* ═══════════ RESET & ROOT ═══════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;max-width:100vw;overflow-x:hidden}
+body{max-width:100vw;overflow-x:hidden}
+:root{
+  --bg:#08080a;--bg2:#0d0d10;--bg3:#111114;--bg4:#18181c;
+  --text:#f5f5f6;--text2:#a0a0a8;--text3:#6b6b73;
+  --purple:#5c6cf0;--purple-h:#717eff;--purple-g:rgba(92,108,240,0.12);
+  --green:#22c55e;--green-g:rgba(34,197,94,0.1);
+  --red:#ef4444;--red-g:rgba(239,68,68,0.1);
+  --b-subtle:rgba(255,255,255,0.06);--b-std:rgba(255,255,255,0.1);
+  --radius:8px;--radius-lg:12px;--radius-xl:16px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --max-w:1100px;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
-a { color: var(--accent); text-decoration: none; }
-a:hover { color: var(--accent-hover); }
-.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
 
-/* Nav */
-.nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; border-bottom: 1px solid var(--border); background: var(--bg-card); position: sticky; top: 0; z-index: 100; }
-.nav-logo { font-size: 20px; font-weight: 700; color: var(--text); }
-.nav-links { display: flex; gap: 24px; align-items: center; }
-.nav-links a { color: var(--text-dim); font-size: 14px; }
-.nav-links a:hover { color: var(--text); }
+/* ═══════════ BASE ═══════════ */
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--purple);text-decoration:none;transition:color .15s}
+a:hover{color:var(--purple-h)}
+img,svg,video{max-width:100%;height:auto}
+.container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
 
-/* Buttons */
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; border-radius: var(--radius); font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; }
-.btn-primary { background: var(--accent); color: white; }
-.btn-primary:hover { background: var(--accent-hover); color: white; }
-.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-.btn-lg { padding: 14px 32px; font-size: 16px; }
-.btn-xl { padding: 18px 40px; font-size: 18px; }
+/* ═══════════ BUTTONS ═══════════ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 28px;border-radius:var(--radius);font-family:var(--font);font-size:15px;font-weight:600;cursor:pointer;border:none;transition:all .2s cubic-bezier(.4,0,.2,1);white-space:nowrap;min-height:48px}
+.btn-primary{background:var(--purple);color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3),0 0 0 1px rgba(92,108,240,.3)}
+.btn-primary:hover{background:var(--purple-h);color:#fff;box-shadow:0 4px 14px rgba(92,108,240,.35),0 0 0 1px rgba(113,126,255,.4);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--b-std)}
+.btn-outline:hover{border-color:rgba(255,255,255,.25);color:var(--text);background:rgba(255,255,255,.03)}
+.btn-lg{padding:16px 36px;font-size:16px;min-height:56px}
+.btn-sm{padding:8px 20px;font-size:13px;min-height:40px}
+.btn-white{background:#fff;color:#08080a;font-weight:600}
+.btn-white:hover{background:#e8e8ed;color:#08080a;transform:translateY(-1px);box-shadow:0 4px 14px rgba(255,255,255,.2)}
 
-/* Card */
-.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
-
-/* Hero */
-.sales-hero { text-align: center; padding: 80px 24px 60px; background: linear-gradient(180deg, #0a0a0b 0%, #141416 100%); }
-.sales-hero .badge-pill { display: inline-block; background: rgba(99,102,241,0.15); color: var(--accent); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 24px; }
-.sales-hero h1 { font-size: 52px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; }
-.sales-hero h1 span { color: var(--accent); }
-.sales-hero .subtitle { font-size: 18px; color: var(--text-dim); max-width: 550px; margin: 0 auto 36px; }
-.hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
-/* Proof bar */
-.proof-bar { display: flex; justify-content: center; gap: 48px; padding: 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-card); }
-.proof-item { text-align: center; }
-.proof-item .num { font-size: 22px; font-weight: 700; color: var(--accent); }
-.proof-item .label { font-size: 12px; color: var(--text-dim); }
-
-/* Sections */
-.section { padding: 80px 0; }
-.section-dark { background: var(--bg-card); }
-.section-label { text-transform: uppercase; font-size: 12px; letter-spacing: 2px; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
-.section h2 { font-size: 36px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 16px; }
-.section .desc { font-size: 16px; color: var(--text-dim); max-width: 560px; margin-bottom: 48px; }
-.section.centered { text-align: center; }
-.section.centered .desc { margin-left: auto; margin-right: auto; }
-
-/* Steps */
-.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px; }
-.step-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 32px; }
-.step-num { width: 40px; height: 40px; background: var(--accent); color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; margin-bottom: 16px; }
-.step-card h3 { font-size: 18px; margin-bottom: 8px; }
-.step-card p { font-size: 14px; color: var(--text-dim); }
-
-/* Demo chat */
-.demo-chat { max-width: 640px; margin: 0 auto; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-.demo-header { background: var(--bg-hover); padding: 12px 16px; font-size: 13px; font-weight: 600; color: var(--text-dim); border-bottom: 1px solid var(--border); }
-.demo-msg { display: flex; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 14px; }
-.demo-msg .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
-.demo-msg .avatar.user { background: #475569; }
-.demo-msg .body { flex: 1; }
-.demo-msg .name { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
-.demo-msg .name .time { font-weight: 400; color: var(--text-dim); font-size: 11px; margin-left: 8px; }
-
-/* Feature grid */
-.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-.feature-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
-.feature-card .icon { font-size: 28px; margin-bottom: 12px; }
-.feature-card h3 { font-size: 17px; margin-bottom: 6px; }
-.feature-card .desc { font-size: 14px; color: var(--text-dim); margin-bottom: 0; }
-
-/* Comparison */
-.compare-table { width: 100%; border-collapse: collapse; }
-.compare-table th { text-align: left; font-size: 13px; padding: 14px 16px; border-bottom: 1px solid var(--border); }
-.compare-table th:first-child { width: 40%; }
-.compare-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--border); }
-.compare-table .check { color: var(--green); font-weight: 700; }
-.compare-table .cross { color: var(--red); }
-
-/* Pricing */
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-.plan { text-align: center; position: relative; }
-.plan.popular { border-color: var(--accent); }
-.plan-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; white-space: nowrap; }
-.plan h3 { font-size: 20px; margin-bottom: 8px; }
-.plan-price { font-size: 42px; font-weight: 800; margin: 16px 0; }
-.plan-price small { font-size: 16px; color: var(--text-dim); font-weight: 400; }
-.plan-features { list-style: none; text-align: left; margin: 24px 0; }
-.plan-features li { padding: 8px 0; font-size: 14px; color: var(--text-dim); border-bottom: 1px solid var(--border); }
-.plan-features li:before { content: '✓ '; color: var(--green); font-weight: 700; }
-
-/* FAQ */
-.faq-list { max-width: 700px; margin: 0 auto; }
-.faq-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
-.faq-q { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-.faq-a { font-size: 14px; color: var(--text-dim); }
-
-/* CTA */
-.cta-section { text-align: center; padding: 80px 24px; background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg) 100%); }
-.cta-section h2 { font-size: 36px; font-weight: 800; margin-bottom: 12px; }
-.cta-section p { color: var(--text-dim); margin-bottom: 32px; font-size: 16px; }
-
-/* Footer */
-.footer { text-align: center; padding: 40px; color: var(--text-dim); font-size: 13px; border-top: 1px solid var(--border); }
-
-/* Newsletter form */
-.contact-form { max-width: 440px; margin: 0 auto; display: flex; gap: 8px; }
-.contact-form input {
-    flex: 1; padding: 14px 18px; background: var(--bg);
-    border: 1px solid var(--border); border-radius: var(--radius);
-    color: var(--text); font-size: 16px;
+/* ═══════════ NAV ═══════════ */
+.nav{position:sticky;top:0;z-index:100;background:rgba(8,8,10,.85);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--b-subtle)}
+.nav .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-size:20px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;letter-spacing:-0.3px}
+.nav-logo span.gradient{background:linear-gradient(135deg,var(--purple),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:14px;font-weight:500;color:var(--text2)}
+.nav-links a:hover{color:var(--text)}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav .container{height:56px}
 }
-.contact-form input:focus { outline: none; border-color: var(--accent); }
 
-@media (max-width: 768px) {
-    .sales-hero h1 { font-size: 32px; }
-    .proof-bar { gap: 20px; flex-wrap: wrap; }
-    .nav { padding: 12px 16px; }
-    .nav-links { gap: 14px; }
-    .section { padding: 48px 0; }
+/* ═══════════ SECTIONS ═══════════ */
+.section{padding:96px 0}
+.section-sm{padding:64px 0}
+.section-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--purple);margin-bottom:16px;display:inline-block}
+.section-title{font-size:44px;font-weight:800;letter-spacing:-1.2px;line-height:1.1;margin-bottom:20px;color:var(--text)}
+.section-subtitle{font-size:18px;color:var(--text2);max-width:540px;line-height:1.6;font-weight:400}
+.section.centered .section-subtitle{margin-left:auto;margin-right:auto}
+
+/* ═══════════ HERO ═══════════ */
+.hero{padding:100px 0 80px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(92,108,240,.15),transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--purple-g);color:var(--purple-h);padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:28px;border:1px solid rgba(92,108,240,.15)}
+.hero-badge .dot{width:6px;height:6px;background:var(--purple);border-radius:50%;animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(36px,7vw,64px);font-weight:800;letter-spacing:-2px;line-height:1.05;margin-bottom:24px;max-width:800px;margin-left:auto;margin-right:auto}
+.hero h1 span{background:linear-gradient(135deg,var(--purple),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:18px;color:var(--text2);max-width:500px;margin:0 auto 40px;line-height:1.7;font-weight:400}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ═══════════ PROOF BAR ═══════════ */
+.proof{display:flex;justify-content:center;gap:clamp(20px,6vw,64px);padding:28px 24px;border-top:1px solid var(--b-subtle);border-bottom:1px solid var(--b-subtle);background:var(--bg2);flex-wrap:wrap}
+.proof-item{text-align:center;min-width:80px}
+.proof-num{font-size:24px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
+.proof-label{font-size:12px;color:var(--text3);margin-top:4px;font-weight:500}
+
+/* ═══════════ SECTION STYLES ═══════════ */
+.bg-alt{background:var(--bg2)}
+
+/* ═══════════ LOGOS / CLIENTS ═══════════ */
+.logos{display:flex;justify-content:center;align-items:center;gap:clamp(24px,6vw,48px);padding:32px 0;flex-wrap:wrap;opacity:.5}
+.logos img,.logos span{font-size:18px;font-weight:700;color:var(--text3);letter-spacing:-0.3px}
+
+/* ═══════════ STEPS ═══════════ */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:48px}
+.step{background:var(--bg3);border:1px solid var(--b-subtle);border-radius:var(--radius-lg);padding:32px;position:relative;transition:border-color .2s,transform .2s}
+.step:hover{border-color:rgba(92,108,240,.2);transform:translateY(-2px)}
+.step-num{width:44px;height:44px;background:var(--purple-g);color:var(--purple-h);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;margin-bottom:20px;border:1px solid rgba(92,108,240,.15)}
+.step h3{font-size:18px;font-weight:600;margin-bottom:8px;letter-spacing:-0.3px}
+.step p{font-size:14px;color:var(--text2);line-height:1.6}
+
+/* ═══════════ DEMO CHAT ═══════════ */
+.demo-chat{max-width:600px;margin:48px auto 0;background:var(--bg3);border:1px solid var(--b-std);border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.demo-bar{background:var(--bg4);padding:10px 16px;font-size:12px;font-weight:600;color:var(--text3);border-bottom:1px solid var(--b-subtle);display:flex;align-items:center;gap:8px}
+.demo-bar .circle{width:8px;height:8px;border-radius:50%;background:var(--purple)}
+.demo-msg{display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--b-subtle);font-size:14px;line-height:1.5}
+.demo-msg:last-child{border-bottom:none}
+.demo-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.demo-avatar.bot{background:var(--purple);color:#fff}
+.demo-avatar.user{background:#334155;color:#e2e8f0}
+.demo-body{flex:1;min-width:0}
+.demo-name{font-weight:600;font-size:12px;margin-bottom:4px;color:var(--text2)}
+.demo-name .time{font-weight:400;color:var(--text3);margin-left:8px;font-size:11px}
+
+/* ═══════════ FEATURES ═══════════ */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:48px}
+.feat{background:var(--bg3);border:1px solid var(--b-subtle);border-radius:var(--radius-lg);padding:28px;transition:border-color .2s}
+.feat:hover{border-color:rgba(92,108,240,.15)}
+.feat-icon{font-size:24px;margin-bottom:16px;display:block}
+.feat h3{font-size:16px;font-weight:600;margin-bottom:6px;letter-spacing:-0.2px}
+.feat p{font-size:14px;color:var(--text2);line-height:1.6}
+
+/* ═══════════ COMPARISON ═══════════ */
+.compare-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:40px;border:1px solid var(--b-subtle);border-radius:var(--radius-lg);background:var(--bg3)}
+.compare-wrap::-webkit-scrollbar{height:4px}
+.compare-wrap::-webkit-scrollbar-thumb{background:var(--b-std);border-radius:2px}
+.compare{width:100%;border-collapse:collapse;min-width:560px}
+.compare th{text-align:left;padding:14px 20px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);border-bottom:1px solid var(--b-subtle)}
+.compare th:first-child{width:40%}
+.compare td{padding:14px 20px;font-size:14px;border-bottom:1px solid var(--b-subtle);color:var(--text2)}
+.compare tr:last-child td{border-bottom:none}
+.compare .check{color:var(--green);font-weight:600}
+.compare .cross{color:var(--text3)}
+.compare .highlight td{background:rgba(92,108,240,.05)}
+
+/* ═══════════ PRICING ═══════════ */
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px;margin-top:48px;align-items:start}
+.plan{background:var(--bg3);border:1px solid var(--b-subtle);border-radius:var(--radius-lg);padding:32px;position:relative;text-align:left;transition:border-color .2s}
+.plan.popular{border-color:rgba(92,108,240,.3);box-shadow:0 0 40px rgba(92,108,240,.08)}
+.plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--purple);color:#fff;padding:4px 16px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.plan h3{font-size:20px;font-weight:700;margin-bottom:4px;letter-spacing:-0.3px}
+.plan .price{font-size:48px;font-weight:800;letter-spacing:-1.5px;margin:16px 0;color:var(--text)}
+.plan .price small{font-size:16px;font-weight:400;color:var(--text2);letter-spacing:0}
+.plan ul{list-style:none;margin:24px 0}
+.plan li{padding:8px 0;font-size:14px;color:var(--text2);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--b-subtle)}
+.plan li:last-child{border-bottom:none}
+.plan li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+.plan .btn{width:100%;margin-top:8px}
+
+/* ═══════════ FAQ ═══════════ */
+.faq{max-width:680px;margin:48px auto 0}
+.faq-item{border-bottom:1px solid var(--b-subtle);padding:24px 0}
+.faq-item:first-child{padding-top:0}
+.faq-q{font-size:16px;font-weight:600;margin-bottom:8px;letter-spacing:-0.2px;cursor:default}
+.faq-a{font-size:14px;color:var(--text2);line-height:1.7}
+
+/* ═══════════ CTA ═══════════ */
+.cta{text-align:center;padding:96px 0;background:linear-gradient(180deg,var(--bg2),var(--bg));position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(92,108,240,.1),transparent 70%);pointer-events:none}
+.cta h2{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-1.2px;margin-bottom:16px}
+.cta p{font-size:17px;color:var(--text2);margin-bottom:32px}
+.cta .btn{margin:0 6px}
+.cta-note{font-size:13px;color:var(--text3);margin-top:20px}
+
+/* ═══════════ FOOTER ═══════════ */
+.footer{border-top:1px solid var(--b-subtle);padding:48px 24px;text-align:center}
+.footer p{font-size:13px;color:var(--text3)}
+.footer a{color:var(--text2)}
+.footer a:hover{color:var(--text)}
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media(max-width:768px){
+  .section{padding:64px 0}
+  .section-title{font-size:32px;letter-spacing:-0.8px}
+  .hero{padding:64px 0 48px}
+  .hero h1{letter-spacing:-1px}
+  .container{padding:0 16px}
+  .features{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .pricing{grid-template-columns:1fr}
+  .plan{padding:24px}
+  .cta{padding:64px 0}
 }
+
+/* ═══════════ ANIMATIONS ═══════════ */
+.fade-in{opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav class="nav">
-    <a href="#" class="nav-logo">⚡ BotForge</a>
+  <div class="container">
+    <a href="#" class="nav-logo">⚡ <span class="gradient">BotForge</span></a>
     <div class="nav-links">
-        <a href="#comment">Comment ça marche</a>
-        <a href="#demo">Démo</a>
-        <a href="#tarifs">Tarifs</a>
-        <a href="#contact" class="btn btn-primary">Essai gratuit</a>
+      <a href="#comment">Comment ça marche</a>
+      <a href="#demo">Démo</a>
+      <a href="#features">Fonctionnalités</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#contact" class="btn btn-primary btn-sm">Essai gratuit</a>
     </div>
+  </div>
 </nav>
 
-<!-- Hero -->
-<section class="sales-hero">
-    <div class="badge-pill">🚀 Lancement — Places limitées</div>
-    <h1>Un bot IA pour votre<br>serveur Discord, <span>sans effort</span></h1>
-    <p class="subtitle">Vos membres posent des questions 24h/24. Votre bot répond, modère, et anime votre communauté pendant que vous dormez.</p>
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge"><span class="dot"></span> Lancement — Offre early adopter</div>
+    <h1>Votre serveur Discord<br>mérite une <span>vraie IA</span></h1>
+    <p>Pendant que vous dormez, votre bot répond aux questions, modère les discussions et anime votre communauté. Zéro effort, 100% France.</p>
     <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary btn-lg">Demander un essai gratuit</a>
-        <a href="#demo" class="btn btn-outline btn-lg">Voir une démo ↓</a>
+      <a href="#contact" class="btn btn-primary btn-lg">Commencer l'essai gratuit</a>
+      <a href="#demo" class="btn btn-outline btn-lg">Voir la démo ↓</a>
     </div>
+  </div>
 </section>
 
-<!-- Social proof -->
-<div class="proof-bar">
-    <div class="proof-item"><div class="num">&lt;2s</div><div class="label">Temps de réponse</div></div>
-    <div class="proof-item"><div class="num">99.9%</div><div class="label">Disponibilité</div></div>
-    <div class="proof-item"><div class="num">🇫🇷</div><div class="label">Hébergé en France</div></div>
-    <div class="proof-item"><div class="num">5 min</div><div class="label">Pour installer</div></div>
-    <div class="proof-item"><div class="num">7j</div><div class="label">Essai gratuit</div></div>
+<!-- PROOF BAR -->
+<div class="proof">
+  <div class="proof-item"><div class="proof-num">&lt;2s</div><div class="proof-label">Temps de réponse</div></div>
+  <div class="proof-item"><div class="proof-num">99.9%</div><div class="proof-label">Disponibilité</div></div>
+  <div class="proof-item"><div class="proof-num">🇫🇷</div><div class="proof-label">Hébergé en France</div></div>
+  <div class="proof-item"><div class="proof-num">5 min</div><div class="proof-label">Pour installer</div></div>
+  <div class="proof-item"><div class="proof-num">7 jours</div><div class="proof-label">Essai gratuit</div></div>
 </div>
 
-<!-- How it works -->
-<div class="section centered" id="comment">
-    <div class="container">
-        <div class="section-label">Comment ça marche</div>
-        <h2>Votre bot en 3 étapes</h2>
-        <p class="desc">Pas besoin d'être développeur. Vous connectez votre serveur, vous choisissez ce que le bot fait, et c'est parti.</p>
-        <div class="steps" style="text-align:left;">
-            <div class="step-card">
-                <div class="step-num">1</div>
-                <h3>Vous réservez votre essai</h3>
-                <p>Remplissez le formulaire ci-dessous. On vous répond dans la journée pour activer votre essai gratuit de 7 jours. Sans engagement.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-num">2</div>
-                <h3>On installe le bot sur votre serveur</h3>
-                <p>Un lien d'invitation, un clic. Le bot arrive avec ses commandes, son IA, et sa configuration de base. 5 minutes chrono.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-num">3</div>
-                <h3>Votre communauté décolle</h3>
-                <p>Vos membres posent des questions, le bot répond. Vous gérez tout depuis votre dashboard : stats, personnalisation, logs.</p>
-            </div>
+<!-- HOW IT WORKS -->
+<section class="section centered" id="comment">
+  <div class="container">
+    <span class="section-label">Comment ça marche</span>
+    <h2 class="section-title">Votre bot en trois étapes</h2>
+    <p class="section-subtitle">Pas besoin d'être développeur. Un clic pour inviter le bot, et votre serveur prend vie.</p>
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-num">1</div>
+        <h3>Vous réservez votre essai</h3>
+        <p>Remplissez le formulaire. On active votre essai gratuit de 7 jours dans la journée. Sans engagement, sans carte bancaire.</p>
+      </div>
+      <div class="step fade-in delay-1">
+        <div class="step-num">2</div>
+        <h3>On installe le bot sur votre serveur</h3>
+        <p>Un lien d'invitation, un clic. Le bot arrive avec ses commandes, son IA et sa configuration. 5 minutes montre en main.</p>
+      </div>
+      <div class="step fade-in delay-2">
+        <div class="step-num">3</div>
+        <h3>Votre communauté décolle</h3>
+        <p>Vos membres discutent avec le bot, participent aux tournois, et vous gérez tout depuis votre dashboard privé.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="section section-sm bg-alt centered" id="demo">
+  <div class="container">
+    <span class="section-label">Démonstration</span>
+    <h2 class="section-title">Ce que vos membres voient</h2>
+    <p class="section-subtitle">Extrait réel d'une conversation sur un serveur gaming. Pas de maquette, pas de mockup.</p>
+    <div class="demo-chat">
+      <div class="demo-bar"><span class="circle"></span> #général — Serveur Gaming FR</div>
+      <div class="demo-msg">
+        <div class="demo-avatar user">S</div>
+        <div class="demo-body">
+          <div class="demo-name">xDarkSlayer_x<span class="time">21:15</span></div>
+          C'est quoi le meilleur perso sur Valorant pour débuter ?
         </div>
-    </div>
-</div>
-
-<!-- Demo -->
-<div class="section section-dark centered" id="demo">
-    <div class="container">
-        <div class="section-label">Démonstration</div>
-        <h2>Ce que vos membres voient</h2>
-        <p class="desc">Voici à quoi ressemble une conversation réelle avec le bot sur un serveur gaming.</p>
-        <div class="demo-chat">
-            <div class="demo-header">🎮 #général — Serveur Gaming FR</div>
-            <div class="demo-msg">
-                <div class="avatar user">S</div>
-                <div class="body">
-                    <div class="name">xDarkSlayer_x <span class="time">21:15</span></div>
-                    C'est quoi le meilleur perso sur Valorant pour un débutant ?
-                </div>
-            </div>
-            <div class="demo-msg">
-                <div class="avatar">🤖</div>
-                <div class="body">
-                    <div class="name">GameBot <span class="time">21:15</span></div>
-                    Salut ! Pour débuter, je te conseille <strong>Sage</strong> ou <strong>Phoenix</strong>. Sage est facile à prendre en main (soin, résurrection, murs défensifs) et Phoenix a un flash + auto-heal très intuitif. Tu veux que je te détaille leurs capacités ? 🔥
-                </div>
-            </div>
-            <div class="demo-msg">
-                <div class="avatar user">L</div>
-                <div class="body">
-                    <div class="name">LeGamerDu92 <span class="time">21:18</span></div>
-                    /rank
-                </div>
-            </div>
-            <div class="demo-msg">
-                <div class="avatar">🤖</div>
-                <div class="body">
-                    <div class="name">GameBot <span class="time">21:18</span></div>
-                    <strong>🏆 Classement Valorant</strong><br>
-                    🥇 xDarkSlayer_x — Platine 2 (1420 pts)<br>
-                    🥈 ProGamerFR — Or 3 (1180 pts)<br>
-                    🥉 LeGamerDu92 — Or 1 (950 pts)<br>
-                    4. Newbie_2004 — Argent 2 (720 pts)
-                </div>
-            </div>
-            <div class="demo-msg">
-                <div class="avatar user">P</div>
-                <div class="body">
-                    <div class="name">ProGamerFR <span class="time">21:20</span></div>
-                    /tournoi Valorant samedi 20h 16 slots
-                </div>
-            </div>
-            <div class="demo-msg">
-                <div class="avatar">🤖</div>
-                <div class="body">
-                    <div class="name">GameBot <span class="time">21:20</span></div>
-                    🏆 <strong>Tournoi Valorant créé !</strong><br>
-                    📅 Samedi 28 juin — 20h00<br>
-                    👥 16 slots disponibles<br>
-                    Réagis avec 🎮 pour t'inscrire !
-                </div>
-            </div>
+      </div>
+      <div class="demo-msg">
+        <div class="demo-avatar bot">🤖</div>
+        <div class="demo-body">
+          <div class="demo-name">GameBot<span class="time">21:15</span></div>
+          Salut ! Pour débuter, je te conseille <strong>Sage</strong> ou <strong>Phoenix</strong>. Sage est facile (soin, résurrection, murs) et Phoenix a un flash + heal très intuitif. Évite Jett ou Yoru au début. Tu veux que je détaille leurs capacités ? 🔥
         </div>
-        <p style="margin-top: 20px; font-size: 13px; color: var(--text-dim);">↑ Extrait réel du bot en fonctionnement</p>
-    </div>
-</div>
-
-<!-- Features -->
-<div class="section" id="features">
-    <div class="container">
-        <div class="section-label">Fonctionnalités</div>
-        <h2>Tout ce dont votre serveur a besoin</h2>
-        <p class="desc">Un seul bot. Toutes les fonctions. Zéro plugin à configurer.</p>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <div class="icon">🧠</div>
-                <h3>IA conversationnelle</h3>
-                <p class="desc">Vos membres discutent naturellement avec le bot. Il comprend le contexte, l'humour, et répond de façon utile — pas des réponses génériques de chatbot.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🛡️</div>
-                <h3>Modération intelligente</h3>
-                <p class="desc">Détecte spam, insultes, liens dangereux, et raids. Applique vos règles automatiquement : avertissement, mute, ou ban selon la gravité.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🎮</div>
-                <h3>Commandes gaming</h3>
-                <p class="desc">Classements, stats, tournois automatiques, annonces, sondages. Le bot gère vos événements de A à Z.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">📊</div>
-                <h3>Dashboard analytics</h3>
-                <p class="desc">Messages par jour, membres actifs, questions fréquentes, taux de satisfaction. Prenez des décisions basées sur des données réelles.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🎨</div>
-                <h3>Personnalisation complète</h3>
-                <p class="desc">Nom du bot, avatar, ton des réponses, commandes customs. Votre bot reflète l'identité de votre communauté, pas la nôtre.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🔒</div>
-                <h3>100% privé, hébergé en France</h3>
-                <p class="desc">Vos données ne quittent jamais l'UE. Pas d'API américaine. RGPD natif. On ne revend rien.</p>
-            </div>
+      </div>
+      <div class="demo-msg">
+        <div class="demo-avatar user">L</div>
+        <div class="demo-body">
+          <div class="demo-name">LeGamerDu92<span class="time">21:18</span></div>
+          /rank
         </div>
-    </div>
-</div>
-
-<!-- Why BotForge -->
-<div class="section section-dark">
-    <div class="container">
-        <h2 style="text-align:center;">Pourquoi vos membres préfèrent BotForge</h2>
-        <p class="desc" style="text-align:center;margin:16px auto 48px;">Comparé aux bots gratuits que tout le monde utilise.</p>
-        <table class="compare-table">
-            <thead>
-                <tr><th></th><th style="color:var(--text-dim);">MEE6 / Dyno</th><th style="color:var(--accent);font-weight:700;">BotForge</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>Réponses en langage naturel</td><td class="cross">Commandes fixes uniquement</td><td class="check">✅ IA contextuelle</td></tr>
-                <tr><td>Compréhension du contexte</td><td class="cross">Aucune</td><td class="check">✅ Suit la conversation</td></tr>
-                <tr><td>Hébergement</td><td>USA (cloud américain)</td><td class="check">✅ France (UE)</td></tr>
-                <tr><td>Personnalisation</td><td>Limitée (configs fixes)</td><td class="check">✅ Totale (prompt, ton, avatar)</td></tr>
-                <tr><td>Dashboard de gestion</td><td class="cross">Basique ou inexistant</td><td class="check">✅ Complet + analytics</td></tr>
-                <tr><td>Support</td><td>Forum / Discord</td><td class="check">✅ Email & chat, réponse en 4h</td></tr>
-                <tr><td><strong>Prix</strong></td><td>Gratuit (ou ~12€/mois premium)</td><td style="font-weight:700;color:var(--accent);">À partir de 25€/mois</td></tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<!-- Pricing -->
-<div class="section centered" id="tarifs">
-    <div class="container">
-        <div class="section-label">Tarifs</div>
-        <h2>Simple, transparent, sans surprise</h2>
-        <p class="desc">7 jours d'essai gratuit sur tous les plans. Sans engagement. Annulez quand vous voulez.</p>
-        <div class="pricing-grid" style="text-align:left;">
-            <div class="card plan">
-                <h3>Starter</h3>
-                <div class="plan-price">25€<small>/mois</small></div>
-                <ul class="plan-features">
-                    <li>1 bot Discord</li>
-                    <li>IA conversationnelle</li>
-                    <li>5 commandes slash</li>
-                    <li>Jusqu'à 500 membres</li>
-                    <li>Dashboard client</li>
-                    <li>Support email (48h)</li>
-                </ul>
-                <a href="#contact" class="btn btn-outline" style="width:100%;">Essai gratuit</a>
-            </div>
-            <div class="card plan popular">
-                <div class="plan-badge">🔥 Recommandé</div>
-                <h3>Pro</h3>
-                <div class="plan-price">75€<small>/mois</small></div>
-                <ul class="plan-features">
-                    <li>Jusqu'à 3 bots Discord</li>
-                    <li>IA avancée</li>
-                    <li>Commandes slash illimitées</li>
-                    <li>Membres illimités</li>
-                    <li>Modération automatique</li>
-                    <li>Commandes gaming</li>
-                    <li>Dashboard analytics</li>
-                    <li>Support prioritaire (4h)</li>
-                    <li>Backup quotidien</li>
-                </ul>
-                <a href="#contact" class="btn btn-primary" style="width:100%;">Commencer</a>
-            </div>
-            <div class="card plan">
-                <h3>Enterprise</h3>
-                <div class="plan-price">250€<small>/mois</small></div>
-                <ul class="plan-features">
-                    <li>Bots illimités</li>
-                    <li>GPU dédié</li>
-                    <li>Données 100% privées</li>
-                    <li>Personnalisation complète</li>
-                    <li>Dashboard white-label</li>
-                    <li>Intégration Twitch/YT</li>
-                    <li>Déploiement sur votre serveur</li>
-                    <li>Support dédié (1h)</li>
-                    <li>SLA 99.9%</li>
-                </ul>
-                <a href="#contact" class="btn btn-outline" style="width:100%;">Nous contacter</a>
-            </div>
+      </div>
+      <div class="demo-msg">
+        <div class="demo-avatar bot">🤖</div>
+        <div class="demo-body">
+          <div class="demo-name">GameBot<span class="time">21:18</span></div>
+          <strong>🏆 Classement Valorant</strong><br>🥇 xDarkSlayer_x — Platine 2 (1420 pts)<br>🥈 ProGamerFR — Or 3 (1180 pts)<br>🥉 LeGamerDu92 — Or 1 (950 pts)
         </div>
+      </div>
+      <div class="demo-msg">
+        <div class="demo-avatar user">P</div>
+        <div class="demo-body">
+          <div class="demo-name">ProGamerFR<span class="time">21:20</span></div>
+          /tournoi Valorant samedi 20h 16 slots
+        </div>
+      </div>
+      <div class="demo-msg">
+        <div class="demo-avatar bot">🤖</div>
+        <div class="demo-body">
+          <div class="demo-name">GameBot<span class="time">21:20</span></div>
+          🏆 <strong>Tournoi Valorant créé !</strong><br>📅 Samedi 28 juin — 20h<br>👥 16 slots — Réagis avec 🎮 pour t'inscrire
+        </div>
+      </div>
     </div>
-</div>
+    <p style="margin-top:16px;font-size:13px;color:var(--text3)">Extrait du bot en production sur notre serveur de test.</p>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="container">
+    <span class="section-label">Fonctionnalités</span>
+    <h2 class="section-title">Un bot, toutes les fonctions</h2>
+    <p class="section-subtitle">Zéro plugin à installer. Zéro configuration complexe. Tout est intégré et prêt à l'emploi.</p>
+    <div class="features">
+      <div class="feat">
+        <span class="feat-icon">🧠</span>
+        <h3>IA conversationnelle</h3>
+        <p>Vos membres discutent naturellement. Le bot comprend le contexte, l'humour, et répond de façon pertinente — pas des réponses génériques.</p>
+      </div>
+      <div class="feat">
+        <span class="feat-icon">🛡️</span>
+        <h3>Modération automatique</h3>
+        <p>Spam, insultes, liens dangereux, raids : détectés et traités selon vos règles. Avertissement, mute ou ban automatique.</p>
+      </div>
+      <div class="feat">
+        <span class="feat-icon">🎮</span>
+        <h3>Commandes gaming</h3>
+        <p>Classements, statistiques, tournois automatiques, annonces, sondages. Tout ce dont une communauté gaming a besoin.</p>
+      </div>
+      <div class="feat">
+        <span class="feat-icon">📊</span>
+        <h3>Dashboard analytics</h3>
+        <p>Messages par jour, membres actifs, questions fréquentes, satisfaction. Pilotez votre communauté avec des données réelles.</p>
+      </div>
+      <div class="feat">
+        <span class="feat-icon">🎨</span>
+        <h3>Personnalisation totale</h3>
+        <p>Nom du bot, avatar, ton des réponses, commandes customs. Votre bot reflète votre communauté, pas la nôtre.</p>
+      </div>
+      <div class="feat">
+        <span class="feat-icon">🔒</span>
+        <h3>100% privé, hébergé en France</h3>
+        <p>Données dans l'UE uniquement. Zéro API américaine. RGPD natif. On ne revend rien, on ne fait pas de pub.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="section section-sm bg-alt">
+  <div class="container">
+    <h2 class="section-title" style="text-align:center">Pourquoi vos membres préfèrent BotForge</h2>
+    <p class="section-subtitle" style="text-align:center;margin:0 auto 0">Comparé aux bots gratuits que tout le monde utilise.</p>
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead><tr><th></th><th>MEE6 / Dyno</th><th style="color:var(--purple-h)">BotForge</th></tr></thead>
+        <tbody>
+          <tr><td>Réponses naturelles</td><td class="cross">Commandes fixes</td><td class="check">✅ IA contextuelle</td></tr>
+          <tr><td>Compréhension du contexte</td><td class="cross">Aucune</td><td class="check">✅ Suit la conversation</td></tr>
+          <tr><td>Hébergement</td><td>USA</td><td class="check">✅ France (UE)</td></tr>
+          <tr><td>Personnalisation</td><td>Limitée</td><td class="check">✅ Totale</td></tr>
+          <tr><td>Dashboard analytics</td><td class="cross">Basique / inexistant</td><td class="check">✅ Complet</td></tr>
+          <tr><td>Support client</td><td>Forum</td><td class="check">✅ Email, réponse en 4h</td></tr>
+          <tr class="highlight"><td><strong>Prix</strong></td><td>Gratuit (ou ~12€/mois)</td><td style="color:var(--purple-h);font-weight:700">À partir de 25€/mois</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section centered" id="tarifs">
+  <div class="container">
+    <span class="section-label">Tarifs</span>
+    <h2 class="section-title">Simple et transparent</h2>
+    <p class="section-subtitle">7 jours d'essai gratuit. Sans carte bancaire. Annulez quand vous voulez.</p>
+    <div class="pricing">
+      <div class="plan">
+        <h3>Starter</h3>
+        <div class="price">25€<small>/mois</small></div>
+        <ul>
+          <li>1 bot Discord</li>
+          <li>IA conversationnelle</li>
+          <li>5 commandes slash</li>
+          <li>Jusqu'à 500 membres</li>
+          <li>Dashboard client</li>
+          <li>Support email (48h)</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline">Essai gratuit</a>
+      </div>
+      <div class="plan popular">
+        <div class="plan-badge">Recommandé</div>
+        <h3>Pro</h3>
+        <div class="price">75€<small>/mois</small></div>
+        <ul>
+          <li>Jusqu'à 3 bots Discord</li>
+          <li>IA avancée</li>
+          <li>Commandes illimitées</li>
+          <li>Membres illimités</li>
+          <li>Modération automatique</li>
+          <li>Commandes gaming</li>
+          <li>Dashboard analytics</li>
+          <li>Support prioritaire (4h)</li>
+          <li>Backup quotidien</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Commencer</a>
+      </div>
+      <div class="plan">
+        <h3>Enterprise</h3>
+        <div class="price">250€<small>/mois</small></div>
+        <ul>
+          <li>Bots illimités</li>
+          <li>GPU dédié</li>
+          <li>Données 100% privées</li>
+          <li>Personnalisation complète</li>
+          <li>Dashboard white-label</li>
+          <li>Twitch / YouTube</li>
+          <li>Votre propre serveur</li>
+          <li>Support dédié (1h)</li>
+          <li>SLA 99.9%</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline">Nous contacter</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- FAQ -->
-<div class="section section-dark">
-    <div class="container">
-        <div class="section-label" style="text-align:center;">FAQ</div>
-        <h2 style="text-align:center;">Questions fréquentes</h2>
-        <div class="faq-list" style="margin-top:48px;">
-            <div class="faq-item">
-                <div class="faq-q">C'est quoi la différence avec MEE6 ?</div>
-                <div class="faq-a">MEE6 fait de la modération basique et des commandes fixes. BotForge utilise une vraie IA qui comprend le langage naturel : vos membres peuvent poser des questions comme à un humain, et le bot s'adapte. C'est la différence entre un répondeur automatique et un assistant intelligent.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-q">Je dois savoir coder pour l'installer ?</div>
-                <div class="faq-a">Zéro code. Vous recevez un lien d'invitation, vous cliquez, c'est installé. La configuration se fait depuis le dashboard web en français.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-q">Mes données sont stockées où ?</div>
-                <div class="faq-a">En France, sur nos serveurs. Rien ne passe par les USA. On ne revend aucune donnée, on ne fait pas de pub. Le jour où vous partez, vos données sont supprimées définitivement.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-q">Et si j'ai plus de 500 membres ?</div>
-                <div class="faq-a">Le plan Pro est illimité en membres. Si vous démarrez en Starter et que votre communauté grandit, vous passez en Pro en un clic, sans perdre votre configuration.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-q">Je peux tester avant de payer ?</div>
-                <div class="faq-a">Oui, 7 jours d'essai gratuit sur tous les plans. Si ça ne vous convient pas, vous annulez et on supprime tout. Aucun risque.</div>
-            </div>
-        </div>
+<section class="section section-sm bg-alt">
+  <div class="container">
+    <span class="section-label" style="text-align:center;display:block">FAQ</span>
+    <h2 class="section-title" style="text-align:center">Questions fréquentes</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-q">C'est quoi la différence avec MEE6 ?</div>
+        <div class="faq-a">MEE6 fait de la modération basique et des commandes fixes. BotForge utilise une vraie IA qui comprend le langage naturel : vos membres posent des questions comme à un humain, et le bot s'adapte au contexte. C'est la différence entre un répondeur automatique et un assistant intelligent.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Je dois savoir coder ?</div>
+        <div class="faq-a">Zéro code. Vous recevez un lien d'invitation, vous cliquez, c'est installé. Toute la configuration se fait depuis le dashboard web en français.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Où sont stockées mes données ?</div>
+        <div class="faq-a">En France. Rien ne transite par les États-Unis. Aucune revente de données, aucune publicité. Le jour où vous partez, vos données sont supprimées définitivement.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Et si je dépasse 500 membres ?</div>
+        <div class="faq-a">Le plan Pro est illimité. Si vous démarrez en Starter, vous passez en Pro en un clic sans perdre votre configuration.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Je peux vraiment tester gratuitement ?</div>
+        <div class="faq-a">Oui, 7 jours, sans carte bancaire. Si ça ne vous convient pas, vous annulez et on supprime tout. Aucun risque.</div>
+      </div>
     </div>
-</div>
+  </div>
+</section>
 
-<!-- Contact -->
-<div class="cta-section" id="contact">
-    <h2>Prêt à passer au niveau supérieur ?</h2>
-    <p>Laissez votre email, on vous répond dans la journée pour activer votre essai gratuit.</p>
-    <form class="contact-form" action="https://formspree.io/f/CHANGE_ME" method="POST">
-        <input type="email" name="email" placeholder="votre@email.com" required>
-        <button type="submit" class="btn btn-primary btn-lg">Essai gratuit →</button>
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="container">
+    <h2>Prêt à donner une IA à votre serveur ?</h2>
+    <p>Laissez votre email, on vous répond dans la journée.</p>
+    <form action="https://formspree.io/f/CHANGE_ME" method="POST" style="display:flex;gap:8px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center">
+      <input type="email" name="email" placeholder="votre@email.com" required style="flex:1;min-width:200px;padding:14px 18px;background:var(--bg3);border:1px solid var(--b-std);border-radius:var(--radius);color:var(--text);font-size:15px;font-family:var(--font);min-height:52px">
+      <button type="submit" class="btn btn-white btn-lg">Essai gratuit →</button>
     </form>
-    <p style="margin-top: 16px; font-size: 13px; color: var(--text-dim);">7 jours gratuits · Sans CB · Annulation en un clic</p>
-</div>
+    <p class="cta-note">7 jours gratuits · Sans CB · Annulation en un clic</p>
+  </div>
+</section>
 
+<!-- FOOTER -->
 <footer class="footer">
-    <p>⚡ BotForge © 2026 — Bots Discord IA hébergés en France 🇫🇷</p>
-    <p style="font-size:12px;margin-top:4px;">Contact : contact@botforge.fr</p>
+  <p>⚡ BotForge © 2026 — Bots Discord IA hébergés en France</p>
+  <p style="margin-top:6px"><a href="mailto:contact@botforge.fr">contact@botforge.fr</a></p>
 </footer>
 
 </body>
