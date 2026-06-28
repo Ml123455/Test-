@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — BotForge</title>
+<meta name="description" content="Contactez BotForge pour un essai gratuit de 7 jours. Bot Discord IA hébergé en France.">
+<meta name="theme-color" content="#08080a">
+<link rel="canonical" href="https://botforge.fr/contact.html">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo">⚡ <span class="gradient-text">BotForge</span></a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="/fonctionnalites.html">Fonctionnalités</a>
+      <a href="/tarifs.html">Tarifs</a>
+      <a href="/blog/">Blog</a>
+      <a href="/contact.html" class="active">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="container">
+    <span class="section-label">Contact</span>
+    <h1>Commencez votre<br>essai gratuit</h1>
+    <p>Remplissez le formulaire. On vous répond dans la journée pour activer votre essai de 7 jours.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container" style="max-width:640px">
+    <form id="contact-form" action="https://formspree.io/f/CHANGE_ME" method="POST" style="background:var(--bg3);border:1px solid var(--b-subtle);border-radius:var(--radius-xl);padding:40px">
+      <div class="form-group">
+        <label class="form-label" for="name">Nom</label>
+        <input type="text" id="name" name="name" class="form-input" placeholder="Votre nom ou pseudo" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="email">Email</label>
+        <input type="email" id="email" name="email" class="form-input" placeholder="vous@example.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="discord">Serveur Discord (optionnel)</label>
+        <input type="text" id="discord" name="discord" class="form-input" placeholder="https://discord.gg/votre-serveur">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="plan">Plan souhaité</label>
+        <select id="plan" name="plan" class="form-select">
+          <option value="">Je veux d'abord tester</option>
+          <option value="starter">Starter — 25€/mois</option>
+          <option value="pro">Pro — 75€/mois</option>
+          <option value="enterprise">Enterprise — 250€/mois</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="members">Nombre de membres (approx.)</label>
+        <select id="members" name="members" class="form-select">
+          <option value="<100">Moins de 100</option>
+          <option value="100-500">100 à 500</option>
+          <option value="500-2000">500 à 2000</option>
+          <option value="2000+">Plus de 2000</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="message">Message (optionnel)</label>
+        <textarea id="message" name="message" class="form-textarea" placeholder="Décrivez votre communauté, ce que vous cherchez..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Demander mon essai gratuit →</button>
+      <p style="text-align:center;font-size:13px;color:var(--text3);margin-top:16px">
+        7 jours gratuits · Sans CB · Annulation en un clic<br>
+        Ou écrivez-nous : <a href="mailto:contact@botforge.fr">contact@botforge.fr</a>
+      </p>
+    </form>
+  </div>
+</section>
+
+<section class="section section-sm bg-alt centered">
+  <div class="container">
+    <h2 class="section-title">On s'occupe de tout</h2>
+    <p class="section-subtitle">Quand vous validez le formulaire :</p>
+    <div class="grid-3" style="margin-top:40px">
+      <div class="card"><div class="card-icon">📨</div><h3>On vous répond</h3><p>Dans la journée. Pour comprendre vos besoins.</p></div>
+      <div class="card"><div class="card-icon">🔧</div><h3>On active votre essai</h3><p>7 jours de plan Pro. Zéro configuration de votre côté.</p></div>
+      <div class="card"><div class="card-icon">📞</div><h3>On vous accompagne</h3><p>Support réactif. On ajuste le bot à votre communauté.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="/" style="font-size:20px;font-weight:700;color:var(--text)">⚡ <span class="gradient-text">BotForge</span></a><p>Bots Discord IA hébergés en France.</p></div>
+    <div class="footer-col"><h4>Produit</h4><a href="/fonctionnalites.html">Fonctionnalités</a><a href="/tarifs.html">Tarifs</a><a href="/blog/">Blog</a><a href="/contact.html">Contact</a></div>
+    <div class="footer-col"><h4>Ressources</h4><a href="/blog/guide-installation.html">Guide</a><a href="/blog/faq-complete.html">FAQ</a><a href="/blog/">Actus</a></div>
+    <div class="footer-col"><h4>Légal</h4><a href="#">Confidentialité</a><a href="#">CGV</a><a href="#">Mentions</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 BotForge</span><span>🇫🇷</span></div>
+</footer>
+<script src="/js/main.js"></script>
+</body>
+</html>
