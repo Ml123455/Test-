@@ -79,40 +79,40 @@ function initContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
     const originalText = btn.textContent;
-    
-    btn.disabled = true;
-    btn.textContent = 'Envoi en cours...';
-    
-    const formData = new FormData(form);
-    
-    try {
-      // Formspree — replace FORMSPREE_ID with real endpoint
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
-      
-      if (response.ok) {
-        form.innerHTML = `
-          <div style="text-align:center;padding:40px 20px">
-            <div style="font-size:48px;margin-bottom:16px">✅</div>
-            <h3 style="font-size:20px;margin-bottom:8px">Message envoyé !</h3>
-            <p style="color:var(--text2)">On vous répond dans la journée.</p>
-          </div>
-        `;
-      } else {
-        throw new Error('Form submission failed');
-      }
-    } catch (err) {
-      btn.disabled = false;
-      btn.textContent = originalText;
-      alert('Erreur lors de l\'envoi. Réessayez ou contactez-nous par email : contact@botforge.fr');
-    }
+
+    // Build email from form data
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const plan = document.getElementById('plan').value;
+    const members = document.getElementById('members').value;
+    const discord = document.getElementById('discord').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    const subject = encodeURIComponent('[BotForge] Demande essai gratuit — ' + name);
+    let body = `Nom: ${name}\nEmail: ${email}\nPlan: ${plan}\nMembres: ${members}`;
+    if (discord) body += `\nDiscord: ${discord}`;
+    if (message) body += `\n\nMessage:\n${message}`;
+    body += `\n\n---\nEnvoyé depuis botarmory.com`;
+
+    // Open email client
+    window.location.href = `mailto:contact@botforge.fr?subject=${subject}&body=${encodeURIComponent(body)}`;
+
+    // Show success
+    form.innerHTML = `
+      <div style="text-align:center;padding:40px 20px">
+        <div style="font-size:48px;margin-bottom:16px">📨</div>
+        <h3 style="font-size:20px;margin-bottom:8px">Ouvrez votre email !</h3>
+        <p style="color:var(--text2);margin-bottom:16px">Votre client email devrait s'ouvrir. Envoyez le message et on vous répond dans la journée.</p>
+        <p style="font-size:13px;color:var(--text3)">
+          Si rien ne s'ouvre, écrivez-nous à<br>
+          <a href="mailto:contact@botforge.fr">contact@botforge.fr</a>
+        </p>
+      </div>
+    `;
   });
 }
 
