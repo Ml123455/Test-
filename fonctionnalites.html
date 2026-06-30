@@ -4,21 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fonctionnalités — BotForge</title>
-<meta name="description" content="IA conversationnelle, modération automatique, commandes gaming, dashboard analytics. Tout ce dont votre serveur Discord a besoin.">
+<meta name="description" content="RAG documentaire, analytics, 9 commandes slash, multi-serveur, quotas, dépassement automatique. Tout ce que BotForge fait vraiment.">
 <meta name="theme-color" content="#08080a">
-<link rel="canonical" href="https://botforge.fr/fonctionnalites.html">
+<link rel="canonical" href="https://botforge.botarmory.com/fonctionnalites.html">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
 <nav class="nav">
   <div class="container nav-inner">
-    <a href="/" class="nav-logo">⚡ <span class="gradient-text">BotForge</span></a>
+    <a href="/" class="nav-logo">⚒️ <span class="gradient-text">BotForge</span></a>
     <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
     <div class="nav-links">
       <a href="/fonctionnalites.html" class="active">Fonctionnalités</a>
       <a href="/tarifs.html">Tarifs</a>
-      <a href="/blog/">Blog</a>
       <a href="https://botforge.botarmory.com/botforge/signup" class="btn btn-primary btn-sm">Essai gratuit</a>
     </div>
   </div>
@@ -27,177 +26,151 @@
 <header class="page-header">
   <div class="container">
     <span class="section-label">Fonctionnalités</span>
-    <h1>Tout ce dont votre<br>serveur a besoin</h1>
-    <p>Une plateforme complète. Zéro extension à installer. Tout est intégré, testé et optimisé.</p>
+    <h1>Ce que <span class="gradient-text">BotForge</span> fait vraiment</h1>
+    <p>Pas de promesses vides. Voici ce qui tourne en production.</p>
   </div>
 </header>
 
-<!-- IA CONVERSATIONNELLE -->
-<section class="section">
-  <div class="container grid-2">
-    <div>
-      <span class="section-label">🧠 Intelligence</span>
-      <h2 class="section-title">IA conversationnelle avancée</h2>
-      <p class="section-subtitle">Vos membres parlent au bot comme à un humain. Il comprend le contexte, l'humour, les références à la conversation en cours. Pas de réponses génériques ou hors-sujet.</p>
-      <ul style="list-style:none;margin-top:24px;display:grid;gap:12px">
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Contexte sur 50+ messages</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Ton personnalisable (sérieux, fun, expert)</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Réponses en français naturel</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Détection automatique de la langue</li>
-      </ul>
-    </div>
-    <div style="background:var(--bg3);border:1px solid var(--b-subtle);border-radius:var(--radius-xl);padding:24px">
-      <div style="background:var(--bg4);padding:10px 16px;font-size:12px;color:var(--text3);border-radius:var(--radius);margin-bottom:16px">💬 Aperçu conversation</div>
-      <div style="margin-bottom:12px;padding:12px;background:var(--bg2);border-radius:var(--radius);font-size:14px;color:var(--text2)">
-        <strong style="color:var(--text)">Joueur</strong><br>
-        Le dernier patch a nerf mon main, je fais quoi ?
-      </div>
-      <div style="padding:12px;background:rgba(92,108,240,0.08);border-radius:var(--radius);font-size:14px;color:var(--text2);border:1px solid rgba(92,108,240,0.1)">
-        <strong style="color:var(--purple-h)">BotForge</strong><br>
-        Ah, le nerf de Phoenix ? Pas de panique. Essaie <strong>Kayo</strong> : son flash est resté intact et sa grenade est parfaite pour le contrôle de zone. Tu veux que je te fasse un comparatif des dégâts entre le patch précédent et celui-ci ?
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MODERATION -->
-<section class="section bg-alt">
-  <div class="container grid-2">
-    <div style="order:1">
-      <div style="background:var(--bg3);border:1px solid var(--b-subtle);border-radius:var(--radius-xl);padding:24px">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div style="background:var(--bg2);padding:16px;border-radius:var(--radius);text-align:center">
-            <div style="font-size:28px;font-weight:700;color:var(--green)">0</div>
-            <div style="font-size:12px;color:var(--text3)">Spam aujourd'hui</div>
-          </div>
-          <div style="background:var(--bg2);padding:16px;border-radius:var(--radius);text-align:center">
-            <div style="font-size:28px;font-weight:700;color:var(--purple-h)">12</div>
-            <div style="font-size:12px;color:var(--text3)">Messages modérés</div>
-          </div>
-          <div style="background:var(--bg2);padding:16px;border-radius:var(--radius);text-align:center">
-            <div style="font-size:28px;font-weight:700;color:var(--amber)">2</div>
-            <div style="font-size:12px;color:var(--text3)">Avertissements</div>
-          </div>
-          <div style="background:var(--bg2);padding:16px;border-radius:var(--radius);text-align:center">
-            <div style="font-size:28px;font-weight:700;color:var(--red)">0</div>
-            <div style="font-size:12px;color:var(--text3)">Bans</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div>
-      <span class="section-label">🛡️ Protection</span>
-      <h2 class="section-title">Modération intelligente</h2>
-      <p class="section-subtitle">Spam, insultes, liens dangereux, raids : le bot détecte et agit selon vos règles. Vous décidez du niveau de sévérité.</p>
-      <ul style="list-style:none;margin-top:24px;display:grid;gap:12px">
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Anti-spam automatique</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Filtre anti-insultes (FR/EN)</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Détection de liens malveillants</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Protection anti-raid</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Règles personnalisables</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- GAMING -->
-<section class="section">
-  <div class="container grid-2">
-    <div>
-      <span class="section-label">🎮 Gaming</span>
-      <h2 class="section-title">Commandes gaming et tournois</h2>
-      <p class="section-subtitle">Classements, statistiques, tournois automatiques avec brackets. Tout ce qu'une communauté gaming attend.</p>
-      <ul style="list-style:none;margin-top:24px;display:grid;gap:12px">
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Tournois automatiques (brackets, seeding)</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Classements / ladder par jeu</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Sondages et votes</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Annonces programmées</li>
-      </ul>
-    </div>
-    <div style="background:var(--bg3);border:1px solid var(--b-subtle);border-radius:var(--radius-xl);padding:24px;font-size:14px">
-      <div style="font-weight:700;color:var(--purple-h);margin-bottom:16px">🏆 Tournoi Valorant — Samedi 20h</div>
-      <div style="display:grid;gap:8px">
-        <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--bg2);border-radius:var(--radius)">
-          <span>🥇 xDarkSlayer_x</span><span style="color:var(--green)">Qualifié</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--bg2);border-radius:var(--radius)">
-          <span>🥈 LeGamerDu92</span><span style="color:var(--green)">Qualifié</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--bg2);border-radius:var(--radius)">
-          <span>🥉 ProGamerFR</span><span style="color:var(--amber)">En attente</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DASHBOARD -->
-<section class="section bg-alt">
-  <div class="container grid-2">
-    <div style="order:1;text-align:center">
-      <div style="background:var(--bg3);border:1px solid var(--b-subtle);border-radius:var(--radius-xl);padding:24px">
-        <div style="font-size:12px;color:var(--text3);margin-bottom:16px">📊 Activité — 7 derniers jours</div>
-        <div style="display:flex;align-items:end;justify-content:center;gap:8px;height:120px">
-          <div style="width:40px;background:var(--purple);height:60%;border-radius:4px 4px 0 0"></div>
-          <div style="width:40px;background:var(--purple);height:80%;border-radius:4px 4px 0 0"></div>
-          <div style="width:40px;background:var(--purple);height:45%;border-radius:4px 4px 0 0"></div>
-          <div style="width:40px;background:var(--purple);height:90%;border-radius:4px 4px 0 0"></div>
-          <div style="width:40px;background:var(--purple);height:70%;border-radius:4px 4px 0 0"></div>
-          <div style="width:40px;background:var(--purple);height:95%;border-radius:4px 4px 0 0"></div>
-          <div style="width:40px;background:var(--purple);height:100%;border-radius:4px 4px 0 0"></div>
-        </div>
-      </div>
-    </div>
-    <div>
-      <span class="section-label">📊 Analytics</span>
-      <h2 class="section-title">Dashboard analytics complet</h2>
-      <p class="section-subtitle">Messages par jour, membres actifs, questions fréquentes, taux de satisfaction. Pilotez votre communauté avec des données réelles.</p>
-      <ul style="list-style:none;margin-top:24px;display:grid;gap:12px">
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Statistiques en temps réel</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Rétention des membres</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Questions les plus posées</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2)"><span style="color:var(--green)">✓</span> Rapports hebdomadaires par email</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ALL FEATURES -->
 <section class="section">
   <div class="container">
-    <h2 class="section-title" style="text-align:center">Toutes les fonctionnalités</h2>
-    <div class="grid-3" style="margin-top:48px">
-      <div class="card"><div class="card-icon">🎨</div><h3>Personnalisation totale</h3><p>Nom, avatar, ton des réponses. Votre bot reflète votre communauté.</p></div>
-      <div class="card"><div class="card-icon">🔒</div><h3>100% privé, France</h3><p>Données dans l'UE. Zéro API US. RGPD natif.</p></div>
-      <div class="card"><div class="card-icon">📅</div><h3>Événements programmés</h3><p>Annonces, tournois, rappels automatiques.</p></div>
-      <div class="card"><div class="card-icon">🔗</div><h3>Intégrations</h3><p>Twitch, YouTube, Twitter. Notifications live.</p></div>
-      <div class="card"><div class="card-icon">💾</div><h3>Backup quotidien</h3><p>Configuration sauvegardée chaque jour. Restauration en un clic.</p></div>
-      <div class="card"><div class="card-icon">🌍</div><h3>Multi-langue</h3><p>Français, anglais, espagnol. Le bot détecte et répond dans la langue.</p></div>
+
+    <!-- RAG -->
+    <div class="feature-row">
+      <div class="feature-text">
+        <h2>📚 RAG documentaire</h2>
+        <p>Importez vos PDF, Markdown, TXT. Le bot les indexe automatiquement avec les embeddings Mistral. Quand un membre pose une question, il cherche dans <strong>vos</strong> documents et répond avec les sources.</p>
+        <ul class="feature-list">
+          <li>PDF, Markdown, texte brut</li>
+          <li>Chunking intelligent (500 chars, respect des paragraphes)</li>
+          <li>Embeddings Mistral (Paris)</li>
+          <li>Sources citées dans chaque réponse</li>
+          <li>Base vectorielle ChromaDB</li>
+          <li>Upload par drag & drop depuis le dashboard</li>
+        </ul>
+      </div>
     </div>
+
+    <!-- SLASH COMMANDS -->
+    <div class="feature-row reverse" style="margin-top:64px">
+      <div class="feature-text">
+        <h2>⚡ 9 commandes slash</h2>
+        <p>Prêtes à l'emploi. Propres, rapides, documentées.</p>
+        <ul class="feature-list">
+          <li><code>/ask</code> — Poser une question (IA + RAG)</li>
+          <li><code>/docs</code> — Lister les documents importés</li>
+          <li><code>/know</code> — Ajouter une connaissance manuelle</li>
+          <li><code>/stats</code> — Statistiques du serveur</li>
+          <li><code>/quota</code> — Utilisation mensuelle</li>
+          <li><code>/resume</code> — Résumé de la conversation</li>
+          <li><code>/clear</code> — Réinitialiser le contexte</li>
+          <li><code>/plan</code> — Voir le plan actuel</li>
+          <li><code>/ping</code> — Vérifier la latence</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div class="feature-row" style="margin-top:64px">
+      <div class="feature-text">
+        <h2>📊 Analytics dashboard</h2>
+        <p>Comprenez ce que vos équipes demandent. Quels documents sont les plus utiles.</p>
+        <ul class="feature-list">
+          <li>Nombre de questions par jour</li>
+          <li>Documents les plus consultés</li>
+          <li>Questions sans réponse (lacunes documentaires)</li>
+          <li>Taux d'utilisation par employé</li>
+          <li>Disponible à partir du plan Pro</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- QUOTAS -->
+    <div class="feature-row reverse" style="margin-top:64px">
+      <div class="feature-text">
+        <h2>🛡️ Quotas & dépassement</h2>
+        <p>Gardez le contrôle de vos coûts. Tout est transparent.</p>
+        <ul class="feature-list">
+          <li>Quota mensuel par plan (de 1 000 à 150 000 questions)</li>
+          <li>Rate limiting par minute (de 10 à 120 req/min)</li>
+          <li>Dépassement automatique tarifé</li>
+          <li>Plafond de dépense paramétrable</li>
+          <li>Alerte à 80% et 100% du quota</li>
+          <li>Aucune surprise sur la facture</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECURITY -->
+    <div class="feature-row" style="margin-top:64px">
+      <div class="feature-text">
+        <h2>🔒 Souveraineté & conformité</h2>
+        <p>Vos données documentaires ne quittent jamais l'UE.</p>
+        <ul class="feature-list">
+          <li>Hébergement OVHcloud (France)</li>
+          <li>IA Mistral (France — Paris)</li>
+          <li>Base vectorielle ChromaDB (locale)</li>
+          <li>Chiffrement AES-256</li>
+          <li>DPA fourni (Standard et +)</li>
+          <li>RGPD natif</li>
+          <li>Suppression garantie des données à la résiliation</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MULTI-SERVER -->
+    <div class="feature-row reverse" style="margin-top:64px">
+      <div class="feature-text">
+        <h2>🔀 Multi-serveur</h2>
+        <p>Un compte, plusieurs serveurs. Chaque serveur a sa propre base documentaire.</p>
+        <ul class="feature-list">
+          <li>Collections ChromaDB séparées par serveur</li>
+          <li>Quotas indépendants</li>
+          <li>Gestion centralisée depuis le dashboard</li>
+          <li>1 serveur (Standard) à illimité (Conformité)</li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-section">
   <div class="container">
-    <h2>Convaincu ?</h2>
-    <p>Essayez gratuitement pendant 7 jours. Sans CB.</p>
-    <a href="https://botforge.botarmory.com/botforge/signup" class="btn btn-white btn-lg">Commencer l'essai →</a>
+    <h2>Testez tout gratuitement pendant 7 jours</h2>
+    <p>Sans CB. Accès complet. Annulez quand vous voulez.</p>
+    <a href="https://botforge.botarmory.com/botforge/signup" class="btn btn-white btn-lg">Commencer l'essai gratuit →</a>
   </div>
 </section>
 
 <footer class="footer">
   <div class="footer-grid">
     <div class="footer-brand">
-      <a href="/" style="font-size:20px;font-weight:700;color:var(--text)">⚡ <span class="gradient-text">BotForge</span></a>
-      <p>Bots Discord IA hébergés en France.</p>
+      <a href="/" style="font-size:20px;font-weight:700;color:var(--text)">⚒️ <span class="gradient-text">BotForge</span></a>
+      <p>Assistant IA documentaire pour Discord. Hébergé en France.</p>
     </div>
-    <div class="footer-col"><h4>Produit</h4><a href="/fonctionnalites.html">Fonctionnalités</a><a href="/tarifs.html">Tarifs</a><a href="/blog/">Blog</a><a href="https://botforge.botarmory.com/botforge/signup">Contact</a></div>
-    <div class="footer-col"><h4>Ressources</h4><a href="/blog/guide-installation.html">Guide</a><a href="/blog/faq-complete.html">FAQ</a><a href="/blog/">Actus</a></div>
-    <div class="footer-col"><h4>Légal</h4><a href="#">Confidentialité</a><a href="#">CGV</a><a href="#">Mentions</a></div>
+    <div class="footer-col">
+      <h4>Produit</h4>
+      <a href="/fonctionnalites.html">Fonctionnalités</a>
+      <a href="/tarifs.html">Tarifs</a>
+      <a href="https://botforge.botarmory.com/botforge/signup">Essai gratuit</a>
+    </div>
+    <div class="footer-col">
+      <h4>Confiance</h4>
+      <a href="https://botforge.botarmory.com/botforge/legal">Mentions légales</a>
+      <a href="https://botforge.botarmory.com/botforge/legal">Confidentialité</a>
+      <a href="https://botforge.botarmory.com/botforge/legal">CGV</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="https://botforge.botarmory.com/botforge/contact">Nous écrire</a>
+    </div>
   </div>
-  <div class="footer-bottom"><span>© 2026 BotForge</span><span>🇫🇷</span></div>
+  <div class="footer-bottom">
+    <span>© 2026 BotForge</span>
+    <span>🇫🇷 Hébergé en France</span>
+  </div>
 </footer>
+
 <script src="/js/main.js"></script>
 </body>
 </html>
