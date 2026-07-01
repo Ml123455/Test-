@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Créez l'aperçu de votre site artisanal en 30 secondes. Gratuit, sans engagement.">
+<title>Créez votre site | Template Artisan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0b; --card: #121214; --border: rgba(255,255,255,0.07);
+    --text: #fafafa; --text2: #b4b4b8; --text3: #71717a;
+    --accent: #f5a623; --accent-glow: rgba(245,166,35,0.12);
+    --radius: 10px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; }
+  
+  /* ── NAV ── */
+  .nav { position:sticky; top:0; z-index:100; background:rgba(10,10,11,0.85); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); padding:0 24px; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:56px; }
+  .nav-brand { font-weight:700; font-size:15px; }
+  .nav-brand span { color:var(--accent); }
+  .nav-link { font-size:13px; color:var(--text3); text-decoration:none; transition:color .15s; }
+  .nav-link:hover { color:var(--text); }
+  .nav-cta { background:var(--accent); color:#0a0a0b; padding:7px 18px; border-radius:6px; font-size:13px; font-weight:600; text-decoration:none; }
+
+  .container { max-width:1100px; margin:0 auto; padding:0 24px; }
+
+  /* ── FORM SECTION ── */
+  .form-section { padding:56px 0 40px; text-align:center; }
+  .form-section h1 { font-size:clamp(24px,4.5vw,40px); font-weight:800; letter-spacing:-0.025em; margin-bottom:8px; }
+  .form-section .sub { color:var(--text3); font-size:15px; max-width:480px; margin:0 auto; line-height:1.5; }
+  .form-grid {
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; max-width:800px;
+    margin:32px auto 0; text-align:left;
+  }
+  .fg-full { grid-column:1/-1; }
+  .fg-2 { grid-column:span 2; }
+  .field label { display:block; font-size:11px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:5px; }
+  .field input, .field textarea {
+    width:100%; padding:11px 14px; background:var(--card); border:1px solid var(--border);
+    border-radius:7px; color:var(--text); font-family:inherit; font-size:14px; outline:none;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .field input:focus, .field textarea:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-glow); }
+  .field input::placeholder, .field textarea::placeholder { color:#52525b; }
+  .field textarea { resize:vertical; min-height:72px; }
+  .form-trust { font-size:12px; color:var(--text3); margin-top:20px; text-align:center; }
+
+  /* ── PREVIEW ── */
+  .preview-section { padding:0 24px 80px; }
+  .preview-label { text-align:center; margin-bottom:24px; }
+  .preview-label span { font-size:11px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.05em; }
+  
+  .preview-site {
+    max-width:960px; margin:0 auto; border-radius:12px;
+    overflow:hidden; border:1px solid var(--border);
+    box-shadow:0 0 0 1px rgba(255,255,255,0.02), 0 32px 80px rgba(0,0,0,0.7);
+  }
+  /* Nav */
+  .ps-nav { display:flex; align-items:center; justify-content:space-between; padding:16px 32px; border-bottom:1px solid var(--border); background:var(--bg); }
+  .ps-logo { font-weight:700; font-size:17px; color:var(--text); outline:none; }
+  .ps-nav-links { display:flex; gap:24px; font-size:13px; }
+  .ps-nav-links a { color:var(--text3); text-decoration:none; }
+  .ps-nav-links a.dim { color:var(--accent); }
+  /* Hero */
+  .ps-hero { text-align:center; padding:64px 32px 56px; }
+  .ps-badge { display:inline-block; font-size:11px; font-weight:600; color:var(--accent); background:var(--accent-glow); padding:5px 14px; border-radius:20px; margin-bottom:18px; outline:none; }
+  .ps-hero h1 { font-size:clamp(24px,4vw,40px); font-weight:800; color:var(--text); line-height:1.1; max-width:640px; margin:0 auto 12px; outline:none; letter-spacing:-0.025em; }
+  .ps-hero .ps-sub { color:var(--text3); font-size:15px; max-width:520px; margin:0 auto 28px; line-height:1.6; outline:none; }
+  .ps-cta { display:inline-block; background:var(--accent); color:#0a0a0b; font-weight:600; font-size:15px; padding:14px 32px; border-radius:8px; }
+  .ps-trust { display:flex; gap:32px; justify-content:center; margin-top:36px; font-size:13px; color:var(--text3); flex-wrap:wrap; }
+  /* Gallery */
+  .ps-gallery { padding:56px 32px; border-top:1px solid var(--border); background:rgba(255,255,255,0.008); }
+  .ps-gallery h2 { text-align:center; font-size:24px; font-weight:700; margin-bottom:32px; }
+  .ps-gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .ps-gal-item { border-radius:8px; overflow:hidden; border:1px solid var(--border); background:var(--card); }
+  .ps-gal-img { aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; color:var(--text3); font-size:13px; background:#1a1a1e; }
+  .ps-gal-item p { padding:10px 14px; font-size:12px; color:var(--text3); }
+  /* Services */
+  .ps-services { padding:56px 32px; border-top:1px solid var(--border); background:rgba(255,255,255,0.012); }
+  .ps-services h2 { text-align:center; font-size:24px; font-weight:700; margin-bottom:32px; }
+  .ps-svc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .ps-svc { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:28px 20px; text-align:center; }
+  .ps-svc-icon { font-size:28px; margin-bottom:12px; }
+  .ps-svc h4 { font-size:15px; font-weight:600; margin-bottom:6px; outline:none; }
+  .ps-svc p { font-size:12px; color:var(--text3); }
+  /* CTA section */
+  .ps-cta-section { padding:48px 32px; border-top:1px solid var(--border); background:rgba(245,166,35,0.03); text-align:center; }
+  .ps-cta-section h2 { font-size:22px; font-weight:700; margin-bottom:8px; }
+  .ps-cta-section p { color:var(--text3); font-size:14px; margin-bottom:20px; }
+  /* Footer */
+  .ps-footer { padding:20px 32px; border-top:1px solid var(--border); text-align:center; font-size:12px; color:var(--text3); outline:none; }
+
+  /* ── Responsive ── */
+  @media (max-width:768px) {
+    .form-grid { grid-template-columns:1fr 1fr; }
+    .fg-2 { grid-column:span 2; }
+    .ps-nav { padding:12px 18px; }
+    .ps-nav-links { display:none; }
+    .ps-hero { padding:40px 20px 32px; }
+    .ps-gallery, .ps-services, .ps-cta-section { padding:36px 20px; }
+    .ps-gallery-grid, .ps-svc-grid { grid-template-columns:1fr 1fr; gap:10px; }
+    .ps-trust { gap:16px; }
+  }
+  @media (max-width:480px) {
+    .form-grid { grid-template-columns:1fr; }
+    .fg-2 { grid-column:1; }
+    .ps-gallery-grid, .ps-svc-grid { grid-template-columns:1fr; }
+    .ps-hero h1 { font-size:20px; }
+  }
+
+  [contenteditable]:hover { outline:1px dashed var(--accent); cursor:text; }
+  [contenteditable]:focus { outline:2px solid var(--accent); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">✦ <span>Template</span>Artisan</div>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="../" class="nav-link">Accueil</a>
+      <a href="../#tarifs" class="nav-link">Tarifs</a>
+      <a href="../#commander" class="nav-cta">Commander</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ FORMULAIRE ═══ -->
+<section class="form-section">
+  <div class="container">
+    <h1>À quoi ressemblera votre site ?</h1>
+    <p class="sub">Remplissez les champs ci-dessous. Le site se construit en direct sous vos yeux. Modifiez n'importe quel texte en cliquant dessus.</p>
+    <div class="form-grid" id="gen-form">
+      <div class="field">
+        <label>Votre nom</label>
+        <input id="gen-name" placeholder="Jean Dubois" oninput="updatePreview()">
+      </div>
+      <div class="field">
+        <label>Métier</label>
+        <input id="gen-job" placeholder="Menuisier ébéniste" oninput="updatePreview()">
+      </div>
+      <div class="field">
+        <label>Ville</label>
+        <input id="gen-city" placeholder="Chartres" oninput="updatePreview()">
+      </div>
+      <div class="field fg-full">
+        <label>Phrase d'accroche</label>
+        <input id="gen-headline" placeholder="Des meubles qui traversent les générations" oninput="updatePreview()">
+      </div>
+      <div class="field fg-full">
+        <label>Description de votre activité</label>
+        <textarea id="gen-desc" placeholder="Décrivez ce que vous faites en 2-3 phrases. Votre expérience, votre style, ce qui vous rend unique." oninput="updatePreview()"></textarea>
+      </div>
+      <div class="field">
+        <label>Service 1</label>
+        <input id="gen-s1" placeholder="Meubles sur mesure" oninput="updatePreview()">
+      </div>
+      <div class="field">
+        <label>Service 2</label>
+        <input id="gen-s2" placeholder="Rénovation de meubles" oninput="updatePreview()">
+      </div>
+      <div class="field">
+        <label>Service 3</label>
+        <input id="gen-s3" placeholder="Agencement intérieur" oninput="updatePreview()">
+      </div>
+    </div>
+    <p class="form-trust">🔒 Aucune donnée enregistrée — 100% gratuit — Aucun engagement</p>
+  </div>
+</section>
+
+<!-- ═══ APERÇU DU SITE ═══ -->
+<section class="preview-section">
+  <div class="preview-label"><span>↓ Votre site — faites défiler ↓</span></div>
+  <div class="preview-site" id="preview-site">
+    <!-- NAV -->
+    <div class="ps-nav">
+      <span class="ps-logo" id="prev-logo" contenteditable="true">DUBOIS</span>
+      <div class="ps-nav-links">
+        <a>Réalisations</a>
+        <a>Services</a>
+        <a class="dim">Contact</a>
+      </div>
+    </div>
+    <!-- HERO -->
+    <div class="ps-hero">
+      <p class="ps-badge" id="prev-badge" contenteditable="true">Menuisier ébéniste · Chartres</p>
+      <h1 id="prev-headline" contenteditable="true">Des meubles qui traversent les générations</h1>
+      <p class="ps-sub" id="prev-desc" contenteditable="true">Artisan menuisier depuis 15 ans à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer.</p>
+      <div class="ps-cta">Demander un devis gratuit</div>
+      <div class="ps-trust">
+        <span id="prev-trust1">✅ 15 ans d'expérience</span>
+        <span>✅ Sur mesure</span>
+        <span>✅ Devis gratuit</span>
+      </div>
+    </div>
+    <!-- GALERIE -->
+    <div class="ps-gallery">
+      <h2>Mes réalisations</h2>
+      <div class="ps-gallery-grid">
+        <div class="ps-gal-item"><div class="ps-gal-img">Photo 1</div><p>Projet récent — VILLE</p></div>
+        <div class="ps-gal-item"><div class="ps-gal-img">Photo 2</div><p>Projet récent — VILLE</p></div>
+        <div class="ps-gal-item"><div class="ps-gal-img">Photo 3</div><p>Projet récent — VILLE</p></div>
+      </div>
+    </div>
+    <!-- SERVICES -->
+    <div class="ps-services">
+      <h2>Mes services</h2>
+      <div class="ps-svc-grid">
+        <div class="ps-svc"><div class="ps-svc-icon">🪚</div><h4 id="prev-s1" contenteditable="true">Meubles sur mesure</h4><p>Création unique, adaptée à vos besoins</p></div>
+        <div class="ps-svc"><div class="ps-svc-icon">✨</div><h4 id="prev-s2" contenteditable="true">Rénovation de meubles</h4><p>Restauration dans les règles de l'art</p></div>
+        <div class="ps-svc"><div class="ps-svc-icon">📐</div><h4 id="prev-s3" contenteditable="true">Agencement intérieur</h4><p>Bibliothèques, dressings, cuisines</p></div>
+      </div>
+    </div>
+    <!-- CTA -->
+    <div class="ps-cta-section">
+      <h2>Un projet ? Parlons-en.</h2>
+      <p>Devis gratuit, réponse sous 48h.</p>
+      <div class="ps-cta">Me contacter</div>
+    </div>
+    <!-- FOOTER -->
+    <div class="ps-footer" id="prev-footer" contenteditable="true">
+      Jean Dubois · Artisan menuisier à Chartres · SIRET : 123 456 789 00010
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:32px;">
+    <a href="../#commander" class="ps-cta" style="display:inline-block;font-size:16px;padding:16px 36px;">Ça me plaît — Je commande</a>
+  </div>
+</section>
+
+<script>
+  function get(id) { var e=document.getElementById(id); return e?e.value.trim():''; }
+  function set(id,t) { var e=document.getElementById(id); if(e)e.textContent=t; }
+  
+  function updatePreview() {
+    var name=get('gen-name')||'Jean Dubois',
+        job=get('gen-job')||'Menuisier ébéniste',
+        city=get('gen-city')||'Chartres',
+        hl=get('gen-headline')||'Des meubles qui traversent les générations',
+        desc=get('gen-desc')||'Artisan menuisier depuis 15 ans à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer.',
+        s1=get('gen-s1')||'Meubles sur mesure',
+        s2=get('gen-s2')||'Rénovation de meubles',
+        s3=get('gen-s3')||'Agencement intérieur';
+
+    var p=name.trim().split(/\s+/), logo=p.length>1?p[p.length-1].toUpperCase():(name||'DUBOIS').toUpperCase();
+    set('prev-logo',logo);
+
+    var badge=job.charAt(0).toUpperCase()+job.slice(1);
+    if(city&&city!=='Chartres') badge+=' · '+city;
+    set('prev-badge',badge);
+    set('prev-headline',hl);
+    set('prev-desc',desc);
+    set('prev-s1',s1); set('prev-s2',s2); set('prev-s3',s3);
+
+    var trust1=document.getElementById('prev-trust1');
+    if(trust1) trust1.textContent='✅ '+(get('gen-exp')||'Expérimenté');
+
+    var f=name+' · Artisan '+job;
+    if(city) f+=' à '+city;
+    set('prev-footer',f);
+
+    try{var d={};
+    ['gen-name','gen-job','gen-city','gen-headline','gen-desc','gen-s1','gen-s2','gen-s3'].forEach(function(k){d[k]=get(k);});
+    localStorage.setItem('sitegen-v3',JSON.stringify(d));}catch(e){}
+  }
+
+  function load() {
+    try{var r=localStorage.getItem('sitegen-v3');if(!r)return;var d=JSON.parse(r);
+    for(var k in d){var e=document.getElementById(k);if(e&&d[k])e.value=d[k];}
+    updatePreview();}catch(e){}
+  }
+
+  function counter() {
+    // Compteur retiré — n'affiche pas de chiffres inventés
+  }
+
+  document.addEventListener('DOMContentLoaded',function(){
+    if(!get('gen-name')){
+      document.getElementById('gen-name').value='Jean Dubois';
+      document.getElementById('gen-job').value='Menuisier ébéniste';
+      document.getElementById('gen-city').value='Chartres';
+      document.getElementById('gen-headline').value='Des meubles qui traversent les générations';
+      document.getElementById('gen-desc').value='Artisan menuisier depuis 15 ans à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer.';
+      document.getElementById('gen-s1').value='Meubles sur mesure';
+      document.getElementById('gen-s2').value='Rénovation de meubles';
+      document.getElementById('gen-s3').value='Agencement intérieur';
+    }
+    load(); updatePreview(); counter();
+  });
+</script>
+</body>
+</html>
