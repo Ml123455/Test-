@@ -10,287 +10,297 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0b; --card: #121214; --border: rgba(255,255,255,0.07);
-    --text: #fafafa; --text2: #b4b4b8; --text3: #71717a;
-    --accent: #d4a853; --accent-glow: rgba(212,168,83,0.12);
-    --radius: 10px;
+    --bg: #08090a; --bg2: #0d0d10; --bg3: #111114;
+    --text: #f7f8f8; --text2: #d0d6e0; --text3: #8a8f98; --text4: #585c63;
+    --accent: #d4a853; --accent-glow: rgba(212,168,83,0.10);
+    --border: rgba(255,255,255,0.06); --border2: rgba(255,255,255,0.04);
+    --radius: 8px; --radius-lg: 12px;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; }
-  
-  /* ── NAV ── */
-  .nav { position:sticky; top:0; z-index:100; background:rgba(10,10,11,0.85); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); padding:0 24px; }
-  .nav-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:56px; }
-  .nav-brand { font-weight:700; font-size:15px; }
-  .nav-brand span { color:var(--accent); }
-  .nav-link { font-size:13px; color:var(--text3); text-decoration:none; transition:color .15s; }
-  .nav-link:hover { color:var(--text); }
-  .nav-cta { background:var(--accent); color:#0a0a0b; padding:7px 18px; border-radius:6px; font-size:13px; font-weight:600; text-decoration:none; }
 
-  .container { max-width:1100px; margin:0 auto; padding:0 24px; }
+  /* ── TOP BAR ── */
+  .topbar { background:rgba(8,9,10,0.9); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); padding:0 20px; position:sticky; top:0; z-index:50; }
+  .topbar-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:52px; }
+  .topbar-brand { font-weight:700; font-size:15px; }
+  .topbar-brand span { color:var(--accent); }
+  .topbar-link { font-size:13px; color:var(--text3); text-decoration:none; transition:color .15s; }
+  .topbar-link:hover { color:var(--text); }
+  .topbar-cta { background:var(--accent); color:#0a0a0b; padding:6px 16px; border-radius:6px; font-size:13px; font-weight:600; text-decoration:none; }
 
-  /* ── FORM SECTION ── */
-  .form-section { padding:56px 0 40px; text-align:center; }
-  .form-section h1 { font-size:clamp(24px,4.5vw,40px); font-weight:800; letter-spacing:-0.025em; margin-bottom:8px; }
-  .form-section .sub { color:var(--text3); font-size:15px; max-width:480px; margin:0 auto; line-height:1.5; }
-  .form-grid {
-    display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; max-width:800px;
-    margin:32px auto 0; text-align:left;
-  }
-  .fg-full { grid-column:1/-1; }
-  .fg-2 { grid-column:span 2; }
-  .field label { display:block; font-size:11px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:5px; }
-  .field input, .field textarea {
-    width:100%; padding:11px 14px; background:var(--card); border:1px solid var(--border);
-    border-radius:7px; color:var(--text); font-family:inherit; font-size:14px; outline:none;
+  /* ── GENERATOR SECTION ── */
+  .gen-section { padding:48px 20px 32px; text-align:center; }
+  .gen-section h1 { font-size:clamp(22px,4vw,34px); font-weight:800; letter-spacing:-0.02em; margin-bottom:6px; }
+  .gen-sub { color:var(--text3); font-size:14px; max-width:500px; margin:0 auto; line-height:1.5; }
+  .gen-form { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; max-width:780px; margin:28px auto 0; text-align:left; }
+  .gen-form .full { grid-column:1/-1; }
+  .gen-form label { display:block; font-size:10px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px; }
+  .gen-form input, .gen-form textarea {
+    width:100%; padding:10px 13px; background:var(--bg3); border:1px solid var(--border);
+    border-radius:6px; color:var(--text); font-family:inherit; font-size:13px; outline:none;
     transition:border-color .2s, box-shadow .2s;
   }
-  .field input:focus, .field textarea:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-glow); }
-  .field input::placeholder, .field textarea::placeholder { color:#52525b; }
-  .field textarea { resize:vertical; min-height:72px; }
-  .form-trust { font-size:12px; color:var(--text3); margin-top:20px; text-align:center; }
+  .gen-form input:focus, .gen-form textarea:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-glow); }
+  .gen-form input::placeholder, .gen-form textarea::placeholder { color:#444; }
+  .gen-form textarea { resize:vertical; min-height:60px; }
+  .gen-trust { font-size:12px; color:var(--text4); margin-top:18px; }
 
   /* ── PREVIEW ── */
-  .preview-section { padding:0 24px 80px; }
-  .preview-label { text-align:center; margin-bottom:24px; }
-  .preview-label span { font-size:11px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.05em; }
-  
+  .preview-section { padding:0 20px 60px; }
+  .preview-label { text-align:center; margin-bottom:20px; }
+  .preview-label span { font-size:10px; font-weight:600; color:var(--text4); text-transform:uppercase; letter-spacing:0.05em; background:var(--bg3); padding:5px 14px; border-radius:20px; border:1px solid var(--border); }
+
   .preview-site {
-    max-width:960px; margin:0 auto; border-radius:12px;
+    max-width:1000px; margin:0 auto; border-radius:12px;
     overflow:hidden; border:1px solid var(--border);
-    box-shadow:0 0 0 1px rgba(255,255,255,0.02), 0 32px 80px rgba(0,0,0,0.7);
+    box-shadow:0 0 0 1px rgba(255,255,255,0.02), 0 40px 100px rgba(0,0,0,0.8);
   }
-  /* Nav */
-  .ps-nav { display:flex; align-items:center; justify-content:space-between; padding:16px 32px; border-bottom:1px solid var(--border); background:var(--bg); }
-  .ps-logo { font-weight:700; font-size:17px; color:var(--text); outline:none; }
-  .ps-nav-links { display:flex; gap:24px; font-size:13px; }
-  .ps-nav-links a { color:var(--text3); text-decoration:none; }
-  .ps-nav-links a.dim { color:var(--accent); }
-  /* Hero */
-  .ps-hero { text-align:center; padding:64px 32px 56px; }
-  .ps-badge { display:inline-block; font-size:11px; font-weight:600; color:var(--accent); background:var(--accent-glow); padding:5px 14px; border-radius:20px; margin-bottom:18px; outline:none; }
-  .ps-hero h1 { font-size:clamp(24px,4vw,40px); font-weight:800; color:var(--text); line-height:1.1; max-width:640px; margin:0 auto 12px; outline:none; letter-spacing:-0.025em; }
-  .ps-hero .ps-sub { color:var(--text3); font-size:15px; max-width:520px; margin:0 auto 28px; line-height:1.6; outline:none; }
-  .ps-cta { display:inline-block; background:var(--accent); color:#0a0a0b; font-weight:600; font-size:15px; padding:14px 32px; border-radius:8px; }
-  .ps-trust { display:flex; gap:32px; justify-content:center; margin-top:36px; font-size:13px; color:var(--text3); flex-wrap:wrap; }
-  /* Gallery */
-  .ps-gallery { padding:56px 32px; border-top:1px solid var(--border); background:rgba(255,255,255,0.008); }
-  .ps-gallery h2 { text-align:center; font-size:24px; font-weight:700; margin-bottom:32px; }
-  .ps-gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-  .ps-gal-item { border-radius:8px; overflow:hidden; border:1px solid var(--border); background:var(--card); }
-  .ps-gal-img { aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; color:var(--text3); font-size:13px; background:#1a1a1e; }
-  .ps-gal-item p { padding:10px 14px; font-size:12px; color:var(--text3); }
-  /* Services */
-  .ps-services { padding:56px 32px; border-top:1px solid var(--border); background:rgba(255,255,255,0.012); }
-  .ps-services h2 { text-align:center; font-size:24px; font-weight:700; margin-bottom:32px; }
-  .ps-svc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-  .ps-svc { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:28px 20px; text-align:center; }
-  .ps-svc-icon { font-size:28px; margin-bottom:12px; }
-  .ps-svc h4 { font-size:15px; font-weight:600; margin-bottom:6px; outline:none; }
+
+  /* ── PREVIEW: NAV ── */
+  .ps-nav { display:flex; align-items:center; justify-content:space-between; padding:14px 28px; background:rgba(8,9,10,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+  .ps-logo { font-weight:700; font-size:17px; outline:none; }
+  .ps-nav-r { display:flex; gap:28px; align-items:center; }
+  .ps-nav-r a { font-size:13px; color:var(--text3); text-decoration:none; font-weight:500; }
+  .ps-nav-r a.cta { background:var(--accent); color:#0a0a0b; padding:7px 18px; border-radius:6px; font-size:13px; font-weight:600; }
+  @media (max-width:640px) { .ps-nav-r { gap:14px; } .ps-nav-r a { font-size:11px; } .ps-logo { font-size:14px; } }
+
+  /* ── PREVIEW: HERO ── */
+  .ps-hero { position:relative; padding:80px 28px 64px; text-align:center; background:var(--bg2); overflow:hidden; }
+  .ps-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%, rgba(212,168,83,0.06) 0%, transparent 70%); pointer-events:none; }
+  .ps-badge { display:inline-block; font-size:11px; font-weight:600; color:var(--accent); background:var(--accent-glow); border:1px solid rgba(212,168,83,0.15); padding:5px 14px; border-radius:20px; margin-bottom:16px; outline:none; }
+  .ps-hero h1 { font-size:clamp(22px,4vw,38px); font-weight:800; line-height:1.1; max-width:600px; margin:0 auto 10px; outline:none; letter-spacing:-0.02em; }
+  .ps-hero .ps-sub { color:var(--text3); font-size:15px; max-width:500px; margin:0 auto 24px; line-height:1.6; outline:none; }
+  .ps-cta-btn { display:inline-block; background:var(--accent); color:#0a0a0b; font-weight:600; font-size:15px; padding:13px 32px; border-radius:8px; text-decoration:none; }
+  .ps-trust { display:flex; gap:28px; justify-content:center; margin-top:32px; font-size:13px; color:var(--text3); flex-wrap:wrap; }
+
+  /* ── PREVIEW: GALLERY ── */
+  .ps-section { padding:56px 28px; }
+  .ps-section.alt { background:rgba(255,255,255,0.008); border-top:1px solid var(--border2); border-bottom:1px solid var(--border2); }
+  .ps-section h2 { text-align:center; font-size:22px; font-weight:700; margin-bottom:28px; }
+  .ps-gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .ps-gallery img { width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:6px; display:block; }
+  @media (max-width:640px) { .ps-gallery { grid-template-columns:1fr 1fr; } }
+
+  /* ── PREVIEW: SERVICES ── */
+  .ps-services { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .ps-svc { background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:24px 20px; text-align:center; transition:border-color .2s; }
+  .ps-svc:hover { border-color:var(--accent); }
+  .ps-svc-icon { font-size:26px; margin-bottom:10px; }
+  .ps-svc h4 { font-size:14px; font-weight:600; margin-bottom:4px; outline:none; }
   .ps-svc p { font-size:12px; color:var(--text3); }
-  /* CTA section */
-  .ps-cta-section { padding:48px 32px; border-top:1px solid var(--border); background:rgba(245,166,35,0.03); text-align:center; }
-  .ps-cta-section h2 { font-size:22px; font-weight:700; margin-bottom:8px; }
-  .ps-cta-section p { color:var(--text3); font-size:14px; margin-bottom:20px; }
-  /* Footer */
-  .ps-footer { padding:20px 32px; border-top:1px solid var(--border); text-align:center; font-size:12px; color:var(--text3); outline:none; }
+  @media (max-width:640px) { .ps-services { grid-template-columns:1fr 1fr; } }
 
-  /* ── Responsive ── */
-  @media (max-width:768px) {
-    .form-grid { grid-template-columns:1fr 1fr; }
-    .fg-2 { grid-column:span 2; }
-    .ps-nav { padding:12px 18px; }
-    .ps-nav-links { display:none; }
-    .ps-hero { padding:40px 20px 32px; }
-    .ps-gallery, .ps-services, .ps-cta-section { padding:36px 20px; }
-    .ps-gallery-grid, .ps-svc-grid { grid-template-columns:1fr 1fr; gap:10px; }
-    .ps-trust { gap:16px; }
-  }
-  @media (max-width:480px) {
-    .form-grid { grid-template-columns:1fr; }
-    .fg-2 { grid-column:1; }
-    .ps-gallery-grid, .ps-svc-grid { grid-template-columns:1fr; }
-    .ps-hero h1 { font-size:20px; }
-  }
+  /* ── PREVIEW: ABOUT ── */
+  .ps-about { display:flex; gap:32px; align-items:center; flex-wrap:wrap; }
+  .ps-about-img { width:120px; height:120px; border-radius:8px; object-fit:cover; flex-shrink:0; }
+  .ps-about-text { flex:1; min-width:240px; }
+  .ps-about-text h3 { font-size:18px; font-weight:700; margin-bottom:8px; }
+  .ps-about-text p { font-size:14px; color:var(--text3); line-height:1.7; }
 
-  [contenteditable]:hover { outline:1px dashed var(--accent); cursor:text; }
-  [contenteditable]:focus { outline:2px solid var(--accent); }
+  /* ── PREVIEW: CTA SECTION ── */
+  .ps-cta-section { padding:48px 28px; text-align:center; background:rgba(212,168,83,0.03); border-top:1px solid var(--border); }
+  .ps-cta-section h2 { font-size:20px; font-weight:700; margin-bottom:6px; }
+  .ps-cta-section p { color:var(--text3); font-size:14px; margin-bottom:18px; }
+
+  /* ── PREVIEW: FOOTER ── */
+  .ps-footer { padding:18px 28px; border-top:1px solid var(--border); text-align:center; font-size:12px; color:var(--text4); outline:none; }
+
+  /* ── ORDER CTA ── */
+  .order-cta { text-align:center; margin-top:28px; }
+  .order-cta a { display:inline-block; background:var(--accent); color:#0a0a0b; font-weight:700; font-size:16px; padding:15px 36px; border-radius:10px; text-decoration:none; box-shadow:0 4px 20px rgba(212,168,83,0.2); transition:transform .15s; }
+  .order-cta a:hover { transform:translateY(-1px); }
+
+  /* ── EDITABLE ── */
+  [contenteditable]:hover { outline:1px dashed var(--accent); outline-offset:2px; cursor:text; }
+  [contenteditable]:focus { outline:2px solid var(--accent); outline-offset:2px; }
+
+  @media (max-width:640px) {
+    .gen-form { grid-template-columns:1fr 1fr; }
+    .gen-form .full { grid-column:1/-1; }
+    .ps-hero { padding:48px 20px 40px; }
+    .ps-section { padding:36px 20px; }
+    .ps-nav { padding:10px 16px; }
+  }
+  @media (max-width:400px) {
+    .gen-form { grid-template-columns:1fr; }
+    .ps-services { grid-template-columns:1fr; }
+    .ps-gallery { grid-template-columns:1fr; }
+  }
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="nav-brand">✦ <span>Template</span>Artisan</div>
-    <div style="display:flex;align-items:center;gap:24px;">
-      <a href="../" class="nav-link">Accueil</a>
-      <a href="../#tarifs" class="nav-link">Tarifs</a>
-      <a href="../#commander" class="nav-cta">Commander</a>
+<!-- ═══ TOP BAR ═══ -->
+<nav class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">✦ <span>Template</span>Artisan</div>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="../" class="topbar-link">Accueil</a>
+      <a href="../#tarifs" class="topbar-link">Tarifs</a>
+      <a href="../#commander" class="topbar-cta">Commander</a>
     </div>
   </div>
 </nav>
 
-<!-- ═══ FORMULAIRE ═══ -->
-<section class="form-section">
-  <div class="container">
-    <h1>À quoi ressemblera votre site ?</h1>
-    <p class="sub">Remplissez les champs ci-dessous. Le site se construit en direct sous vos yeux. Modifiez n'importe quel texte en cliquant dessus.</p>
-    <div class="form-grid" id="gen-form">
-      <div class="field">
-        <label>Votre nom</label>
-        <input id="gen-name" placeholder="Jean Dubois" oninput="updatePreview()">
-      </div>
-      <div class="field">
-        <label>Métier</label>
-        <input id="gen-job" placeholder="Menuisier ébéniste" oninput="updatePreview()">
-      </div>
-      <div class="field">
-        <label>Ville</label>
-        <input id="gen-city" placeholder="Chartres" oninput="updatePreview()">
-      </div>
-      <div class="field fg-full">
-        <label>Phrase d'accroche</label>
-        <input id="gen-headline" placeholder="Des meubles qui traversent les générations" oninput="updatePreview()">
-      </div>
-      <div class="field fg-full">
-        <label>Description de votre activité</label>
-        <textarea id="gen-desc" placeholder="Décrivez ce que vous faites en 2-3 phrases. Votre expérience, votre style, ce qui vous rend unique." oninput="updatePreview()"></textarea>
-      </div>
-      <div class="field">
-        <label>Service 1</label>
-        <input id="gen-s1" placeholder="Meubles sur mesure" oninput="updatePreview()">
-      </div>
-      <div class="field">
-        <label>Service 2</label>
-        <input id="gen-s2" placeholder="Rénovation de meubles" oninput="updatePreview()">
-      </div>
-      <div class="field">
-        <label>Service 3</label>
-        <input id="gen-s3" placeholder="Agencement intérieur" oninput="updatePreview()">
-      </div>
-    </div>
-    <p class="form-trust">🔒 Aucune donnée enregistrée — 100% gratuit — Aucun engagement</p>
+<!-- ═══ GÉNÉRATEUR ═══ -->
+<section class="gen-section">
+  <h1>À quoi ressemblera votre site ?</h1>
+  <p class="gen-sub">Remplissez les champs, le site se construit en direct. Cliquez sur n'importe quel texte pour le modifier.</p>
+  <div class="gen-form">
+    <div><label>Votre nom</label><input id="gn-name" placeholder="Jean Dubois" oninput="up()"></div>
+    <div><label>Métier</label><input id="gn-job" placeholder="Menuisier ébéniste" oninput="up()"></div>
+    <div><label>Ville</label><input id="gn-city" placeholder="Chartres" oninput="up()"></div>
+    <div class="full"><label>Phrase d'accroche</label><input id="gn-headline" placeholder="Des meubles qui traversent les générations" oninput="up()"></div>
+    <div class="full"><label>Courte description</label><textarea id="gn-desc" placeholder="Ce que vous faites, votre style, votre expérience..." oninput="up()"></textarea></div>
+    <div><label>Service 1</label><input id="gn-s1" placeholder="Meubles sur mesure" oninput="up()"></div>
+    <div><label>Service 2</label><input id="gn-s2" placeholder="Rénovation" oninput="up()"></div>
+    <div><label>Service 3</label><input id="gn-s3" placeholder="Agencement" oninput="up()"></div>
   </div>
+  <p class="gen-trust">Aucune donnée enregistrée — 100% gratuit — Sans engagement</p>
 </section>
 
-<!-- ═══ APERÇU DU SITE ═══ -->
+<!-- ═══ APERÇU ═══ -->
 <section class="preview-section">
-  <div class="preview-label"><span>↓ Votre site — faites défiler ↓</span></div>
-  <div class="preview-site" id="preview-site">
+  <div class="preview-label"><span>↓ Aperçu de votre site ↓</span></div>
+  <div class="preview-site">
+
     <!-- NAV -->
     <div class="ps-nav">
-      <span class="ps-logo" id="prev-logo" contenteditable="true">DUBOIS</span>
-      <div class="ps-nav-links">
+      <span class="ps-logo" id="pv-logo" contenteditable="true">DUBOIS</span>
+      <div class="ps-nav-r">
         <a>Réalisations</a>
         <a>Services</a>
-        <a class="dim">Contact</a>
+        <a class="cta">Devis gratuit</a>
       </div>
     </div>
+
     <!-- HERO -->
     <div class="ps-hero">
-      <p class="ps-badge" id="prev-badge" contenteditable="true">Menuisier ébéniste · Chartres</p>
-      <h1 id="prev-headline" contenteditable="true">Des meubles qui traversent les générations</h1>
-      <p class="ps-sub" id="prev-desc" contenteditable="true">Artisan menuisier à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer.</p>
-      <div class="ps-cta">Demander un devis gratuit</div>
+      <p class="ps-badge" id="pv-badge" contenteditable="true">Menuisier ébéniste · Chartres</p>
+      <h1 id="pv-headline" contenteditable="true">Des meubles qui traversent les générations</h1>
+      <p class="ps-sub" id="pv-desc" contenteditable="true">Artisan menuisier à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer.</p>
+      <div class="ps-cta-btn">Demander un devis gratuit</div>
       <div class="ps-trust">
-        <span id="prev-trust1">✅ Artisan passionné</span>
+        <span>✅ Artisan passionné</span>
         <span>✅ Sur mesure</span>
         <span>✅ Devis gratuit</span>
       </div>
     </div>
+
     <!-- GALERIE -->
-    <div class="ps-gallery">
+    <div class="ps-section">
       <h2>Mes réalisations</h2>
-      <div class="ps-gallery-grid">
-        <div class="ps-gal-item"><div class="ps-gal-img">Photo 1</div><p>Projet récent — VILLE</p></div>
-        <div class="ps-gal-item"><div class="ps-gal-img">Photo 2</div><p>Projet récent — VILLE</p></div>
-        <div class="ps-gal-item"><div class="ps-gal-img">Photo 3</div><p>Projet récent — VILLE</p></div>
+      <div class="ps-gallery">
+        <img src="https://source.unsplash.com/600x450/?woodworking,carpentry" alt="Réalisation" loading="lazy">
+        <img src="https://source.unsplash.com/600x450/?furniture,wood" alt="Réalisation" loading="lazy">
+        <img src="https://source.unsplash.com/600x450/?workshop,craftsman" alt="Réalisation" loading="lazy">
       </div>
     </div>
+
     <!-- SERVICES -->
-    <div class="ps-services">
+    <div class="ps-section alt">
       <h2>Mes services</h2>
-      <div class="ps-svc-grid">
-        <div class="ps-svc"><div class="ps-svc-icon">🪚</div><h4 id="prev-s1" contenteditable="true">Meubles sur mesure</h4><p>Création unique, adaptée à vos besoins</p></div>
-        <div class="ps-svc"><div class="ps-svc-icon">✨</div><h4 id="prev-s2" contenteditable="true">Rénovation de meubles</h4><p>Restauration dans les règles de l'art</p></div>
-        <div class="ps-svc"><div class="ps-svc-icon">📐</div><h4 id="prev-s3" contenteditable="true">Agencement intérieur</h4><p>Bibliothèques, dressings, cuisines</p></div>
+      <div class="ps-services">
+        <div class="ps-svc">
+          <div class="ps-svc-icon">🪚</div>
+          <h4 id="pv-s1" contenteditable="true">Meubles sur mesure</h4>
+          <p>Création unique, adaptée à vos besoins</p>
+        </div>
+        <div class="ps-svc">
+          <div class="ps-svc-icon">✨</div>
+          <h4 id="pv-s2" contenteditable="true">Rénovation de meubles</h4>
+          <p>Restauration dans les règles de l'art</p>
+        </div>
+        <div class="ps-svc">
+          <div class="ps-svc-icon">📐</div>
+          <h4 id="pv-s3" contenteditable="true">Agencement intérieur</h4>
+          <p>Bibliothèques, dressings, cuisines</p>
+        </div>
       </div>
     </div>
+
+    <!-- À PROPOS -->
+    <div class="ps-section">
+      <h2>Qui suis-je ?</h2>
+      <div class="ps-about">
+        <img class="ps-about-img" src="https://source.unsplash.com/240x240/?portrait,craftsman" alt="Artisan" loading="lazy">
+        <div class="ps-about-text">
+          <h3 id="pv-about-name" contenteditable="true">Jean Dubois</h3>
+          <p id="pv-about-text" contenteditable="true">Artisan menuisier passionné, je travaille le bois depuis toujours. Chaque meuble que je crée est une pièce unique, fabriquée avec soin dans mon atelier à Chartres. Je prends le temps de comprendre votre projet pour vous proposer la meilleure solution.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- CTA -->
     <div class="ps-cta-section">
       <h2>Un projet ? Parlons-en.</h2>
       <p>Devis gratuit, réponse sous 48h.</p>
-      <div class="ps-cta">Me contacter</div>
+      <div class="ps-cta-btn">Me contacter</div>
     </div>
+
     <!-- FOOTER -->
-    <div class="ps-footer" id="prev-footer" contenteditable="true">
+    <div class="ps-footer" id="pv-footer" contenteditable="true">
       Jean Dubois · Artisan menuisier à Chartres
     </div>
+
   </div>
-  <div style="text-align:center;margin-top:32px;">
-    <a href="../#commander" class="ps-cta" style="display:inline-block;font-size:16px;padding:16px 36px;">Ça me plaît — Je commande</a>
+
+  <!-- COMMANDER -->
+  <div class="order-cta">
+    <a href="../#commander">Ça me plaît — Je commande</a>
   </div>
 </section>
 
 <script>
-  function get(id) { var e=document.getElementById(id); return e?e.value.trim():''; }
-  function set(id,t) { var e=document.getElementById(id); if(e)e.textContent=t; }
-  
-  function updatePreview() {
-    var name=get('gen-name')||'Jean Dubois',
-        job=get('gen-job')||'Menuisier ébéniste',
-        city=get('gen-city')||'Chartres',
-        hl=get('gen-headline')||'Des meubles qui traversent les générations',
-        desc=get('gen-desc')||'Artisan menuisier à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer.',
-        s1=get('gen-s1')||'Meubles sur mesure',
-        s2=get('gen-s2')||'Rénovation de meubles',
-        s3=get('gen-s3')||'Agencement intérieur';
+  var g=function(id){var e=document.getElementById(id);return e?e.value.trim():'';};
+  var s=function(id,t){var e=document.getElementById(id);if(e&&e.textContent!==t)e.textContent=t;};
 
-    var p=name.trim().split(/\s+/), logo=p.length>1?p[p.length-1].toUpperCase():(name||'DUBOIS').toUpperCase();
-    set('prev-logo',logo);
+  function up(){
+    var name=g('gn-name')||'Jean Dubois',
+        job=g('gn-job')||'Menuisier ébéniste',
+        city=g('gn-city')||'Chartres',
+        hl=g('gn-headline')||'Des meubles qui traversent les générations',
+        desc=g('gn-desc')||'Artisan menuisier à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées.',
+        s1=g('gn-s1')||'Meubles sur mesure',
+        s2=g('gn-s2')||'Rénovation de meubles',
+        s3=g('gn-s3')||'Agencement intérieur';
+
+    var p=name.trim().split(/\s+/);
+    var logo=p.length>1?p[p.length-1].toUpperCase():(name||'DUBOIS').toUpperCase();
+    s('pv-logo',logo);
 
     var badge=job.charAt(0).toUpperCase()+job.slice(1);
-    if(city&&city!=='Chartres') badge+=' · '+city;
-    set('prev-badge',badge);
-    set('prev-headline',hl);
-    set('prev-desc',desc);
-    set('prev-s1',s1); set('prev-s2',s2); set('prev-s3',s3);
+    if(city)s('pv-badge',badge+' · '+city);
+    else s('pv-badge',badge);
 
-    var trust1=document.getElementById('prev-trust1');
-    if(trust1) trust1.textContent='✅ Artisan passionné';
-
-    var f=name+' · Artisan '+job;
-    if(city) f+=' à '+city;
-    set('prev-footer',f);
+    s('pv-headline',hl);
+    s('pv-desc',desc);
+    s('pv-s1',s1); s('pv-s2',s2); s('pv-s3',s3);
+    s('pv-about-name',name);
+    s('pv-about-text','Artisan '+job+' passionné'+(city?', je travaille dans mon atelier à '+city:'')+'. Chaque projet est unique, réalisé avec soin et attention aux détails.');
+    s('pv-footer',name+' · Artisan '+job+(city?' à '+city:''));
 
     try{var d={};
-    ['gen-name','gen-job','gen-city','gen-headline','gen-desc','gen-s1','gen-s2','gen-s3'].forEach(function(k){d[k]=get(k);});
+    ['gn-name','gn-job','gn-city','gn-headline','gn-desc','gn-s1','gn-s2','gn-s3'].forEach(function(k){d[k]=g(k);});
     localStorage.setItem('sitegen-v3',JSON.stringify(d));}catch(e){}
   }
 
-  function load() {
-    try{var r=localStorage.getItem('sitegen-v3');if(!r)return;var d=JSON.parse(r);
-    for(var k in d){var e=document.getElementById(k);if(e&&d[k])e.value=d[k];}
-    updatePreview();}catch(e){}
-  }
-
-  function counter() {
-    // Compteur retiré — n'affiche pas de chiffres inventés
-  }
-
-  document.addEventListener('DOMContentLoaded',function(){
-    if(!get('gen-name')){
-      document.getElementById('gen-name').value='Jean Dubois';
-      document.getElementById('gen-job').value='Menuisier ébéniste';
-      document.getElementById('gen-city').value='Chartres';
-      document.getElementById('gen-headline').value='Des meubles qui traversent les générations';
-      document.getElementById('gen-desc').value='Artisan menuisier à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer.';
-      document.getElementById('gen-s1').value='Meubles sur mesure';
-      document.getElementById('gen-s2').value='Rénovation de meubles';
-      document.getElementById('gen-s3').value='Agencement intérieur';
+  (function(){
+    if(!g('gn-name')){
+      document.getElementById('gn-name').value='Jean Dubois';
+      document.getElementById('gn-job').value='Menuisier ébéniste';
+      document.getElementById('gn-city').value='Chartres';
+      document.getElementById('gn-headline').value='Des meubles qui traversent les générations';
+      document.getElementById('gn-desc').value='Artisan menuisier à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer.';
+      document.getElementById('gn-s1').value='Meubles sur mesure';
+      document.getElementById('gn-s2').value='Rénovation de meubles';
+      document.getElementById('gn-s3').value='Agencement intérieur';
     }
-    load(); updatePreview(); counter();
-  });
+    try{var r=localStorage.getItem('sitegen-v3');if(r){var d=JSON.parse(r);
+    for(var k in d){var e=document.getElementById(k);if(e&&d[k])e.value=d[k];}
+    }}catch(e){}
+    up();
+  })();
 </script>
 </body>
 </html>
