@@ -50,4 +50,20 @@
     observer.observe(el);
   });
 
+  // Pré-remplir le formulaire de commande depuis la démo
+  function prefillFromDemo() {
+    try {
+      var raw = localStorage.getItem('sitegen-v3');
+      if (!raw) return;
+      var d = JSON.parse(raw);
+      if (document.getElementById('gen-name') || !document.querySelector('form.contact-form')) return; // on est sur la démo, pas la landing
+
+      var nameEl = document.querySelector('input[name="name"]');
+      var jobEl = document.querySelector('input[name="job"]');
+      if (nameEl && d['gen-name']) nameEl.value = d['gen-name'];
+      if (jobEl && d['gen-job']) jobEl.value = d['gen-job'];
+    } catch(e) {}
+  }
+  prefillFromDemo();
+
 })();

@@ -12,7 +12,7 @@
   :root {
     --bg: #0a0a0b; --card: #121214; --border: rgba(255,255,255,0.07);
     --text: #fafafa; --text2: #b4b4b8; --text3: #71717a;
-    --accent: #f5a623; --accent-glow: rgba(245,166,35,0.12);
+    --accent: #d4a853; --accent-glow: rgba(212,168,83,0.12);
     --radius: 10px;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -190,10 +190,10 @@
     <div class="ps-hero">
       <p class="ps-badge" id="prev-badge" contenteditable="true">Menuisier ébéniste · Chartres</p>
       <h1 id="prev-headline" contenteditable="true">Des meubles qui traversent les générations</h1>
-      <p class="ps-sub" id="prev-desc" contenteditable="true">Artisan menuisier depuis 15 ans à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer.</p>
+      <p class="ps-sub" id="prev-desc" contenteditable="true">Artisan menuisier à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer.</p>
       <div class="ps-cta">Demander un devis gratuit</div>
       <div class="ps-trust">
-        <span id="prev-trust1">✅ 15 ans d'expérience</span>
+        <span id="prev-trust1">✅ Artisan passionné</span>
         <span>✅ Sur mesure</span>
         <span>✅ Devis gratuit</span>
       </div>
@@ -224,7 +224,7 @@
     </div>
     <!-- FOOTER -->
     <div class="ps-footer" id="prev-footer" contenteditable="true">
-      Jean Dubois · Artisan menuisier à Chartres · SIRET : 123 456 789 00010
+      Jean Dubois · Artisan menuisier à Chartres
     </div>
   </div>
   <div style="text-align:center;margin-top:32px;">
@@ -241,7 +241,7 @@
         job=get('gen-job')||'Menuisier ébéniste',
         city=get('gen-city')||'Chartres',
         hl=get('gen-headline')||'Des meubles qui traversent les générations',
-        desc=get('gen-desc')||'Artisan menuisier depuis 15 ans à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer.',
+        desc=get('gen-desc')||'Artisan menuisier à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer.',
         s1=get('gen-s1')||'Meubles sur mesure',
         s2=get('gen-s2')||'Rénovation de meubles',
         s3=get('gen-s3')||'Agencement intérieur';
@@ -257,7 +257,7 @@
     set('prev-s1',s1); set('prev-s2',s2); set('prev-s3',s3);
 
     var trust1=document.getElementById('prev-trust1');
-    if(trust1) trust1.textContent='✅ '+(get('gen-exp')||'Expérimenté');
+    if(trust1) trust1.textContent='✅ Artisan passionné';
 
     var f=name+' · Artisan '+job;
     if(city) f+=' à '+city;
@@ -284,7 +284,7 @@
       document.getElementById('gen-job').value='Menuisier ébéniste';
       document.getElementById('gen-city').value='Chartres';
       document.getElementById('gen-headline').value='Des meubles qui traversent les générations';
-      document.getElementById('gen-desc').value='Artisan menuisier depuis 15 ans à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer.';
+      document.getElementById('gen-desc').value='Artisan menuisier à Chartres, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer.';
       document.getElementById('gen-s1').value='Meubles sur mesure';
       document.getElementById('gen-s2').value='Rénovation de meubles';
       document.getElementById('gen-s3').value='Agencement intérieur';
