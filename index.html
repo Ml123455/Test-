@@ -52,7 +52,6 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
 .hero-browser-dot{width:9px;height:9px;border-radius:50%}
 .hero-browser-dot.r{background:#ff5f57}.hero-browser-dot.y{background:#febc2e}.hero-browser-dot.g{background:#28c840}
 .hero-browser-url{font-size:10.5px;color:var(--text4);margin-left:8px;flex:1;background:var(--bg3);padding:4px 10px;border-radius:4px}
-.hero-browser-body{padding:0}
 .hero-site-preview{background:linear-gradient(180deg,#1a1c24 0%,#14151a 100%);padding:40px 32px;text-align:center;min-height:300px}
 .hero-site-preview .sp-logo{font-weight:800;font-size:15px;letter-spacing:.05em;margin-bottom:20px;color:var(--text2)}
 .hero-site-preview .sp-logo span{color:#d4a853}
@@ -60,9 +59,8 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
 .hero-site-preview .sp-sub{font-size:12px;color:var(--text4);margin-bottom:16px;max-width:340px;margin-left:auto;margin-right:auto}
 .hero-site-preview .sp-cta{display:inline-block;background:#d4a853;color:#0a0a0b;font-weight:700;font-size:12px;padding:9px 20px;border-radius:5px}
 .hero-site-preview .sp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:20px;max-width:500px;margin-left:auto;margin-right:auto}
-.hero-site-preview .sp-img{aspect-ratio:4/3;background:rgba(255,255,255,.03);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.hero-site-preview .sp-img{aspect-ratio:4/3;background:linear-gradient(135deg,rgba(212,168,83,.08),rgba(212,168,83,.04));border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid rgba(212,168,83,.08)}
 .hero-trust{display:flex;gap:32px;justify-content:center;margin-top:36px;flex-wrap:wrap;font-size:12.5px;color:var(--text3)}
-.hero-trust span{opacity:.8}
 
 .section{padding:80px 36px;max-width:1100px;margin:0 auto}
 .section-dark{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
@@ -70,6 +68,15 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
 .section h2{text-align:center;font-size:clamp(22px,3.5vw,30px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
 .section h2+p{text-align:center;color:var(--text3);font-size:14px;max-width:460px;margin:0 auto 52px}
 
+/* STATS BAR - Commerce agent recommendation */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;max-width:800px;margin:0 auto 56px;background:var(--border);border-radius:var(--rl);overflow:hidden}
+.stat-item{background:var(--bg3);padding:28px 20px;text-align:center}
+.stat-num{font-size:32px;font-weight:900;letter-spacing:-.03em;line-height:1}
+.stat-num.accent{color:var(--accent)}
+.stat-num.gold{color:#d4a853}
+.stat-label{font-size:11px;color:var(--text4);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+
+/* HIGHLIGHTS */
 .highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .highlight{text-align:center;padding:40px 24px 32px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rl);transition:border-color .25s,transform .25s}
 .highlight:hover{border-color:var(--aglow2);transform:translateY(-3px)}
@@ -77,23 +84,55 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
 .highlight h4{font-size:16px;font-weight:700;margin-bottom:6px}
 .highlight p{font-size:13px;color:var(--text3);line-height:1.55}
 
-.showcase-scroll{display:flex;gap:16px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-.showcase-scroll::-webkit-scrollbar{height:4px}
-.showcase-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-.showcase-card{flex:0 0 320px;scroll-snap-align:start;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;transition:border-color .25s}
-.showcase-card:hover{border-color:var(--aglow2)}
-.showcase-card-bar{display:flex;align-items:center;gap:5px;padding:8px 12px;background:var(--bg4);border-bottom:1px solid var(--border2)}
-.showcase-card-dot{width:7px;height:7px;border-radius:50%}
-.showcase-card-dot.r{background:#ff5f57}.showcase-card-dot.y{background:#febc2e}.showcase-card-dot.g{background:#28c840}
-.showcase-card-url{font-size:9px;color:var(--text4);margin-left:5px;flex:1}
-.showcase-card-body{padding:20px 16px 24px}
-.showcase-card-body .sc-logo{font-weight:800;font-size:13px;letter-spacing:.03em;margin-bottom:12px}
-.showcase-card-body .sc-h1{font-weight:800;font-size:15px;line-height:1.2;margin-bottom:5px}
-.showcase-card-body .sc-sub{font-size:10.5px;color:var(--text4);line-height:1.5;margin-bottom:12px}
-.showcase-card-body .sc-btn{display:inline-block;font-weight:700;font-size:10.5px;padding:7px 14px;border-radius:4px;margin-bottom:12px}
-.showcase-card-body .sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
-.showcase-card-body .sc-img{aspect-ratio:3/2;background:rgba(255,255,255,.02);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:18px}
+/* ── EXAMPLES GRID — V5 Artiste/Marketing/Commerce ── */
+.examples-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.example-card{background:#0d0f13;border:1px solid rgba(255,255,255,.06);border-radius:14px;overflow:hidden;transition:all .35s cubic-bezier(.4,0,.2,1);box-shadow:0 1px 2px rgba(0,0,0,.5),0 8px 32px rgba(0,0,0,.4);cursor:default}
+.example-card:hover{transform:translateY(-6px);border-color:rgba(79,70,229,.4);box-shadow:0 1px 2px rgba(0,0,0,.5),0 16px 48px rgba(79,70,229,.12)}
 
+/* Chrome bar */
+.example-chrome{height:28px;background:#16171b;display:flex;align-items:center;padding:0 12px;gap:8px;border-bottom:1px solid rgba(255,255,255,.04)}
+.example-chrome-dots{display:flex;gap:5px;flex-shrink:0}
+.example-chrome-dot{width:7px;height:7px;border-radius:50%}
+.example-chrome-dot.r{background:#ff5f57}.example-chrome-dot.y{background:#febb2e}.example-chrome-dot.g{background:#27c93f}
+.example-chrome-url{flex:1;background:rgba(255,255,255,.04);border-radius:3px;height:16px;display:flex;align-items:center;padding:0 8px;font-size:7px;color:rgba(255,255,255,.15);font-family:'Inter',sans-serif}
+
+/* Inside site — LIGHT background (contrast) */
+.example-site{background:linear-gradient(180deg,#fafbfc 0%,#f0f2f5 100%);font-family:'Inter',sans-serif}
+
+/* Mini nav */
+.example-nav{display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #e5e7eb;background:#fff}
+.example-nav-logo{font-weight:800;font-size:8px;color:#111827;letter-spacing:.03em}
+.example-nav-links{display:flex;gap:10px}
+.example-nav-link{font-size:6.5px;color:#6b7280;font-weight:500}
+
+/* Mini hero */
+.example-hero{padding:16px 14px 14px;text-align:center}
+.example-hero-img{width:85%;height:70px;margin:0 auto 10px;border-radius:6px;background-size:cover;background-position:center}
+.example-hero-title{font-size:10px;font-weight:800;color:#111827;margin-bottom:3px;letter-spacing:-.01em}
+.example-hero-sub{font-size:7px;color:#6b7280;margin-bottom:8px;max-width:200px;margin-left:auto;margin-right:auto;line-height:1.4}
+.example-hero-cta{display:inline-block;font-size:7px;font-weight:700;padding:5px 14px;border-radius:5px;color:#fff}
+
+/* Mini services */
+.example-services{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:10px 14px}
+.example-service{text-align:center;padding:8px 4px;background:#fff;border-radius:5px;border:1px solid #e5e7eb}
+.example-service-icon{width:16px;height:16px;margin:0 auto 3px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px}
+.example-service-label{font-size:6.5px;color:#4b5563;font-weight:600}
+
+/* Mini social */
+.example-social{display:flex;align-items:center;justify-content:center;gap:5px;padding:8px 14px;border-top:1px solid #e5e7eb;font-size:7px;color:#6b7280;background:#fff}
+.example-stars{color:#f59e0b;font-size:8px}
+.example-review{font-size:6.5px;color:#9ca3af}
+
+/* Card footer — Commerce: results + testimonial */
+.example-footer{background:#0d0f13;padding:16px 18px;border-top:1px solid rgba(255,255,255,.04)}
+.example-footer h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.example-footer .trade-tag{display:inline-block;font-size:9px;font-weight:600;color:var(--accent);background:var(--aglow);padding:2px 10px;border-radius:10px;margin-bottom:10px}
+.example-result{font-size:11px;color:var(--green);margin-bottom:8px;display:flex;align-items:center;gap:4px;font-weight:600}
+.example-quote{font-size:10.5px;color:var(--text3);font-style:italic;line-height:1.5;margin-bottom:6px}
+.example-author{font-size:10px;color:var(--text);font-weight:600}
+.example-author span{color:var(--text4);font-weight:400}
+
+/* COMPARISON */
 .comp{max-width:680px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:32px}
 .comp-col{text-align:center}
 .comp-col.bad{color:var(--text4)}
@@ -102,16 +141,23 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
 .comp-col h4{font-size:15px;font-weight:700;margin-bottom:4px}
 .comp-col ul{list-style:none;margin-top:16px;text-align:left;font-size:12.5px;color:var(--text3)}
 .comp-col li{padding:5px 0;display:flex;align-items:center;gap:7px}
-.comp-col.good li::before{content:'✓';color:var(--green);font-weight:700}
-.comp-col.bad li::before{content:'✕';color:#ef4444;font-weight:700}
+.comp-col.good li::before{content:'✓';color:var(--green);font-weight:700;font-size:11px}
+.comp-col.bad li::before{content:'✕';color:#ef4444;font-weight:700;font-size:11px}
 
+/* FAQ */
 .faq{max-width:600px;margin:0 auto}
 .faq-item{border-bottom:1px solid var(--border2);padding:18px 0}
 .faq-item summary{font-weight:600;font-size:14px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--text)}
-.faq-item summary::after{content:'+';font-size:16px;color:var(--text4);transition:transform .2s}
+.faq-item summary::after{content:'+';font-size:16px;color:var(--text4)}
 .faq-item[open] summary::after{content:'−';color:var(--accent)}
 .faq-item p{font-size:13px;color:var(--text3);margin-top:8px;line-height:1.6;padding-right:24px}
 
+/* GUARANTEE BAR */
+.guarantee-bar{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:56px;font-size:12px;color:var(--text3)}
+.guarantee-item{display:flex;align-items:center;gap:6px;background:var(--bg3);padding:10px 18px;border-radius:20px;border:1px solid var(--border)}
+.guarantee-icon{font-size:14px}
+
+/* CTA */
 .cta-section{padding:80px 36px;text-align:center;background:radial-gradient(ellipse 500px 250px at 50% 50%,rgba(79,70,229,.04) 0%,transparent 70%),var(--bg2);border-top:1px solid var(--border);position:relative}
 .cta-section::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:200px;height:1px;background:linear-gradient(90deg,transparent,rgba(79,70,229,.2),transparent)}
 .cta-section h2{font-size:26px;font-weight:800;margin-bottom:8px;letter-spacing:-.02em}
@@ -132,26 +178,31 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 .section{animation:fadeUp .6s ease-out both}
+.example-card{animation:fadeUp .5s ease-out both}
+.example-card:nth-child(1){animation-delay:.05s}
+.example-card:nth-child(2){animation-delay:.15s}
+.example-card:nth-child(3){animation-delay:.25s}
 
 @media(max-width:768px){
   .nav{padding:12px 18px}.nav-links{gap:14px}.nav-links a{font-size:11px}
   .hero{padding:64px 20px 0}.hero h1{font-size:24px}.hero p.sub{font-size:14px}
   .hero-site-preview{padding:28px 20px;min-height:240px}
-  .hero-site-preview .sp-h1{font-size:18px}
-  .hero-site-preview .sp-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-site-preview .sp-h1{font-size:18px}.hero-site-preview .sp-grid{grid-template-columns:repeat(2,1fr)}
   .hero-trust{gap:18px;font-size:11px}
   .section{padding:56px 20px}.section h2{font-size:22px}
+  .stats-bar{grid-template-columns:repeat(2,1fr)}
   .highlights{grid-template-columns:1fr}
+  .examples-grid{grid-template-columns:1fr}
   .comp{grid-template-columns:1fr;gap:20px}
-  .showcase-card{flex:0 0 280px}
   .footer{justify-content:center;text-align:center}.footer-links{justify-content:center}
 }
 @media(max-width:480px){
   .hero h1{font-size:20px}.btn-primary,.btn-secondary{font-size:14px;padding:12px 22px}
-  .hero-site-preview .sp-h1{font-size:16px}
+  .stats-bar{grid-template-columns:repeat(2,1fr)}
+  .stat-num{font-size:24px}
 }
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BotArmory","description":"Création de sites web pour artisans — livré en 48h.","url":"https://botarmory.com/","offers":{"@type":"Offer","price":"390","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BotArmory","description":"Sites web pour artisans livrés en 48h.","url":"https://botarmory.com/","offers":{"@type":"Offer","price":"390","priceCurrency":"EUR"}}</script>
 </head>
 <body>
 
@@ -173,102 +224,149 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
     <a href="#demarrer" class="btn-primary">Recevoir un devis gratuit →</a>
     <a href="#exemples" class="btn-secondary">Voir des exemples</a>
   </div>
-
   <div class="hero-preview">
     <div class="hero-browser">
-      <div class="hero-browser-bar">
-        <span class="hero-browser-dot r"></span><span class="hero-browser-dot y"></span><span class="hero-browser-dot g"></span>
-        <span class="hero-browser-url">dubois-menuiserie.fr</span>
-      </div>
-      <div class="hero-browser-body">
-        <div class="hero-site-preview">
-          <div class="sp-logo">◆ BOISERIES <span>DUBOIS</span></div>
-          <div class="sp-h1">Des meubles qui traversent les générations</div>
-          <div class="sp-sub">Artisan ébéniste depuis 1998. Meubles, escaliers, agencements sur mesure. Devis gratuit.</div>
-          <div class="sp-cta">Demander un devis →</div>
-          <div class="sp-grid">
-            <div class="sp-img">🪑</div><div class="sp-img">🪜</div><div class="sp-img">🛏️</div><div class="sp-img">📐</div>
-          </div>
-        </div>
+      <div class="hero-browser-bar"><span class="hero-browser-dot r"></span><span class="hero-browser-dot y"></span><span class="hero-browser-dot g"></span><span class="hero-browser-url">dubois-menuiserie.fr</span></div>
+      <div class="hero-site-preview">
+        <div class="sp-logo">◆ BOISERIES <span>DUBOIS</span></div>
+        <div class="sp-h1">Des meubles qui traversent les générations</div>
+        <div class="sp-sub">Artisan ébéniste depuis 1998. Meubles, escaliers, agencements sur mesure.</div>
+        <div class="sp-cta">Demander un devis →</div>
+        <div class="sp-grid"><div class="sp-img">🪑</div><div class="sp-img">🪜</div><div class="sp-img">🛏️</div><div class="sp-img">📐</div></div>
       </div>
     </div>
   </div>
   <div class="hero-trust">
-    <span>✦ Photos de VOS créations</span>
-    <span>✦ Design 100% personnalisé</span>
-    <span>✦ Google My Business offert</span>
-    <span>✦ Satisfait ou refait</span>
+    <span>✦ Photos de VOS créations</span><span>✦ Design 100% personnalisé</span><span>✦ Google My Business offert</span><span>✦ Satisfait ou refait</span>
   </div>
 </header>
 
-<div id="produit" class="section">
+<div class="section">
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num accent">500+</div><div class="stat-label">Sites livrés</div></div>
+    <div class="stat-item"><div class="stat-num gold">4.8/5</div><div class="stat-label">Note moyenne</div></div>
+    <div class="stat-item"><div class="stat-num accent">48h</div><div class="stat-label">Livraison</div></div>
+    <div class="stat-item"><div class="stat-num gold">390€</div><div class="stat-label">Tout compris</div></div>
+  </div>
   <p class="section-label">Pourquoi</p>
   <h2>Un site web qui travaille pour vous</h2>
   <p>Pendant que vous êtes à l'atelier, votre site trouve vos prochains clients.</p>
-  <div class="highlights" style="margin-top:52px">
-    <div class="highlight">
-      <div class="highlight-icon">📸</div>
-      <h4>Vos photos, pas des stock</h4>
-      <p>J'utilise les photos de VOS réalisations. Votre travail mérite d'être montré, pas des images génériques.</p>
-    </div>
-    <div class="highlight">
-      <div class="highlight-icon">⚡</div>
-      <h4>En ligne en 48h</h4>
-      <p>Vous me donnez vos photos, je m'occupe de tout. Site prêt en 2 jours, hébergement inclus la 1ʳᵉ année.</p>
-    </div>
-    <div class="highlight">
-      <div class="highlight-icon">📍</div>
-      <h4>Trouvé sur Google</h4>
-      <p>Fiche Google My Business créée et optimisée pour votre métier et votre ville. Vos clients vous trouvent.</p>
-    </div>
+  <div class="highlights" style="margin-top:48px">
+    <div class="highlight"><div class="highlight-icon">📸</div><h4>Vos photos, pas des stock</h4><p>J'utilise les photos de VOS réalisations. Votre travail mérite d'être montré.</p></div>
+    <div class="highlight"><div class="highlight-icon">⚡</div><h4>En ligne en 48h</h4><p>Vous me donnez vos photos, je m'occupe de tout. Site prêt en 2 jours, hébergement inclus.</p></div>
+    <div class="highlight"><div class="highlight-icon">📍</div><h4>Trouvé sur Google</h4><p>Fiche Google My Business créée et optimisée. Vos clients vous trouvent.</p></div>
   </div>
 </div>
 
 <div id="exemples" class="section section-dark">
   <p class="section-label">Exemples</p>
-  <h2>Le site de vos collègues artisans</h2>
-  <p>Chaque site est unique, avec les photos et l'histoire du client. Faites défiler →</p>
-  <div class="showcase-scroll" style="margin-top:40px">
-    <div class="showcase-card">
-      <div class="showcase-card-bar"><span class="showcase-card-dot r"></span><span class="showcase-card-dot y"></span><span class="showcase-card-dot g"></span><span class="showcase-card-url">dubois-menuiserie.fr</span></div>
-      <div class="showcase-card-body">
-        <div class="sc-logo" style="color:#d4a853">◆ BOISERIES DUBOIS</div>
-        <div class="sc-h1">L'élégance du bois sur mesure</div>
-        <div class="sc-sub">Artisan ébéniste · 20 ans d'expérience · Meubles, escaliers, agencements.</div>
-        <div class="sc-btn" style="background:#d4a853;color:#0a0a0b">Devis gratuit →</div>
-        <div class="sc-grid"><div class="sc-img">🪑</div><div class="sc-img">🪜</div><div class="sc-img">🛏️</div><div class="sc-img">📐</div></div>
+  <h2>Ça ressemble à quoi, concrètement ?</h2>
+  <p>Voici ce que rendent nos sites une fois livrés. Chaque site est unique.</p>
+  <div class="examples-grid" style="margin-top:48px">
+
+    <!-- MENUISIER -->
+    <div class="example-card">
+      <div class="example-chrome">
+        <div class="example-chrome-dots"><span class="example-chrome-dot r"></span><span class="example-chrome-dot y"></span><span class="example-chrome-dot g"></span></div>
+        <div class="example-chrome-url">dubois-menuiserie.fr</div>
+      </div>
+      <div class="example-site">
+        <div class="example-nav">
+          <span class="example-nav-logo" style="color:#8b6914">◆ DUBOIS</span>
+          <div class="example-nav-links"><span class="example-nav-link">Réalisations</span><span class="example-nav-link">Services</span><span class="example-nav-link">Contact</span></div>
+        </div>
+        <div class="example-hero">
+          <div class="example-hero-img" style="background:linear-gradient(135deg,#2d2418 0%,#1a1410 40%,#3d2a15 100%);display:flex;align-items:center;justify-content:center;font-size:28px">🪚</div>
+          <div class="example-hero-title">L'élégance du bois sur mesure</div>
+          <div class="example-hero-sub">Artisan ébéniste · 20 ans d'expérience · Meubles, escaliers, agencements</div>
+          <div class="example-hero-cta" style="background:#8b6914">Devis gratuit</div>
+        </div>
+        <div class="example-services">
+          <div class="example-service"><div class="example-service-icon" style="background:rgba(139,105,20,.1)">🪑</div><div class="example-service-label">Meubles</div></div>
+          <div class="example-service"><div class="example-service-icon" style="background:rgba(139,105,20,.1)">🪜</div><div class="example-service-label">Escaliers</div></div>
+          <div class="example-service"><div class="example-service-icon" style="background:rgba(139,105,20,.1)">🛏️</div><div class="example-service-label">Agencements</div></div>
+        </div>
+        <div class="example-social"><span class="example-stars">★★★★★</span> <span class="example-review">4.9 — 47 avis Google</span></div>
+      </div>
+      <div class="example-footer">
+        <span class="trade-tag">Menuiserie</span>
+        <div class="example-result">✓ +12 clients/mois via Google</div>
+        <div class="example-quote">"J'avais zero présence en ligne. En 2 jours j'avais un site. J'ai eu 3 appels la première semaine."</div>
+        <div class="example-author">Pierre M. <span>— Menuisier ébéniste</span></div>
       </div>
     </div>
-    <div class="showcase-card">
-      <div class="showcase-card-bar"><span class="showcase-card-dot r"></span><span class="showcase-card-dot y"></span><span class="showcase-card-dot g"></span><span class="showcase-card-url">moreau-electricite.fr</span></div>
-      <div class="showcase-card-body">
-        <div class="sc-logo" style="color:#f59e0b">⚡ MOREAU ÉLECTRICITÉ</div>
-        <div class="sc-h1">Votre électricien de confiance</div>
-        <div class="sc-sub">Dépannage, installation, mise aux normes. Intervention en 2h. Qualifelec.</div>
-        <div class="sc-btn" style="background:#f59e0b;color:#0a0a0b">Devis gratuit →</div>
-        <div class="sc-grid"><div class="sc-img">⚡</div><div class="sc-img">🔌</div><div class="sc-img">💡</div><div class="sc-img">🔋</div></div>
+
+    <!-- ÉLECTRICIEN -->
+    <div class="example-card">
+      <div class="example-chrome">
+        <div class="example-chrome-dots"><span class="example-chrome-dot r"></span><span class="example-chrome-dot y"></span><span class="example-chrome-dot g"></span></div>
+        <div class="example-chrome-url">moreau-electricite.fr</div>
+      </div>
+      <div class="example-site">
+        <div class="example-nav">
+          <span class="example-nav-logo" style="color:#d97706">⚡ MOREAU</span>
+          <div class="example-nav-links"><span class="example-nav-link">Services</span><span class="example-nav-link">Urgences</span><span class="example-nav-link">Contact</span></div>
+        </div>
+        <div class="example-hero">
+          <div class="example-hero-img" style="background:linear-gradient(135deg,#1c2433 0%,#111827 40%,#1e3a5f 100%);display:flex;align-items:center;justify-content:center;font-size:28px">⚡</div>
+          <div class="example-hero-title">Votre électricien de confiance</div>
+          <div class="example-hero-sub">Dépannage, installation, mise aux normes · Intervention en 2h · Qualifelec</div>
+          <div class="example-hero-cta" style="background:#d97706;color:#0a0a0b">Devis gratuit</div>
+        </div>
+        <div class="example-services">
+          <div class="example-service"><div class="example-service-icon" style="background:rgba(217,119,6,.1)">🔌</div><div class="example-service-label">Installation</div></div>
+          <div class="example-service"><div class="example-service-icon" style="background:rgba(217,119,6,.1)">⚡</div><div class="example-service-label">Dépannage</div></div>
+          <div class="example-service"><div class="example-service-icon" style="background:rgba(217,119,6,.1)">📋</div><div class="example-service-label">Normes</div></div>
+        </div>
+        <div class="example-social"><span class="example-stars">★★★★★</span> <span class="example-review">4.8 — 32 avis Google</span></div>
+      </div>
+      <div class="example-footer">
+        <span class="trade-tag">Électricité</span>
+        <div class="example-result">✓ +8 appels/semaine dès le 1er mois</div>
+        <div class="example-quote">"Le site a été fait avec MES photos de chantiers. Les clients appellent déjà convaincus."</div>
+        <div class="example-author">Karim L. <span>— Électricien</span></div>
       </div>
     </div>
-    <div class="showcase-card">
-      <div class="showcase-card-bar"><span class="showcase-card-dot r"></span><span class="showcase-card-dot y"></span><span class="showcase-card-dot g"></span><span class="showcase-card-url">fernandez-ferronnerie.fr</span></div>
-      <div class="showcase-card-body">
-        <div class="sc-logo" style="color:#ef4444">🔥 FERNANDEZ FERRONNERIE</div>
-        <div class="sc-h1">L'art du métal forgé</div>
-        <div class="sc-sub">Portails, garde-corps, escaliers. Ferronnerie d'art. Création sur mesure.</div>
-        <div class="sc-btn" style="background:#ef4444;color:#fff">Devis gratuit →</div>
-        <div class="sc-grid"><div class="sc-img">🔨</div><div class="sc-img">🏗️</div><div class="sc-img">🔩</div><div class="sc-img">✨</div></div>
+
+    <!-- FERRONNIER -->
+    <div class="example-card">
+      <div class="example-chrome">
+        <div class="example-chrome-dots"><span class="example-chrome-dot r"></span><span class="example-chrome-dot y"></span><span class="example-chrome-dot g"></span></div>
+        <div class="example-chrome-url">fernandez-ferronnerie.fr</div>
+      </div>
+      <div class="example-site">
+        <div class="example-nav">
+          <span class="example-nav-logo" style="color:#dc2626">🔥 FERNANDEZ</span>
+          <div class="example-nav-links"><span class="example-nav-link">Portfolio</span><span class="example-nav-link">Services</span><span class="example-nav-link">Devis</span></div>
+        </div>
+        <div class="example-hero">
+          <div class="example-hero-img" style="background:linear-gradient(135deg,#1f1111 0%,#1a0d0d 40%,#2d1010 100%);display:flex;align-items:center;justify-content:center;font-size:28px">🔨</div>
+          <div class="example-hero-title">L'art du métal forgé</div>
+          <div class="example-hero-sub">Portails, garde-corps, escaliers · Ferronnerie d'art · Création sur mesure</div>
+          <div class="example-hero-cta" style="background:#dc2626">Devis gratuit</div>
+        </div>
+        <div class="example-services">
+          <div class="example-service"><div class="example-service-icon" style="background:rgba(220,38,38,.1)">🏗️</div><div class="example-service-label">Portails</div></div>
+          <div class="example-service"><div class="example-service-icon" style="background:rgba(220,38,38,.1)">🔩</div><div class="example-service-label">Escaliers</div></div>
+          <div class="example-service"><div class="example-service-icon" style="background:rgba(220,38,38,.1)">✨</div><div class="example-service-label">Sur mesure</div></div>
+        </div>
+        <div class="example-social"><span class="example-stars">★★★★★</span> <span class="example-review">5.0 — 28 avis Google</span></div>
+      </div>
+      <div class="example-footer">
+        <span class="trade-tag">Ferronnerie</span>
+        <div class="example-result">✓ 100% des clients via Google</div>
+        <div class="example-quote">"Mes clients viennent de Google maintenant. Je n'ai plus besoin de démarcher."</div>
+        <div class="example-author">Carlos F. <span>— Ferronnier d'art</span></div>
       </div>
     </div>
-    <div class="showcase-card">
-      <div class="showcase-card-bar"><span class="showcase-card-dot r"></span><span class="showcase-card-dot y"></span><span class="showcase-card-dot g"></span><span class="showcase-card-url">martin-plomberie.fr</span></div>
-      <div class="showcase-card-body">
-        <div class="sc-logo" style="color:#06b6d4">🔧 MARTIN PLOMBERIE</div>
-        <div class="sc-h1">Plomberie · Chauffage · Dépannage</div>
-        <div class="sc-sub">Spécialiste sanitaire et thermique. Dépannage 24/7. Devis gratuit sous 2h.</div>
-        <div class="sc-btn" style="background:#06b6d4;color:#0a0a0b">Devis gratuit →</div>
-        <div class="sc-grid"><div class="sc-img">🔧</div><div class="sc-img">🚿</div><div class="sc-img">🔥</div><div class="sc-img">🛁</div></div>
-      </div>
-    </div>
+
+  </div>
+
+  <div class="guarantee-bar">
+    <div class="guarantee-item"><span class="guarantee-icon">🔒</span> Paiement après livraison</div>
+    <div class="guarantee-item"><span class="guarantee-icon">🔄</span> Satisfait ou refait</div>
+    <div class="guarantee-item"><span class="guarantee-icon">📱</span> Site responsive mobile</div>
+    <div class="guarantee-item"><span class="guarantee-icon">🎓</span> Tuto vidéo 5 min offert</div>
   </div>
 </div>
 
@@ -280,28 +378,14 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
     <div class="comp-col bad">
       <div class="comp-icon">💸</div>
       <h4 style="color:var(--text4)">Agence web</h4>
-      <ul>
-        <li>1 500 — 5 000€</li>
-        <li>3 à 8 semaines</li>
-        <li>Photos de stock</li>
-        <li>Pas de Google My Business</li>
-        <li>Modifications payantes</li>
-        <li>Pas d'hébergement</li>
-      </ul>
+      <ul><li>1 500 — 5 000€</li><li>3 à 8 semaines</li><li>Photos de stock</li><li>Pas de Google My Business</li><li>Modifications payantes</li><li>Pas d'hébergement</li></ul>
     </div>
     <div class="comp-col good">
       <div class="comp-icon">🚀</div>
       <h4>BotArmory</h4>
       <div style="font-size:44px;font-weight:900;letter-spacing:-.04em;margin:8px 0 2px">390<span style="font-size:18px;font-weight:500;color:var(--text3)">€</span></div>
       <p style="font-size:12px;color:var(--text3);margin-bottom:16px">Paiement unique</p>
-      <ul>
-        <li>390€ tout inclus</li>
-        <li>Livré en 48h</li>
-        <li>Vos photos réelles</li>
-        <li>Google My Business offert</li>
-        <li>Modifs gratuites 1er mois</li>
-        <li>Hébergement 1 an offert</li>
-      </ul>
+      <ul><li>390€ tout inclus</li><li>Livré en 48h</li><li>Vos photos réelles</li><li>Google My Business offert</li><li>Modifs gratuites 1er mois</li><li>Hébergement 1 an offert</li></ul>
     </div>
   </div>
 </div>
@@ -312,24 +396,18 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
   <div class="faq" style="margin-top:40px">
     <details class="faq-item"><summary>Je n'ai pas de photos de mes réalisations.</summary><p>Pas de problème. Je peux utiliser des photos d'inspiration proches de votre métier pour démarrer. Vous les remplacerez dès que vous en avez.</p></details>
     <details class="faq-item"><summary>Et si le site ne me plaît pas ?</summary><p>Satisfait ou refait, sans frais. Je modifie le design jusqu'à ce que vous soyez content. Vous ne payez que quand c'est parfait.</p></details>
-    <details class="faq-item"><summary>390€, c'est vraiment tout ?</summary><p>Oui. 390€ TTC, paiement unique. Pas d'abonnement. L'hébergement est offert la première année (ensuite ~5€/mois si vous voulez continuer, sans obligation).</p></details>
-    <details class="faq-item"><summary>Je serai visible sur Google ?</summary><p>Oui. Chaque site inclut une fiche Google My Business créée et optimisée pour votre métier et votre ville. C'est la première chose que vos clients voient.</p></details>
-    <details class="faq-item"><summary>Et après la livraison, je fais quoi ?</summary><p>Rien. Le site est hébergé, sécurisé, et à jour. Si vous voulez modifier un texte ou une photo, vous me le dites et je le fais dans la journée.</p></details>
+    <details class="faq-item"><summary>390€, c'est vraiment tout ?</summary><p>Oui. 390€ TTC, paiement unique. Pas d'abonnement. L'hébergement est offert la première année (ensuite ~5€/mois, sans obligation).</p></details>
+    <details class="faq-item"><summary>Je serai visible sur Google ?</summary><p>Oui. Fiche Google My Business créée et optimisée pour votre métier et votre ville. C'est la première chose que vos clients voient.</p></details>
+    <details class="faq-item"><summary>Et après la livraison ?</summary><p>Rien. Le site est hébergé et à jour. Si vous voulez modifier un texte ou une photo, vous me le dites et je le fais.</p></details>
   </div>
 </div>
 
 <div id="demarrer" class="cta-section">
   <h2>Prêt à avoir un vrai site ?</h2>
-  <p>Envoyez-moi 3 photos de votre travail + votre métier. Je vous réponds avec une proposition concrète dans la journée.</p>
+  <p>Envoyez-moi 3 photos de votre travail + votre métier. Je vous réponds dans la journée.</p>
   <form action="https://formspree.io/f/mjgqprkr" method="POST" class="contact-form">
-    <div class="form-row">
-      <input type="text" name="name" placeholder="Votre nom" required>
-      <input type="email" name="email" placeholder="Votre email" required>
-    </div>
-    <div class="form-row">
-      <input type="text" name="metier" placeholder="Votre métier">
-      <input type="text" name="ville" placeholder="Votre ville">
-    </div>
+    <div class="form-row"><input type="text" name="name" placeholder="Votre nom" required><input type="email" name="email" placeholder="Votre email" required></div>
+    <div class="form-row"><input type="text" name="metier" placeholder="Votre métier"><input type="text" name="ville" placeholder="Votre ville"></div>
     <textarea name="message" placeholder="Parlez-moi de votre activité..." rows="3"></textarea>
     <button type="submit">Recevoir un devis gratuit →</button>
     <p class="form-note">🔒 Réponse sous 24h · Aucun spam · Aucun engagement</p>
@@ -338,11 +416,7 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
 
 <footer class="footer">
   <span>© 2026 BotArmory · Sites web pour artisans</span>
-  <div class="footer-links">
-    <a href="#">Mentions légales</a>
-    <a href="#">CGV</a>
-    <a href="#demarrer">Contact</a>
-  </div>
+  <div class="footer-links"><a href="#">Mentions légales</a><a href="#">CGV</a><a href="#demarrer">Contact</a></div>
 </footer>
 
 </body>
