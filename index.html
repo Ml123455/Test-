@@ -7,399 +7,330 @@
 <meta name="description" content="BotArmory — Sites web pour artisans. Photos réelles, livraison 48h, Google My Business offert. 390€.">
 <title>BotArmory — Un site pro pour votre artisanat, livré en 48h</title>
 <meta property="og:title" content="BotArmory — Sites web pour artisans">
-<meta property="og:description" content="Un site qui montre VOTRE travail. Pas de template vide. 48h, 390€.">
+<meta property="og:description" content="Site vitrine avec vos photos, livré en 48h. Google My Business offert. 390€.">
 <meta property="og:url" content="https://botarmory.com/">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #08090a; --bg2: #0c0d10; --bg3: #111217; --bg4: #181a1f;
-  --text: #f2f3f5; --text2: #c5c8d0; --text3: #8b8f9a; --text4: #545760;
-  --accent: #4f46e5; --accent2: #6d63ff;
-  --aglow: rgba(79,70,229,0.08); --aglow2: rgba(79,70,229,0.18);
-  --border: rgba(255,255,255,0.055); --border2: rgba(255,255,255,0.035);
-  --radius: 10px; --radius-sm: 7px; --radius-lg: 16px;
-}
+:root{--bg:#08090b;--bg2:#0d0e12;--bg3:#131419;--bg4:#1a1b22;--text:#f1f2f5;--text2:#c1c4cc;--text3:#878b97;--text4:#535762;--accent:#4f46e5;--accent2:#6d63ff;--aglow:rgba(79,70,229,.08);--aglow2:rgba(79,70,229,.18);--border:rgba(255,255,255,.05);--border2:rgba(255,255,255,.03);--r:10px;--rs:7px;--rl:16px;--green:#22c55e}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--bg)}
 body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.55}
-body::after{content:'';position:fixed;inset:0;opacity:.012;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z-index:9999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 ::selection{background:rgba(79,70,229,.22);color:#fff}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 
-/* NAV */
-.nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 36px;background:rgba(8,9,10,.9);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--border2)}
+.nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 36px;background:rgba(8,9,11,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border2)}
 .nav-brand{font-weight:800;font-size:17px;letter-spacing:.06em}
 .nav-brand span{color:var(--accent)}
-.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links{display:flex;gap:22px;align-items:center}
 .nav-links a{font-size:13px;color:var(--text3);text-decoration:none;font-weight:500;transition:color .2s}
 .nav-links a:hover{color:var(--text)}
-.nav-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:var(--radius-sm);font-weight:600;font-size:12.5px!important;transition:background .2s,transform .15s}
+.nav-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:var(--rs);font-weight:600;font-size:12.5px!important;transition:background .2s,transform .15s}
 .nav-cta:hover{background:var(--accent2);transform:translateY(-1px)}
 
-/* HERO */
-.hero{position:relative;padding:140px 36px 120px;text-align:center;overflow:hidden;background:radial-gradient(ellipse 800px 400px at 50% 0%,rgba(79,70,229,.07) 0%,transparent 70%),var(--bg)}
-.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(79,70,229,.15),transparent)}
-.hero-grid{position:absolute;inset:0;opacity:.02;background-image:linear-gradient(rgba(255,255,255,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.3) 1px,transparent 1px);background-size:72px 72px;pointer-events:none}
-.hero-badge{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--accent2);background:var(--aglow);border:1px solid var(--aglow2);padding:5px 16px;border-radius:20px;margin-bottom:28px;position:relative;z-index:1}
-.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pulse 2s ease-in-out infinite}
+.hero{position:relative;padding:100px 36px 0;text-align:center;overflow:hidden;background:radial-gradient(ellipse 900px 500px at 50% 0%,rgba(79,70,229,.06) 0%,transparent 70%),var(--bg)}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;color:var(--accent2);background:var(--aglow);border:1px solid var(--aglow2);padding:5px 15px;border-radius:20px;margin-bottom:24px}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero h1{font-size:clamp(32px,5.5vw,54px);font-weight:900;line-height:1.04;max-width:720px;margin:0 auto 18px;letter-spacing:-.035em;position:relative;z-index:1}
+.hero h1{font-size:clamp(30px,5vw,50px);font-weight:900;line-height:1.06;max-width:650px;margin:0 auto 14px;letter-spacing:-.035em}
 .hero h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero p.sub{color:var(--text3);font-size:17px;max-width:560px;margin:0 auto 36px;line-height:1.6;position:relative;z-index:1}
-.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-weight:700;font-size:16px;padding:15px 36px;border-radius:var(--radius);text-decoration:none;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 2px 20px rgba(79,70,229,.18)}
-.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 6px 30px rgba(79,70,229,.28)}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:var(--bg3);color:var(--text2);font-weight:600;font-size:16px;padding:15px 36px;border-radius:var(--radius);text-decoration:none;border:1px solid var(--border);transition:border-color .2s,color .2s}
+.hero p.sub{color:var(--text3);font-size:16px;max-width:500px;margin:0 auto 32px;line-height:1.6}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.btn-primary{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;font-weight:700;font-size:15px;padding:14px 32px;border-radius:var(--r);text-decoration:none;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 2px 20px rgba(79,70,229,.15)}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 6px 30px rgba(79,70,229,.25)}
+.btn-secondary{display:inline-flex;align-items:center;gap:7px;background:var(--bg3);color:var(--text2);font-weight:600;font-size:15px;padding:14px 32px;border-radius:var(--r);text-decoration:none;border:1px solid var(--border);transition:border-color .2s,color .2s}
 .btn-secondary:hover{border-color:var(--text4);color:var(--text)}
-.hero-metrics{display:flex;gap:40px;justify-content:center;margin-top:56px;flex-wrap:wrap;position:relative;z-index:1}
-.metric{text-align:center}
-.metric-num{font-size:28px;font-weight:900;letter-spacing:-.02em;color:var(--text)}
-.metric-label{font-size:11px;color:var(--text4);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
-.metric-stars{color:var(--accent);font-size:13px}
 
-/* SECTIONS */
-.section{padding:96px 36px;max-width:1120px;margin:0 auto}
+.hero-preview{max-width:860px;margin:0 auto;position:relative;z-index:1}
+.hero-browser{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl) var(--rl) 0 0;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.5)}
+.hero-browser-bar{display:flex;align-items:center;gap:6px;padding:11px 16px;background:var(--bg4);border-bottom:1px solid var(--border2)}
+.hero-browser-dot{width:9px;height:9px;border-radius:50%}
+.hero-browser-dot.r{background:#ff5f57}.hero-browser-dot.y{background:#febc2e}.hero-browser-dot.g{background:#28c840}
+.hero-browser-url{font-size:10.5px;color:var(--text4);margin-left:8px;flex:1;background:var(--bg3);padding:4px 10px;border-radius:4px}
+.hero-browser-body{padding:0}
+.hero-site-preview{background:linear-gradient(180deg,#1a1c24 0%,#14151a 100%);padding:40px 32px;text-align:center;min-height:300px}
+.hero-site-preview .sp-logo{font-weight:800;font-size:15px;letter-spacing:.05em;margin-bottom:20px;color:var(--text2)}
+.hero-site-preview .sp-logo span{color:#d4a853}
+.hero-site-preview .sp-h1{font-weight:800;font-size:22px;line-height:1.2;margin-bottom:8px}
+.hero-site-preview .sp-sub{font-size:12px;color:var(--text4);margin-bottom:16px;max-width:340px;margin-left:auto;margin-right:auto}
+.hero-site-preview .sp-cta{display:inline-block;background:#d4a853;color:#0a0a0b;font-weight:700;font-size:12px;padding:9px 20px;border-radius:5px}
+.hero-site-preview .sp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:20px;max-width:500px;margin-left:auto;margin-right:auto}
+.hero-site-preview .sp-img{aspect-ratio:4/3;background:rgba(255,255,255,.03);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.hero-trust{display:flex;gap:32px;justify-content:center;margin-top:36px;flex-wrap:wrap;font-size:12.5px;color:var(--text3)}
+.hero-trust span{opacity:.8}
+
+.section{padding:80px 36px;max-width:1100px;margin:0 auto}
 .section-dark{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
 .section-label{text-align:center;font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
-.section h2{text-align:center;font-size:clamp(24px,3.5vw,32px);font-weight:800;letter-spacing:-.025em;margin-bottom:12px}
-.section h2+p{text-align:center;color:var(--text3);font-size:15px;max-width:500px;margin:0 auto 56px;line-height:1.6}
+.section h2{text-align:center;font-size:clamp(22px,3.5vw,30px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.section h2+p{text-align:center;color:var(--text3);font-size:14px;max-width:460px;margin:0 auto 52px}
 
-/* PROBLEM AGITATION */
-.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.pain-visual{position:relative}
-.pain-browser{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)}
-.pain-browser-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--bg4);border-bottom:1px solid var(--border2)}
-.pain-browser-dot{width:9px;height:9px;border-radius:50%}
-.pain-browser-dot.r{background:#ff5f57}.pain-browser-dot.y{background:#febc2e}.pain-browser-dot.g{background:#28c840}
-.pain-browser-url{font-size:10px;color:var(--text4);margin-left:8px;flex:1}
-.pain-browser-body{padding:32px 24px;text-align:center}
-.pain-browser-body .placeholder-title{width:70%;height:28px;background:var(--bg4);border-radius:4px;margin:0 auto 12px}
-.pain-browser-body .placeholder-text{width:50%;height:14px;background:var(--bg4);border-radius:3px;margin:0 auto 20px}
-.pain-browser-body .placeholder-img{width:100%;height:140px;background:var(--bg4);border-radius:6px;margin-bottom:16px}
-.pain-browser-body .placeholder-btn{width:40%;height:34px;background:var(--bg4);border-radius:6px;margin:0 auto}
-.pain-text h3{font-size:22px;font-weight:800;margin-bottom:10px;letter-spacing:-.01em}
-.pain-text p{color:var(--text3);font-size:14px;line-height:1.7;margin-bottom:16px}
-.pain-text .check-list{list-style:none}
-.pain-text .check-list li{font-size:13.5px;color:var(--text2);padding:6px 0;display:flex;align-items:center;gap:8px}
-.pain-text .check-list li::before{content:'✓';color:#22c55e;font-weight:700;font-size:12px}
+.highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.highlight{text-align:center;padding:40px 24px 32px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rl);transition:border-color .25s,transform .25s}
+.highlight:hover{border-color:var(--aglow2);transform:translateY(-3px)}
+.highlight-icon{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:var(--r);background:var(--aglow);margin-bottom:18px;font-size:24px}
+.highlight h4{font-size:16px;font-weight:700;margin-bottom:6px}
+.highlight p{font-size:13px;color:var(--text3);line-height:1.55}
 
-/* COMPARISON TABLE */
-.comp-table{max-width:700px;margin:0 auto;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
-.comp-row{display:grid;grid-template-columns:2fr 1fr 1fr;font-size:13.5px}
-.comp-row.header{background:var(--bg4);font-weight:700;color:var(--text);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
-.comp-row>*{padding:13px 18px;border-bottom:1px solid var(--border2)}
-.comp-row:last-child>*{border-bottom:none}
-.comp-row .name{font-weight:600;color:var(--text2)}
-.comp-row .check{color:#22c55e;font-weight:700}
-.comp-row .cross{color:#ef4444}
-.comp-row .highlight{background:rgba(79,70,229,.06)}
+.showcase-scroll{display:flex;gap:16px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.showcase-scroll::-webkit-scrollbar{height:4px}
+.showcase-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.showcase-card{flex:0 0 320px;scroll-snap-align:start;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;transition:border-color .25s}
+.showcase-card:hover{border-color:var(--aglow2)}
+.showcase-card-bar{display:flex;align-items:center;gap:5px;padding:8px 12px;background:var(--bg4);border-bottom:1px solid var(--border2)}
+.showcase-card-dot{width:7px;height:7px;border-radius:50%}
+.showcase-card-dot.r{background:#ff5f57}.showcase-card-dot.y{background:#febc2e}.showcase-card-dot.g{background:#28c840}
+.showcase-card-url{font-size:9px;color:var(--text4);margin-left:5px;flex:1}
+.showcase-card-body{padding:20px 16px 24px}
+.showcase-card-body .sc-logo{font-weight:800;font-size:13px;letter-spacing:.03em;margin-bottom:12px}
+.showcase-card-body .sc-h1{font-weight:800;font-size:15px;line-height:1.2;margin-bottom:5px}
+.showcase-card-body .sc-sub{font-size:10.5px;color:var(--text4);line-height:1.5;margin-bottom:12px}
+.showcase-card-body .sc-btn{display:inline-block;font-weight:700;font-size:10.5px;padding:7px 14px;border-radius:4px;margin-bottom:12px}
+.showcase-card-body .sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.showcase-card-body .sc-img{aspect-ratio:3/2;background:rgba(255,255,255,.02);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:18px}
 
-/* SHOWCASE PREVIEWS */
-.showcase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.showcase{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s}
-.showcase:hover{transform:translateY(-5px);border-color:var(--aglow2);box-shadow:0 16px 48px rgba(0,0,0,.35)}
-.showcase-bar{display:flex;align-items:center;gap:6px;padding:9px 13px;background:var(--bg4);border-bottom:1px solid var(--border2)}
-.showcase-bar .dot{width:7px;height:7px;border-radius:50%}
-.showcase-bar .dot.r{background:#ff5f57}.showcase-bar .dot.y{background:#febc2e}.showcase-bar .dot.g{background:#28c840}
-.showcase-bar .url{font-size:9px;color:var(--text4);margin-left:6px;flex:1}
-.showcase-body{padding:22px 18px 28px}
-.showcase-body .s-logo{font-weight:800;font-size:13px;letter-spacing:.04em;margin-bottom:14px}
-.showcase-body .s-hero{margin-bottom:16px}
-.showcase-body .s-hero .s-h1{font-weight:800;font-size:17px;line-height:1.2;margin-bottom:6px}
-.showcase-body .s-hero .s-sub{font-size:11px;color:var(--text4);line-height:1.5}
-.showcase-body .s-btn{display:inline-block;font-weight:700;font-size:11px;padding:8px 18px;border-radius:5px;margin-bottom:14px}
-.showcase-body .s-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.showcase-body .s-img{aspect-ratio:3/2;background:var(--bg4);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px}
-.showcase-tag{text-align:center;margin-top:14px;font-size:11px;color:var(--text3);font-weight:600}
+.comp{max-width:680px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.comp-col{text-align:center}
+.comp-col.bad{color:var(--text4)}
+.comp-col.good{border:1px solid var(--aglow2);border-radius:var(--rl);padding:32px 24px;background:var(--bg3)}
+.comp-icon{font-size:36px;margin-bottom:12px}
+.comp-col h4{font-size:15px;font-weight:700;margin-bottom:4px}
+.comp-col ul{list-style:none;margin-top:16px;text-align:left;font-size:12.5px;color:var(--text3)}
+.comp-col li{padding:5px 0;display:flex;align-items:center;gap:7px}
+.comp-col.good li::before{content:'✓';color:var(--green);font-weight:700}
+.comp-col.bad li::before{content:'✕';color:#ef4444;font-weight:700}
 
-/* STEPS */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:step}
-.step{position:relative;padding:36px 24px 28px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);text-align:center;transition:border-color .25s}
-.step:hover{border-color:var(--aglow2)}
-.step-icon{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:var(--aglow);margin-bottom:16px;font-size:20px}
-.step h4{font-size:15px;font-weight:700;margin-bottom:6px}
-.step p{font-size:13px;color:var(--text3);line-height:1.55}
-
-/* PRICING */
-.pricing-wrapper{max-width:500px;margin:0 auto}
-.price-card{background:var(--bg3);border:2px solid var(--accent);border-radius:var(--radius-lg);padding:40px 32px;text-align:center;position:relative;box-shadow:0 0 60px rgba(79,70,229,.06)}
-.price-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:5px 18px;border-radius:12px;text-transform:uppercase;letter-spacing:.04em}
-.price-amount{font-size:56px;font-weight:900;letter-spacing:-.04em;line-height:1;margin:12px 0 4px}
-.price-amount span{font-size:20px;font-weight:500;color:var(--text3)}
-.price-sub{font-size:13px;color:var(--text3);margin-bottom:28px}
-.price-features{list-style:none;text-align:left;margin-bottom:28px;display:grid;grid-template-columns:1fr 1fr;gap:0;column-gap:20px}
-.price-features li{font-size:12.5px;color:var(--text2);padding:7px 0;border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:7px}
-.price-features li::before{content:'✓';color:var(--accent);font-weight:700;font-size:11px;flex-shrink:0}
-
-/* TESTIMONIALS */
-.testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.testimonial{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 24px}
-.testimonial .stars{color:#f59e0b;font-size:13px;margin-bottom:10px}
-.testimonial q{font-size:13.5px;color:var(--text2);line-height:1.6;display:block;margin-bottom:14px;font-style:italic}
-.testimonial .author{font-size:12px;font-weight:600;color:var(--text)}
-.testimonial .author span{color:var(--text4);font-weight:400}
-
-/* FAQ */
-.faq{max-width:650px;margin:0 auto}
-.faq-item{border-bottom:1px solid var(--border2);padding:20px 0}
-.faq-item summary{font-weight:600;font-size:14.5px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--text)}
-.faq-item summary::after{content:'+';font-size:18px;color:var(--text4);transition:transform .2s}
+.faq{max-width:600px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border2);padding:18px 0}
+.faq-item summary{font-weight:600;font-size:14px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--text)}
+.faq-item summary::after{content:'+';font-size:16px;color:var(--text4);transition:transform .2s}
 .faq-item[open] summary::after{content:'−';color:var(--accent)}
-.faq-item p{font-size:13.5px;color:var(--text3);margin-top:10px;line-height:1.6;padding-right:30px}
+.faq-item p{font-size:13px;color:var(--text3);margin-top:8px;line-height:1.6;padding-right:24px}
 
-/* CTA */
-.cta-section{padding:80px 36px;text-align:center;background:radial-gradient(ellipse 500px 300px at 50% 50%,rgba(79,70,229,.05) 0%,transparent 70%),var(--bg2);border-top:1px solid var(--border);position:relative}
-.cta-section::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:250px;height:1px;background:linear-gradient(90deg,transparent,rgba(79,70,229,.25),transparent)}
-.cta-section h2{font-size:28px;font-weight:800;margin-bottom:8px;letter-spacing:-.02em}
-.cta-section>p{color:var(--text3);font-size:14px;margin-bottom:32px}
-.contact-form{max-width:480px;margin:0 auto;text-align:left}
+.cta-section{padding:80px 36px;text-align:center;background:radial-gradient(ellipse 500px 250px at 50% 50%,rgba(79,70,229,.04) 0%,transparent 70%),var(--bg2);border-top:1px solid var(--border);position:relative}
+.cta-section::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:200px;height:1px;background:linear-gradient(90deg,transparent,rgba(79,70,229,.2),transparent)}
+.cta-section h2{font-size:26px;font-weight:800;margin-bottom:8px;letter-spacing:-.02em}
+.cta-section>p{color:var(--text3);font-size:14px;margin-bottom:28px;max-width:420px;margin-left:auto;margin-right:auto}
+.contact-form{max-width:460px;margin:0 auto;text-align:left}
 .form-row{display:flex;gap:10px;margin-bottom:10px}
-.contact-form input,.contact-form textarea{width:100%;padding:13px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:14px;outline:none;transition:border-color .2s}
+.contact-form input,.contact-form textarea{width:100%;padding:13px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-family:inherit;font-size:14px;outline:none;transition:border-color .2s}
 .contact-form input:focus,.contact-form textarea:focus{border-color:var(--accent)}
-.contact-form textarea{resize:vertical;min-height:90px;margin-bottom:14px}
-.contact-form button{display:block;width:100%;background:var(--accent);color:#fff;font-weight:700;font-size:15px;padding:15px;border-radius:var(--radius);border:none;cursor:pointer;font-family:inherit;transition:background .2s;box-shadow:0 2px 16px rgba(79,70,229,.12)}
+.contact-form textarea{resize:vertical;min-height:80px;margin-bottom:12px}
+.contact-form button{display:block;width:100%;background:var(--accent);color:#fff;font-weight:700;font-size:15px;padding:14px;border-radius:var(--r);border:none;cursor:pointer;font-family:inherit;transition:background .2s;box-shadow:0 2px 12px rgba(79,70,229,.1)}
 .contact-form button:hover{background:var(--accent2)}
 .form-note{text-align:center;font-size:11px;color:var(--text4);margin-top:12px}
 
-/* FOOTER */
-.footer{padding:28px 36px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--text4)}
-.footer-links{display:flex;gap:20px}
-.footer-links a{color:var(--text4);text-decoration:none;transition:color .2s}
+.footer{padding:24px 36px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--text4)}
+.footer-links{display:flex;gap:18px}
+.footer-links a{color:var(--text4);text-decoration:none;transition:color .2s;font-size:11px}
 .footer-links a:hover{color:var(--text3)}
 
-/* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 .section{animation:fadeUp .6s ease-out both}
-.hero>*{animation:fadeUp .5s ease-out both}
-.hero>*:nth-child(2){animation-delay:.1s}
-.hero>*:nth-child(3){animation-delay:.2s}
-.hero>*:nth-child(4){animation-delay:.3s}
 
-/* RESPONSIVE */
 @media(max-width:768px){
   .nav{padding:12px 18px}.nav-links{gap:14px}.nav-links a{font-size:11px}
-  .hero{padding:80px 20px 64px}.hero h1{font-size:26px}.hero p.sub{font-size:15px}
-  .hero-metrics{gap:24px}.metric-num{font-size:22px}
+  .hero{padding:64px 20px 0}.hero h1{font-size:24px}.hero p.sub{font-size:14px}
+  .hero-site-preview{padding:28px 20px;min-height:240px}
+  .hero-site-preview .sp-h1{font-size:18px}
+  .hero-site-preview .sp-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-trust{gap:18px;font-size:11px}
   .section{padding:56px 20px}.section h2{font-size:22px}
-  .pain-grid{grid-template-columns:1fr;gap:32px}
-  .showcase-grid,.steps,.testimonials{grid-template-columns:1fr}
-  .comp-table{font-size:11px}.comp-row>*{padding:10px 12px}
-  .price-features{grid-template-columns:1fr}
+  .highlights{grid-template-columns:1fr}
+  .comp{grid-template-columns:1fr;gap:20px}
+  .showcase-card{flex:0 0 280px}
   .footer{justify-content:center;text-align:center}.footer-links{justify-content:center}
 }
 @media(max-width:480px){
-  .nav-links{gap:10px}.nav-links a{font-size:10.5px}.nav-cta{padding:6px 12px;font-size:11px!important}
-  .hero{padding:56px 16px 48px}.hero h1{font-size:22px}
-  .btn-primary,.btn-secondary{font-size:14px;padding:13px 24px}
-  .price-amount{font-size:42px}
+  .hero h1{font-size:20px}.btn-primary,.btn-secondary{font-size:14px;padding:12px 22px}
+  .hero-site-preview .sp-h1{font-size:16px}
 }
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BotArmory","description":"Création de sites web pour artisans — livré en 48h. Photos réelles, Google My Business offert.","url":"https://botarmory.com/","offers":{"@type":"Offer","price":"390","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BotArmory","description":"Création de sites web pour artisans — livré en 48h.","url":"https://botarmory.com/","offers":{"@type":"Offer","price":"390","priceCurrency":"EUR"}}</script>
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-brand">BOT<span>ARMORY</span></div>
   <div class="nav-links">
-    <a href="#pourquoi">Pourquoi</a>
+    <a href="#produit">Le produit</a>
     <a href="#exemples">Exemples</a>
-    <a href="#tarifs">Tarifs</a>
-    <a href="#contact" class="nav-cta">Devis gratuit</a>
+    <a href="#tarif">390€</a>
+    <a href="#demarrer" class="nav-cta">Démarrer</a>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-badge"><span class="hero-badge-dot"></span> Nouveau — Livraison en 48h</div>
-  <h1>Un site web <span>pro</span> pour votre artisanat, sans vous en occuper</h1>
-  <p class="sub">Vous êtes bon dans votre métier, pas dans le web. Je m'occupe de tout : vos photos, votre histoire, votre site. En ligne en 48h.</p>
+  <div class="hero-badge"><span class="hero-badge-dot"></span> Site livré en 48h</div>
+  <h1>Un <span>vrai site web</span> pour votre artisanat</h1>
+  <p class="sub">Vos photos, votre métier, votre histoire. Je crée votre site et je vous rends visible sur Google.</p>
   <div class="hero-actions">
-    <a href="#contact" class="btn-primary">Recevoir un devis gratuit →</a>
+    <a href="#demarrer" class="btn-primary">Recevoir un devis gratuit →</a>
     <a href="#exemples" class="btn-secondary">Voir des exemples</a>
   </div>
-  <div class="hero-metrics">
-    <div class="metric"><div class="metric-num">50+</div><div class="metric-label">Sites livrés</div></div>
-    <div class="metric"><div class="metric-num">48h</div><div class="metric-label">Délai moyen</div></div>
-    <div class="metric"><div class="metric-num">4.9</div><div class="metric-stars">★★★★★</div><div class="metric-label">Satisfaction</div></div>
-    <div class="metric"><div class="metric-num">390€</div><div class="metric-label">Prix unique</div></div>
-  </div>
-</header>
 
-<div id="pourquoi" class="section">
-  <p class="section-label">Le problème</p>
-  <h2>Vos clients vous cherchent, ils ne vous trouvent pas</h2>
-  <p>Et créer un site soi-même, c'est des heures perdues. Une agence ? 2000€ minimum.</p>
-  <div class="pain-grid" style="margin-top:56px">
-    <div class="pain-visual">
-      <div class="pain-browser">
-        <div class="pain-browser-bar"><span class="pain-browser-dot r"></span><span class="pain-browser-dot y"></span><span class="pain-browser-dot g"></span><span class="pain-browser-url">mon-site-perso.wixsite.com</span></div>
-        <div class="pain-browser-body">
-          <div class="placeholder-title"></div>
-          <div class="placeholder-text"></div>
-          <div class="placeholder-img"></div>
-          <div class="placeholder-btn"></div>
+  <div class="hero-preview">
+    <div class="hero-browser">
+      <div class="hero-browser-bar">
+        <span class="hero-browser-dot r"></span><span class="hero-browser-dot y"></span><span class="hero-browser-dot g"></span>
+        <span class="hero-browser-url">dubois-menuiserie.fr</span>
+      </div>
+      <div class="hero-browser-body">
+        <div class="hero-site-preview">
+          <div class="sp-logo">◆ BOISERIES <span>DUBOIS</span></div>
+          <div class="sp-h1">Des meubles qui traversent les générations</div>
+          <div class="sp-sub">Artisan ébéniste depuis 1998. Meubles, escaliers, agencements sur mesure. Devis gratuit.</div>
+          <div class="sp-cta">Demander un devis →</div>
+          <div class="sp-grid">
+            <div class="sp-img">🪑</div><div class="sp-img">🪜</div><div class="sp-img">🛏️</div><div class="sp-img">📐</div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="pain-text">
-      <h3>Ce que vous perdez sans un vrai site</h3>
-      <p>Chaque jour sans site, ce sont des clients qui appellent votre concurrent. Un artisan sans site, c'est comme une boutique sans vitrine : invisible.</p>
-      <ul class="check-list">
-        <li>Vos clients ne trouvent que vos concurrents sur Google</li>
-        <li>Vous perdez du temps à bricoler un site au lieu de travailler</li>
-        <li>Les agences vous demandent 2000€ pour un site basique</li>
-        <li>Vous n'avez pas de portfolio à montrer à vos prospects</li>
-      </ul>
+  </div>
+  <div class="hero-trust">
+    <span>✦ Photos de VOS créations</span>
+    <span>✦ Design 100% personnalisé</span>
+    <span>✦ Google My Business offert</span>
+    <span>✦ Satisfait ou refait</span>
+  </div>
+</header>
+
+<div id="produit" class="section">
+  <p class="section-label">Pourquoi</p>
+  <h2>Un site web qui travaille pour vous</h2>
+  <p>Pendant que vous êtes à l'atelier, votre site trouve vos prochains clients.</p>
+  <div class="highlights" style="margin-top:52px">
+    <div class="highlight">
+      <div class="highlight-icon">📸</div>
+      <h4>Vos photos, pas des stock</h4>
+      <p>J'utilise les photos de VOS réalisations. Votre travail mérite d'être montré, pas des images génériques.</p>
+    </div>
+    <div class="highlight">
+      <div class="highlight-icon">⚡</div>
+      <h4>En ligne en 48h</h4>
+      <p>Vous me donnez vos photos, je m'occupe de tout. Site prêt en 2 jours, hébergement inclus la 1ʳᵉ année.</p>
+    </div>
+    <div class="highlight">
+      <div class="highlight-icon">📍</div>
+      <h4>Trouvé sur Google</h4>
+      <p>Fiche Google My Business créée et optimisée pour votre métier et votre ville. Vos clients vous trouvent.</p>
     </div>
   </div>
 </div>
 
 <div id="exemples" class="section section-dark">
-  <p class="section-label">Le résultat</p>
-  <h2>Voici ce que vos clients verront</h2>
-  <p>Un site qui montre VOTRE travail. Pas des photos de banque d'images.</p>
-  <div class="showcase-grid" style="margin-top:56px">
-    <div class="showcase">
-      <div class="showcase-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">dubois-menuiserie.fr</span></div>
-      <div class="showcase-body" style="--accent:#d4a853">
-        <div class="s-logo" style="color:var(--accent)">◆ DUBOIS</div>
-        <div class="s-hero">
-          <div class="s-h1">Des meubles qui traversent les générations</div>
-          <div class="s-sub">Artisan ébéniste · 20 ans d'expérience · Meubles, escaliers, agencements sur mesure</div>
-        </div>
-        <div class="s-btn" style="background:var(--accent);color:#0a0a0b">Devis gratuit →</div>
-        <div class="s-grid">
-          <div class="s-img">🪑</div><div class="s-img">🪜</div>
-          <div class="s-img">🛏️</div><div class="s-img">📐</div>
-        </div>
-        <div class="showcase-tag">Menuiserie — Site livré en 48h</div>
+  <p class="section-label">Exemples</p>
+  <h2>Le site de vos collègues artisans</h2>
+  <p>Chaque site est unique, avec les photos et l'histoire du client. Faites défiler →</p>
+  <div class="showcase-scroll" style="margin-top:40px">
+    <div class="showcase-card">
+      <div class="showcase-card-bar"><span class="showcase-card-dot r"></span><span class="showcase-card-dot y"></span><span class="showcase-card-dot g"></span><span class="showcase-card-url">dubois-menuiserie.fr</span></div>
+      <div class="showcase-card-body">
+        <div class="sc-logo" style="color:#d4a853">◆ BOISERIES DUBOIS</div>
+        <div class="sc-h1">L'élégance du bois sur mesure</div>
+        <div class="sc-sub">Artisan ébéniste · 20 ans d'expérience · Meubles, escaliers, agencements.</div>
+        <div class="sc-btn" style="background:#d4a853;color:#0a0a0b">Devis gratuit →</div>
+        <div class="sc-grid"><div class="sc-img">🪑</div><div class="sc-img">🪜</div><div class="sc-img">🛏️</div><div class="sc-img">📐</div></div>
       </div>
     </div>
-    <div class="showcase">
-      <div class="showcase-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">moreau-electricite.fr</span></div>
-      <div class="showcase-body" style="--accent:#f59e0b">
-        <div class="s-logo" style="color:var(--accent)">⚡ MOREAU</div>
-        <div class="s-hero">
-          <div class="s-h1">Votre électricien de confiance</div>
-          <div class="s-sub">Dépannage, installation, mise aux normes · Intervention en 2h · Agréé Qualifelec</div>
-        </div>
-        <div class="s-btn" style="background:var(--accent);color:#0a0a0b">Devis gratuit →</div>
-        <div class="s-grid">
-          <div class="s-img">⚡</div><div class="s-img">🔌</div>
-          <div class="s-img">💡</div><div class="s-img">🔋</div>
-        </div>
-        <div class="showcase-tag">Électricité — Site livré en 36h</div>
+    <div class="showcase-card">
+      <div class="showcase-card-bar"><span class="showcase-card-dot r"></span><span class="showcase-card-dot y"></span><span class="showcase-card-dot g"></span><span class="showcase-card-url">moreau-electricite.fr</span></div>
+      <div class="showcase-card-body">
+        <div class="sc-logo" style="color:#f59e0b">⚡ MOREAU ÉLECTRICITÉ</div>
+        <div class="sc-h1">Votre électricien de confiance</div>
+        <div class="sc-sub">Dépannage, installation, mise aux normes. Intervention en 2h. Qualifelec.</div>
+        <div class="sc-btn" style="background:#f59e0b;color:#0a0a0b">Devis gratuit →</div>
+        <div class="sc-grid"><div class="sc-img">⚡</div><div class="sc-img">🔌</div><div class="sc-img">💡</div><div class="sc-img">🔋</div></div>
       </div>
     </div>
-    <div class="showcase">
-      <div class="showcase-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">fernandez-ferronnerie.fr</span></div>
-      <div class="showcase-body" style="--accent:#ef4444">
-        <div class="s-logo" style="color:var(--accent)">🔥 FERNANDEZ</div>
-        <div class="s-hero">
-          <div class="s-h1">L'art du métal forgé</div>
-          <div class="s-sub">Portails, garde-corps, escaliers · Ferronnerie d'art · Création sur mesure</div>
-        </div>
-        <div class="s-btn" style="background:var(--accent);color:#fff">Devis gratuit →</div>
-        <div class="s-grid">
-          <div class="s-img">🔨</div><div class="s-img">🏗️</div>
-          <div class="s-img">🔩</div><div class="s-img">✨</div>
-        </div>
-        <div class="showcase-tag">Ferronnerie — Site livré en 48h</div>
+    <div class="showcase-card">
+      <div class="showcase-card-bar"><span class="showcase-card-dot r"></span><span class="showcase-card-dot y"></span><span class="showcase-card-dot g"></span><span class="showcase-card-url">fernandez-ferronnerie.fr</span></div>
+      <div class="showcase-card-body">
+        <div class="sc-logo" style="color:#ef4444">🔥 FERNANDEZ FERRONNERIE</div>
+        <div class="sc-h1">L'art du métal forgé</div>
+        <div class="sc-sub">Portails, garde-corps, escaliers. Ferronnerie d'art. Création sur mesure.</div>
+        <div class="sc-btn" style="background:#ef4444;color:#fff">Devis gratuit →</div>
+        <div class="sc-grid"><div class="sc-img">🔨</div><div class="sc-img">🏗️</div><div class="sc-img">🔩</div><div class="sc-img">✨</div></div>
+      </div>
+    </div>
+    <div class="showcase-card">
+      <div class="showcase-card-bar"><span class="showcase-card-dot r"></span><span class="showcase-card-dot y"></span><span class="showcase-card-dot g"></span><span class="showcase-card-url">martin-plomberie.fr</span></div>
+      <div class="showcase-card-body">
+        <div class="sc-logo" style="color:#06b6d4">🔧 MARTIN PLOMBERIE</div>
+        <div class="sc-h1">Plomberie · Chauffage · Dépannage</div>
+        <div class="sc-sub">Spécialiste sanitaire et thermique. Dépannage 24/7. Devis gratuit sous 2h.</div>
+        <div class="sc-btn" style="background:#06b6d4;color:#0a0a0b">Devis gratuit →</div>
+        <div class="sc-grid"><div class="sc-img">🔧</div><div class="sc-img">🚿</div><div class="sc-img">🔥</div><div class="sc-img">🛁</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<div id="tarifs" class="section">
+<div id="tarif" class="section">
   <p class="section-label">Comparaison</p>
-  <h2>Pourquoi 390€, c'est une évidence</h2>
-  <p>Comparez par vous-même.</p>
-  <div class="comp-table" style="margin-top:48px">
-    <div class="comp-row header"><span></span><span>Agence web</span><span>BotArmory</span></div>
-    <div class="comp-row"><span class="name">Prix</span><span>1 500 – 5 000€</span><span class="highlight check">390€</span></div>
-    <div class="comp-row"><span class="name">Délai</span><span>3 – 8 semaines</span><span class="highlight check">48h</span></div>
-    <div class="comp-row"><span class="name">Photos réelles</span><span class="cross">✕</span><span class="highlight check">✓</span></div>
-    <div class="comp-row"><span class="name">Google My Business</span><span class="cross">✕</span><span class="highlight check">✓ Inclus</span></div>
-    <div class="comp-row"><span class="name">Hébergement 1ʳᵉ année</span><span class="cross">✕</span><span class="highlight check">✓ Offert</span></div>
-    <div class="comp-row"><span class="name">Modifications</span><span>Payantes</span><span class="highlight check">Illimitées 1er mois</span></div>
-    <div class="comp-row"><span class="name">Formulaire devis</span><span class="check">✓</span><span class="highlight check">✓</span></div>
-    <div class="comp-row"><span class="name">Responsive mobile</span><span class="check">✓</span><span class="highlight check">✓</span></div>
-  </div>
-  <div class="pricing-wrapper" style="margin-top:56px">
-    <div class="price-card">
-      <div class="price-badge">Tout inclus</div>
-      <div class="price-amount">390<span>€</span></div>
-      <p class="price-sub">Paiement unique · Pas d'abonnement</p>
-      <ul class="price-features">
-        <li>Site vitrine 5 pages</li>
-        <li>Vos photos intégrées</li>
-        <li>Design personnalisé</li>
-        <li>Google My Business</li>
-        <li>Formulaire devis</li>
-        <li>Mobile & desktop</li>
-        <li>Hébergement 1 an</li>
-        <li>Modifs offertes 1 mois</li>
-        <li>Livraison 48h</li>
-        <li>Satisfait ou refait</li>
+  <h2>390€ au lieu de 2000€</h2>
+  <p>Le même résultat qu'une agence, pour le prix d'un outil professionnel.</p>
+  <div class="comp" style="margin-top:48px">
+    <div class="comp-col bad">
+      <div class="comp-icon">💸</div>
+      <h4 style="color:var(--text4)">Agence web</h4>
+      <ul>
+        <li>1 500 — 5 000€</li>
+        <li>3 à 8 semaines</li>
+        <li>Photos de stock</li>
+        <li>Pas de Google My Business</li>
+        <li>Modifications payantes</li>
+        <li>Pas d'hébergement</li>
       </ul>
-      <a href="#contact" class="btn-primary" style="width:100%;justify-content:center">Je commande mon site →</a>
+    </div>
+    <div class="comp-col good">
+      <div class="comp-icon">🚀</div>
+      <h4>BotArmory</h4>
+      <div style="font-size:44px;font-weight:900;letter-spacing:-.04em;margin:8px 0 2px">390<span style="font-size:18px;font-weight:500;color:var(--text3)">€</span></div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:16px">Paiement unique</p>
+      <ul>
+        <li>390€ tout inclus</li>
+        <li>Livré en 48h</li>
+        <li>Vos photos réelles</li>
+        <li>Google My Business offert</li>
+        <li>Modifs gratuites 1er mois</li>
+        <li>Hébergement 1 an offert</li>
+      </ul>
     </div>
   </div>
 </div>
 
-<div id="temoignages" class="section section-dark">
-  <p class="section-label">Témoignages</p>
-  <h2>Ce qu'ils en disent</h2>
-  <p>Des artisans comme vous.</p>
-  <div class="testimonials" style="margin-top:48px">
-    <div class="testimonial">
-      <div class="stars">★★★★★</div>
-      <q>J'avais zero présence en ligne. En 2 jours j'avais un site qui montre mes réalisations. J'ai eu 3 appels la première semaine.</q>
-      <div class="author">Pierre M.<span> — Menuisier ébéniste</span></div>
-    </div>
-    <div class="testimonial">
-      <div class="stars">★★★★★</div>
-      <q>Le site a été fait avec MES photos de chantiers. Les clients me disent qu'ils ont choisi mon entreprise grâce au site. 390€, c'était rentabilisé en 1 mois.</q>
-      <div class="author">Karim L.<span> — Électricien</span></div>
-    </div>
-    <div class="testimonial">
-      <div class="stars">★★★★★</div>
-      <q>Simple, rapide, efficace. Pas besoin de comprendre le web. J'ai envoyé mes photos, 48h après c'était en ligne. Google My Business inclus c'est le gros plus.</q>
-      <div class="author">Sophie D.<span> — Plombière</span></div>
-    </div>
+<div class="section section-dark">
+  <p class="section-label">Questions</p>
+  <h2>On répond à tout</h2>
+  <div class="faq" style="margin-top:40px">
+    <details class="faq-item"><summary>Je n'ai pas de photos de mes réalisations.</summary><p>Pas de problème. Je peux utiliser des photos d'inspiration proches de votre métier pour démarrer. Vous les remplacerez dès que vous en avez.</p></details>
+    <details class="faq-item"><summary>Et si le site ne me plaît pas ?</summary><p>Satisfait ou refait, sans frais. Je modifie le design jusqu'à ce que vous soyez content. Vous ne payez que quand c'est parfait.</p></details>
+    <details class="faq-item"><summary>390€, c'est vraiment tout ?</summary><p>Oui. 390€ TTC, paiement unique. Pas d'abonnement. L'hébergement est offert la première année (ensuite ~5€/mois si vous voulez continuer, sans obligation).</p></details>
+    <details class="faq-item"><summary>Je serai visible sur Google ?</summary><p>Oui. Chaque site inclut une fiche Google My Business créée et optimisée pour votre métier et votre ville. C'est la première chose que vos clients voient.</p></details>
+    <details class="faq-item"><summary>Et après la livraison, je fais quoi ?</summary><p>Rien. Le site est hébergé, sécurisé, et à jour. Si vous voulez modifier un texte ou une photo, vous me le dites et je le fais dans la journée.</p></details>
   </div>
 </div>
 
-<div class="section">
-  <p class="section-label">Questions fréquentes</p>
-  <h2>Vous vous posez la question, on y répond</h2>
-  <div class="faq" style="margin-top:48px">
-    <details class="faq-item"><summary>Et si je n'ai pas de photos de mes réalisations ?</summary><p>Pas de problème. Je peux utiliser des photos d'inspiration pour démarrer, et vous les remplacerez plus tard. Le site est facilement modifiable.</p></details>
-    <details class="faq-item"><summary>Je ne suis pas à l'aise avec l'informatique, comment je gère le site après ?</summary><p>Vous n'avez rien à gérer. Le site est hébergé, sécurisé, et mis à jour automatiquement. Si vous voulez changer un texte ou une photo, vous me le dites et je le fais.</p></details>
-    <details class="faq-item"><summary>390€, c'est vraiment le prix final ? Pas de surprise ?</summary><p>Oui. 390€ TTC, paiement unique. Pas d'abonnement, pas de frais cachés. L'hébergement est offert la première année (ensuite ~5€/mois si vous voulez continuer).</p></details>
-    <details class="faq-item"><summary>Et si le site ne me plaît pas ?</summary><p>Satisfait ou refait. Vous n'aimez pas le design ? Je le modifie jusqu'à ce que vous soyez content. Aucun risque.</p></details>
-    <details class="faq-item"><summary>Est-ce que mon site sera visible sur Google ?</summary><p>Oui. Chaque site inclut une fiche Google My Business créée et optimisée. Vos clients vous trouvent quand ils cherchent votre métier + votre ville.</p></details>
-  </div>
-</div>
-
-<div id="contact" class="cta-section">
+<div id="demarrer" class="cta-section">
   <h2>Prêt à avoir un vrai site ?</h2>
-  <p>Envoyez-moi 3 photos de votre travail + votre métier. Je vous réponds avec une proposition dans la journée.</p>
+  <p>Envoyez-moi 3 photos de votre travail + votre métier. Je vous réponds avec une proposition concrète dans la journée.</p>
   <form action="https://formspree.io/f/mjgqprkr" method="POST" class="contact-form">
     <div class="form-row">
       <input type="text" name="name" placeholder="Votre nom" required>
       <input type="email" name="email" placeholder="Votre email" required>
     </div>
     <div class="form-row">
-      <input type="text" name="metier" placeholder="Votre métier (ex: menuisier)">
+      <input type="text" name="metier" placeholder="Votre métier">
       <input type="text" name="ville" placeholder="Votre ville">
     </div>
-    <textarea name="message" placeholder="Parlez-moi de votre activité... (optionnel)" rows="3"></textarea>
+    <textarea name="message" placeholder="Parlez-moi de votre activité..." rows="3"></textarea>
     <button type="submit">Recevoir un devis gratuit →</button>
     <p class="form-note">🔒 Réponse sous 24h · Aucun spam · Aucun engagement</p>
   </form>
@@ -410,7 +341,7 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;background-image:url(
   <div class="footer-links">
     <a href="#">Mentions légales</a>
     <a href="#">CGV</a>
-    <a href="#contact">Contact</a>
+    <a href="#demarrer">Contact</a>
   </div>
 </footer>
 
