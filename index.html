@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https:;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="BotArmory — Création de sites web. Sites Web Performants à Chartres">
 <title>BotArmory | Création de sites web Chartres</title>
@@ -624,6 +624,56 @@
     box-shadow: 0 2px 20px rgba(79,70,229,0.12);
   }
   .ps-cta-btn-large:hover { background: var(--accent2); transform: translateY(-2px); }
+  /* ─────── CONTACT FORM ─────── */
+  .ps-contact-form {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .ps-form-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .ps-contact-form input,
+  .ps-contact-form textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .ps-contact-form input:focus,
+  .ps-contact-form textarea:focus {
+    border-color: var(--accent);
+  }
+  .ps-contact-form textarea {
+    resize: vertical;
+    min-height: 80px;
+    margin-bottom: 16px;
+  }
+  .ps-contact-form .ps-cta-btn-large {
+    display: block;
+    width: 100%;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .ps-form-note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text4);
+    margin-top: 10px;
+  }
+  @media (max-width: 640px) {
+    .ps-form-row { flex-direction: column; gap: 10px; }
+  }
 
   @media (max-width: 640px) {
     .ps-cta-section { padding: 40px 20px; }
@@ -912,7 +962,7 @@
     <div id="contact" class="ps-cta-section">
       <h2>Un site web ? C'est parti.</h2>
       <p>Décrivez votre activité, je vous envoie un devis gratuit sous 24h.</p>
-      <form class="ps-form" action="https://formspree.io/f/CHANGE_ME" method="POST">
+      <form class="ps-form" action="https://formspree.io/f/mjgqprkr" method="POST">
         <div class="ps-form-group">
           <label>Votre nom</label>
           <input type="text" name="name" placeholder="Jean Dupont" required>
