@@ -4,764 +4,411 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="BotArmory — Création de sites web. Votre artisanat mérite un vrai site">
-<title>BotArmory | Création de sites web </title>
-
-<meta property="og:title" content="BotArmory | Création de sites web ">
-<meta property="og:description" content="BotArmory — Création de sites web. Votre artisanat mérite un vrai site">
+<meta name="description" content="BotArmory — Sites web pour artisans. Vos photos, votre histoire, livré en 48h. Fiche Google My Business offerte.">
+<title>BotArmory | Sites web pour artisans — livré en 48h</title>
+<meta property="og:title" content="BotArmory | Sites web pour artisans">
+<meta property="og:description" content="Un site web avec vos photos, votre ADN. Livré en 48h, fiche Google offerte.">
 <meta property="og:url" content="https://botarmory.com/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
-<meta property="og:site_name" content="BotArmory">
-<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #060708;
-    --bg2: #0a0b0d;
-    --bg3: #0f1014;
-    --bg4: #14151a;
-    --text: #f4f5f7;
-    --text2: #c8cdd6;
-    --text3: #8b909d;
-    --text4: #545861;
-    --accent: #4f46e5;
-    --accent2: #818cf8;
-    --accent-glow: rgba(79,70,229,0.08);
-    --accent-glow2: rgba(79,70,229,0.15);
-    --border: rgba(255,255,255,0.06);
-    --border2: rgba(255,255,255,0.04);
-    --border3: rgba(255,255,255,0.08);
-    --radius: 10px;
-    --radius-sm: 7px;
-    --radius-lg: 14px;
-  }
+:root {
+  --bg: #08090a;
+  --bg2: #0d0e11;
+  --bg3: #121318;
+  --bg4: #181920;
+  --text: #f0f1f4;
+  --text2: #c4c7cf;
+  --text3: #8a8e9b;
+  --text4: #525560;
+  --accent: #4f46e5;
+  --accent2: #6d63ff;
+  --accent-glow: rgba(79,70,229,0.1);
+  --accent-glow2: rgba(79,70,229,0.2);
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.04);
+  --radius: 10px;
+  --radius-sm: 7px;
+  --radius-lg: 14px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0; opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999;
+}
+::selection { background: rgba(79,70,229,0.25); color: var(--text); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  body {
-    font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    line-height: 1.5;
-  }
+/* NAV */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 32px;
+  background: rgba(8,9,10,0.92);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border2);
+}
+.nav-logo { font-weight: 800; font-size: 18px; letter-spacing: 0.05em; color: var(--text); }
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 24px; align-items: center; }
+.nav-links a { font-size: 13.5px; color: var(--text3); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--accent); color: #fff !important;
+  padding: 8px 20px; border-radius: var(--radius-sm);
+  font-weight: 600; transition: background 0.2s, transform 0.15s;
+}
+.nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
 
-  /* Subtle noise texture overlay */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    opacity: 0.015;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-  }
+/* HERO */
+.hero {
+  position: relative; padding: 120px 32px 100px; text-align: center;
+  background: radial-gradient(ellipse at 50% 0%, rgba(79,70,229,0.06) 0%, transparent 60%), var(--bg2);
+  overflow: hidden;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(79,70,229,0.2), transparent);
+}
+.hero-grid {
+  position: absolute; inset: 0; opacity: 0.025;
+  background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
+  background-size: 64px 64px; pointer-events: none;
+}
+.hero-badge {
+  display: inline-block; font-size: 12px; font-weight: 600; color: var(--accent2);
+  background: var(--accent-glow); border: 1px solid var(--accent-glow2);
+  padding: 6px 18px; border-radius: 20px; margin-bottom: 24px;
+  position: relative; z-index: 1;
+}
+.hero h1 { font-size: clamp(30px, 5.5vw, 52px); font-weight: 900; line-height: 1.05; max-width: 700px; margin: 0 auto 16px; letter-spacing: -0.03em; position: relative; z-index: 1; }
+.hero h1 span { color: var(--accent); }
+.hero-sub { color: var(--text3); font-size: 17px; max-width: 540px; margin: 0 auto 32px; line-height: 1.6; position: relative; z-index: 1; }
+.hero-cta {
+  display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: 17px;
+  padding: 16px 40px; border-radius: var(--radius); text-decoration: none;
+  position: relative; z-index: 1; transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(79,70,229,0.2);
+}
+.hero-cta:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(79,70,229,0.3); }
+.trust-bar {
+  display: flex; gap: 36px; justify-content: center; margin-top: 48px;
+  font-size: 13px; color: var(--text3); flex-wrap: wrap; position: relative; z-index: 1;
+}
 
-  
+/* SECTION */
+.section { padding: 80px 32px; max-width: 1100px; margin: 0 auto; }
+.section-alt { background: var(--bg2); border-top: 1px solid var(--border2); border-bottom: 1px solid var(--border2); }
+.section-label { text-align: center; font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+.section h2 { text-align: center; font-size: clamp(22px, 3.5vw, 30px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 48px; }
 
-  /* ─────── PREVIEW: NAV ─────── */
-  .ps-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 32px;
-    background: rgba(10,11,13,0.95);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border2);
-  }
-  .ps-logo {
-    font-weight: 800;
-    font-size: 18px;
-    letter-spacing: 0.04em;
-    outline: none;
-    color: var(--text);
-  }
-  .ps-nav-links { display: flex; gap: 28px; align-items: center; }
-  .ps-nav-links a {
-    font-size: 13.5px;
-    color: var(--text3);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-  .ps-nav-links a:hover { color: var(--text); }
-  .ps-nav-cta {
-    background: var(--accent);
-    color: #0a0a0b !important;
-    padding: 8px 20px;
-    border-radius: var(--radius-sm);
-    font-size: 13.5px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-  .ps-nav-cta:hover { background: var(--accent2) !important; }
+/* HOW IT WORKS */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.step {
+  text-align: center; padding: 32px 20px; background: var(--bg3);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  position: relative; overflow: hidden;
+}
+.step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--accent-glow); color: var(--accent);
+  font-weight: 800; font-size: 17px; margin-bottom: 14px;
+}
+.step h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.step p { font-size: 13px; color: var(--text3); line-height: 1.55; }
 
-  @media (max-width: 640px) {
-    .ps-nav { padding: 12px 18px; }
-    .ps-nav-links { gap: 16px; }
-    .ps-nav-links a { font-size: 12px; }
-    .ps-logo { font-size: 15px; }
-    .ps-nav-cta { padding: 7px 14px; font-size: 12px; }
-  }
+/* MOCKUPS */
+.mockups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.mockup {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); overflow: hidden; transition: transform 0.3s, border-color 0.3s;
+}
+.mockup:hover { transform: translateY(-4px); border-color: var(--accent-glow2); }
+.mockup-browser {
+  display: flex; align-items: center; gap: 6px; padding: 10px 14px;
+  background: var(--bg4); border-bottom: 1px solid var(--border2);
+}
+.mockup-dot { width: 8px; height: 8px; border-radius: 50%; }
+.mockup-dot.r { background: #ff5f57; } .mockup-dot.y { background: #febc2e; } .mockup-dot.g { background: #28c840; }
+.mockup-url { font-size: 10px; color: var(--text4); margin-left: 8px; flex:1; }
+.mockup-body { padding: 20px 16px 24px; }
+.mockup-body .m-logo { font-weight: 800; font-size: 14px; letter-spacing: 0.03em; margin-bottom: 12px; }
+.mockup-body .m-logo span { color: var(--accent); }
+.mockup-body .m-h1 { font-weight: 800; font-size: 16px; line-height: 1.2; margin-bottom: 6px; }
+.mockup-body .m-sub { font-size: 11px; color: var(--text3); margin-bottom: 14px; line-height: 1.5; }
+.mockup-body .m-btn {
+  display: inline-block; background: var(--accent); color: #fff; font-weight: 600;
+  font-size: 11px; padding: 8px 16px; border-radius: 6px;
+}
+.mockup-body .m-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 12px; }
+.mockup-body .m-img {
+  aspect-ratio: 4/3; background: var(--bg4); border-radius: 4px;
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
 
-  /* ─────── PREVIEW: HERO ─────── */
-  .ps-hero {
-    position: relative;
-    padding: 100px 32px 80px;
-    text-align: center;
-    background: var(--bg2);
-    overflow: hidden;
-  }
-  .ps-hero::before {
-    content: '';
-    position: absolute;
-    top: -40%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 900px;
-    height: 900px;
-    background: radial-gradient(ellipse, rgba(79,70,229,0.04) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .ps-hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(79,70,229,0.15), transparent);
-  }
-  .ps-hero-grid {
-    position: absolute;
-    inset: 0;
-    opacity: 0.03;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-  }
-  .ps-badge {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--accent);
-    background: var(--accent-glow);
-    border: 1px solid var(--accent-glow2);
-    padding: 6px 16px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    outline: none;
-    position: relative;
-    z-index: 1;
-  }
-  .ps-hero h1 {
-    font-size: clamp(28px, 5vw, 46px);
-    font-weight: 900;
-    line-height: 1.08;
-    max-width: 680px;
-    margin: 0 auto 14px;
-    outline: none;
-    letter-spacing: -0.03em;
-    position: relative;
-    z-index: 1;
-  }
-  .ps-hero .ps-sub {
-    color: var(--text3);
-    font-size: 16px;
-    max-width: 540px;
-    margin: 0 auto 28px;
-    line-height: 1.65;
-    outline: none;
-    position: relative;
-    z-index: 1;
-  }
-  .ps-hero-cta {
-    display: inline-block;
-    background: var(--accent);
-    color: #0a0a0b;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 14px 36px;
-    border-radius: var(--radius);
-    text-decoration: none;
-    position: relative;
-    z-index: 1;
-    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-    box-shadow: 0 2px 16px rgba(79,70,229,0.15);
-  }
-  .ps-hero-cta:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 4px 24px rgba(79,70,229,0.25); }
-  .ps-trust {
-    display: flex;
-    gap: 32px;
-    justify-content: center;
-    margin-top: 36px;
-    font-size: 13px;
-    color: var(--text3);
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 1;
-  }
-  .ps-trust span { opacity: 0.85; }
+/* PRICING */
+.pricing { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 600px; margin: 0 auto; }
+.price-card {
+  background: var(--bg3); border: 1px solid var(--accent-glow2); border-radius: var(--radius-lg);
+  padding: 32px; text-align: center; position: relative;
+}
+.price-card.featured { border-color: var(--accent); box-shadow: 0 0 40px rgba(79,70,229,0.08); }
+.price-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #fff; font-size: 11px; font-weight: 700;
+  padding: 4px 16px; border-radius: 12px; text-transform: uppercase;
+}
+.price-amount { font-size: 40px; font-weight: 900; letter-spacing: -0.03em; margin: 8px 0 4px; }
+.price-amount sub { font-size: 18px; font-weight: 500; color: var(--text3); }
+.price-desc { font-size: 14px; color: var(--text3); margin-bottom: 20px; }
+.price-features { list-style: none; text-align: left; margin-bottom: 24px; }
+.price-features li { font-size: 13px; color: var(--text2); padding: 6px 0; border-bottom: 1px solid var(--border2); display: flex; align-items: center; gap: 8px; }
+.price-features li::before { content: '✦'; color: var(--accent); font-size: 10px; flex-shrink: 0; }
+.price-cta {
+  display: inline-block; background: var(--accent); color: #fff; font-weight: 700;
+  font-size: 15px; padding: 14px 32px; border-radius: var(--radius); text-decoration: none;
+  transition: background 0.2s, transform 0.15s; width: 100%; text-align: center;
+}
+.price-cta:hover { background: var(--accent2); transform: translateY(-1px); }
 
-  @media (max-width: 640px) {
-    .ps-hero { padding: 56px 20px 48px; }
-    .ps-hero h1 { font-size: 24px; }
-    .ps-hero .ps-sub { font-size: 14px; }
-    .ps-trust { gap: 20px; font-size: 12px; }
-    .ps-hero-cta { font-size: 15px; padding: 13px 28px; }
-  }
+/* FORM */
+.cta-section {
+  padding: 64px 32px; text-align: center;
+  background: linear-gradient(180deg, rgba(79,70,229,0.04) 0%, transparent 100%);
+  border-top: 1px solid var(--border); position: relative;
+}
+.cta-section::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 300px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(79,70,229,0.3), transparent);
+}
+.cta-section h2 { font-size: 24px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em; }
+.cta-section > p { color: var(--text3); font-size: 14px; margin-bottom: 28px; }
+.contact-form { max-width: 500px; margin: 0 auto; text-align: left; }
+.form-row { display: flex; gap: 12px; margin-bottom: 12px; }
+.contact-form input, .contact-form textarea {
+  width: 100%; padding: 13px 16px; background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text); font-family: inherit; font-size: 14px;
+  outline: none; transition: border-color 0.2s;
+}
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+.contact-form textarea { resize: vertical; min-height: 90px; margin-bottom: 16px; }
+.contact-form button {
+  display: block; width: 100%; background: var(--accent); color: #fff; font-weight: 700;
+  font-size: 16px; padding: 15px; border-radius: var(--radius); border: none; cursor: pointer;
+  font-family: inherit; transition: background 0.2s; box-shadow: 0 2px 16px rgba(79,70,229,0.15);
+}
+.contact-form button:hover { background: var(--accent2); }
+.form-note { text-align: center; font-size: 12px; color: var(--text4); margin-top: 12px; }
 
-  /* ─────── PREVIEW: SECTION HEADERS ─────── */
-  .ps-section {
-    padding: 64px 32px;
-    position: relative;
-  }
-  .ps-section.alt {
-    background: rgba(255,255,255,0.01);
-    border-top: 1px solid var(--border2);
-    border-bottom: 1px solid var(--border2);
-  }
-  .ps-section-label {
-    text-align: center;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 8px;
-  }
-  .ps-section h2 {
-    text-align: center;
-    font-size: 26px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-bottom: 36px;
-  }
+/* FOOTER */
+.footer {
+  padding: 28px 32px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  font-size: 13px; color: var(--text4);
+}
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { color: var(--text4); text-decoration: none; font-size: 12px; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text3); }
 
-  @media (max-width: 640px) {
-    .ps-section { padding: 44px 20px; }
-    .ps-section h2 { font-size: 22px; margin-bottom: 28px; }
-  }
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.section { animation: fadeUp 0.6s ease-out both; }
+.section:nth-child(2) { animation-delay: 0.1s; }
+.section:nth-child(3) { animation-delay: 0.2s; }
 
-  /* ─────── PREVIEW: GALLERY ─────── */
-  .ps-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-  }
-  .ps-gallery-item {
-    position: relative;
-    border-radius: var(--radius);
-    overflow: hidden;
-    aspect-ratio: 4/3;
-    cursor: pointer;
-    border: 1px solid var(--border2);
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .ps-gallery-item:hover {
-    border-color: var(--accent-glow2);
-    transform: translateY(-3px);
-  }
-  .ps-gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.5s;
-  }
-  .ps-gallery-item:hover img { transform: scale(1.04); }
-  .ps-gallery-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
-    display: flex;
-    align-items: flex-end;
-    padding: 16px;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .ps-gallery-item:hover .ps-gallery-overlay { opacity: 1; }
-  .ps-gallery-caption {
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  @media (max-width: 640px) {
-    .ps-gallery { grid-template-columns: 1fr 1fr; gap: 10px; }
-  }
-  @media (max-width: 420px) {
-    .ps-gallery { grid-template-columns: 1fr; }
-  }
-
-  /* ─────── PREVIEW: SERVICES ─────── */
-  .ps-services {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  .ps-svc {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 32px 24px 28px;
-    text-align: center;
-    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-  .ps-svc::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .ps-svc:hover {
-    border-color: var(--accent-glow2);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-  }
-  .ps-svc:hover::before { opacity: 1; }
-  .ps-svc-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    border-radius: var(--radius);
-    background: var(--accent-glow);
-    margin-bottom: 14px;
-    font-size: 22px;
-  }
-  .ps-svc h4 {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    outline: none;
-    color: var(--text);
-  }
-  .ps-svc p {
-    font-size: 13px;
-    color: var(--text3);
-    line-height: 1.55;
-  }
-
-  @media (max-width: 640px) {
-    .ps-services { grid-template-columns: 1fr 1fr; gap: 12px; }
-    .ps-svc { padding: 24px 18px 22px; }
-  }
-  @media (max-width: 420px) {
-    .ps-services { grid-template-columns: 1fr; }
-  }
-
-  /* ─────── PREVIEW: ABOUT ─────── */
-  .ps-about {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .ps-about-img-wrap {
-    flex-shrink: 0;
-    width: 160px;
-    height: 160px;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    border: 2px solid var(--border);
-    position: relative;
-  }
-  .ps-about-img-wrap::after {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--accent-glow2);
-    opacity: 0.5;
-    pointer-events: none;
-  }
-  .ps-about-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .ps-about-text {
-    flex: 1;
-    min-width: 260px;
-  }
-  .ps-about-text h3 {
-    font-size: 20px;
-    font-weight: 800;
-    margin-bottom: 8px;
-    outline: none;
-    letter-spacing: -0.01em;
-  }
-  .ps-about-text p {
-    font-size: 14px;
-    color: var(--text3);
-    line-height: 1.75;
-    outline: none;
-    margin-bottom: 16px;
-  }
-  .ps-about-stats {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  .ps-about-stat {
-    text-align: center;
-  }
-  .ps-about-stat-num {
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-  }
-  .ps-about-stat-label {
-    font-size: 11px;
-    color: var(--text4);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-top: 2px;
-  }
-
-  @media (max-width: 640px) {
-    .ps-about { gap: 24px; justify-content: center; text-align: center; }
-    .ps-about-img-wrap { width: 120px; height: 120px; }
-    .ps-about-stats { justify-content: center; }
-    .ps-about-text h3 { font-size: 18px; }
-  }
-
-  /* ─────── PREVIEW: CTA SECTION ─────── */
-  .ps-cta-section {
-    padding: 56px 32px;
-    text-align: center;
-    background: linear-gradient(180deg, rgba(79,70,229,0.03) 0%, rgba(79,70,229,0.01) 100%);
-    border-top: 1px solid var(--border);
-    position: relative;
-  }
-  .ps-cta-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(79,70,229,0.3), transparent);
-  }
-  .ps-cta-section h2 {
-    font-size: 24px;
-    font-weight: 800;
-    margin-bottom: 8px;
-    letter-spacing: -0.02em;
-  }
-  .ps-cta-section p {
-    color: var(--text3);
-    font-size: 14px;
-    margin-bottom: 24px;
-    max-width: 440px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .ps-cta-btn-large {
-    display: inline-block;
-    background: var(--accent);
-    color: #0a0a0b;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 14px 36px;
-    border-radius: var(--radius);
-    text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
-    box-shadow: 0 2px 20px rgba(79,70,229,0.12);
-  }
-  .ps-cta-btn-large:hover { background: var(--accent2); transform: translateY(-2px); }
-
-  /* ─────── CONTACT FORM ─────── */
-  .ps-contact-form {
-    max-width: 500px;
-    margin: 0 auto;
-    text-align: left;
-  }
-  .ps-form-row {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-  .ps-contact-form input,
-  .ps-contact-form textarea {
-    width: 100%;
-    padding: 12px 16px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    color: var(--text);
-    font-family: inherit;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .ps-contact-form input:focus,
-  .ps-contact-form textarea:focus {
-    border-color: var(--accent);
-  }
-  .ps-contact-form textarea {
-    resize: vertical;
-    min-height: 80px;
-    margin-bottom: 16px;
-  }
-  .ps-contact-form .ps-cta-btn-large {
-    display: block;
-    width: 100%;
-    text-align: center;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .ps-form-note {
-    text-align: center;
-    font-size: 12px;
-    color: var(--text4);
-    margin-top: 10px;
-  }
-  @media (max-width: 640px) {
-    .ps-form-row { flex-direction: column; gap: 10px; }
-  }
-
-  @media (max-width: 640px) {
-    .ps-cta-section { padding: 40px 20px; }
-    .ps-cta-section h2 { font-size: 20px; }
-    .ps-cta-btn-large { font-size: 15px; padding: 13px 28px; }
-  }
-
-  /* ─────── PREVIEW: FOOTER ─────── */
-  .ps-footer {
-    padding: 24px 32px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    font-size: 13px;
-    color: var(--text4);
-    outline: none;
-  }
-  .ps-footer-links { display: flex; gap: 20px; }
-  .ps-footer-links a {
-    color: var(--text4);
-    text-decoration: none;
-    font-size: 12px;
-    transition: color 0.2s;
-  }
-  .ps-footer-links a:hover { color: var(--text3); }
-
-  @media (max-width: 640px) {
-    .ps-footer { padding: 18px 20px; justify-content: center; text-align: center; }
-    .ps-footer-links { justify-content: center; }
-  }
-
-  /* ─────── ORDER CTA ─────── */
-  .order-cta {
-    text-align: center;
-    margin-top: 32px;
-  }
-  .order-cta a {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--accent);
-    color: #0a0a0b;
-    font-weight: 700;
-    font-size: 17px;
-    padding: 16px 40px;
-    border-radius: var(--radius);
-    text-decoration: none;
-    box-shadow: 0 4px 28px rgba(79,70,229,0.25);
-    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-  }
-  .order-cta a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 36px rgba(79,70,229,0.35);
-    background: var(--accent2);
-  }
-  .order-cta-sub {
-    margin-top: 12px;
-    font-size: 12px;
-    color: var(--text4);
-  }
-
-  /* ─────── ANIMATIONS ─────── */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .ps-section {
-    animation: fadeInUp 0.6s ease-out both;
-  }
-  .ps-section:nth-child(2) { animation-delay: 0.1s; }
-  .ps-section:nth-child(3) { animation-delay: 0.2s; }
-  .ps-section:nth-child(4) { animation-delay: 0.3s; }
-  .ps-section:nth-child(5) { animation-delay: 0.4s; }
-
-  /* ─────── SCROLLBAR ─────── */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--border3); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--text4); }
-
-  /* ─────── SELECTION ─────── */
-  ::selection { background: rgba(79,70,229,0.2); color: var(--text); }
+/* MOBILE */
+@media (max-width: 768px) {
+  .nav { padding: 12px 18px; }
+  .nav-links { gap: 14px; }
+  .nav-links a { font-size: 12px; }
+  .nav-cta { padding: 7px 14px; font-size: 12px; }
+  .hero { padding: 80px 20px 64px; }
+  .hero-sub { font-size: 15px; }
+  .trust-bar { gap: 20px; font-size: 12px; }
+  .section { padding: 48px 20px; }
+  .steps, .mockups { grid-template-columns: 1fr; }
+  .form-row { flex-direction: column; }
+  .footer { justify-content: center; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+@media (max-width: 480px) {
+  .nav-links { gap: 10px; }
+  .nav-links a { font-size: 11px; }
+  .hero h1 { font-size: 24px; }
+  .hero-cta { font-size: 15px; padding: 14px 28px; }
+  .price-amount { font-size: 32px; }
+}
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "BotArmory", "description": "Votre artisanat mérite un vrai site", "url": "https://botarmory.com/", "telephone": "", "priceRange": "€€"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BotArmory","description":"Création de sites web pour artisans — livré en 48h avec vos photos","url":"https://botarmory.com/","provider":{"@type":"Organization","name":"BotArmory"},"offers":{"@type":"Offer","price":"390","priceCurrency":"EUR"}}</script>
 </head>
 <body>
 
-    <!-- NAV -->
-    <div class="ps-nav">
-      <span class="ps-logo">BOTARMORY</span>
-      <div class="ps-nav-links">
-        <a href="#galerie">Réalisations</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-        <a class="ps-nav-cta" href="#contact">Devis gratuit</a>
-      </div>
-    </div>
+<nav class="nav">
+  <div class="nav-logo">BOT<span>ARMORY</span></div>
+  <div class="nav-links">
+    <a href="#comment">Comment ça marche</a>
+    <a href="#exemples">Exemples</a>
+    <a href="#tarif">Tarif</a>
+    <a href="#contact" class="nav-cta">Devis gratuit</a>
+  </div>
+</nav>
 
-    <!-- HERO -->
-    <div class="ps-hero">
-      <div class="ps-hero-grid"></div>
-      <p class="ps-badge">Création de sites web</p>
-      <h1>Votre artisanat mérite un vrai site</h1>
-      <p class="ps-sub">Je crée votre site avec vos photos, votre histoire, et je vous rends visible sur Google. Livré en 48h.</p>
-      <a class="ps-hero-cta" href="#contact">Demander un devis gratuit</a>
-      <div class="ps-trust">
-        <span>✦ Avec VOS photos de créations</span>
-        <span>✦ Votre ADN d'entreprise</span>
-        <span>✦ Fiche Google My Business offerte</span>
-        <span>✦ Site livré en 48h</span>
-      </div>
-    </div>
+<header class="hero">
+  <div class="hero-grid"></div>
+  <p class="hero-badge">✦ Pour les artisans qui veulent exister en ligne</p>
+  <h1>Un site web <span>qui vous ressemble</span>, livré en 48h</h1>
+  <p class="hero-sub">Vos photos, votre histoire, votre métier. Pas de template vide. Je crée votre site et je vous rends visible sur Google. Fiche Google My Business offerte.</p>
+  <a href="#contact" class="hero-cta">Je veux mon site →</a>
+  <div class="trust-bar">
+    <span>✦ Photos de VOS créations</span>
+    <span>✦ 100% personnalisé</span>
+    <span>✦ Fiche Google offerte</span>
+    <span>✦ Site en ligne en 48h</span>
+    <span>✦ Satisfait ou refait</span>
+  </div>
+</header>
 
-    <!-- GALERIE -->
-    <div id="galerie" class="ps-section">
-      <p class="ps-section-label">Ils me font confiance</p>
-      <h2>Leurs sites en ligne</h2>
-      <div class="ps-gallery">
-        <div class="ps-gallery-item">
-          <img src="img/galerie1.jpg" alt="Site vitrine artisanal personnalisé" loading="lazy">
-          <div class="ps-gallery-overlay">
-            <span class="ps-gallery-caption">Site vitrine avec photos réelles — menuisier</span>
-          </div>
-        </div>
-        <div class="ps-gallery-item">
-          <img src="img/galerie2.jpg" alt="Site web avec photos de créations réelles" loading="lazy">
-          <div class="ps-gallery-overlay">
-            <span class="ps-gallery-caption">Site personnalisé — électricien</span>
-          </div>
-        </div>
-        <div class="ps-gallery-item">
-          <img src="img/galerie3.jpg" alt="Site internet artisanal + Google My Business" loading="lazy">
-          <div class="ps-gallery-overlay">
-            <span class="ps-gallery-caption">Site artisanal + fiche Google — plombier</span>
-          </div>
-        </div>
-      </div>
+<div id="comment" class="section">
+  <p class="section-label">Simple et rapide</p>
+  <h2>Comment ça marche</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Vous m'envoyez vos photos</h4>
+      <p>3-4 photos de vos réalisations, votre métier, votre ville. C'est tout ce dont j'ai besoin pour démarrer.</p>
     </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Je crée votre site</h4>
+      <p>En 48h max, votre site est prêt. Avec vos photos, votre histoire, et un design pro qui inspire confiance.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Vous êtes visible</h4>
+      <p>Site en ligne + fiche Google My Business optimisée. Vos clients vous trouvent quand ils cherchent votre métier.</p>
+    </div>
+  </div>
+</div>
 
-    <!-- SERVICES -->
-    <div id="services" class="ps-section alt">
-      <p class="ps-section-label">Mon offre</p>
-      <h2>Ce que je fais pour vous</h2>
-      <div class="ps-services">
-        <div class="ps-svc">
-          <div class="ps-svc-icon">📸</div>
-          <h4>Site vitrine complet</h4>
-          <p>J'utilise les photos de VOS réalisations. Pas de banque d'images générique. Votre travail, votre signature.</p>
-        </div>
-        <div class="ps-svc">
-          <div class="ps-svc-icon">⚡</div>
-          <h4>Référencement Google</h4>
-          <p>Vous me donnez vos photos et votre texte, je m'occupe de tout. Site en ligne en 2 jours, hébergement inclus la 1re année.</p>
-        </div>
-        <div class="ps-svc">
-          <div class="ps-svc-icon">📍</div>
-          <h4>Livraison en 48h</h4>
-          <p>Je crée et optimise votre fiche Google My Business. Vos clients vous trouvent dans la région, pas vos concurrents.</p>
+<div id="exemples" class="section section-alt">
+  <p class="section-label">Aperçu</p>
+  <h2>À quoi ressemble votre futur site</h2>
+  <div class="mockups">
+    <div class="mockup">
+      <div class="mockup-browser">
+        <span class="mockup-dot r"></span><span class="mockup-dot y"></span><span class="mockup-dot g"></span>
+        <span class="mockup-url">dubois-menuiserie.fr</span>
+      </div>
+      <div class="mockup-body" style="--accent: #d4a853; --accent2: #e0b963;">
+        <div class="m-logo">BOISERIES <span>DUBOIS</span></div>
+        <div class="m-h1">L'élégance du bois sur mesure</div>
+        <div class="m-sub">Artisan ébéniste depuis 1998. Meubles, escaliers, agencements. Devis gratuit sous 24h.</div>
+        <div class="m-btn" style="background:#d4a853;color:#0a0a0b;">Demander un devis →</div>
+        <div class="m-grid">
+          <div class="m-img">🪑</div><div class="m-img">🪜</div><div class="m-img">🛏️</div>
         </div>
       </div>
     </div>
+    <div class="mockup">
+      <div class="mockup-browser">
+        <span class="mockup-dot r"></span><span class="mockup-dot y"></span><span class="mockup-dot g"></span>
+        <span class="mockup-url">moreau-electricite.fr</span>
+      </div>
+      <div class="mockup-body" style="--accent: #f59e0b; --accent2: #fbbf24;">
+        <div class="m-logo">MOREAU <span>ÉLECTRICITÉ</span></div>
+        <div class="m-h1">Votre électricien de confiance</div>
+        <div class="m-sub">Dépannage, installation, mise aux normes. Intervention en 2h. Agréé Qualifelec.</div>
+        <div class="m-btn" style="background:#f59e0b;color:#0a0a0b;">Devis gratuit →</div>
+        <div class="m-grid">
+          <div class="m-img">⚡</div><div class="m-img">🔌</div><div class="m-img">💡</div>
+        </div>
+      </div>
+    </div>
+    <div class="mockup">
+      <div class="mockup-browser">
+        <span class="mockup-dot r"></span><span class="mockup-dot y"></span><span class="mockup-dot g"></span>
+        <span class="mockup-url">martin-plomberie.fr</span>
+      </div>
+      <div class="mockup-body" style="--accent: #06b6d4; --accent2: #22d3ee;">
+        <div class="m-logo">MARTIN <span>PLOMBERIE</span></div>
+        <div class="m-h1">Plomberie · Chauffage · Dépannage</div>
+        <div class="m-sub">Spécialiste sanitaire et thermique. Dépannage urgent 24/7. Devis gratuit.</div>
+        <div class="m-btn" style="background:#06b6d4;color:#0a0a0b;">Devis gratuit →</div>
+        <div class="m-grid">
+          <div class="m-img">🔧</div><div class="m-img">🚿</div><div class="m-img">🔥</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- ABOUT -->
-    <div class="ps-section">
-      <p class="ps-section-label">Pourquoi moi</p>
-      <h2>Artisan, je parle votre langue</h2>
-      <div class="ps-about">
-        <div class="ps-about-img-wrap">
-          <img class="ps-about-img" src="img/artisan.jpg" alt="Portrait de l'artisan" loading="lazy">
-        </div>
-        <div class="ps-about-text">
-          <h3>BotArmory</h3>
-          <p>Je suis artisan comme vous. Je comprends votre métier, vos contraintes, et je crée des sites qui parlent à vos clients.</p>
-          <div class="ps-about-stats">
-            <div class="ps-about-stat">
-              <div class="ps-about-stat-num">48h</div>
-              <div class="ps-about-stat-label">Livraison</div>
-            </div>
-            <div class="ps-about-stat">
-              <div class="ps-about-stat-num">100%</div>
-              <div class="ps-about-stat-label">Satisfaction</div>
-            </div>
-            <div class="ps-about-stat">
-              <div class="ps-about-stat-num">SEO</div>
-              <div class="ps-about-stat-label">Google</div>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-<!-- CTA -->
-    <div id="contact" class="ps-cta-section">
-      <h2>On en parle ?</h2>
-      <p>Envoyez-moi 3 photos de vos créations et votre métier. Je vous réponds avec une proposition dans la journée.</p>
-      <form action="https://formspree.io/f/mjgqprkr" method="POST" class="ps-contact-form">
-      <div class="ps-form-row">
-        <input type="text" name="name" placeholder="Votre nom" required>
-        <input type="email" name="email" placeholder="Votre email" required>
-      </div>
-      <div class="ps-form-row">
-        <input type="text" name="metier" placeholder="Votre métier">
-        <input type="text" name="ville" placeholder="Votre ville">
-      </div>
-      <textarea name="message" placeholder="Décrivez votre projet en quelques mots..." rows="3" required></textarea>
-      <button type="submit" class="ps-cta-btn-large">Recevoir un devis gratuit</button>
-      <p class="ps-form-note">🔒 Réponse sous 24h · Aucun spam</p>
-    </form>
+<div id="tarif" class="section">
+  <p class="section-label">Offre simple</p>
+  <h2>Un tarif, tout inclus</h2>
+  <div class="pricing">
+    <div class="price-card featured">
+      <div class="price-badge">Le plus demandé</div>
+      <div class="price-amount">390<sub>€</sub></div>
+      <p class="price-desc">Paiement unique — pas d'abonnement</p>
+      <ul class="price-features">
+        <li>Site vitrine complet (5 pages)</li>
+        <li>Avec VOS photos de créations</li>
+        <li>Design personnalisé à votre métier</li>
+        <li>Fiche Google My Business créée et optimisée</li>
+        <li>Formulaire de contact / devis</li>
+        <li>Responsive (mobile, tablette, desktop)</li>
+        <li>Hébergement offert la 1ʳᵉ année</li>
+        <li>Livraison en 48h</li>
+      </ul>
+      <a href="#contact" class="price-cta">Je commande mon site →</a>
     </div>
+  </div>
+</div>
 
-    <!-- FOOTER -->
-    <div class="ps-footer">
-      <span>BotArmory · Création de sites web</span>
-      <div class="ps-footer-links">
-        <a href="#mentions">Mentions légales</a>
-        <a href="#cgv">CGV</a>
-        <a href="#contact">Contact</a>
-      </div>
+<div id="contact" class="cta-section">
+  <h2>On en parle ?</h2>
+  <p>Envoyez-moi 3 photos de vos créations + votre métier. Je vous réponds avec une proposition dans la journée.</p>
+  <form action="https://formspree.io/f/mjgqprkr" method="POST" class="contact-form">
+    <div class="form-row">
+      <input type="text" name="name" placeholder="Votre nom" required>
+      <input type="email" name="email" placeholder="Votre email" required>
     </div>
+    <div class="form-row">
+      <input type="text" name="metier" placeholder="Votre métier">
+      <input type="text" name="ville" placeholder="Votre ville">
+    </div>
+    <textarea name="message" placeholder="Parlez-moi de votre activité..." rows="3" required></textarea>
+    <button type="submit">Recevoir un devis gratuit →</button>
+    <p class="form-note">🔒 Réponse sous 24h · Aucun spam · Pas d'engagement</p>
+  </form>
+</div>
+
+<footer class="footer">
+  <span>BotArmory · Sites web pour artisans</span>
+  <div class="footer-links">
+    <a href="#">Mentions légales</a>
+    <a href="#">CGV</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
 
 </body>
 </html>
