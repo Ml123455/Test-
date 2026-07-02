@@ -61,60 +61,8 @@
     z-index: 9999;
   }
 
-  /* ─────── TOPBAR ─────── */
-  .topbar {
-    background: rgba(6,7,8,0.85);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .topbar-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 54px;
-    padding: 0 24px;
-  }
-  .topbar-brand {
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: -0.01em;
-  }
-  .topbar-brand span { color: var(--accent); }
-  .topbar-links { display: flex; align-items: center; gap: 24px; }
-  .topbar-link {
-    font-size: 13px;
-    color: var(--text3);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-  .topbar-link:hover { color: var(--text); }
-  .topbar-cta {
-    background: var(--accent);
-    color: #0a0a0b;
-    padding: 7px 18px;
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .topbar-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+  /* ═══════════ SITE ═══════════ */
 
-  @media (max-width: 640px) {
-    .topbar-inner { padding: 0 16px; }
-    .topbar-links { gap: 14px; }
-    .topbar-link { font-size: 12px; }
-    .topbar-brand { font-size: 14px; }
-  }
-
-  /* ─────── GENERATOR ─────── */
   .gen-section {
     padding: 56px 24px 36px;
     text-align: center;
@@ -782,23 +730,9 @@
 </head>
 <body>
 
-<!-- ═══════════ TOPBAR ═══════════ -->
-<nav class="topbar">
-  <div class="topbar-inner">
-    <div class="topbar-brand">✦ <span>BOTARMORY</span></div>
-    <div class="topbar-links">
-      <a href="./" class="topbar-link">Accueil</a>
-      <a href="#services" class="topbar-link">Tarifs</a>
-      <a href="../#commander" class="topbar-cta">Commander</a>
-    </div>
-  </div>
-</nav>
 
 
-<section class="preview-section">
-  
 
-  <div class="preview-site">
 
     <!-- NAV -->
     <div class="ps-nav">
@@ -815,8 +749,8 @@
     <div class="ps-hero">
       <div class="ps-hero-grid"></div>
       <p class="ps-badge">Création de sites web · Chartres</p>
-      <h1>Un site web qui fait rayonner votre activité à Chartres</h1>
-      <p class="ps-sub">TPE/PME, artisans, commerçants et professions libérales à Chartres et en Eure-et-Loir, souhaitant une présence en ligne professionnelle sans complexité technique.</p>
+      <h1>Un site web pro pour votre artisanat</h1>
+      <p class="ps-sub">Site vitrine livré en 48h, clé en main, optimisé Google. Sans que vous ayez à écrire une ligne de code.</p>
       <a class="ps-hero-cta" href="mailto:contact@botarmory.fr">Demander un devis gratuit</a>
       <div class="ps-trust">
         <span>✦ Site livré en 48h</span>
@@ -920,7 +854,5 @@
       </div>
     </div>
 
-  </div>
-</section>
 </body>
 </html>
