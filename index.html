@@ -2,307 +2,925 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https:;">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Template Artisan — Sites web pour artisans. Site vitrine à partir de 300€.">
-<title>Template Artisan — Sites web sur mesure pour artisans</title>
+<meta name="description" content="BotArmory — Création de sites web. Un site web qui fait rayonner votre activité à Chartres">
+<title>BotArmory | Création de sites web Chartres</title>
+
+<meta property="og:title" content="BotArmory | Création de sites web Chartres">
+<meta property="og:description" content="BotArmory — Création de sites web. Un site web qui fait rayonner votre activité à Chartres">
+<meta property="og:url" content="https://botarmory.fr/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="BotArmory">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<meta name="theme-color" content="#08090a">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060708;
+    --bg2: #0a0b0d;
+    --bg3: #0f1014;
+    --bg4: #14151a;
+    --text: #f4f5f7;
+    --text2: #c8cdd6;
+    --text3: #8b909d;
+    --text4: #545861;
+    --accent: #4f46e5;
+    --accent2: #818cf8;
+    --accent-glow: rgba(79,70,229,0.08);
+    --accent-glow2: rgba(79,70,229,0.15);
+    --border: rgba(255,255,255,0.06);
+    --border2: rgba(255,255,255,0.04);
+    --border3: rgba(255,255,255,0.08);
+    --radius: 10px;
+    --radius-sm: 7px;
+    --radius-lg: 14px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+  }
+
+  /* Subtle noise texture overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    opacity: 0.015;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ─────── TOPBAR ─────── */
+  .topbar {
+    background: rgba(6,7,8,0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 54px;
+    padding: 0 24px;
+  }
+  .topbar-brand {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .topbar-brand span { color: var(--accent); }
+  .topbar-links { display: flex; align-items: center; gap: 24px; }
+  .topbar-link {
+    font-size: 13px;
+    color: var(--text3);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .topbar-link:hover { color: var(--text); }
+  .topbar-cta {
+    background: var(--accent);
+    color: #0a0a0b;
+    padding: 7px 18px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .topbar-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
+  @media (max-width: 640px) {
+    .topbar-inner { padding: 0 16px; }
+    .topbar-links { gap: 14px; }
+    .topbar-link { font-size: 12px; }
+    .topbar-brand { font-size: 14px; }
+  }
+
+  /* ─────── GENERATOR ─────── */
+  .gen-section {
+    padding: 56px 24px 36px;
+    text-align: center;
+    position: relative;
+  }
+  .gen-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(79,70,229,0.2), transparent);
+  }
+  .gen-title {
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .gen-title span { color: var(--accent); }
+  .gen-sub {
+    color: var(--text3);
+    font-size: 14px;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .gen-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    max-width: 800px;
+    margin: 32px auto 0;
+    text-align: left;
+  }
+  .gen-form .full { grid-column: 1 / -1; }
+  .gen-form .half { grid-column: span 1; }
+  @media (max-width: 640px) {
+    .gen-form { grid-template-columns: 1fr 1fr; }
+    .gen-form .half { grid-column: span 1; }
+    .gen-form .full { grid-column: 1 / -1; }
+  }
+  @media (max-width: 420px) {
+    .gen-form { grid-template-columns: 1fr; }
+    .gen-form .half { grid-column: 1 / -1; }
+  }
+  .gen-form label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text4);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 5px;
+  }
+  .gen-form input,
+  .gen-form textarea {
+    width: 100%;
+    padding: 11px 14px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13.5px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .gen-form input::placeholder,
+  .gen-form textarea::placeholder { color: var(--text4); }
+  .gen-form input:focus,
+  .gen-form textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-glow);
+  }
+  .gen-form textarea { resize: vertical; min-height: 68px; }
+  .gen-trust {
+    font-size: 12px;
+    color: var(--text4);
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  /* ─────── PREVIEW WRAPPER ─────── */
+  .preview-section { padding: 0 24px 64px; }
+  .preview-label {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .preview-label-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text4);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg3);
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+  .preview-label-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .preview-site {
+    max-width: 1040px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.015),
+      0 24px 80px rgba(0,0,0,0.7),
+      0 8px 24px rgba(0,0,0,0.4);
+  }
+
+  /* ─────── PREVIEW: NAV ─────── */
+  .ps-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    background: rgba(10,11,13,0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border2);
+  }
+  .ps-logo {
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    outline: none;
+    color: var(--text);
+  }
+  .ps-nav-links { display: flex; gap: 28px; align-items: center; }
+  .ps-nav-links a {
+    font-size: 13.5px;
+    color: var(--text3);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .ps-nav-links a:hover { color: var(--text); }
+  .ps-nav-cta {
+    background: var(--accent);
+    color: #0a0a0b !important;
+    padding: 8px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .ps-nav-cta:hover { background: var(--accent2) !important; }
+
+  @media (max-width: 640px) {
+    .ps-nav { padding: 12px 18px; }
+    .ps-nav-links { gap: 16px; }
+    .ps-nav-links a { font-size: 12px; }
+    .ps-logo { font-size: 15px; }
+    .ps-nav-cta { padding: 7px 14px; font-size: 12px; }
+  }
+
+  /* ─────── PREVIEW: HERO ─────── */
+  .ps-hero {
+    position: relative;
+    padding: 100px 32px 80px;
+    text-align: center;
+    background: var(--bg2);
+    overflow: hidden;
+  }
+  .ps-hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(ellipse, rgba(79,70,229,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .ps-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(79,70,229,0.15), transparent);
+  }
+  .ps-hero-grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .ps-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-glow);
+    border: 1px solid var(--accent-glow2);
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    outline: none;
+    position: relative;
+    z-index: 1;
+  }
+  .ps-hero h1 {
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 900;
+    line-height: 1.08;
+    max-width: 680px;
+    margin: 0 auto 14px;
+    outline: none;
+    letter-spacing: -0.03em;
+    position: relative;
+    z-index: 1;
+  }
+  .ps-hero .ps-sub {
+    color: var(--text3);
+    font-size: 16px;
+    max-width: 540px;
+    margin: 0 auto 28px;
+    line-height: 1.65;
+    outline: none;
+    position: relative;
+    z-index: 1;
+  }
+  .ps-hero-cta {
+    display: inline-block;
+    background: var(--accent);
+    color: #0a0a0b;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 36px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 2px 16px rgba(79,70,229,0.15);
+  }
+  .ps-hero-cta:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 4px 24px rgba(79,70,229,0.25); }
+  .ps-trust {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    margin-top: 36px;
+    font-size: 13px;
+    color: var(--text3);
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .ps-trust span { opacity: 0.85; }
+
+  @media (max-width: 640px) {
+    .ps-hero { padding: 56px 20px 48px; }
+    .ps-hero h1 { font-size: 24px; }
+    .ps-hero .ps-sub { font-size: 14px; }
+    .ps-trust { gap: 20px; font-size: 12px; }
+    .ps-hero-cta { font-size: 15px; padding: 13px 28px; }
+  }
+
+  /* ─────── PREVIEW: SECTION HEADERS ─────── */
+  .ps-section {
+    padding: 64px 32px;
+    position: relative;
+  }
+  .ps-section.alt {
+    background: rgba(255,255,255,0.01);
+    border-top: 1px solid var(--border2);
+    border-bottom: 1px solid var(--border2);
+  }
+  .ps-section-label {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .ps-section h2 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 36px;
+  }
+
+  @media (max-width: 640px) {
+    .ps-section { padding: 44px 20px; }
+    .ps-section h2 { font-size: 22px; margin-bottom: 28px; }
+  }
+
+  /* ─────── PREVIEW: GALLERY ─────── */
+  .ps-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .ps-gallery-item {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    cursor: pointer;
+    border: 1px solid var(--border2);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .ps-gallery-item:hover {
+    border-color: var(--accent-glow2);
+    transform: translateY(-3px);
+  }
+  .ps-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+  }
+  .ps-gallery-item:hover img { transform: scale(1.04); }
+  .ps-gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .ps-gallery-item:hover .ps-gallery-overlay { opacity: 1; }
+  .ps-gallery-caption {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .ps-gallery { grid-template-columns: 1fr 1fr; gap: 10px; }
+  }
+  @media (max-width: 420px) {
+    .ps-gallery { grid-template-columns: 1fr; }
+  }
+
+  /* ─────── PREVIEW: SERVICES ─────── */
+  .ps-services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .ps-svc {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 24px 28px;
+    text-align: center;
+    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .ps-svc::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .ps-svc:hover {
+    border-color: var(--accent-glow2);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+  .ps-svc:hover::before { opacity: 1; }
+  .ps-svc-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius);
+    background: var(--accent-glow);
+    margin-bottom: 14px;
+    font-size: 22px;
+  }
+  .ps-svc h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    outline: none;
+    color: var(--text);
+  }
+  .ps-svc p {
+    font-size: 13px;
+    color: var(--text3);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 640px) {
+    .ps-services { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .ps-svc { padding: 24px 18px 22px; }
+  }
+  @media (max-width: 420px) {
+    .ps-services { grid-template-columns: 1fr; }
+  }
+
+  /* ─────── PREVIEW: ABOUT ─────── */
+  .ps-about {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .ps-about-img-wrap {
+    flex-shrink: 0;
+    width: 160px;
+    height: 160px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 2px solid var(--border);
+    position: relative;
+  }
+  .ps-about-img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--accent-glow2);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .ps-about-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .ps-about-text {
+    flex: 1;
+    min-width: 260px;
+  }
+  .ps-about-text h3 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    outline: none;
+    letter-spacing: -0.01em;
+  }
+  .ps-about-text p {
+    font-size: 14px;
+    color: var(--text3);
+    line-height: 1.75;
+    outline: none;
+    margin-bottom: 16px;
+  }
+  .ps-about-stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .ps-about-stat {
+    text-align: center;
+  }
+  .ps-about-stat-num {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .ps-about-stat-label {
+    font-size: 11px;
+    color: var(--text4);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .ps-about { gap: 24px; justify-content: center; text-align: center; }
+    .ps-about-img-wrap { width: 120px; height: 120px; }
+    .ps-about-stats { justify-content: center; }
+    .ps-about-text h3 { font-size: 18px; }
+  }
+
+  /* ─────── PREVIEW: CTA SECTION ─────── */
+  .ps-cta-section {
+    padding: 56px 32px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(79,70,229,0.03) 0%, rgba(79,70,229,0.01) 100%);
+    border-top: 1px solid var(--border);
+    position: relative;
+  }
+  .ps-cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(79,70,229,0.3), transparent);
+  }
+  .ps-cta-section h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .ps-cta-section p {
+    color: var(--text3);
+    font-size: 14px;
+    margin-bottom: 24px;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .ps-cta-btn-large {
+    display: inline-block;
+    background: var(--accent);
+    color: #0a0a0b;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 36px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 2px 20px rgba(79,70,229,0.12);
+  }
+  .ps-cta-btn-large:hover { background: var(--accent2); transform: translateY(-2px); }
+
+  @media (max-width: 640px) {
+    .ps-cta-section { padding: 40px 20px; }
+    .ps-cta-section h2 { font-size: 20px; }
+    .ps-cta-btn-large { font-size: 15px; padding: 13px 28px; }
+  }
+
+  /* ─────── PREVIEW: FOOTER ─────── */
+  .ps-footer {
+    padding: 24px 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text4);
+    outline: none;
+  }
+  .ps-footer-links { display: flex; gap: 20px; }
+  .ps-footer-links a {
+    color: var(--text4);
+    text-decoration: none;
+    font-size: 12px;
+    transition: color 0.2s;
+  }
+  .ps-footer-links a:hover { color: var(--text3); }
+
+  @media (max-width: 640px) {
+    .ps-footer { padding: 18px 20px; justify-content: center; text-align: center; }
+    .ps-footer-links { justify-content: center; }
+  }
+
+  /* ─────── ORDER CTA ─────── */
+  .order-cta {
+    text-align: center;
+    margin-top: 32px;
+  }
+  .order-cta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #0a0a0b;
+    font-weight: 700;
+    font-size: 17px;
+    padding: 16px 40px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    box-shadow: 0 4px 28px rgba(79,70,229,0.25);
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  .order-cta a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 36px rgba(79,70,229,0.35);
+    background: var(--accent2);
+  }
+  .order-cta-sub {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--text4);
+  }
+
+  /* ─────── EDITABLE INDICATORS ─────── */
+  [contenteditable] {
+    border-radius: 4px;
+    transition: box-shadow 0.2s, outline 0.2s;
+    cursor: default;
+    position: relative;
+  }
+  [contenteditable]:hover {
+    outline: 1.5px dashed rgba(79,70,229,0.5);
+    outline-offset: 3px;
+  }
+  [contenteditable]:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+
+  /* ─────── ANIMATIONS ─────── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .ps-section {
+    animation: fadeInUp 0.6s ease-out both;
+  }
+  .ps-section:nth-child(2) { animation-delay: 0.1s; }
+  .ps-section:nth-child(3) { animation-delay: 0.2s; }
+  .ps-section:nth-child(4) { animation-delay: 0.3s; }
+  .ps-section:nth-child(5) { animation-delay: 0.4s; }
+
+  /* ─────── SCROLLBAR ─────── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border3); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text4); }
+
+  /* ─────── SELECTION ─────── */
+  ::selection { background: rgba(79,70,229,0.2); color: var(--text); }
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "BotArmory", "description": "Un site web qui fait rayonner votre activité à Chartres", "address": {"@type": "PostalAddress", "addressLocality": "Chartres", "addressCountry": "FR"}, "url": "https://botarmory.fr/", "telephone": "", "priceRange": "€€"}</script>
 </head>
 <body>
 
-<nav class="nav" id="nav">
-  <div class="container nav-inner">
-    <a href="#" class="nav-logo">Template<span style="color:var(--accent)">Artisan</span></a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
-    <div class="nav-links" id="nav-links">
-      <a href="#pourquoi">Pourquoi</a>
-      <a href="#exemples">Templates</a>
-      <a href="#tarifs">Tarifs</a>
-      <a href="#qui-suis-je">Qui suis-je</a>
-      <a href="/demo/" class="btn btn-primary btn-sm">Essayer gratuitement</a>
+<!-- ═══════════ TOPBAR ═══════════ -->
+<nav class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">✦ <span>BOTARMORY</span></div>
+    <div class="topbar-links">
+      <a href="./" class="topbar-link">Accueil</a>
+      <a href="#services" class="topbar-link">Tarifs</a>
+      <a href="../#commander" class="topbar-cta">Commander</a>
     </div>
   </div>
 </nav>
 
-<!-- ═══ HERO ═══ -->
-<header class="hero">
-  <div class="container">
-    <p class="hero-badge">Sites web pour artisans — créés en 48h</p>
-    <h1>Un site pro qui vous ramène des clients, sans vous prendre la tête</h1>
-    <p class="hero-sub">Je crée votre site vitrine sur mesure. Vous remplissez un formulaire, je m'occupe de tout. Résultat en 48h, satisfait ou remboursé.</p>
-    <div class="hero-cta">
-      <a href="/demo/" class="btn btn-primary btn-lg">Essayer la démo gratuite</a>
-      <a href="#tarifs" class="btn btn-outline btn-lg">Voir les tarifs</a>
-    </div>
-    <div class="hero-trust">
-      <span>✅ Démo gratuite et sans engagement</span>
-      <span>✅ Livré en 48h</span>
-      <span>✅ Paiement après validation</span>
-    </div>
-  </div>
-</header>
 
-<!-- ═══ SANS VS AVEC ═══ -->
-<section class="section" id="pourquoi">
-  <div class="container">
-    <h2 style="text-align:center;">Pourquoi avoir un site ?</h2>
-    <div class="before-after" style="margin-top:36px;">
-      <div class="ba-col ba-bad">
-        <h3>Sans site</h3>
-        <ul>
-          <li>Vos clients ne vous trouvent pas sur Google</li>
-          <li>Vous perdez des appels pour répondre aux mêmes questions</li>
-          <li>Pas de portfolio à montrer — vous dépendez du bouche-à-oreille</li>
-          <li>Vos concurrents ont un site, pas vous</li>
-        </ul>
-      </div>
-      <div class="ba-arrow">→</div>
-      <div class="ba-col ba-good">
-        <h3>Avec votre site</h3>
-        <ul>
-          <li>✅ Vous apparaissez sur Google quand on cherche votre métier</li>
-          <li>✅ Portfolio en ligne — vos clients voient votre travail avant d'appeler</li>
-          <li>✅ Formulaire de contact — les demandes arrivent par email</li>
-          <li>✅ Site pro qui inspire confiance — vous gagnez des clients</li>
-        </ul>
+<section class="preview-section">
+  
+
+  <div class="preview-site">
+
+    <!-- NAV -->
+    <div class="ps-nav">
+      <span class="ps-logo">BOTARMORY</span>
+      <div class="ps-nav-links">
+        <a href="#galerie">Réalisations</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <a class="ps-nav-cta" href="mailto:contact@botarmory.fr">Devis gratuit</a>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ═══ COMMENT ÇA MARCHE ═══ -->
-<section class="section section-alt" id="process">
-  <div class="container">
-    <h2 style="text-align:center;">Comment ça marche</h2>
-    <p class="section-sub" style="text-align:center;margin:8px auto 0;">Simple, rapide, sans blabla technique.</p>
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><h3>Vous essayez la démo</h3><p>Allez sur la page démo et remplissez le formulaire. Vous voyez votre site apparaître en direct. Gratuit, sans engagement.</p></div>
-      <div class="step-arrow">→</div>
-      <div class="step"><div class="step-num">2</div><h3>Vous validez le design</h3><p>Modifiez les textes en cliquant dessus. Quand c'est parfait, vous commandez.</p></div>
-      <div class="step-arrow">→</div>
-      <div class="step"><div class="step-num">3</div><h3>Vous recevez votre site</h3><p>Je finalise et je mets en ligne sous 48h. Vous payez APRÈS avoir vu le résultat final.</p></div>
+    <!-- HERO -->
+    <div class="ps-hero">
+      <div class="ps-hero-grid"></div>
+      <p class="ps-badge">Création de sites web · Chartres</p>
+      <h1>Un site web qui fait rayonner votre activité à Chartres</h1>
+      <p class="ps-sub">TPE/PME, artisans, commerçants et professions libérales à Chartres et en Eure-et-Loir, souhaitant une présence en ligne professionnelle sans complexité technique.</p>
+      <a class="ps-hero-cta" href="mailto:contact@botarmory.fr">Demander un devis gratuit</a>
+      <div class="ps-trust">
+        <span>✦ Site livré en 48h</span>
+        <span>✦ 100% personnalisé</span>
+        <span>✦ Hébergement inclus</span>
+        <span>✦ Satisfait ou remboursé</span>
+      </div>
     </div>
-  </div>
-</section>
 
-<!-- ═══ CTA DÉMO ═══ -->
-<section class="section" id="demo">
-  <div class="container" style="text-align:center;">
-    <h2>Essayez gratuitement</h2>
-    <p class="section-sub" style="margin:8px auto 20px;">Remplissez un formulaire simple et voyez votre site apparaître en direct. Aucune inscription, aucun engagement.</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px;">
-      <a href="demo/" class="btn btn-primary btn-lg">🪄 Créer mon site en direct</a>
-      <a href="#tarifs" class="btn btn-outline btn-lg">Voir les tarifs</a>
-    </div>
-    <div class="hero-trust" style="margin-top:32px;">
-      <span>✅ 100% gratuit</span>
-      <span>✅ Résultat immédiat</span>
-      <span>✅ Sans engagement</span>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ EXEMPLES ═══ -->
-<section class="section" id="exemples">
-  <div class="container">
-    <h2 style="text-align:center;">Aperçus de templates</h2>
-    <p class="section-sub" style="text-align:center;margin:8px auto 36px;">Voici à quoi ressemblent les sites que je crée. Chaque site est personnalisé avec vos photos et vos textes.</p>
-    <div class="examples-grid">
-      <div class="example-card">
-        <div class="example-preview" style="background:linear-gradient(135deg, #1a1a24, #1e1824);">
-          <div style="text-align:center;">
-            <p style="font-size:28px;margin-bottom:6px;">🪚</p>
-            <p style="font-weight:700;color:#d0d6e0;">Template Menuiserie</p>
-            <p style="font-size:11px;color:var(--text4);margin-top:4px;">Dark · Élégant · Pro</p>
+    <!-- GALERIE -->
+    <div id="galerie" class="ps-section">
+      <p class="ps-section-label">Réalisations</p>
+      <h2>Quelques sites réalisés</h2>
+      <div class="ps-gallery">
+        <div class="ps-gallery-item">
+          <img src="img/galerie1.jpg" alt="Site vitrine pour artisan" loading="lazy">
+          <div class="ps-gallery-overlay">
+            <span class="ps-gallery-caption">Site vitrine — artisan menuisier</span>
           </div>
         </div>
-        <h3>Menuiserie</h3>
-        <p>Hero + galerie + services + formulaire</p>
-      </div>
-      <div class="example-card">
-        <div class="example-preview" style="background:linear-gradient(135deg, #1a1a24, #241a18);">
-          <div style="text-align:center;">
-            <p style="font-size:28px;margin-bottom:6px;">🔨</p>
-            <p style="font-weight:700;color:#d0d6e0;">Template Ferronnerie</p>
-            <p style="font-size:11px;color:var(--text4);margin-top:4px;">Dark · Doré · Brut</p>
+        <div class="ps-gallery-item">
+          <img src="img/galerie2.jpg" alt="Site web professionnel" loading="lazy">
+          <div class="ps-gallery-overlay">
+            <span class="ps-gallery-caption">Site vitrine — électricien</span>
           </div>
         </div>
-        <h3>Ferronnerie</h3>
-        <p>Hero + galerie + services + formulaire</p>
-      </div>
-      <div class="example-card">
-        <div class="example-preview" style="background:linear-gradient(135deg, #1a1a24, #18241a);">
-          <div style="text-align:center;">
-            <p style="font-size:28px;margin-bottom:6px;">🎨</p>
-            <p style="font-weight:700;color:#d0d6e0;">Template Créateur</p>
-            <p style="font-size:11px;color:var(--text4);margin-top:4px;">Dark · Coloré · Unique</p>
+        <div class="ps-gallery-item">
+          <img src="img/galerie3.jpg" alt="Site internet artisanal" loading="lazy">
+          <div class="ps-gallery-overlay">
+            <span class="ps-gallery-caption">Site vitrine — plombier</span>
           </div>
         </div>
-        <h3>Créateur / Artisanat</h3>
-        <p>Hero + boutique simple + formulaire</p>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ═══ VS CONCURRENCE ═══ -->
-<section class="section section-alt" id="pourquoi-nous">
-  <div class="container">
-    <h2 style="text-align:center;">Pourquoi pas un site Wix ou Squarespace ?</h2>
-    <p class="section-sub" style="text-align:center;margin:8px auto 36px;">Ces plateformes sont gratuites au début. Voici ce qui change avec un site fait main.</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:0 auto;">
-      <div style="background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.12);border-radius:var(--radius-lg);padding:28px 24px;text-align:center;">
-        <p style="font-size:24px;margin-bottom:8px;">🧩</p>
-        <h3 style="color:var(--red);margin-bottom:8px;">Wix / Squarespace</h3>
-        <p style="font-size:14px;color:var(--text3);line-height:1.6;">Vous devez tout faire vous-même. Templates génériques, pub Wix en bas, limité en SEO. Gratuit au début, puis abonnement.</p>
-      </div>
-      <div style="background:rgba(245,166,35,0.02);border:1px solid var(--accent);border-radius:var(--radius-lg);padding:28px 24px;text-align:center;">
-        <p style="font-size:24px;margin-bottom:8px;">⭐</p>
-        <h3 style="color:var(--accent);margin-bottom:8px;">Template Artisan</h3>
-        <p style="font-size:14px;color:var(--text2);line-height:1.6;">Fait pour vous. Design unique, pas de pub, optimisé Google. Paiement unique, pas d'abonnement. Un artisan comprend votre métier.</p>
-      </div>
-      <div style="background:rgba(99,102,241,0.04);border:1px solid rgba(99,102,241,0.15);border-radius:var(--radius-lg);padding:28px 24px;text-align:center;">
-        <p style="font-size:24px;margin-bottom:8px;">💼</p>
-        <h3 style="color:#6366f1;margin-bottom:8px;">Agence web</h3>
-        <p style="font-size:14px;color:var(--text3);line-height:1.6;">À partir de 1500-3000€. Processus long, beaucoup de réunions. Vous payez cher un site dont vous n'avez pas besoin.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ TARIFS ═══ -->
-<section class="section section-alt" id="tarifs">
-  <div class="container">
-    <h2 style="text-align:center;">Des tarifs simples</h2>
-    <p class="section-sub" style="text-align:center;margin:8px auto 36px;">Paiement APRÈS validation du résultat. Satisfait ou remboursé.</p>
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <h3>Site Vitrine</h3>
-        <div class="price">300€</div>
-        <div class="price-sub">Paiement unique · Pas d'abonnement</div>
-        <ul>
-          <li>✅ Site 1 page (accueil, services, contact)</li>
-          <li>✅ Galerie de 6 photos</li>
-          <li>✅ Formulaire de contact</li>
-          <li>✅ Design sur mesure</li>
-          <li>✅ Adapté mobile & tablette</li>
-          <li>✅ Mise en ligne incluse</li>
-        </ul>
-        <a href="#demo" class="btn btn-outline btn-block">Essayer la démo</a>
-      </div>
-      <div class="pricing-card popular">
-        <div class="pricing-badge">⭐ Le plus demandé</div>
-        <h3>Site Complet</h3>
-        <div class="price">600€</div>
-        <div class="price-sub">Paiement unique · Pas d'abonnement</div>
-        <ul>
-          <li>✅ Tout ce qui est dans Site Vitrine</li>
-          <li>✅ Jusqu'à 5 pages</li>
-          <li>✅ Référencement Google optimisé</li>
-          <li>✅ Fiche Google My Business</li>
-          <li>✅ Photos fournies intégrées</li>
-          <li>✅ Modifications gratuites pendant 30 jours</li>
-        </ul>
-        <a href="#demo" class="btn btn-primary btn-block">Essayer la démo</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ QUI SUIS-JE ═══ -->
-<section class="section" id="qui-suis-je">
-  <div class="container">
-    <h2 style="text-align:center;">Qui crée votre site ?</h2>
-    <p class="section-sub" style="text-align:center;margin:8px auto 36px;">Un artisan qui comprend les artisans.</p>
-    <div style="display:flex;gap:40px;align-items:flex-start;max-width:760px;margin:0 auto;flex-wrap:wrap;">
-      <div style="flex-shrink:0;width:100px;height:100px;border-radius:50%;background:var(--bg4);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:36px;">M</div>
-      <div style="flex:1;min-width:280px;">
-        <p style="color:var(--text2);line-height:1.7;margin-bottom:12px;">
-          Je m'appelle <strong style="color:var(--text);">Marius</strong>. Je suis moi-même artisan (ferronnerie, menuiserie), et j'ai créé ce service parce que je sais à quel point un site pro change tout pour un artisan.
-        </p>
-        <p style="color:var(--text3);line-height:1.7;">
-          Pas de jargon, pas de blabla. Je crée des sites simples, élégants, qui vous ramènent des clients. Chaque site est fait main, avec vos photos et vos mots.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ GARANTIE ═══ -->
-<section class="section" id="garantie">
-  <div class="container">
-    <div class="guarantee-box">
-      <div class="guarantee-icon">🛡️</div>
-      <h2>Satisfait ou remboursé</h2>
-      <p>Si le site final ne vous plaît pas, vous ne payez rien. Je ne valide la commande qu'une fois que vous êtes 100% satisfait du résultat.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ COMMANDER ═══ -->
-<section class="section section-alt" id="commander">
-  <div class="container">
-    <h2 style="text-align:center;">Lancez votre site</h2>
-    <p class="section-sub" style="text-align:center;margin:8px auto 0;">Je vous recontacte sous 24h pour affiner votre projet. Aucun paiement maintenant.</p>
-    <form class="contact-form" action="https://formsubmit.co/mariuslagrue@lgmartisanat.com" method="POST">
-      <input type="hidden" name="_next" value="https://botarmory.com/merci.html">
-      <input type="hidden" name="_subject" value="Nouvelle commande site — Template Artisan">
-      <input type="hidden" name="_captcha" value="false">
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Votre nom</label>
-          <input class="form-input" name="name" type="text" placeholder="Jean Dupont" required>
+    <!-- SERVICES -->
+    <div id="services" class="ps-section alt">
+      <p class="ps-section-label">Ce que je propose</p>
+      <h2>Mes prestations</h2>
+      <div class="ps-services">
+        <div class="ps-svc">
+          <div class="ps-svc-icon">🌐</div>
+          <h4>Création de sites vitrine</h4>
+          <p>Un site web professionnel optimisé pour Google. Design moderne, contenu sur mesure, compatible mobile.</p>
         </div>
-        <div class="form-group">
-          <label class="form-label">Votre email</label>
-          <input class="form-input" name="email" type="email" placeholder="jean@email.com" required>
+        <div class="ps-svc">
+          <div class="ps-svc-icon">⚡</div>
+          <h4>Refonte de site existant</h4>
+          <p>Votre site en ligne en 2 jours ouvrés. Clé en main, sans technique, hébergement inclus la première année.</p>
+        </div>
+        <div class="ps-svc">
+          <div class="ps-svc-icon">📈</div>
+          <h4>Optimisation SEO local</h4>
+          <p>Référencement Google My Business, mots-clés ciblés, fiche établissement optimisée pour attirer vos clients.</p>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Votre métier</label>
-          <input class="form-input" name="job" placeholder="Menuisier, ferronnier..." required>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="ps-section">
+      <p class="ps-section-label">Qui suis-je</p>
+      <h2>Pourquoi me choisir ?</h2>
+      <div class="ps-about">
+        <div class="ps-about-img-wrap">
+          <img class="ps-about-img" src="img/artisan.jpg" alt="Portrait de l'artisan" loading="lazy">
         </div>
-        <div class="form-group">
-          <label class="form-label">Formule souhaitée</label>
-          <select class="form-input" name="plan" required>
-            <option value="">Choisir...</option>
-            <option value="vitrine">Site Vitrine — 300€</option>
-            <option value="complet">Site Complet — 600€</option>
-          </select>
+        <div class="ps-about-text">
+          <h3>BotArmory</h3>
+          <p>Je comprends votre métier parce que je suis artisan moi-même. Je crée des sites qui parlent à vos clients, sans jargon technique, avec un vrai accompagnement local à Chartres et dans l'Eure-et-Loir.</p>
+          <div class="ps-about-stats">
+            <div class="ps-about-stat">
+              <div class="ps-about-stat-num">48h</div>
+              <div class="ps-about-stat-label">Délai de livraison</div>
+            </div>
+            <div class="ps-about-stat">
+              <div class="ps-about-stat-num">100%</div>
+              <div class="ps-about-stat-label">Clients satisfaits</div>
+            </div>
+            <div class="ps-about-stat">
+              <div class="ps-about-stat-num">SEO</div>
+              <div class="ps-about-stat-label">Optimisé Google</div>
+            </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Décrivez votre activité</label>
-        <textarea class="form-input" name="message" rows="3" placeholder="Ce que vous faites, votre style, ce que vous attendez du site..." required></textarea>
+<!-- CTA -->
+    <div id="contact" class="ps-cta-section">
+      <h2>Prêt à avoir votre site ?</h2>
+      <p>Discutons de votre projet. Je vous rappelle sous 24h pour comprendre vos besoins et vous faire une proposition gratuite.</p>
+      <a class="ps-cta-btn-large" href="mailto:contact@botarmory.fr">Me contacter</a>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="ps-footer">
+      <span>BotArmory · Création de sites web à Chartres</span>
+      <div class="ps-footer-links">
+        <a href="#mentions">Mentions légales</a>
+        <a href="#cgv">CGV</a>
+        <a href="mailto:contact@botarmory.fr">Contact</a>
       </div>
-      <button type="submit" class="btn btn-primary btn-block btn-lg">Demander à être recontacté</button>
-      <p class="form-note">🔒 Gratuit, sans engagement. Paiement uniquement après validation.</p>
-    </form>
+    </div>
+
   </div>
 </section>
-
-<!-- ═══ FOOTER ═══ -->
-<footer class="footer">
-  <div class="container footer-inner">
-    <div>
-      <p class="footer-name">Template Artisan</p>
-      <p class="footer-desc">Sites web pour artisans — par Marius Lagrue</p>
-      <p class="footer-desc"><a href="/mentions-legales.html">Mentions légales</a></p>
-    </div>
-    <div class="footer-links">
-      <a href="#pourquoi">Pourquoi un site</a>
-      <a href="#demo">Démo gratuite</a>
-      <a href="#tarifs">Tarifs</a>
-      <a href="#commander">Commander</a>
-    </div>
-    <div><p class="footer-copy">© 2026 Template Artisan — Marius Lagrue</p></div>
-  </div>
-</footer>
-
-<script src="js/main.js"></script>
 </body>
 </html>
