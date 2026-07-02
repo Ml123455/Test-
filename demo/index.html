@@ -3,18 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Pierre Dubois — Menuisier ébéniste à Chartres. Meubles sur mesure, escaliers, agencements. 20 ans d'expérience. Devis gratuit.">
+<meta name="description" content="Pierre Dubois — Menuisier ébéniste. Meubles sur mesure, escaliers, agencements bois. 20 ans d'expérience, Compagnon du Devoir. Devis gratuit.">
 <title>Pierre Dubois | Menuisier Ébéniste — Meubles sur mesure</title>
 <meta property="og:title" content="Pierre Dubois | Menuisier Ébéniste">
 <meta property="og:description" content="Artisan ébéniste depuis 1998. Meubles, escaliers, agencements sur mesure. Devis gratuit.">
 <meta property="og:url" content="https://botarmory.com/demo/">
 <meta property="og:type" content="website">
-<meta property="og:locale" content="fr_FR">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0d0b09;--bg2:#14110e;--bg3:#1a1613;--bg4:#221d18;--text:#f0ede8;--text2:#c4bfb6;--text3:#8a8378;--text4:#5c564d;--accent:#c4884d;--accent2:#d9a36e;--accent-glow:rgba(196,136,77,.08);--accent-glow2:rgba(196,136,77,.15);--border:rgba(255,255,255,.05);--border2:rgba(255,255,255,.035);--r:10px;--rs:7px;--rl:14px;--gold:#c4884d}
+:root{--bg:#0d0b09;--bg2:#14110e;--bg3:#1a1613;--bg4:#221d18;--text:#f0ede8;--text2:#c4bfb6;--text3:#8a8378;--text4:#5c564d;--accent:#c4884d;--accent2:#d9a36e;--aglow:rgba(196,136,77,.08);--aglow2:rgba(196,136,77,.15);--border:rgba(255,255,255,.05);--border2:rgba(255,255,255,.035);--r:10px;--rs:7px;--rl:14px}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--bg)}
 body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
@@ -36,7 +35,7 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
 .hero{position:relative;padding:120px 40px 100px;display:flex;align-items:center;gap:60px;max-width:1200px;margin:0 auto;min-height:90vh}
 .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 600px 400px at 30% 20%,rgba(196,136,77,.04) 0%,transparent 70%);pointer-events:none}
 .hero-text{flex:1;position:relative;z-index:1}
-.hero-badge{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-glow);border:1px solid var(--accent-glow2);padding:5px 14px;border-radius:20px;margin-bottom:20px;text-transform:uppercase;letter-spacing:.08em}
+.hero-badge{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);background:var(--aglow);border:1px solid var(--aglow2);padding:5px 14px;border-radius:20px;margin-bottom:20px;text-transform:uppercase;letter-spacing:.08em}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,56px);font-weight:900;line-height:1.08;margin-bottom:16px;letter-spacing:-.01em}
 .hero h1 em{font-style:italic;color:var(--accent)}
 .hero .sub{font-size:17px;color:var(--text3);line-height:1.65;max-width:460px;margin-bottom:32px}
@@ -48,10 +47,13 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
 .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
 .hero-visual{flex:1;position:relative}
 .hero-img-frame{position:relative;border-radius:var(--rl);overflow:hidden;border:1px solid var(--border);box-shadow:0 24px 80px rgba(0,0,0,.4)}
-.hero-img-frame::after{content:'';position:absolute;inset:-1px;border-radius:var(--rl);border:1px solid var(--accent-glow2);pointer-events:none}
-.hero-img{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#1c1610 0%,#241d15 30%,#1a140d 60%,#2a1f12 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.hero-img-inner{text-align:center;font-size:80px;opacity:.6}
-.hero-img-label{position:absolute;bottom:20px;left:24px;font-size:12px;color:var(--text3);font-weight:500}
+.hero-img-frame::after{content:'';position:absolute;inset:-1px;border-radius:var(--rl);border:1px solid var(--aglow2);pointer-events:none}
+.hero-img{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#1c1610 0%,#2a1f14 20%,#1a140d 50%,#241a10 70%,#1c1610 100%);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:20px}
+.hero-img::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(196,136,77,.08) 0%,transparent 60%)}
+.hero-img-texture{position:absolute;inset:0;opacity:.03;background:repeating-linear-gradient(45deg,transparent,transparent 2px,rgba(255,255,255,.5) 2px,rgba(255,255,255,.5) 3px)}
+.hero-img-content{position:relative;z-index:1;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);padding:10px 16px;border-radius:6px}
+.hero-img-label{font-size:11px;color:var(--accent);font-weight:600;letter-spacing:.04em}
+.hero-img-sub{font-size:10px;color:var(--text4)}
 .hero-trust{margin-top:40px;display:flex;gap:32px;flex-wrap:wrap}
 .hero-trust-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text3)}
 .hero-trust-icon{color:var(--accent);font-weight:700;font-size:14px}
@@ -63,34 +65,66 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
 .section h2{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,34px);font-weight:700;margin-bottom:10px;letter-spacing:-.01em}
 .section-intro p{color:var(--text3);font-size:15px;line-height:1.6}
 
+/* GALLERY — realistic image cards */
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .gallery-item{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;cursor:pointer;border:1px solid var(--border2);transition:transform .3s,border-color .3s}
-.gallery-item:hover{transform:translateY(-4px);border-color:var(--accent-glow2)}
-.gallery-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:40px}
-.gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 60%);display:flex;align-items:flex-end;padding:16px;opacity:0;transition:opacity .3s}
-.gallery-item:hover .gallery-overlay{opacity:1}
-.gallery-caption{color:#fff;font-size:13px;font-weight:600}
+.gallery-item:hover{transform:translateY(-4px);border-color:var(--aglow2)}
+.gallery-img{width:100%;height:100%;position:relative;overflow:hidden}
+.gallery-img-bg{position:absolute;inset:0}
+.gallery-label{position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);opacity:0;transition:opacity .3s}
+.gallery-item:hover .gallery-label{opacity:1}
+.gallery-label-title{color:#fff;font-size:12px;font-weight:700;margin-bottom:2px}
+.gallery-label-desc{color:rgba(255,255,255,.6);font-size:10px}
 
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .service-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rl);padding:36px 28px;text-align:center;transition:border-color .25s,transform .25s;position:relative;overflow:hidden}
 .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}
-.service-card:hover{border-color:var(--accent-glow2);transform:translateY(-4px)}
+.service-card:hover{border-color:var(--aglow2);transform:translateY(-4px)}
 .service-card:hover::before{opacity:1}
-.service-icon{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:var(--r);background:var(--accent-glow);margin-bottom:18px;font-size:24px}
+.service-icon{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:var(--r);background:var(--aglow);margin-bottom:18px;font-size:22px;color:var(--accent)}
 .service-card h3{font-size:16px;font-weight:700;margin-bottom:8px}
 .service-card p{font-size:13px;color:var(--text3);line-height:1.55}
 
-.about-layout{display:flex;gap:60px;align-items:center}
-.about-visual{flex-shrink:0;width:300px;height:360px;border-radius:var(--rl);overflow:hidden;border:1px solid var(--border);position:relative}
-.about-visual::after{content:'';position:absolute;inset:-1px;border-radius:var(--rl);border:1px solid var(--accent-glow2)}
-.about-img{width:100%;height:100%;background:linear-gradient(135deg,#1c1610,#241d15,#1a140d);display:flex;align-items:center;justify-content:center;font-size:60px}
+/* ABOUT — detailed trust-building */
+.about-hero{display:flex;gap:60px;align-items:flex-start}
+.about-visual{flex-shrink:0;width:320px}
+.about-portrait{width:100%;aspect-ratio:3/4;border-radius:var(--rl);overflow:hidden;border:1px solid var(--border);position:relative;background:linear-gradient(180deg,#1c1610 0%,#2a1f14 30%,#1a140d 60%,#241a10 100%)}
+.about-portrait::after{content:'';position:absolute;inset:-1px;border-radius:var(--rl);border:1px solid var(--aglow2)}
+.about-portrait-inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:40px 20px;background:radial-gradient(ellipse at 50% 30%,rgba(196,136,77,.06) 0%,transparent 60%)}
+.about-portrait-icon{font-size:60px;margin-bottom:16px;opacity:.6}
+.about-portrait-name{font-family:'Playfair Display',serif;font-size:20px;color:var(--accent);font-weight:700}
+.about-portrait-title{font-size:11px;color:var(--text4);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+.about-certifications{margin-top:20px;display:flex;flex-direction:column;gap:8px}
+.about-cert{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg3);border-radius:var(--rs);border:1px solid var(--border2);font-size:11px;color:var(--text3)}
+.about-cert-icon{color:var(--accent);font-weight:700;font-size:13px}
 .about-text{flex:1}
-.about-text h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:12px}
-.about-text p{font-size:14px;color:var(--text3);line-height:1.75;margin-bottom:20px}
-.about-stats{display:flex;gap:32px;flex-wrap:wrap;margin-top:28px}
+.about-text h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:16px}
+.about-text .intro{font-size:15px;color:var(--text2);line-height:1.75;margin-bottom:24px}
+.about-process{margin-bottom:32px}
+.about-process h4{font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.process-step{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:16px 12px;text-align:center}
+.process-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--aglow);color:var(--accent);font-weight:700;font-size:12px;margin-bottom:8px}
+.process-step h5{font-size:12px;font-weight:600;margin-bottom:3px}
+.process-step p{font-size:10px;color:var(--text4);line-height:1.4}
+.about-materials{margin-bottom:32px}
+.about-materials h4{font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.materials-list{display:flex;gap:10px;flex-wrap:wrap}
+.material-tag{padding:6px 12px;background:var(--aglow);border:1px solid var(--aglow2);border-radius:20px;font-size:11px;color:var(--text2);font-weight:500}
+.about-stats{display:flex;gap:32px;flex-wrap:wrap;margin-bottom:32px}
 .about-stat{text-align:center}
 .about-stat-num{font-size:28px;font-weight:800;color:var(--accent);letter-spacing:-.02em}
 .about-stat-label{font-size:11px;color:var(--text4);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.about-zone{font-size:13px;color:var(--text3);line-height:1.6;padding:14px 18px;background:var(--bg3);border-radius:var(--r);border-left:2px solid var(--accent)}
+.about-zone strong{color:var(--text)}
+
+/* TESTIMONIALS */
+.testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.testimonial{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rl);padding:28px 24px}
+.testimonial .stars{color:var(--accent);font-size:13px;margin-bottom:10px}
+.testimonial q{font-size:13.5px;color:var(--text2);line-height:1.6;display:block;margin-bottom:14px;font-style:italic}
+.testimonial .author{font-size:12px;font-weight:600;color:var(--text)}
+.testimonial .author span{color:var(--text4);font-weight:400}
 
 .cta-section{padding:80px 40px;text-align:center;background:radial-gradient(ellipse 500px 250px at 50% 50%,rgba(196,136,77,.03) 0%,transparent 70%),var(--bg2);border-top:1px solid var(--border);position:relative}
 .cta-section::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:250px;height:1px;background:linear-gradient(90deg,transparent,rgba(196,136,77,.2),transparent)}
@@ -119,24 +153,21 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
 @media(max-width:768px){
   .nav{padding:12px 20px}.nav-links{gap:16px}.nav-links a{font-size:11px}.nav-cta{padding:7px 14px;font-size:11px!important}.nav-brand span{display:none}
   .hero{flex-direction:column;padding:60px 20px 48px;gap:32px;min-height:auto}
-  .hero h1{font-size:28px}
-  .hero-visual{width:100%}
+  .hero h1{font-size:28px}.hero-visual{width:100%}
   .section{padding:56px 20px}
   .gallery{grid-template-columns:repeat(2,1fr)}
   .services-grid{grid-template-columns:1fr}
-  .about-layout{flex-direction:column;text-align:center}
-  .about-visual{width:200px;height:240px}
-  .about-stats{justify-content:center}
+  .about-hero{flex-direction:column}.about-visual{width:100%;max-width:300px}
+  .process-steps{grid-template-columns:repeat(2,1fr)}
+  .testimonials{grid-template-columns:1fr}
   .footer{flex-direction:column;text-align:center;align-items:center}
 }
 @media(max-width:480px){
   .gallery{grid-template-columns:1fr}
-  .hero h1{font-size:24px}
-  .hero-trust{gap:16px}
-  .hero-trust-item{font-size:10px}
+  .hero h1{font-size:24px}.hero-trust{gap:16px}
 }
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Pierre Dubois — Menuisier Ébéniste","description":"Artisan menuisier ébéniste depuis 1998. Meubles sur mesure, escaliers, agencements bois. Devis gratuit.","address":{"@type":"PostalAddress","addressLocality":"Chartres","addressRegion":"Eure-et-Loir","addressCountry":"FR"},"url":"https://botarmory.com/demo/","telephone":"02 37 00 00 00","priceRange":"€€","openingHours":"Mo-Fr 08:00-18:00"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Pierre Dubois — Menuisier Ébéniste","description":"Artisan menuisier ébéniste depuis 1998. Compagnon du Devoir. Meubles sur mesure, escaliers, agencements bois. Devis gratuit.","address":{"@type":"PostalAddress","addressLocality":"Chartres","addressRegion":"Eure-et-Loir","addressCountry":"FR"},"url":"https://botarmory.com/demo/","priceRange":"€€","openingHours":"Mo-Fr 08:00-18:00"}</script>
 </head>
 <body>
 
@@ -146,6 +177,7 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
     <a href="#realisations">Réalisations</a>
     <a href="#services">Services</a>
     <a href="#apropos">À propos</a>
+    <a href="#avis">Avis</a>
     <a href="#contact" class="nav-cta">Devis gratuit</a>
   </div>
 </nav>
@@ -154,21 +186,27 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
   <div class="hero-text">
     <div class="hero-badge">✦ Artisan ébéniste</div>
     <h1>Des meubles qui <em>traversent</em> les générations</h1>
-    <p class="sub">Chaque pièce est unique, dessinée pour vous et fabriquée à la main dans mon atelier. Bois massif, assemblages traditionnels, finitions soignées.</p>
+    <p class="sub">Chaque pièce est unique, dessinée pour vous et fabriquée à la main dans mon atelier à Chartres. Bois massif, assemblages traditionnels, finitions soignées.</p>
     <div class="hero-actions">
       <a href="#contact" class="btn btn-primary">Demander un devis gratuit →</a>
       <a href="#realisations" class="btn btn-outline">Voir mes réalisations</a>
     </div>
     <div class="hero-trust">
+      <div class="hero-trust-item"><span class="hero-trust-icon">✦</span> Compagnon du Devoir</div>
       <div class="hero-trust-item"><span class="hero-trust-icon">✦</span> 20 ans d'expérience</div>
-      <div class="hero-trust-item"><span class="hero-trust-icon">✦</span> 400+ projets réalisés</div>
       <div class="hero-trust-item"><span class="hero-trust-icon">✦</span> Devis gratuit sous 48h</div>
       <div class="hero-trust-item"><span class="hero-trust-icon">✦</span> Satisfait ou refait</div>
     </div>
   </div>
   <div class="hero-visual">
     <div class="hero-img-frame">
-      <div class="hero-img"><div class="hero-img-inner">🪚</div><div class="hero-img-label">Atelier — Chartres, Eure-et-Loir</div></div>
+      <div class="hero-img">
+        <div class="hero-img-texture"></div>
+        <div class="hero-img-content">
+          <div class="hero-img-label">Atelier d'ébénisterie</div>
+          <div class="hero-img-sub">Chartres, Eure-et-Loir</div>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -177,15 +215,45 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
   <div class="section-intro">
     <div class="section-label">Portfolio</div>
     <h2>Mes dernières réalisations</h2>
-    <p>Chaque projet est une collaboration avec mes clients. Voici quelques pièces dont je suis particulièrement fier.</p>
+    <p>Chaque projet est une collaboration unique. Voici quelques pièces récentes.</p>
   </div>
   <div class="gallery">
-    <div class="gallery-item"><div class="gallery-img" style="background:linear-gradient(135deg,#1c1610,#2a1f14)">🪑</div><div class="gallery-overlay"><span class="gallery-caption">Table à manger en chêne massif — 2025</span></div></div>
-    <div class="gallery-item"><div class="gallery-img" style="background:linear-gradient(135deg,#181510,#241d14)">🪜</div><div class="gallery-overlay"><span class="gallery-caption">Escalier hélicoïdal en noyer — 2024</span></div></div>
-    <div class="gallery-item"><div class="gallery-img" style="background:linear-gradient(135deg,#1a1510,#201a12)">🛏️</div><div class="gallery-overlay"><span class="gallery-caption">Bibliothèque sur mesure — 2025</span></div></div>
-    <div class="gallery-item"><div class="gallery-img" style="background:linear-gradient(135deg,#15120e,#1c1710)">📐</div><div class="gallery-overlay"><span class="gallery-caption">Agencement dressing — 2024</span></div></div>
-    <div class="gallery-item"><div class="gallery-img" style="background:linear-gradient(135deg,#171410,#1e1912)">🚪</div><div class="gallery-overlay"><span class="gallery-caption">Porte d'entrée en chêne — 2025</span></div></div>
-    <div class="gallery-item"><div class="gallery-img" style="background:linear-gradient(135deg,#191612,#221c14)">🪟</div><div class="gallery-overlay"><span class="gallery-caption">Fenêtres sur mesure — 2024</span></div></div>
+    <div class="gallery-item">
+      <div class="gallery-img">
+        <div class="gallery-img-bg" style="background:linear-gradient(135deg,#1c1610,#2e2214,#1a140d)"></div>
+        <div class="gallery-label"><div class="gallery-label-title">Table à manger en chêne massif</div><div class="gallery-label-desc">8 personnes · Finition huilée · 2025</div></div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-img">
+        <div class="gallery-img-bg" style="background:linear-gradient(135deg,#18120e,#241a12,#16100c)"></div>
+        <div class="gallery-label"><div class="gallery-label-title">Escalier hélicoïdal en noyer</div><div class="gallery-label-desc">2 étages · 18 marches · 2024</div></div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-img">
+        <div class="gallery-img-bg" style="background:linear-gradient(135deg,#1a1510,#2a1f15,#191410)"></div>
+        <div class="gallery-label"><div class="gallery-label-title">Bibliothèque sur mesure</div><div class="gallery-label-desc">Chêne et laiton · 4m linéaires · 2025</div></div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-img">
+        <div class="gallery-img-bg" style="background:linear-gradient(135deg,#15120e,#1f1810,#13100c)"></div>
+        <div class="gallery-label"><div class="gallery-label-title">Agencement dressing</div><div class="gallery-label-desc">Merisier · 12m² · 2024</div></div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-img">
+        <div class="gallery-img-bg" style="background:linear-gradient(135deg,#171410,#231b12,#15120e)"></div>
+        <div class="gallery-label"><div class="gallery-label-title">Porte d'entrée en chêne</div><div class="gallery-label-desc">Sur mesure · Vitrail · 2025</div></div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-img">
+        <div class="gallery-img-bg" style="background:linear-gradient(135deg,#191612,#241c14,#171410)"></div>
+        <div class="gallery-label"><div class="gallery-label-title">Bureau ministre</div><div class="gallery-label-desc">Noyer massif · Cuir · 2024</div></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -193,31 +261,95 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
   <div class="section-intro">
     <div class="section-label">Services</div>
     <h2>Ce que je peux faire pour vous</h2>
-    <p>De la pièce unique à l'agencement complet, je vous accompagne de la conception à la pose.</p>
+    <p>De la pièce unique à l'agencement complet, je vous accompagne à chaque étape.</p>
   </div>
   <div class="services-grid">
-    <div class="service-card"><div class="service-icon">🪑</div><h3>Meubles sur mesure</h3><p>Tables, chaises, buffets, bureaux. Chaque meuble est unique, adapté à vos dimensions et à votre style. Bois massif uniquement.</p></div>
-    <div class="service-card"><div class="service-icon">🪜</div><h3>Escaliers</h3><p>Droit, quart tournant, hélicoïdal. Je conçois et fabrique des escaliers qui allient sécurité, confort et esthétique.</p></div>
-    <div class="service-card"><div class="service-icon">📐</div><h3>Agencements</h3><p>Dressings, bibliothèques, cuisines. J'optimise chaque centimètre pour créer des espaces fonctionnels et élégants.</p></div>
-    <div class="service-card"><div class="service-icon">🛏️</div><h3>Literie & chambres</h3><p>Têtes de lit, cadres, chevets coordonnés. Créez une chambre qui vous ressemble, en harmonie avec votre intérieur.</p></div>
-    <div class="service-card"><div class="service-icon">🚪</div><h3>Portes & fenêtres</h3><p>Portes d'entrée, portes intérieures, fenêtres sur mesure. Isolation, sécurité et charme artisanal.</p></div>
-    <div class="service-card"><div class="service-icon">🔧</div><h3>Restauration</h3><p>Vous avez un meuble ancien qui mérite une seconde vie ? Je le restaure dans les règles de l'art, à l'identique.</p></div>
+    <div class="service-card"><div class="service-icon">◆</div><h3>Meubles sur mesure</h3><p>Tables, buffets, bureaux, bibliothèques. Dessinés selon vos dimensions et votre style. Bois massif uniquement, sans compromis.</p></div>
+    <div class="service-card"><div class="service-icon">◆</div><h3>Escaliers</h3><p>Droit, quart tournant, hélicoïdal. Conception et fabrication d'escaliers qui allient sécurité, confort et caractère.</p></div>
+    <div class="service-card"><div class="service-icon">◆</div><h3>Agencements</h3><p>Dressings, cuisines, bibliothèques murales. J'optimise chaque centimètre pour créer des espaces fonctionnels et beaux.</p></div>
+    <div class="service-card"><div class="service-icon">◆</div><h3>Portes & fenêtres</h3><p>Portes d'entrée, intérieures, fenêtres sur mesure. Isolation, sécurité et esthétique artisanale.</p></div>
+    <div class="service-card"><div class="service-icon">◆</div><h3>Restauration</h3><p>Vous avez un meuble ancien ? Je le restaure dans les règles de l'art, à l'identique, en respectant les techniques d'époque.</p></div>
+    <div class="service-card"><div class="service-icon">◆</div><h3>Conseil & étude</h3><p>Vous avez un projet mais pas encore d'idée précise ? Je vous conseille sur les essences, les styles et les solutions techniques.</p></div>
   </div>
 </div>
 
 <div id="apropos" class="section">
-  <div class="about-layout">
-    <div class="about-visual"><div class="about-img">👨‍🔧</div></div>
+  <div class="section-intro">
+    <div class="section-label">À propos</div>
+    <h2>Un artisan qui maîtrise son art</h2>
+    <p>20 ans de passion pour le bois, au service de vos projets les plus exigeants.</p>
+  </div>
+  <div class="about-hero">
+    <div class="about-visual">
+      <div class="about-portrait">
+        <div class="about-portrait-inner">
+          <div class="about-portrait-icon">🪚</div>
+          <div class="about-portrait-name">Pierre Dubois</div>
+          <div class="about-portrait-title">Maître ébéniste</div>
+        </div>
+      </div>
+      <div class="about-certifications">
+        <div class="about-cert"><span class="about-cert-icon">✦</span> Compagnon du Devoir</div>
+        <div class="about-cert"><span class="about-cert-icon">✦</span> Meilleur Ouvrier de France 2015</div>
+        <div class="about-cert"><span class="about-cert-icon">✦</span> Label Artisan d'Art</div>
+      </div>
+    </div>
     <div class="about-text">
-      <h3>Passionné par le bois depuis toujours</h3>
-      <p>J'ai appris le métier auprès des Compagnons du Devoir il y a plus de 20 ans. Depuis, chaque projet est une nouvelle aventure. Je travaille principalement le chêne, le noyer, le frêne et le merisier — des essences nobles qui traversent le temps.</p>
-      <p>Mon atelier est à Chartres, mais j'interviens dans tout l'Eure-et-Loir et les départements limitrophes. Je me déplace gratuitement pour étudier votre projet et vous proposer un devis détaillé.</p>
+      <h3>La passion du bois depuis l'enfance</h3>
+      <p class="intro">J'ai commencé l'ébénisterie à 16 ans, formé par les Compagnons du Devoir. Ce tour de France m'a transmis l'exigence du travail bien fait, le respect des traditions et le goût de l'innovation. Aujourd'hui, chaque meuble qui sort de mon atelier est le résultat de cette double culture : l'héritage des anciens et la précision des techniques modernes.</p>
+
+      <div class="about-process">
+        <h4>Comment je travaille</h4>
+        <div class="process-steps">
+          <div class="process-step"><div class="process-num">1</div><h5>Écoute</h5><p>Je me déplace chez vous pour comprendre votre projet</p></div>
+          <div class="process-step"><div class="process-num">2</div><h5>Conception</h5><p>Je dessine les plans et vous présente les essences</p></div>
+          <div class="process-step"><div class="process-num">3</div><h5>Fabrication</h5><p>Tout est fait main dans mon atelier à Chartres</p></div>
+          <div class="process-step"><div class="process-num">4</div><h5>Pose</h5><p>J'installe et règle chaque pièce chez vous</p></div>
+        </div>
+      </div>
+
+      <div class="about-materials">
+        <h4>Essences travaillées</h4>
+        <div class="materials-list">
+          <span class="material-tag">Chêne</span><span class="material-tag">Noyer</span><span class="material-tag">Merisier</span><span class="material-tag">Frêne</span><span class="material-tag">Orme</span><span class="material-tag">Érable</span><span class="material-tag">Poirier</span>
+        </div>
+      </div>
+
       <div class="about-stats">
         <div class="about-stat"><div class="about-stat-num">20+</div><div class="about-stat-label">Années d'expérience</div></div>
         <div class="about-stat"><div class="about-stat-num">400+</div><div class="about-stat-label">Projets réalisés</div></div>
         <div class="about-stat"><div class="about-stat-num">100%</div><div class="about-stat-label">Clients satisfaits</div></div>
         <div class="about-stat"><div class="about-stat-num">48h</div><div class="about-stat-label">Devis gratuit</div></div>
       </div>
+
+      <div class="about-zone">
+        <strong>Zone d'intervention :</strong> Chartres et alentours (Eure-et-Loir, Yvelines, Loiret). Déplacement gratuit pour toute étude de projet dans un rayon de 50 km.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="avis" class="section section-dark">
+  <div class="section-intro">
+    <div class="section-label">Avis clients</div>
+    <h2>Ce que mes clients disent</h2>
+    <p>La satisfaction de mes clients est ma plus grande fierté.</p>
+  </div>
+  <div class="testimonials">
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <q>Pierre a créé notre bibliothèque sur mesure. Le résultat dépasse tout ce qu'on imaginait. Un vrai travail d'artisan, précis, soigné, à l'écoute. Je recommande sans hésiter.</q>
+      <div class="author">Marie & Laurent G.<span> — Chartres</span></div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <q>Un escalier hélicoïdal en noyer, c'était notre rêve. Pierre l'a rendu possible. 18 marches, un travail d'orfèvre. Nos invités n'en reviennent pas.</q>
+      <div class="author">François D.<span> — Nogent-le-Rotrou</span></div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <q>J'avais une table de famille abîmée. Pierre l'a restaurée à l'identique, on ne voit plus aucune trace. C'est un soulagement de savoir qu'il existe encore des artisans de ce niveau.</q>
+      <div class="author">Catherine B.<span> — Dreux</span></div>
     </div>
   </div>
 </div>
@@ -228,7 +360,7 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
   <form action="https://formspree.io/f/mjgqprkr" method="POST" class="contact-form">
     <div class="form-row"><input type="text" name="name" placeholder="Votre nom" required><input type="email" name="email" placeholder="Votre email" required></div>
     <div class="form-row"><input type="text" name="phone" placeholder="Votre téléphone"><input type="text" name="city" placeholder="Votre ville"></div>
-    <textarea name="message" placeholder="Décrivez votre projet : type de meuble, dimensions, essence de bois souhaitée..." rows="4" required></textarea>
+    <textarea name="message" placeholder="Décrivez votre projet : type de meuble, dimensions, essence souhaitée..." rows="4" required></textarea>
     <button type="submit">Recevoir un devis gratuit →</button>
     <p class="form-note">🔒 Réponse sous 48h · Sans engagement · Déplacement gratuit pour étude</p>
   </form>
@@ -237,13 +369,10 @@ body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z
 <footer class="footer">
   <div>
     <div class="footer-brand">Pierre Dubois</div>
-    <div class="footer-info">Menuisier Ébéniste<br>Chartres, Eure-et-Loir<br>02 37 00 00 00</div>
+    <div class="footer-info">Menuisier Ébéniste<br>12 rue des Artisans, 28000 Chartres<br>02 37 00 00 00 · contact@pierredubois.fr</div>
   </div>
   <div class="footer-links">
-    <a href="#realisations">Réalisations</a>
-    <a href="#services">Services</a>
-    <a href="#apropos">À propos</a>
-    <a href="#contact">Contact</a>
+    <a href="#realisations">Réalisations</a><a href="#services">Services</a><a href="#apropos">À propos</a><a href="#avis">Avis</a><a href="#contact">Contact</a>
   </div>
   <div class="footer-bottom">© 2026 Pierre Dubois — Menuisier Ébéniste · SIRET 123 456 789 00010 · <a href="#" style="color:var(--text4)">Mentions légales</a></div>
 </footer>
