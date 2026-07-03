@@ -3,1164 +3,383 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Créez l'aperçu de votre site artisanal en direct. Gratuit, sans engagement.">
-<title>Créez votre site | Template Artisan</title>
+<meta name="description" content="Pierre Dubois — Menuisier ébéniste. Meubles sur mesure, aménagement, extérieur. 20 ans d'expérience, Compagnon du Devoir.">
+<title>Pierre Dubois | Menuisier Ébéniste</title>
+<meta property="og:title" content="Pierre Dubois | Menuisier Ébéniste">
+<meta property="og:description" content="Artisan ébéniste depuis 1998. Meubles, aménagements, extérieurs bois.">
+<meta property="og:url" content="https://botarmory.com/demo/">
+<meta property="og:image" content="https://botarmory.com/demo/img/table-design.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #060708;
-    --bg2: #0a0b0d;
-    --bg3: #0f1014;
-    --bg4: #14151a;
-    --text: #f4f5f7;
-    --text2: #c8cdd6;
-    --text3: #8b909d;
-    --text4: #545861;
-    --accent: #d4a853;
-    --accent2: #e6c46e;
-    --accent-glow: rgba(212,168,83,0.08);
-    --accent-glow2: rgba(212,168,83,0.15);
-    --border: rgba(255,255,255,0.06);
-    --border2: rgba(255,255,255,0.04);
-    --border3: rgba(255,255,255,0.08);
-    --radius: 10px;
-    --radius-sm: 7px;
-    --radius-lg: 14px;
-  }
+:root{--bg:#0d0b09;--bg2:#14110e;--bg3:#1a1613;--bg4:#221d18;--text:#f0ede8;--text2:#c4bfb6;--text3:#8a8378;--text4:#5c564d;--accent:#c4884d;--accent2:#d9a36e;--aglow:rgba(196,136,77,.08);--aglow2:rgba(196,136,77,.15);--border:rgba(255,255,255,.05);--border2:rgba(255,255,255,.035);--r:10px;--rs:7px;--rl:14px}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
+body::after{content:'';position:fixed;inset:0;opacity:.012;pointer-events:none;z-index:9999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+::selection{background:rgba(196,136,77,.25);color:#fff}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+a{color:inherit;text-decoration:none}
 
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  body {
-    font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    line-height: 1.5;
-  }
+/* Page system — each section is a page */
+.page{display:none;animation:fadeIn .4s ease-out}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
-  /* Subtle noise texture overlay */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    opacity: 0.015;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-  }
+.nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:rgba(13,11,9,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border2)}
+.nav-brand{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--accent);letter-spacing:.02em;cursor:pointer}
+.nav-brand span{color:var(--text);font-weight:500;font-size:14px;margin-left:8px}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:13px;color:var(--text3);font-weight:500;cursor:pointer;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.nav-cta{background:var(--accent);color:#0d0b09!important;padding:9px 20px;border-radius:var(--rs);font-weight:700;font-size:13px!important;cursor:pointer;transition:background .2s,transform .15s;border:none;font-family:inherit}
+.nav-cta:hover{background:var(--accent2)!important;transform:translateY(-1px)}
 
-  /* ─────── TOPBAR ─────── */
-  .topbar {
-    background: rgba(6,7,8,0.85);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .topbar-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 54px;
-    padding: 0 24px;
-  }
-  .topbar-brand {
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: -0.01em;
-  }
-  .topbar-brand span { color: var(--accent); }
-  .topbar-links { display: flex; align-items: center; gap: 24px; }
-  .topbar-link {
-    font-size: 13px;
-    color: var(--text3);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-  .topbar-link:hover { color: var(--text); }
-  .topbar-cta {
-    background: var(--accent);
-    color: #0a0a0b;
-    padding: 7px 18px;
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .topbar-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+.btn{display:inline-flex;align-items:center;gap:8px;padding:15px 32px;border-radius:var(--r);font-weight:700;font-size:15px;transition:all .2s;cursor:pointer}
+.btn-primary{background:var(--accent);color:#0d0b09;border:none;box-shadow:0 2px 20px rgba(196,136,77,.15)}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-2px)}
+.btn-outline{border:1px solid var(--border);color:var(--text2);background:transparent}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
 
-  @media (max-width: 640px) {
-    .topbar-inner { padding: 0 16px; }
-    .topbar-links { gap: 14px; }
-    .topbar-link { font-size: 12px; }
-    .topbar-brand { font-size: 14px; }
-  }
+/* HERO */
+.hero{position:relative;padding:120px 40px 80px;display:flex;align-items:center;gap:60px;max-width:1200px;margin:0 auto}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 600px 400px at 30% 20%,rgba(196,136,77,.04) 0%,transparent 70%);pointer-events:none}
+.hero-text{flex:1;position:relative;z-index:1}
+.hero-badge{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);background:var(--aglow);border:1px solid var(--aglow2);padding:5px 14px;border-radius:20px;margin-bottom:20px;text-transform:uppercase;letter-spacing:.08em}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.08;margin-bottom:16px}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero .sub{font-size:16px;color:var(--text3);line-height:1.65;max-width:440px;margin-bottom:28px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.hero-visual{flex:1;position:relative}
+.hero-frame{position:relative;border-radius:var(--rl);overflow:hidden;border:1px solid var(--border);box-shadow:0 24px 80px rgba(0,0,0,.4)}
+.hero-frame::after{content:'';position:absolute;inset:-1px;border-radius:var(--rl);border:1px solid var(--aglow2);pointer-events:none}
+.hero-img{width:100%;aspect-ratio:4/3;display:flex;align-items:flex-end;padding:20px}
+.hero-img-caption{position:relative;z-index:1;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);padding:10px 16px;border-radius:6px;font-size:11px;color:var(--accent);font-weight:600}
+.hero-trust{margin-top:36px;display:flex;gap:28px;flex-wrap:wrap}
+.hero-trust-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text3)}
 
-  /* ─────── GENERATOR ─────── */
-  .gen-section {
-    padding: 56px 24px 36px;
-    text-align: center;
-    position: relative;
-  }
-  .gen-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(212,168,83,0.2), transparent);
-  }
-  .gen-title {
-    font-size: clamp(24px, 4vw, 36px);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 8px;
-    line-height: 1.2;
-  }
-  .gen-title span { color: var(--accent); }
-  .gen-sub {
-    color: var(--text3);
-    font-size: 14px;
-    max-width: 500px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-  .gen-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
-    max-width: 800px;
-    margin: 32px auto 0;
-    text-align: left;
-  }
-  .gen-form .full { grid-column: 1 / -1; }
-  .gen-form .half { grid-column: span 1; }
-  @media (max-width: 640px) {
-    .gen-form { grid-template-columns: 1fr 1fr; }
-    .gen-form .half { grid-column: span 1; }
-    .gen-form .full { grid-column: 1 / -1; }
-  }
-  @media (max-width: 420px) {
-    .gen-form { grid-template-columns: 1fr; }
-    .gen-form .half { grid-column: 1 / -1; }
-  }
-  .gen-form label {
-    display: block;
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--text4);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 5px;
-  }
-  .gen-form input,
-  .gen-form textarea {
-    width: 100%;
-    padding: 11px 14px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    color: var(--text);
-    font-family: inherit;
-    font-size: 13.5px;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  .gen-form input::placeholder,
-  .gen-form textarea::placeholder { color: var(--text4); }
-  .gen-form input:focus,
-  .gen-form textarea:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 4px var(--accent-glow);
-  }
-  .gen-form textarea { resize: vertical; min-height: 68px; }
-  .gen-trust {
-    font-size: 12px;
-    color: var(--text4);
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-  }
+/* PAGE HEADER */
+.page-header{text-align:center;padding:72px 40px 40px;background:radial-gradient(ellipse 500px 200px at 50% 0%,rgba(196,136,77,.04) 0%,transparent 70%),var(--bg2);border-bottom:1px solid var(--border2)}
+.page-label{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
+.page-header h2{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,34px);font-weight:700;margin-bottom:8px}
+.page-header p{color:var(--text3);font-size:14px;max-width:480px;margin:0 auto}
 
-  /* ─────── PREVIEW WRAPPER ─────── */
-  .preview-section { padding: 0 24px 64px; }
-  .preview-label {
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  .preview-label-inner {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text4);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    background: var(--bg3);
-    padding: 6px 16px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-  }
-  .preview-label-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #22c55e;
-    animation: pulse-dot 2s ease-in-out infinite;
-  }
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
+.section{padding:64px 40px;max-width:1200px;margin:0 auto}
+.section-dark{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
 
-  .preview-site {
-    max-width: 1040px;
-    margin: 0 auto;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    border: 1px solid var(--border);
-    background: var(--bg2);
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,0.015),
-      0 24px 80px rgba(0,0,0,0.7),
-      0 8px 24px rgba(0,0,0,0.4);
-  }
+/* TEASERS */
+.teasers{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.teaser{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;transition:transform .25s,border-color .25s;cursor:pointer}
+.teaser:hover{transform:translateY(-4px);border-color:var(--aglow2)}
+.teaser-img{width:100%;aspect-ratio:16/9;background-size:cover;background-position:center}
+.teaser-body{padding:22px 18px}
+.teaser-body h3{font-size:15px;font-weight:700;margin-bottom:5px}
+.teaser-body p{font-size:12px;color:var(--text3);line-height:1.5;margin-bottom:10px}
+.teaser-link{font-size:11px;font-weight:600;color:var(--accent)}
 
-  /* ─────── PREVIEW: NAV ─────── */
-  .ps-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 32px;
-    background: rgba(10,11,13,0.95);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border2);
-  }
-  .ps-logo {
-    font-weight: 800;
-    font-size: 18px;
-    letter-spacing: 0.04em;
-    outline: none;
-    color: var(--text);
-  }
-  .ps-nav-links { display: flex; gap: 28px; align-items: center; }
-  .ps-nav-links a {
-    font-size: 13.5px;
-    color: var(--text3);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-  .ps-nav-links a:hover { color: var(--text); }
-  .ps-nav-link { cursor: pointer; }
-  .ps-nav-link.active { color: var(--accent) !important; font-weight: 700; }
-  .ps-nav-cta {
-    background: var(--accent);
-    color: #0a0a0b !important;
-    padding: 8px 20px;
-    border-radius: var(--radius-sm);
-    font-size: 13.5px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-  .ps-nav-cta:hover { background: var(--accent2) !important; }
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gallery-item{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;border:1px solid var(--border2);transition:transform .3s,border-color .3s}
+.gallery-item:hover{transform:translateY(-4px);border-color:var(--aglow2)}
+.gallery-img{width:100%;height:100%;background-size:cover;background-position:center}
+.gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 50%);display:flex;align-items:flex-end;padding:14px;opacity:0;transition:opacity .3s}
+.gallery-item:hover .gallery-overlay{opacity:1}
+.gallery-info-title{color:#fff;font-size:12px;font-weight:700;margin-bottom:2px}
+.gallery-info-desc{color:rgba(255,255,255,.6);font-size:10px}
+.cat-section{margin-bottom:48px}
+.cat-section:last-child{margin-bottom:0}
+.cat-header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.cat-icon{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:var(--rs);background:var(--aglow);color:var(--accent);font-size:15px}
+.cat-header h3{font-family:'Playfair Display',serif;font-size:19px;font-weight:700}
+.cat-header span{color:var(--text4);font-size:11px;display:block;margin-top:1px}
 
-  @media (max-width: 640px) {
-    .ps-nav { padding: 12px 18px; }
-    .ps-nav-links { gap: 16px; }
-    .ps-nav-links a { font-size: 12px; }
-    .ps-logo { font-size: 15px; }
-    .ps-nav-cta { padding: 7px 14px; font-size: 12px; }
-  }
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.service-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rl);padding:32px 24px;text-align:center;transition:border-color .25s,transform .25s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}
+.service-card:hover{border-color:var(--aglow2);transform:translateY(-4px)}
+.service-card:hover::before{opacity:1}
+.service-icon{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:var(--r);background:var(--aglow);margin-bottom:14px;font-size:19px;color:var(--accent)}
+.service-card h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.service-card p{font-size:12.5px;color:var(--text3);line-height:1.5}
 
-  /* ─────── PREVIEW: HERO ─────── */
-  .ps-hero {
-    position: relative;
-    padding: 100px 32px 80px;
-    text-align: center;
-    background: var(--bg2);
-    overflow: hidden;
-  }
-  .ps-hero::before {
-    content: '';
-    position: absolute;
-    top: -40%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 900px;
-    height: 900px;
-    background: radial-gradient(ellipse, rgba(212,168,83,0.04) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .ps-hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(212,168,83,0.15), transparent);
-  }
-  .ps-hero-grid {
-    position: absolute;
-    inset: 0;
-    opacity: 0.03;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-  }
-  .ps-badge {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--accent);
-    background: var(--accent-glow);
-    border: 1px solid var(--accent-glow2);
-    padding: 6px 16px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    outline: none;
-    position: relative;
-    z-index: 1;
-  }
-  .ps-hero h1 {
-    font-size: clamp(28px, 5vw, 46px);
-    font-weight: 900;
-    line-height: 1.08;
-    max-width: 680px;
-    margin: 0 auto 14px;
-    outline: none;
-    letter-spacing: -0.03em;
-    position: relative;
-    z-index: 1;
-  }
-  .ps-hero .ps-sub {
-    color: var(--text3);
-    font-size: 16px;
-    max-width: 540px;
-    margin: 0 auto 28px;
-    line-height: 1.65;
-    outline: none;
-    position: relative;
-    z-index: 1;
-  }
-  .ps-hero-cta {
-    display: inline-block;
-    background: var(--accent);
-    color: #0a0a0b;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 14px 36px;
-    border-radius: var(--radius);
-    text-decoration: none;
-    position: relative;
-    z-index: 1;
-    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-    box-shadow: 0 2px 16px rgba(212,168,83,0.15);
-  }
-  .ps-hero-cta:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 4px 24px rgba(212,168,83,0.25); }
-  .ps-trust {
-    display: flex;
-    gap: 32px;
-    justify-content: center;
-    margin-top: 36px;
-    font-size: 13px;
-    color: var(--text3);
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 1;
-  }
-  .ps-trust span { opacity: 0.85; }
+/* ABOUT */
+.about-layout{display:flex;gap:50px;align-items:flex-start}
+.about-visual{flex-shrink:0;width:280px}
+.about-portrait{width:100%;aspect-ratio:3/4;border-radius:var(--rl);overflow:hidden;border:1px solid var(--border);position:relative}
+.about-portrait::after{content:'';position:absolute;inset:-1px;border-radius:var(--rl);border:1px solid var(--aglow2);pointer-events:none}
+.about-portrait img{width:100%;height:100%;object-fit:cover}
+.about-certs{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.about-cert{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg3);border-radius:var(--rs);border:1px solid var(--border2);font-size:10.5px;color:var(--text3)}
+.about-cert strong{color:var(--accent)}
+.about-text{flex:1}
+.about-text h3{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;margin-bottom:10px}
+.about-text .lead{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:22px}
+.about-badge{font-size:12px;color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:20px}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
+.process-step{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:14px 10px;text-align:center}
+.process-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--aglow);color:var(--accent);font-weight:700;font-size:10px;margin-bottom:5px}
+.process-step h4{font-size:11px;font-weight:600;margin-bottom:2px}
+.process-step p{font-size:9.5px;color:var(--text4);line-height:1.3}
+.tag-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:24px}
+.tag{padding:5px 9px;background:var(--aglow);border:1px solid var(--aglow2);border-radius:16px;font-size:10.5px;color:var(--text2);font-weight:500}
+.stats-row{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:24px}
+.stat-item{text-align:center}
+.stat-num{font-size:24px;font-weight:800;color:var(--accent);letter-spacing:-.02em}
+.stat-label{font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.06em}
+.zone-info{font-size:12px;color:var(--text3);line-height:1.6;padding:10px 14px;background:var(--bg3);border-radius:var(--r);border-left:2px solid var(--accent)}
+.zone-info strong{color:var(--text)}
 
-  @media (max-width: 640px) {
-    .ps-hero { padding: 56px 20px 48px; }
-    .ps-hero h1 { font-size: 24px; }
-    .ps-hero .ps-sub { font-size: 14px; }
-    .ps-trust { gap: 20px; font-size: 12px; }
-    .ps-hero-cta { font-size: 15px; padding: 13px 28px; }
-  }
+/* TESTIMONIALS */
+.testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.testimonial{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rl);padding:22px 18px}
+.testimonial .stars{color:var(--accent);font-size:11px;margin-bottom:8px}
+.testimonial q{font-size:12.5px;color:var(--text2);line-height:1.6;display:block;margin-bottom:10px;font-style:italic}
+.testimonial .author{font-size:11px;font-weight:600;color:var(--text)}
+.testimonial .author span{color:var(--text4);font-weight:400}
 
-  /* ─────── PREVIEW: SECTION HEADERS ─────── */
-  .ps-section {
-    padding: 64px 32px;
-    position: relative;
-  }
-  .ps-section.alt {
-    background: rgba(255,255,255,0.01);
-    border-top: 1px solid var(--border2);
-    border-bottom: 1px solid var(--border2);
-  }
-  .ps-section-label {
-    text-align: center;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 8px;
-  }
-  .ps-section h2 {
-    text-align: center;
-    font-size: 26px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-bottom: 36px;
-  }
+/* CTA HOME */
+.cta-home{text-align:center;padding:56px 40px;background:radial-gradient(ellipse 400px 200px at 50% 50%,rgba(196,136,77,.03) 0%,transparent 70%),var(--bg2);border-top:1px solid var(--border)}
+.cta-home h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:6px}
 
-  @media (max-width: 640px) {
-    .ps-section { padding: 44px 20px; }
-    .ps-section h2 { font-size: 22px; margin-bottom: 28px; }
-  }
+/* CONTACT FORM */
+.contact-form{max-width:500px;margin:0 auto}
+.form-row{display:flex;gap:10px;margin-bottom:10px}
+.contact-form input,.contact-form textarea{width:100%;padding:14px 18px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-family:inherit;font-size:14px;outline:none;transition:border-color .2s}
+.contact-form input:focus,.contact-form textarea:focus{border-color:var(--accent)}
+.contact-form textarea{resize:vertical;min-height:90px;margin-bottom:14px}
+.contact-form button{display:block;width:100%;background:var(--accent);color:#0d0b09;font-weight:700;font-size:15px;padding:15px;border-radius:var(--r);border:none;cursor:pointer;font-family:inherit;transition:background .2s;box-shadow:0 2px 12px rgba(196,136,77,.1)}
+.contact-form button:hover{background:var(--accent2)}
+.form-note{text-align:center;font-size:11px;color:var(--text4);margin-top:10px}
 
-  /* ─────── PREVIEW: GALLERY ─────── */
-  .ps-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-  }
-  .ps-gallery-item {
-    position: relative;
-    border-radius: var(--radius);
-    overflow: hidden;
-    aspect-ratio: 4/3;
-    cursor: pointer;
-    border: 1px solid var(--border2);
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .ps-gallery-item:hover {
-    border-color: var(--accent-glow2);
-    transform: translateY(-3px);
-  }
-  .ps-gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.5s;
-  }
-  .ps-gallery-item:hover img { transform: scale(1.04); }
-  .ps-gallery-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
-    display: flex;
-    align-items: flex-end;
-    padding: 16px;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .ps-gallery-item:hover .ps-gallery-overlay { opacity: 1; }
-  .ps-gallery-caption {
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-  }
+.contact-info{margin-top:48px;text-align:center;padding:28px;background:var(--bg3);border-radius:var(--rl);border:1px solid var(--border)}
+.contact-info h4{font-family:'Playfair Display',serif;font-size:17px;color:var(--accent);margin-bottom:6px}
+.contact-info p{font-size:12px;color:var(--text3);line-height:1.8}
 
-  @media (max-width: 640px) {
-    .ps-gallery { grid-template-columns: 1fr 1fr; gap: 10px; }
-  }
-  @media (max-width: 420px) {
-    .ps-gallery { grid-template-columns: 1fr; }
-  }
+.footer{padding:24px 40px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:18px}
+.footer-brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--accent)}
+.footer-info{font-size:11px;color:var(--text4);line-height:1.8}
+.footer-links{display:flex;gap:16px}
+.footer-links a{font-size:10.5px;color:var(--text4);cursor:pointer;transition:color .2s}
+.footer-links a:hover{color:var(--text3)}
+.footer-bottom{width:100%;text-align:center;padding-top:12px;border-top:1px solid var(--border2);font-size:10px;color:var(--text4)}
 
-  /* ─────── PREVIEW: SERVICES ─────── */
-  .ps-services {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  .ps-svc {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 32px 24px 28px;
-    text-align: center;
-    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-  .ps-svc::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .ps-svc:hover {
-    border-color: var(--accent-glow2);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-  }
-  .ps-svc:hover::before { opacity: 1; }
-  .ps-svc-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    border-radius: var(--radius);
-    background: var(--accent-glow);
-    margin-bottom: 14px;
-    font-size: 22px;
-  }
-  .ps-svc h4 {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    outline: none;
-    color: var(--text);
-  }
-  .ps-svc p {
-    font-size: 13px;
-    color: var(--text3);
-    line-height: 1.55;
-  }
-
-  @media (max-width: 640px) {
-    .ps-services { grid-template-columns: 1fr 1fr; gap: 12px; }
-    .ps-svc { padding: 24px 18px 22px; }
-  }
-  @media (max-width: 420px) {
-    .ps-services { grid-template-columns: 1fr; }
-  }
-
-  /* ─────── PREVIEW: ABOUT ─────── */
-  .ps-about {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .ps-about-img-wrap {
-    flex-shrink: 0;
-    width: 160px;
-    height: 160px;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    border: 2px solid var(--border);
-    position: relative;
-  }
-  .ps-about-img-wrap::after {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--accent-glow2);
-    opacity: 0.5;
-    pointer-events: none;
-  }
-  .ps-about-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .ps-about-text {
-    flex: 1;
-    min-width: 260px;
-  }
-  .ps-about-text h3 {
-    font-size: 20px;
-    font-weight: 800;
-    margin-bottom: 8px;
-    outline: none;
-    letter-spacing: -0.01em;
-  }
-  .ps-about-text p {
-    font-size: 14px;
-    color: var(--text3);
-    line-height: 1.75;
-    outline: none;
-    margin-bottom: 16px;
-  }
-  .ps-about-stats {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  .ps-about-stat {
-    text-align: center;
-  }
-  .ps-about-stat-num {
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-  }
-  .ps-about-stat-label {
-    font-size: 11px;
-    color: var(--text4);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-top: 2px;
-  }
-
-  @media (max-width: 640px) {
-    .ps-about { gap: 24px; justify-content: center; text-align: center; }
-    .ps-about-img-wrap { width: 120px; height: 120px; }
-    .ps-about-stats { justify-content: center; }
-    .ps-about-text h3 { font-size: 18px; }
-  }
-
-  /* ─────── PREVIEW: CTA SECTION ─────── */
-  .ps-cta-section {
-    padding: 56px 32px;
-    text-align: center;
-    background: linear-gradient(180deg, rgba(212,168,83,0.03) 0%, rgba(212,168,83,0.01) 100%);
-    border-top: 1px solid var(--border);
-    position: relative;
-  }
-  .ps-cta-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(212,168,83,0.3), transparent);
-  }
-  .ps-cta-section h2 {
-    font-size: 24px;
-    font-weight: 800;
-    margin-bottom: 8px;
-    letter-spacing: -0.02em;
-  }
-  .ps-cta-section p {
-    color: var(--text3);
-    font-size: 14px;
-    margin-bottom: 24px;
-    max-width: 440px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .ps-cta-btn-large {
-    display: inline-block;
-    background: var(--accent);
-    color: #0a0a0b;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 14px 36px;
-    border-radius: var(--radius);
-    text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
-    box-shadow: 0 2px 20px rgba(212,168,83,0.12);
-  }
-  .ps-cta-btn-large:hover { background: var(--accent2); transform: translateY(-2px); }
-
-  /* ─────── CONTACT FORM ─────── */
-  .ps-contact-form {
-    max-width: 500px;
-    margin: 0 auto;
-    text-align: left;
-  }
-  .ps-form-row {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-  .ps-contact-form input,
-  .ps-contact-form textarea {
-    width: 100%;
-    padding: 12px 16px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    color: var(--text);
-    font-family: inherit;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .ps-contact-form input:focus,
-  .ps-contact-form textarea:focus {
-    border-color: var(--accent);
-  }
-  .ps-contact-form textarea {
-    resize: vertical;
-    min-height: 80px;
-    margin-bottom: 16px;
-  }
-  .ps-contact-form .ps-cta-btn-large {
-    display: block;
-    width: 100%;
-    text-align: center;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .ps-form-note {
-    text-align: center;
-    font-size: 12px;
-    color: var(--text4);
-    margin-top: 10px;
-  }
-  @media (max-width: 640px) {
-    .ps-form-row { flex-direction: column; gap: 10px; }
-  }
-
-  @media (max-width: 640px) {
-    .ps-cta-section { padding: 40px 20px; }
-    .ps-cta-section h2 { font-size: 20px; }
-    .ps-cta-btn-large { font-size: 15px; padding: 13px 28px; }
-  }
-
-  /* ─────── PREVIEW: FOOTER ─────── */
-  .ps-footer {
-    padding: 24px 32px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    font-size: 13px;
-    color: var(--text4);
-    outline: none;
-  }
-  .ps-footer-links { display: flex; gap: 20px; }
-  .ps-footer-links a {
-    color: var(--text4);
-    text-decoration: none;
-    font-size: 12px;
-    transition: color 0.2s;
-  }
-  .ps-footer-links a:hover { color: var(--text3); }
-
-  @media (max-width: 640px) {
-    .ps-footer { padding: 18px 20px; justify-content: center; text-align: center; }
-    .ps-footer-links { justify-content: center; }
-  }
-
-  /* ─────── ORDER CTA ─────── */
-  .order-cta {
-    text-align: center;
-    margin-top: 32px;
-  }
-  .order-cta a {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--accent);
-    color: #0a0a0b;
-    font-weight: 700;
-    font-size: 17px;
-    padding: 16px 40px;
-    border-radius: var(--radius);
-    text-decoration: none;
-    box-shadow: 0 4px 28px rgba(212,168,83,0.25);
-    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-  }
-  .order-cta a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 36px rgba(212,168,83,0.35);
-    background: var(--accent2);
-  }
-  .order-cta-sub {
-    margin-top: 12px;
-    font-size: 12px;
-    color: var(--text4);
-  }
-
-  /* ─────── EDITABLE INDICATORS ─────── */
-  [contenteditable] {
-    border-radius: 4px;
-    transition: box-shadow 0.2s, outline 0.2s;
-    cursor: default;
-    position: relative;
-  }
-  [contenteditable]:hover {
-    outline: 1.5px dashed rgba(212,168,83,0.5);
-    outline-offset: 3px;
-  }
-  [contenteditable]:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: 4px;
-  }
-
-  /* ─────── ANIMATIONS ─────── */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .ps-section {
-    animation: fadeInUp 0.6s ease-out both;
-  }
-  .ps-section:nth-child(2) { animation-delay: 0.1s; }
-  .ps-section:nth-child(3) { animation-delay: 0.2s; }
-  .ps-section:nth-child(4) { animation-delay: 0.3s; }
-  .ps-section:nth-child(5) { animation-delay: 0.4s; }
-
-  /* ─────── SCROLLBAR ─────── */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--border3); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--text4); }
-
-  /* ─────── SELECTION ─────── */
-  ::selection { background: rgba(212,168,83,0.2); color: var(--text); }
-
-  /* ─────── PAGE NAVIGATION ─────── */
-  .ps-page {
-    animation: fadeInUp 0.35s ease-out both;
-  }
+@media(max-width:768px){
+  .nav{padding:12px 18px}.nav-links{gap:14px}.nav-links a{font-size:11px}.nav-cta{padding:7px 12px;font-size:11px!important}.nav-brand span{display:none}
+  .hero{flex-direction:column;padding:60px 20px 40px;gap:28px}.hero h1{font-size:26px}.hero-visual{width:100%}
+  .section{padding:40px 20px}.page-header{padding:48px 20px 32px}
+  .teasers{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .services-grid{grid-template-columns:1fr}
+  .about-layout{flex-direction:column}.about-visual{width:100%;max-width:240px}
+  .process-grid{grid-template-columns:repeat(2,1fr)}
+  .testimonials{grid-template-columns:1fr}
+  .footer{flex-direction:column;text-align:center;align-items:center}
+}
+@media(max-width:480px){.gallery{grid-template-columns:1fr}.hero h1{font-size:22px}}
 </style>
 </head>
 <body>
 
-<!-- ═══════════ TOPBAR ═══════════ -->
-<nav class="topbar">
-  <div class="topbar-inner">
-    <div class="topbar-brand">✦ <span>Template</span>Artisan</div>
-    <div class="topbar-links">
-      <a href="../" class="topbar-link">Accueil</a>
-      <a href="../#tarifs" class="topbar-link">Tarifs</a>
-      <a href="../#commander" class="topbar-cta">Commander</a>
-    </div>
+<nav class="nav">
+  <div class="nav-brand" onclick="navigate('accueil')">Pierre Dubois<span>— Ébéniste</span></div>
+  <div class="nav-links">
+    <a onclick="navigate('realisations')" data-page="realisations">Réalisations</a>
+    <a onclick="navigate('services')" data-page="services">Services</a>
+    <a onclick="navigate('apropos')" data-page="apropos">À propos</a>
+    <a onclick="navigate('contact')" data-page="contact" class="nav-cta">Devis gratuit</a>
   </div>
 </nav>
 
-<!-- ═══════════ GENERATOR FORM ═══════════ -->
-<section class="gen-section">
-  <h1 class="gen-title">À quoi ressemblera <span>votre</span> site ?</h1>
-  <p class="gen-sub">Remplissez le formulaire et regardez votre site prendre vie en direct. Vous pouvez aussi cliquer directement sur les textes de la preview pour les modifier.</p>
-  <div class="gen-form">
-    <div class="half"><label>Votre nom</label><input id="gn-name" placeholder="Jean Dubois" oninput="up()" autocomplete="off"></div>
-    <div class="half"><label>Votre métier</label><input id="gn-job" placeholder="Menuisier ébéniste" oninput="up()" autocomplete="off"></div>
-    <div class="half"><label>Votre ville</label><input id="gn-city" placeholder="Chartres" oninput="up()" autocomplete="off"></div>
-    <div class="full"><label>Phrase d'accroche</label><input id="gn-headline" placeholder="Des meubles qui traversent les générations" oninput="up()" autocomplete="off"></div>
-    <div class="full"><label>Courte description (2-3 phrases)</label><textarea id="gn-desc" placeholder="Décrivez votre activité, votre passion, ce qui vous rend unique…" oninput="up()"></textarea></div>
-    <div class="half"><label>Service n°1</label><input id="gn-s1" placeholder="Meubles sur mesure" oninput="up()" autocomplete="off"></div>
-    <div class="half"><label>Service n°2</label><input id="gn-s2" placeholder="Rénovation de meubles" oninput="up()" autocomplete="off"></div>
-    <div class="half"><label>Service n°3</label><input id="gn-s3" placeholder="Agencement intérieur" oninput="up()" autocomplete="off"></div>
-  </div>
-  <p class="gen-trust">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    Aucune donnée enregistrée · 100% gratuit · Sans engagement
-  </p>
-</section>
-
-<!-- ═══════════ PREVIEW ═══════════ -->
-<section class="preview-section">
-  <div class="preview-label">
-    <span class="preview-label-inner">
-      <span class="preview-label-dot"></span>
-      Aperçu de votre site — modifiable en direct
-    </span>
-  </div>
-
-  <div class="preview-site">
-
-    <!-- NAV -->
-    <div class="ps-nav">
-      <span class="ps-logo" id="pv-logo" contenteditable="true">DUBOIS</span>
-      <div class="ps-nav-links">
-        <a onclick="showPage('realisations')" class="ps-nav-link" data-page="realisations">Réalisations</a>
-        <a onclick="showPage('services')" class="ps-nav-link" data-page="services">Services</a>
-        <a onclick="showPage('apropos')" class="ps-nav-link" data-page="apropos">À propos</a>
-        <a onclick="showPage('contact')" class="ps-nav-cta ps-nav-link" data-page="contact">Contact</a>
+<!-- ═══════════ PAGE: ACCUEIL ═══════════ -->
+<div class="page active" id="page-accueil">
+  <header class="hero">
+    <div class="hero-text">
+      <div class="hero-badge">✦ Artisan ébéniste</div>
+      <h1>Des meubles qui <em>traversent</em> les générations</h1>
+      <p class="sub">Chaque pièce est unique, fabriquée à la main dans mon atelier à Chartres. Bois massif, assemblages traditionnels, finitions soignées.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="navigate('contact')">Demander un devis gratuit →</button>
+        <button class="btn btn-outline" onclick="navigate('realisations')">Voir mes réalisations</button>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-item">✦ Compagnon du Devoir</div>
+        <div class="hero-trust-item">✦ 20 ans d'expérience</div>
+        <div class="hero-trust-item">✦ Devis gratuit sous 48h</div>
+        <div class="hero-trust-item">✦ Satisfait ou refait</div>
       </div>
     </div>
-
-    <!-- PAGES CONTAINER -->
-    <div id="ps-pages">
-
-    <!-- PAGE: ACCUEIL (hero) -->
-    <div class="ps-page" id="page-accueil">
-    <div class="ps-hero">
-      <div class="ps-hero-grid"></div>
-      <p class="ps-badge" id="pv-badge" contenteditable="true">Menuisier ébéniste · Chartres</p>
-      <h1 id="pv-headline" contenteditable="true">Des meubles qui traversent les générations</h1>
-      <p class="ps-sub" id="pv-desc" contenteditable="true">Artisan menuisier passionné, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer et s'intégrer parfaitement dans votre intérieur.</p>
-      <span class="ps-hero-cta">Demander un devis gratuit</span>
-      <div class="ps-trust">
-        <span>✦ Artisan passionné</span>
-        <span>✦ 100% sur mesure</span>
-        <span>✦ Devis gratuit sous 48h</span>
-        <span>✦ Satisfait ou refait</span>
-      </div>
-    </div>
-    </div><!-- /page-accueil -->
-
-    <!-- PAGE: RÉALISATIONS -->
-    <div class="ps-page" id="page-realisations" style="display:none">
-    <!-- GALERIE -->
-    <div class="ps-section">
-      <p class="ps-section-label">Portfolio</p>
-      <h2>Mes réalisations récentes</h2>
-      <div class="ps-gallery">
-        <div class="ps-gallery-item">
-          <img src="../img/galerie1.jpg" alt="Réalisation menuiserie" loading="lazy">
-          <div class="ps-gallery-overlay">
-            <span class="ps-gallery-caption">Bibliothèque sur mesure — chêne massif</span>
-          </div>
-        </div>
-        <div class="ps-gallery-item">
-          <img src="../img/galerie2.jpg" alt="Réalisation artisanale" loading="lazy">
-          <div class="ps-gallery-overlay">
-            <span class="ps-gallery-caption">Table de salle à manger — noyer</span>
-          </div>
-        </div>
-        <div class="ps-gallery-item">
-          <img src="../img/galerie3.jpg" alt="Travail artisanal" loading="lazy">
-          <div class="ps-gallery-overlay">
-            <span class="ps-gallery-caption">Dressing intégré — sur mesure</span>
-          </div>
+    <div class="hero-visual">
+      <div class="hero-frame">
+        <div class="hero-img" style="background:url('img/table-design.jpg') center/cover no-repeat">
+          <div class="hero-img-caption">Atelier d'ébénisterie — Chartres</div>
         </div>
       </div>
     </div>
-    </div><!-- /page-realisations -->
+  </header>
 
-    <!-- PAGE: SERVICES -->
-    <div class="ps-page" id="page-services" style="display:none">
-    <!-- SERVICES -->
-    <div class="ps-section alt">
-      <p class="ps-section-label">Ce que je propose</p>
-      <h2>Mes services</h2>
-      <div class="ps-services">
-        <div class="ps-svc">
-          <div class="ps-svc-icon">🪚</div>
-          <h4 id="pv-s1" contenteditable="true">Meubles sur mesure</h4>
-          <p>Création unique adaptée à vos besoins, vos goûts et votre espace. Du croquis à la livraison.</p>
-        </div>
-        <div class="ps-svc">
-          <div class="ps-svc-icon">✨</div>
-          <h4 id="pv-s2" contenteditable="true">Rénovation de meubles</h4>
-          <p>Redonnez vie à vos meubles anciens. Restauration dans les règles de l'art, respect du bois d'origine.</p>
-        </div>
-        <div class="ps-svc">
-          <div class="ps-svc-icon">📐</div>
-          <h4 id="pv-s3" contenteditable="true">Agencement intérieur</h4>
-          <p>Bibliothèques, dressings, cuisines équipées. Chaque centimètre est optimisé pour votre quotidien.</p>
-        </div>
+  <div class="section">
+    <div class="teasers">
+      <div class="teaser" onclick="navigate('realisations')">
+        <div class="teaser-img" style="background-image:url('img/portail-domaine.jpg')"></div>
+        <div class="teaser-body"><h3>Réalisations</h3><p>Meubles, aménagements, extérieurs — découvrez mon portfolio organisé par catégories.</p><span class="teaser-link">Voir le portfolio →</span></div>
+      </div>
+      <div class="teaser" onclick="navigate('services')">
+        <div class="teaser-body"><h3>Services</h3><p>Meubles sur mesure, agencements, escaliers — j'interviens sur tout type de projet bois.</p><span class="teaser-link">Voir les prestations →</span></div>
+      </div>
+      <div class="teaser" onclick="navigate('apropos')">
+        <div class="teaser-body"><h3>À propos</h3><p>Compagnon du Devoir, 20 ans de passion. Découvrez mon parcours et ma façon de travailler.</p><span class="teaser-link">En savoir plus →</span></div>
       </div>
     </div>
-    </div><!-- /page-services -->
-
-    <!-- PAGE: À PROPOS -->
-    <div class="ps-page" id="page-apropos" style="display:none">
-    <!-- ABOUT -->
-    <div class="ps-section">
-      <p class="ps-section-label">L'artisan</p>
-      <h2>Qui suis-je ?</h2>
-      <div class="ps-about">
-        <div class="ps-about-img-wrap">
-          <img class="ps-about-img" src="../img/artisan.jpg" alt="Portrait de l'artisan" loading="lazy">
-        </div>
-        <div class="ps-about-text">
-          <h3 id="pv-about-name" contenteditable="true">Jean Dubois</h3>
-          <p id="pv-about-text" contenteditable="true">Artisan menuisier depuis plus de 15 ans, je travaille le bois avec passion dans mon atelier de Chartres. Formé aux techniques traditionnelles, j'allie savoir-faire ancestral et design contemporain. Chaque meuble que je crée est une pièce unique, fabriquée avec des matériaux soigneusement sélectionnés. Je prends le temps de comprendre votre projet, vos envies et votre espace pour vous proposer la solution la plus adaptée.</p>
-          <div class="ps-about-stats">
-            <div class="ps-about-stat">
-              <div class="ps-about-stat-num">15+</div>
-              <div class="ps-about-stat-label">Années d'expérience</div>
-            </div>
-            <div class="ps-about-stat">
-              <div class="ps-about-stat-num">200+</div>
-              <div class="ps-about-stat-label">Projets réalisés</div>
-            </div>
-            <div class="ps-about-stat">
-              <div class="ps-about-stat-num">98%</div>
-              <div class="ps-about-stat-label">Clients satisfaits</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div><!-- /page-apropos -->
-
-    <!-- PAGE: CONTACT -->
-    <div class="ps-page" id="page-contact" style="display:none">
-    <!-- CTA -->
-    <div class="ps-cta-section">
-      <h2>Un projet en tête ?</h2>
-      <p>Parlons-en autour d'un café. Je me déplace gratuitement pour étudier votre projet et vous faire un devis précis.</p>
-      <span class="ps-cta-btn-large">Me contacter</span>
-    </div>
-    </div><!-- /page-contact -->
-
-    </div><!-- /ps-pages -->
-
-    <!-- FOOTER (always visible) -->
-    <div class="ps-footer" id="pv-footer" contenteditable="true">
-      <span>Jean Dubois · Artisan menuisier à Chartres</span>
-      <div class="ps-footer-links">
-        <a>Mentions légales</a>
-        <a>CGV</a>
-        <a>Contact</a>
-      </div>
-    </div>
-
   </div>
 
-  <!-- ORDER CTA -->
-  <div class="order-cta">
-    <a href="../#commander">
-      Ça me plaît — Je commande
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
-    <p class="order-cta-sub">🔒 Paiement uniquement après validation du résultat final</p>
+  <div class="cta-home">
+    <h3>Un projet en tête ?</h3>
+    <p style="color:var(--text3);margin:8px 0 20px;font-size:14px">Je me déplace gratuitement pour étudier votre projet.</p>
+    <button class="btn btn-primary" onclick="navigate('contact')">Demander un devis →</button>
   </div>
-</section>
+</div>
 
-<!-- ═══════════ SCRIPTS ═══════════ -->
+<!-- ═══════════ PAGE: RÉALISATIONS ═══════════ -->
+<div class="page" id="page-realisations">
+  <div class="page-header">
+    <div class="page-label">Portfolio</div>
+    <h2>Mes réalisations</h2>
+    <p>Chaque projet est unique. Découvrez mon travail par catégorie.</p>
+  </div>
+  <div class="section">
+    <div class="cat-section">
+      <div class="cat-header"><div class="cat-icon">◆</div><div><h3>Meubles sur mesure</h3><span>Tables & mobilier — conception et fabrication artisanale</span></div></div>
+      <div class="gallery">
+        <div class="gallery-item"><div class="gallery-img" style="background-image:url('img/table-design.jpg')"><div class="gallery-overlay"><div class="gallery-info"><div class="gallery-info-title">Table design contemporaine</div><div class="gallery-info-desc">Piètement sculptural · Chêne massif</div></div></div></div></div>
+        <div class="gallery-item"><div class="gallery-img" style="background-image:url('img/atelier-travail.jpg')"><div class="gallery-overlay"><div class="gallery-info"><div class="gallery-info-title">Fabrication en atelier</div><div class="gallery-info-desc">Travail artisanal · Noyer massif</div></div></div></div></div>
+      </div>
+    </div>
+    <div class="cat-section">
+      <div class="cat-header"><div class="cat-icon">◆</div><div><h3>Aménagement intérieur</h3><span>Parquets, agencements, rénovation</span></div></div>
+      <div class="gallery">
+        <div class="gallery-item"><div class="gallery-img" style="background-image:url('img/renovation-interieure.jpg')"><div class="gallery-overlay"><div class="gallery-info"><div class="gallery-info-title">Rénovation pierre & parquet</div><div class="gallery-info-desc">Bâtisse ancienne · Pose complète</div></div></div></div></div>
+        <div class="gallery-item"><div class="gallery-img" style="background-image:url('img/espace-interieur.jpg')"><div class="gallery-overlay"><div class="gallery-info"><div class="gallery-info-title">Espace intérieur contemporain</div><div class="gallery-info-desc">Studio · Agencement ouvert</div></div></div></div></div>
+      </div>
+    </div>
+    <div class="cat-section">
+      <div class="cat-header"><div class="cat-icon">◆</div><div><h3>Espace extérieur</h3><span>Terrasses, portails, structures bois</span></div></div>
+      <div class="gallery">
+        <div class="gallery-item"><div class="gallery-img" style="background-image:url('img/portail-artisanal.jpg')"><div class="gallery-overlay"><div class="gallery-info"><div class="gallery-info-title">Portail artisanal</div><div class="gallery-info-desc">Arche décorative · Bois massif</div></div></div></div></div>
+        <div class="gallery-item"><div class="gallery-img" style="background-image:url('img/portail-domaine.jpg')"><div class="gallery-overlay"><div class="gallery-info"><div class="gallery-info-title">Portail de domaine</div><div class="gallery-info-desc">Double vantaux · Sur mesure</div></div></div></div></div>
+        <div class="gallery-item"><div class="gallery-img" style="background-image:url('img/terrasse-bois.jpg')"><div class="gallery-overlay"><div class="gallery-info"><div class="gallery-info-title">Terrasse & structure bois</div><div class="gallery-info-desc">Construction extérieure complète</div></div></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PAGE: SERVICES ═══════════ -->
+<div class="page" id="page-services">
+  <div class="page-header">
+    <div class="page-label">Prestations</div>
+    <h2>Ce que je peux faire pour vous</h2>
+    <p>De la pièce unique à l'agencement complet, je vous accompagne à chaque étape.</p>
+  </div>
+  <div class="section">
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon">◆</div><h3>Meubles sur mesure</h3><p>Tables, buffets, bureaux, bibliothèques. Dessinés selon vos dimensions. Bois massif, assemblages traditionnels.</p></div>
+      <div class="service-card"><div class="service-icon">◆</div><h3>Aménagement intérieur</h3><p>Parquets, dressings, cuisines. J'optimise chaque centimètre pour des espaces fonctionnels et élégants.</p></div>
+      <div class="service-card"><div class="service-icon">◆</div><h3>Espace extérieur</h3><p>Terrasses, portails, pergolas. Des structures en bois qui résistent au temps.</p></div>
+      <div class="service-card"><div class="service-icon">◆</div><h3>Escaliers</h3><p>Droit, quart tournant, hélicoïdal. Conception et fabrication sur mesure. Sécurité, confort, caractère.</p></div>
+      <div class="service-card"><div class="service-icon">◆</div><h3>Restauration</h3><p>Meubles anciens, boiseries. Restauration à l'identique dans le respect des techniques d'époque.</p></div>
+      <div class="service-card"><div class="service-icon">◆</div><h3>Conseil & étude</h3><p>Un projet en tête ? Je vous conseille sur les essences, les styles et les solutions techniques.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PAGE: À PROPOS ═══════════ -->
+<div class="page" id="page-apropos">
+  <div class="page-header">
+    <div class="page-label">À propos</div>
+    <h2>Un artisan qui maîtrise son art</h2>
+    <p>20 ans de passion pour le bois, au service de vos projets.</p>
+  </div>
+  <div class="section">
+    <div class="about-layout">
+      <div class="about-visual">
+        <div class="about-portrait"><img src="img/atelier-travail.jpg" alt="Pierre Dubois à l'atelier" loading="lazy"></div>
+        <div class="about-certs">
+          <div class="about-cert"><strong>✦</strong> Compagnon du Devoir</div>
+          <div class="about-cert"><strong>✦</strong> Meilleur Ouvrier de France 2015</div>
+          <div class="about-cert"><strong>✦</strong> Label Artisan d'Art</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <h3>La passion du bois depuis l'enfance</h3>
+        <p class="lead">J'ai commencé l'ébénisterie à 16 ans, formé par les Compagnons du Devoir. Ce tour de France m'a transmis l'exigence du travail bien fait, le respect des traditions et le goût de l'innovation.</p>
+        <div class="about-badge">Comment je travaille</div>
+        <div class="process-grid">
+          <div class="process-step"><div class="process-num">1</div><h4>Écoute</h4><p>Je me déplace chez vous</p></div>
+          <div class="process-step"><div class="process-num">2</div><h4>Conception</h4><p>Plans et essences</p></div>
+          <div class="process-step"><div class="process-num">3</div><h4>Fabrication</h4><p>Fait main à Chartres</p></div>
+          <div class="process-step"><div class="process-num">4</div><h4>Pose</h4><p>Installation chez vous</p></div>
+        </div>
+        <div class="about-badge">Essences travaillées</div>
+        <div class="tag-row"><span class="tag">Chêne</span><span class="tag">Noyer</span><span class="tag">Merisier</span><span class="tag">Frêne</span><span class="tag">Orme</span><span class="tag">Érable</span><span class="tag">Poirier</span></div>
+        <div class="stats-row">
+          <div class="stat-item"><div class="stat-num">20+</div><div class="stat-label">Années</div></div>
+          <div class="stat-item"><div class="stat-num">400+</div><div class="stat-label">Projets</div></div>
+          <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Satisfaction</div></div>
+          <div class="stat-item"><div class="stat-num">48h</div><div class="stat-label">Devis</div></div>
+        </div>
+        <div class="zone-info"><strong>Zone d'intervention :</strong> Chartres et alentours (Eure-et-Loir, Yvelines, Loiret). Déplacement gratuit dans un rayon de 50 km.</div>
+      </div>
+    </div>
+    <div class="testimonials">
+      <div class="testimonial"><div class="stars">★★★★★</div><q>Pierre a créé notre bibliothèque sur mesure. Un vrai travail d'artisan. Je recommande.</q><div class="author">Marie & Laurent G.<span> — Chartres</span></div></div>
+      <div class="testimonial"><div class="stars">★★★★★</div><q>Un escalier en noyer, c'était notre rêve. Pierre l'a rendu possible.</q><div class="author">François D.<span> — Nogent-le-Rotrou</span></div></div>
+      <div class="testimonial"><div class="stars">★★★★★</div><q>Table de famille restaurée à l'identique. Un soulagement de savoir qu'il existe encore des artisans de ce niveau.</q><div class="author">Catherine B.<span> — Dreux</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PAGE: CONTACT ═══════════ -->
+<div class="page" id="page-contact">
+  <div class="page-header">
+    <div class="page-label">Contact</div>
+    <h2>Un projet en tête ?</h2>
+    <p>Décrivez-moi votre idée. Je vous réponds sous 48h avec un devis gratuit.</p>
+  </div>
+  <div class="section" style="max-width:600px">
+    <form action="https://formspree.io/f/mjgqprkr" method="POST" class="contact-form">
+      <div class="form-row"><input type="text" name="name" placeholder="Votre nom" required><input type="email" name="email" placeholder="Votre email" required></div>
+      <div class="form-row"><input type="text" name="phone" placeholder="Votre téléphone"><input type="text" name="city" placeholder="Votre ville"></div>
+      <textarea name="message" placeholder="Décrivez votre projet..." rows="5" required></textarea>
+      <button type="submit">Recevoir un devis gratuit →</button>
+      <p class="form-note">🔒 Réponse sous 48h · Sans engagement · Déplacement gratuit</p>
+    </form>
+    <div class="contact-info">
+      <h4>Pierre Dubois</h4>
+      <p>12 rue des Artisans, 28000 Chartres<br>02 37 00 00 00 · contact@pierredubois.fr<br>Lundi – Vendredi · 8h – 18h</p>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div><div class="footer-brand">Pierre Dubois</div><div class="footer-info">Menuisier Ébéniste<br>Chartres, Eure-et-Loir</div></div>
+  <div class="footer-links">
+    <a onclick="navigate('realisations')">Réalisations</a><a onclick="navigate('services')">Services</a><a onclick="navigate('apropos')">À propos</a><a onclick="navigate('contact')">Contact</a>
+  </div>
+  <div class="footer-bottom">© 2026 Pierre Dubois · SIRET 123 456 789 00010</div>
+</footer>
+
 <script>
-  // ── PAGE NAVIGATION ──
-  var currentPage = 'accueil';
-  function showPage(name) {
-    if (name === currentPage) return;
-    // hide current
-    var cur = document.getElementById('page-' + currentPage);
-    if (cur) cur.style.display = 'none';
-    // show target
-    var target = document.getElementById('page-' + name);
-    if (target) {
-      target.style.display = 'block';
-      // re-trigger animation
-      target.style.animation = 'none';
-      target.offsetHeight;
-      target.style.animation = '';
-    }
-    // update active link
-    document.querySelectorAll('.ps-nav-link').forEach(function(l) {
-      l.classList.remove('active');
-      if (l.getAttribute('data-page') === name) l.classList.add('active');
-    });
-    currentPage = name;
-    // scroll to top of preview
-    document.querySelector('.preview-site').scrollIntoView({behavior:'smooth',block:'start'});
-  }
-
-  var g = function(id) {
-    var e = document.getElementById(id);
-    return e ? e.value.trim() : '';
-  };
-  var s = function(id, t) {
-    var e = document.getElementById(id);
-    if (e && e.textContent !== t) e.textContent = t;
-  };
-
-  function up() {
-    var name   = g('gn-name')   || 'Jean Dubois',
-        job    = g('gn-job')    || 'Menuisier ébéniste',
-        city   = g('gn-city')   || 'Chartres',
-        hl     = g('gn-headline') || 'Des meubles qui traversent les générations',
-        desc   = g('gn-desc')   || 'Artisan menuisier passionné, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer et s\'intégrer parfaitement dans votre intérieur.',
-        s1     = g('gn-s1')     || 'Meubles sur mesure',
-        s2     = g('gn-s2')     || 'Rénovation de meubles',
-        s3     = g('gn-s3')     || 'Agencement intérieur';
-
-    // Logo = last name
-    var parts = name.trim().split(/\s+/);
-    var logo = parts.length > 1 ? parts[parts.length - 1].toUpperCase() : (name || 'DUBOIS').toUpperCase();
-    s('pv-logo', logo);
-
-    // Badge = Job · City
-    var badge = job.charAt(0).toUpperCase() + job.slice(1);
-    if (city) s('pv-badge', badge + ' · ' + city);
-    else s('pv-badge', badge);
-
-    // Headline & description
-    s('pv-headline', hl);
-    s('pv-desc', desc);
-
-    // Services
-    s('pv-s1', s1);
-    s('pv-s2', s2);
-    s('pv-s3', s3);
-
-    // About
-    s('pv-about-name', name);
-
-    var aboutText = 'Artisan ' + job + ' depuis plus de 15 ans, je travaille avec passion dans mon atelier' + (city ? ' à ' + city : '') + '. Formé aux techniques traditionnelles, j\'allie savoir-faire ancestral et design contemporain. Chaque pièce que je crée est unique, fabriquée avec des matériaux soigneusement sélectionnés. Je prends le temps de comprendre votre projet, vos envies et votre espace pour vous proposer la solution la plus adaptée.';
-    s('pv-about-text', aboutText);
-
-    // Footer
-    s('pv-footer', name + ' · Artisan ' + job + (city ? ' à ' + city : ''));
-
-    // Save to localStorage
-    try {
-      var d = {};
-      ['gn-name','gn-job','gn-city','gn-headline','gn-desc','gn-s1','gn-s2','gn-s3'].forEach(function(k) {
-        d[k] = g(k);
-      });
-      localStorage.setItem('template-artisan-demo-v4', JSON.stringify(d));
-    } catch(e) {}
-  }
-
-  // Init
-  (function() {
-    var hasData = false;
-    try {
-      var raw = localStorage.getItem('template-artisan-demo-v4');
-      if (raw) {
-        var d = JSON.parse(raw);
-        for (var k in d) {
-          var e = document.getElementById(k);
-          if (e && d[k]) { e.value = d[k]; hasData = true; }
-        }
-      }
-    } catch(e) {}
-
-    if (!hasData) {
-      document.getElementById('gn-name').value     = 'Jean Dubois';
-      document.getElementById('gn-job').value      = 'Menuisier ébéniste';
-      document.getElementById('gn-city').value     = 'Chartres';
-      document.getElementById('gn-headline').value = 'Des meubles qui traversent les générations';
-      document.getElementById('gn-desc').value     = 'Artisan menuisier passionné, je crée des meubles sur mesure avec des bois nobles et des finitions soignées. Chaque pièce est unique, pensée pour durer et s\'intégrer parfaitement dans votre intérieur.';
-      document.getElementById('gn-s1').value       = 'Meubles sur mesure';
-      document.getElementById('gn-s2').value       = 'Rénovation de meubles';
-      document.getElementById('gn-s3').value       = 'Agencement intérieur';
-    }
-
-    up();
-
-    // Listen to contenteditable changes and sync back to form
-    document.querySelectorAll('[contenteditable]').forEach(function(el) {
-      el.addEventListener('input', function() {
-        var map = {
-          'pv-logo':       null,
-          'pv-badge':      null,
-          'pv-headline':   'gn-headline',
-          'pv-desc':       'gn-desc',
-          'pv-s1':         'gn-s1',
-          'pv-s2':         'gn-s2',
-          'pv-s3':         'gn-s3',
-          'pv-about-name': 'gn-name',
-          'pv-about-text': null,
-          'pv-footer':     null
-        };
-        var formId = map[el.id];
-        if (formId) {
-          var input = document.getElementById(formId);
-          if (input) input.value = el.textContent;
-        }
-        up();
-      });
-    });
-  })();
+function navigate(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelectorAll('.nav-links a[data-page]').forEach(a=>a.classList.remove('active'));
+  var link=document.querySelector('.nav-links a[data-page="'+page+'"]');
+  if(link)link.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 </script>
 
 </body>
