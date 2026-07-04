@@ -180,6 +180,12 @@ body::after{content:'';position:fixed;inset:0;opacity:.005;pointer-events:none;z
 .example-card:nth-child(2){animation-delay:.15s}
 .example-card:nth-child(3){animation-delay:.25s}
 
+/* PAGE SYSTEM */
+.page{display:none}
+.page.active{display:block;animation:fadeUp .35s ease-out both}
+.nav-links a.nav-link{cursor:pointer}
+.nav-links a.nav-link.active{color:var(--accent);font-weight:600}
+
 @media(max-width:768px){
   .nav{padding:12px 18px}.nav-links{gap:14px}.nav-links a{font-size:11px}
   .hero{padding:64px 20px 0}.hero h1{font-size:24px}.hero p.sub{font-size:14px}
@@ -204,22 +210,24 @@ body::after{content:'';position:fixed;inset:0;opacity:.005;pointer-events:none;z
 <body>
 
 <nav class="nav">
-  <div class="nav-brand">BOT<span>ARMORY</span></div>
+  <div class="nav-brand" onclick="navigate('accueil')" style="cursor:pointer">BOT<span>ARMORY</span></div>
   <div class="nav-links">
-    <a href="#produit">Le produit</a>
-    <a href="#exemples">Exemples</a>
-    <a href="#tarif">390€</a>
-    <a href="#demarrer" class="nav-cta">Démarrer</a>
+    <a onclick="navigate('exemples')" class="nav-link" data-page="exemples">Exemples</a>
+    <a onclick="navigate('tarifs')" class="nav-link" data-page="tarifs">390€</a>
+    <a onclick="navigate('contact')" class="nav-cta nav-link" data-page="contact">Démarrer</a>
   </div>
 </nav>
+
+<!-- ═══════════ PAGE: ACCUEIL ═══════════ -->
+<div class="page active" id="page-accueil">
 
 <header class="hero">
   <div class="hero-badge"><span class="hero-badge-dot"></span> Site livré en 48h</div>
   <h1>Un <span>vrai site web</span> pour votre artisanat</h1>
   <p class="sub">Vos photos, votre métier, votre histoire. Je crée votre site et je vous rends visible sur Google.</p>
   <div class="hero-actions">
-    <a href="#demarrer" class="btn-primary">Recevoir un devis gratuit →</a>
-    <a href="#exemples" class="btn-secondary">Voir des exemples</a>
+    <a onclick="navigate('contact')" class="btn-primary" style="cursor:pointer">Recevoir un devis gratuit →</a>
+    <a onclick="navigate('exemples')" class="btn-secondary" style="cursor:pointer">Voir des exemples</a>
   </div>
   <div class="hero-preview">
     <div class="hero-browser">
@@ -254,6 +262,10 @@ body::after{content:'';position:fixed;inset:0;opacity:.005;pointer-events:none;z
     <div class="highlight"><div class="highlight-icon">📍</div><h4>Trouvé sur Google</h4><p>Fiche Google My Business créée et optimisée. Vos clients vous trouvent.</p></div>
   </div>
 </div>
+</div><!-- /page-accueil -->
+
+<!-- ═══════════ PAGE: EXEMPLES ═══════════ -->
+<div class="page" id="page-exemples">
 
 <div id="exemples" class="section section-dark">
   <p class="section-label">Exemples</p>
@@ -371,6 +383,10 @@ body::after{content:'';position:fixed;inset:0;opacity:.005;pointer-events:none;z
     <div class="guarantee-item"><span class="guarantee-icon">🎓</span> Tuto vidéo 5 min offert</div>
   </div>
 </div>
+</div><!-- /page-exemples -->
+
+<!-- ═══════════ PAGE: TARIFS ═══════════ -->
+<div class="page" id="page-tarifs">
 
 <div id="tarif" class="section">
   <p class="section-label">Comparaison</p>
@@ -403,6 +419,10 @@ body::after{content:'';position:fixed;inset:0;opacity:.005;pointer-events:none;z
     <details class="faq-item"><summary>Et après la livraison ?</summary><p>Rien. Le site est hébergé et à jour. Si vous voulez modifier un texte ou une photo, vous me le dites et je le fais.</p></details>
   </div>
 </div>
+</div><!-- /page-tarifs -->
+
+<!-- ═══════════ PAGE: CONTACT ═══════════ -->
+<div class="page" id="page-contact">
 
 <div id="demarrer" class="cta-section">
   <h2>Prêt à avoir un vrai site ?</h2>
@@ -415,11 +435,23 @@ body::after{content:'';position:fixed;inset:0;opacity:.005;pointer-events:none;z
     <p class="form-note">🔒 Réponse sous 24h · Aucun spam · Aucun engagement</p>
   </form>
 </div>
+</div><!-- /page-contact -->
 
 <footer class="footer">
   <span>© 2026 BotArmory · Sites web pour artisans</span>
-  <div class="footer-links"><a href="#">Mentions légales</a><a href="#">CGV</a><a href="#demarrer">Contact</a></div>
+  <div class="footer-links"><a href="#">Mentions légales</a><a href="#">CGV</a><a onclick="navigate('contact')" style="cursor:pointer">Contact</a></div>
 </footer>
+
+<script>
+function navigate(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(a=>a.classList.remove('active'));
+  var link=document.querySelector('.nav-link[data-page="'+page+'"]');
+  if(link)link.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
 
 </body>
 </html>
