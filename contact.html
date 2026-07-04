@@ -3,60 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Contactez Marius Lagrue — BotArmory. Site web pour artisans en 48h. Devis gratuit, paiement après validation.">
-<title>Contact — BotArmory | Devis site artisan gratuit</title>
-<meta property="og:title" content="Contact — BotArmory">
-<meta property="og:description" content="Recevez un devis pour votre site d'artisan. Réponse sous 24h.">
-<meta property="og:url" content="https://botarmory.com/contact.html">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#ffffff">
+<meta name="description" content="Contactez BotArmory pour un devis site artisan gratuit. Réponse sous 24h.">
+<title>Contact — BotArmory</title>
 <link rel="canonical" href="https://botarmory.com/contact.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
 <style>
-.contact-form{max-width:460px;margin:0 auto;text-align:left}
-.form-row{display:flex;gap:10px;margin-bottom:10px}
-.contact-form input,.contact-form textarea{width:100%;padding:13px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-family:inherit;font-size:14px;outline:none;transition:border-color .2s}
-.contact-form input:focus,.contact-form textarea:focus{border-color:var(--accent)}
-.contact-form textarea{resize:vertical;min-height:80px;margin-bottom:12px}
-.contact-form button{display:block;width:100%;background:var(--accent);color:#fff;font-weight:700;font-size:15px;padding:14px;border-radius:var(--r);border:none;cursor:pointer;font-family:inherit;transition:background .2s;box-shadow:0 2px 12px rgba(79,70,229,.1)}
-.contact-form button:hover{background:var(--accent2)}
-.form-note{text-align:center;font-size:11px;color:var(--text4);margin-top:12px}
-@media(max-width:768px){.form-row{flex-direction:column;gap:10px}}
+.site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 24px}
+.logo{font-weight:800;font-size:18px;letter-spacing:.04em;color:#111318;text-decoration:none}
+.logo span{color:#4f46e5}
+.main-nav{display:flex;gap:24px;align-items:center}
+.main-nav a{font-size:14px;color:#3e414a;text-decoration:none;font-weight:500}
+.main-nav a:hover{color:#111318}
+.btn-cta{background:#4f46e5;color:#fff!important;padding:9px 20px;border-radius:8px;font-weight:600!important;font-size:13px!important}
+.contact-wrap{padding:100px 24px 60px;max-width:480px;margin:0 auto;text-align:center}
+.contact-wrap h2{font-size:28px;font-weight:800;margin-bottom:8px}
+.contact-wrap .sub{font-size:15px;color:#6b6f7c;margin-bottom:36px}
+.form-group{margin-bottom:12px}
+.form-group input,.form-group textarea{width:100%;padding:13px 16px;background:#f8f9fb;border:1px solid #e5e7eb;border-radius:8px;font-family:inherit;font-size:14px;outline:none;color:#111318}
+.form-group input:focus,.form-group textarea:focus{border-color:#4f46e5}
+.form-group textarea{min-height:80px;resize:vertical}
+.form-row{display:flex;gap:10px}
+.form-row .form-group{flex:1}
+.btn-submit{width:100%;background:#4f46e5;color:#fff;font-weight:700;font-size:15px;padding:14px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;box-shadow:0 2px 12px rgba(79,70,229,.2)}
+.form-note{font-size:11px;color:#9ca0ad;margin-top:12px}
+.site-footer{max-width:1100px;margin:0 auto;padding:32px 24px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#9ca0ad;border-top:1px solid #f0f2f5}
+.site-footer a{color:#6b6f7c;text-decoration:none;margin-left:20px}
+@media(max-width:768px){.form-row{flex-direction:column;gap:12px}.header-inner{padding:12px 16px}.main-nav{gap:14px}.main-nav a{font-size:12px}}
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <a href="/" class="nav-brand">BOT<span>ARMORY</span></a>
-  <div class="nav-links">
-    <a href="/exemples.html">Exemples</a>
-    <a href="/tarifs.html">1090€</a>
-    <a href="/contact.html" class="nav-cta">Démarrer</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo">Bot<span>Armory</span></a>
+    <nav class="main-nav">
+      <a href="/exemples.html">Exemples</a>
+      <a href="/tarifs.html">Tarifs</a>
+      <a href="/contact.html" class="btn-cta">Démarrer</a>
+    </nav>
   </div>
-</nav>
+</header>
 
-<div class="cta-section" style="padding-top:100px">
-  <h2>Prêt à avoir un vrai site ?</h2>
-  <p>Remplissez ce formulaire. Je vous réponds dans la journée avec un devis personnalisé.</p>
-  <form action="https://formspree.io/f/mjgqprkr" method="POST" class="contact-form" style="margin-top:32px">
-    <div class="form-row"><input type="text" name="name" placeholder="Votre nom" required><input type="email" name="email" placeholder="Votre email" required></div>
-    <div class="form-row"><input type="text" name="metier" placeholder="Votre métier"><input type="text" name="ville" placeholder="Votre ville"></div>
-    <textarea name="message" placeholder="Parlez-moi de votre activité... (facultatif)" rows="3"></textarea>
-    <button type="submit">Recevoir un devis →</button>
-    <p class="form-note">🔒 Réponse sous 24h · Paiement après validation · Aucun engagement</p>
+<div class="contact-wrap">
+  <h2>Recevoir un devis</h2>
+  <p class="sub">3 photos de votre travail. Je vous réponds dans la journée.</p>
+  <form action="https://formspree.io/f/mjgqprkr" method="POST">
+    <div class="form-row">
+      <div class="form-group"><input type="text" name="name" placeholder="Votre nom" required></div>
+      <div class="form-group"><input type="email" name="email" placeholder="Votre email" required></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><input type="text" name="metier" placeholder="Votre métier"></div>
+      <div class="form-group"><input type="text" name="ville" placeholder="Votre ville"></div>
+    </div>
+    <div class="form-group"><textarea name="message" placeholder="Parlez-moi de votre activité..." rows="3"></textarea></div>
+    <button type="submit" class="btn-submit">Recevoir un devis →</button>
+    <p class="form-note">🔒 Réponse sous 24h · Paiement APRÈS validation · Aucun engagement</p>
   </form>
 </div>
 
-<footer class="footer">
+<footer class="site-footer">
   <span>© 2026 BotArmory — Marius Lagrue</span>
-  <div class="footer-links">
-    <a href="/mentions-legales.html">Mentions légales</a>
-    <a href="/cgv.html">CGV</a>
-    <a href="/contact.html">Contact</a>
-  </div>
+  <div><a href="/mentions-legales.html">Mentions</a><a href="/cgv.html">CGV</a><a href="/contact.html">Contact</a></div>
 </footer>
 </body>
 </html>

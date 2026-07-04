@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Site internet artisan pas cher : création site web menuisier, électricien, plombier. Site professionnel + SEO local + devis en ligne. Paiement après validation.">
-<title>BotArmory — Création site web artisan | Site internet menuisier pas cher</title>
+<title>BotArmory — Sites web pour artisans</title>
 <meta property="og:title" content="BotArmory — Sites web pour artisans">
-<meta property="og:description" content="Site vitrine avec vos photos, livré en 5-10 jours. Google My Business offert. Paiement après validation. 1090€.">
+<meta property="og:description" content="Site vitrine avec vos photos. SEO local, Google Business, maintenance incluse. 1090€. Paiement APRÈS validation.">
 <meta property="og:url" content="https://botarmory.com/">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#ffffff">
@@ -16,253 +16,229 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
 <style>
-.hero-site-preview .sp-logo{font-weight:800;font-size:15px;letter-spacing:.05em;margin-bottom:20px;color:var(--text2)}
-.hero-site-preview .sp-logo span{color:#c4884d}
-.hero-site-preview .sp-h1{font-weight:800;font-size:22px;line-height:1.2;margin-bottom:8px;color:var(--text)}
-.hero-site-preview .sp-sub{font-size:12px;color:var(--text4);margin-bottom:16px;max-width:340px;margin-left:auto;margin-right:auto}
-.hero-site-preview .sp-cta{display:inline-block;background:#c4884d;color:#fff;font-weight:700;font-size:12px;padding:9px 20px;border-radius:5px}
-.hero-site-preview .sp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:20px;max-width:500px;margin-left:auto;margin-right:auto}
-.hero-site-preview .sp-img{aspect-ratio:4/3;background:var(--bg3);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid var(--border)}
-.pain-point{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:24px;text-align:center}
-.pain-point h4{font-size:14px;color:var(--text);margin-bottom:6px}
-.pain-point p{font-size:13px;color:var(--text3);line-height:1.5}
-.check-list{list-style:none;padding:0}
-.check-list li{padding:12px 0;border-bottom:1px solid var(--border2);display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--text2)}
-.check-list li::before{content:"✓";color:var(--green);font-weight:700;font-size:16px;flex-shrink:0}
-.faq-item{border-bottom:1px solid var(--border2);padding:20px 0}
-.faq-item h4{font-size:15px;color:var(--text);margin-bottom:6px;cursor:pointer}
-.faq-item p{font-size:13px;color:var(--text3);line-height:1.6}
-.price-block{background:var(--bg2);border:2px solid #4f46e5;border-radius:16px;padding:40px 32px;text-align:center;max-width:480px;margin:0 auto}
-.price-amount{font-size:48px;font-weight:900;color:var(--text);line-height:1}
-.price-amount span{font-size:18px;font-weight:500;color:var(--text3)}
-.guarantee-badge{display:inline-block;background:#4f46e5;color:#fff;font-weight:700;font-size:12px;padding:6px 16px;border-radius:20px;margin-top:12px}
+/* === HEADER & NAV === */
+.site-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 24px}
+.logo{font-weight:800;font-size:18px;letter-spacing:.04em;color:#111318;text-decoration:none}
+.logo span{color:#4f46e5}
+.main-nav{display:flex;gap:24px;align-items:center}
+.main-nav a{font-size:14px;color:#3e414a;text-decoration:none;font-weight:500;transition:color .15s}
+.main-nav a:hover{color:#111318}
+.btn-cta{background:#4f46e5;color:#fff!important;padding:9px 20px;border-radius:8px;font-weight:600!important;font-size:13px!important}
+.btn-cta:hover{background:#4338ca!important;color:#fff!important}
+
+/* === HERO === */
+.hero-home{padding:100px 24px 80px;text-align:center;background:linear-gradient(180deg,#f8f9fb 0%,#fff 100%)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#3e414a;background:#fff;border:1px solid #e5e7eb;padding:5px 14px;border-radius:20px;margin-bottom:20px}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:#16a34a}
+.hero-home h1{font-size:clamp(28px,5vw,48px);font-weight:900;letter-spacing:-.03em;line-height:1.15;margin-bottom:16px;color:#111318}
+.hero-home h1 span{color:#4f46e5}
+.hero-sub{font-size:17px;color:#6b6f7c;max-width:500px;margin:0 auto 32px;line-height:1.5}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.btn-main{display:inline-block;background:#4f46e5;color:#fff!important;font-weight:700;font-size:15px;padding:14px 28px;border-radius:10px;text-decoration:none;transition:background .2s,transform .15s;box-shadow:0 2px 16px rgba(79,70,229,.2)}
+.btn-main:hover{background:#4338ca;transform:translateY(-1px)}
+.btn-ghost{display:inline-block;color:#3e414a!important;font-weight:600;font-size:15px;padding:14px 28px;border-radius:10px;text-decoration:none;border:1px solid #e5e7eb;background:#fff;transition:border-color .2s}
+.btn-ghost:hover{border-color:#4f46e5}
+.hero-trust{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#6b6f7c;font-weight:500}
+
+/* === SECTIONS === */
+.section{padding:80px 24px;max-width:1100px;margin:0 auto}
+.section h2{font-size:clamp(24px,4vw,32px);font-weight:800;letter-spacing:-.02em;text-align:center;margin-bottom:12px;color:#111318}
+.section-sub{text-align:center;font-size:15px;color:#6b6f7c;max-width:500px;margin:0 auto 48px;line-height:1.6}
+.section-alt{background:#f8f9fb;max-width:100%;padding:80px 24px}
+.section-alt h2,.section-alt .section-sub{max-width:1100px;margin-left:auto;margin-right:auto}
+.section-alt h2{text-align:center}
+
+/* === CARDS === */
+.cards-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:32px 28px;transition:box-shadow .2s,transform .15s}
+.card:hover{box-shadow:0 4px 20px rgba(0,0,0,.06);transform:translateY(-2px)}
+.card h3{font-size:17px;font-weight:700;margin-bottom:8px;color:#111318}
+.card p{font-size:14px;color:#6b6f7c;line-height:1.5;margin-bottom:16px}
+.card a{font-size:13px;font-weight:600;color:#4f46e5;text-decoration:none}
+
+/* === DEMOS === */
+.demos{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:24px;max-width:900px;margin:0 auto}
+.demo-card{display:block;text-decoration:none;color:inherit;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;background:#fff;transition:box-shadow .2s}
+.demo-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.demo-browser-bar{display:flex;align-items:center;gap:5px;padding:10px 14px;background:#f0f2f5;border-bottom:1px solid #e5e7eb;font-size:10px;color:#9ca0ad}
+.demo-browser-bar span{width:8px;height:8px;border-radius:50%;background:#ddd}
+.demo-browser-bar span:nth-child(1){background:#ff5f57}
+.demo-browser-bar span:nth-child(2){background:#febc2e}
+.demo-browser-bar span:nth-child(3){background:#28c840}
+.demo-preview{padding:28px 20px;text-align:center;background:linear-gradient(180deg,#fafcfd,#f0f3f5)}
+.demo-logo{font-weight:800;font-size:14px;letter-spacing:.03em;color:#3e414a;margin-bottom:14px}
+.demo-logo span{color:#c4884d}
+.demo-title{font-weight:800;font-size:18px;margin-bottom:16px;color:#111318}
+.demo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-width:400px;margin:0 auto}
+.demo-grid div{aspect-ratio:4/3;border-radius:5px;border:1px solid #e5e7eb}
+.demo-tag{background:#f0f2f5;padding:12px 16px;border-top:1px solid #e5e7eb;font-size:11px;font-weight:600;color:#16a34a}
+
+/* === PRICE === */
+.price-block{max-width:420px;margin:0 auto;text-align:center;background:#fff;border:2px solid #4f46e5;border-radius:16px;padding:40px 32px}
+.price-num{font-size:52px;font-weight:900;letter-spacing:-.03em;color:#111318;line-height:1}
+.price-num span{font-size:20px;font-weight:500;color:#6b6f7c}
+.price-features{list-style:none;text-align:left;max-width:280px;margin:24px auto}
+.price-features li{padding:8px 0;border-bottom:1px solid #f0f2f5;font-size:14px;color:#3e414a;display:flex;align-items:center;gap:8px}
+.price-features li::before{content:'✓';color:#16a34a;font-weight:700}
+.guarantee{display:inline-block;background:#4f46e5;color:#fff;font-weight:700;font-size:13px;padding:7px 18px;border-radius:20px;margin-top:8px}
+
+/* === ABOUT === */
+.about{display:flex;gap:28px;align-items:flex-start;max-width:600px;margin:0 auto}
+.about-avatar{flex-shrink:0;width:72px;height:72px;border-radius:50%;background:#f0f2f5;border:2px solid #4f46e5;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#4f46e5}
+.about p{color:#3e414a;line-height:1.7;margin-bottom:10px;font-size:14px}
+
+/* === CTA BANNER === */
+.cta-banner{padding:80px 24px;text-align:center;background:#f8f9fb}
+.cta-banner h2{font-size:clamp(22px,4vw,30px);font-weight:800;letter-spacing:-.02em;margin-bottom:10px;color:#111318}
+.cta-banner p{font-size:15px;color:#6b6f7c;margin-bottom:28px}
+
+/* === FOOTER === */
+.site-footer{max-width:1100px;margin:0 auto;padding:32px 24px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#9ca0ad;border-top:1px solid #f0f2f5}
+.site-footer a{color:#6b6f7c;text-decoration:none;margin-left:20px}
+
+@media(max-width:768px){
+  .header-inner{padding:12px 16px}
+  .main-nav{gap:14px}
+  .main-nav a{font-size:12px}
+  .hero-home{padding:64px 16px 48px}
+  .hero-home h1{font-size:26px}
+  .hero-trust{gap:14px;font-size:11px}
+  .demos{grid-template-columns:1fr}
+  .about{flex-direction:column;align-items:center;text-align:center}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BotArmory","description":"Création de sites web pour artisans. Site vitrine + SEO local + devis en ligne. 1090€. Paiement après validation.","url":"https://botarmory.com/","provider":{"@type":"Person","name":"Marius Lagrue"},"offers":{"@type":"Offer","price":"1090","priceCurrency":"EUR"}}</script>
 </head>
 <body>
 
-<nav class="nav">
-  <a href="/" class="nav-brand">BOT<span>ARMORY</span></a>
-  <div class="nav-links">
-    <a href="/exemples.html">Exemples</a>
-    <a href="/tarifs.html">1090€</a>
-    <a href="/contact.html" class="nav-cta">Démarrer</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="hero-badge"><span class="hero-badge-dot"></span> Site livré en 5-10 jours</div>
-  <h1>Un <span>vrai site web</span> pour votre artisanat</h1>
-  <p class="sub">Vos photos, votre métier. On crée votre site, on s'occupe du référencement Google, vous restez à l'atelier.</p>
-  <div class="hero-actions">
-    <a href="/contact.html" class="btn-primary">Recevoir un devis →</a>
-    <a href="/exemples.html" class="btn-secondary">Voir des exemples</a>
-  </div>
-  <div class="hero-preview">
-    <div class="hero-browser">
-      <div class="hero-browser-bar"><span class="hero-browser-dot r"></span><span class="hero-browser-dot y"></span><span class="hero-browser-dot g"></span><span class="hero-browser-url">dubois-menuiserie.fr</span></div>
-      <div class="hero-site-preview">
-        <div class="sp-logo">◆ BOISERIES <span>DUBOIS</span></div>
-        <div class="sp-h1">Des meubles qui traversent les générations</div>
-        <div class="sp-sub">Artisan ébéniste depuis 1998. Meubles, escaliers, agencements sur mesure.</div>
-        <div class="sp-cta">Demander un devis →</div>
-        <div class="sp-grid">
-          <div class="sp-img" style="background:url('/demo/img/table-design.jpg') center/cover no-repeat;position:relative"><span style="position:absolute;bottom:3px;left:4px;font-size:7px;color:#fff;background:rgba(0,0,0,.5);padding:1px 4px;border-radius:2px">Meubles</span></div>
-          <div class="sp-img" style="background:url('/demo/img/portail-domaine.jpg') center/cover no-repeat;position:relative"><span style="position:absolute;bottom:3px;left:4px;font-size:7px;color:#fff;background:rgba(0,0,0,.5);padding:1px 4px;border-radius:2px">Portails</span></div>
-          <div class="sp-img" style="background:url('/demo/img/terrasse-bois.jpg') center/cover no-repeat;position:relative"><span style="position:absolute;bottom:3px;left:4px;font-size:7px;color:#fff;background:rgba(0,0,0,.5);padding:1px 4px;border-radius:2px">Terrasses</span></div>
-          <div class="sp-img" style="background:url('/demo/img/atelier-travail.jpg') center/cover no-repeat;position:relative"><span style="position:absolute;bottom:3px;left:4px;font-size:7px;color:#fff;background:rgba(0,0,0,.5);padding:1px 4px;border-radius:2px">Atelier</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-trust">
-    <span>✦ Photos de VOS créations</span><span>✦ SEO local inclus</span><span>✦ Google My Business offert</span><span>✦ Paiement APRÈS validation</span>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo">Bot<span>Armory</span></a>
+    <nav class="main-nav">
+      <a href="/exemples.html">Exemples</a>
+      <a href="/tarifs.html">Tarifs</a>
+      <a href="/contact.html" class="btn-cta">Démarrer</a>
+    </nav>
   </div>
 </header>
 
-<!-- STATS -->
-<div class="section">
-  <div class="stats-bar">
-    <div class="stat-item"><div class="stat-num accent">5-10j</div><div class="stat-label">Livraison</div></div>
-    <div class="stat-item"><div class="stat-num gold">1090€</div><div class="stat-label">Tout compris</div></div>
-    <div class="stat-item"><div class="stat-num green">✓</div><div class="stat-label">Paiement après validation</div></div>
-    <div class="stat-item"><div class="stat-num gold">1 an</div><div class="stat-label">Maintenance incluse</div></div>
+<section class="hero-home">
+  <div class="hero-badge">Site livré en 5-10 jours</div>
+  <h1>Un <span>vrai site web</span> pour votre artisanat</h1>
+  <p class="hero-sub">Vos photos, votre métier. On crée tout. Vous validez, vous payez.</p>
+  <div class="hero-btns">
+    <a href="/contact.html" class="btn-main">Recevoir un devis →</a>
+    <a href="/exemples.html" class="btn-ghost">Voir des exemples</a>
   </div>
-</div>
-
-<!-- LE PROBLÈME -->
-<div class="section section-dark">
-  <p class="section-label">Le problème</p>
-  <h2>68% des artisans n'ont pas le temps de gérer un site</h2>
-  <p>Et 45% ont déjà été contactés par des agences aux promesses floues. Résultat : votre travail n'est pas visible en ligne, et vous perdez des clients chaque jour.</p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:40px;max-width:800px;margin-left:auto;margin-right:auto">
-    <div class="pain-point"><h4>😞 Pas le temps</h4><p>Vous êtes à l'atelier 10h par jour. Mettre à jour un site ou poster sur les réseaux, c'est la dernière chose dont vous avez envie.</p></div>
-    <div class="pain-point"><h4>😟 Peur de l'arnaque</h4><p>Des agences vous promettent la première page Google pour 3000€. Vous connaissez un artisan qui a payé et n'a rien vu.</p></div>
-    <div class="pain-point"><h4>😤 Trop compliqué</h4><p>Wix, WordPress, Shopify… On vous dit que c'est simple, mais vous n'avez pas 3 week-ends à perdre à cliquer.</p></div>
+  <div class="hero-trust">
+    <span>Photos RÉELLES</span>
+    <span>SEO local inclus</span>
+    <span>Google Business offert</span>
+    <span>Paiement APRÈS validation</span>
   </div>
-</div>
+</section>
 
-<!-- LA SOLUTION -->
-<div class="section">
-  <p class="section-label">La solution</p>
-  <h2>BotArmory : votre site, sans vous en occuper</h2>
-  <p>On crée tout. Vous validez. Vous payez. C'est tout.</p>
-  <div class="highlights" style="margin-top:48px">
-    <div class="highlight"><h4> Site clé en main</h4><p>5 pages, vos photos, votre histoire. Un site professionnel qui vous ressemble, pas un template générique.</p></div>
-    <div class="highlight"><h4> Trouvé sur Google</h4><p>Fiche Google Business créée et optimisée. Mots-clés locaux. Vos clients vous trouvent sans payer de pub.</p></div>
-    <div class="highlight"><h4> Zéro maintenance</h4><p>Vous nous envoyez vos modifications par WhatsApp, on s'en occupe. 1 an de maintenance inclus. Vous restez concentré sur votre atelier.</p></div>
+<section class="section">
+  <h2>Votre site, sans vous en occuper</h2>
+  <p class="section-sub">BotArmory crée des sites web pour artisans. Vous restez à l'atelier.</p>
+  <div class="cards-3">
+    <div class="card">
+      <h3>Site clé en main</h3>
+      <p>5 pages, vos photos, votre histoire. Rien à faire.</p>
+      <a href="/tarifs.html">Voir le détail →</a>
+    </div>
+    <div class="card">
+      <h3>Trouvé sur Google</h3>
+      <p>SEO local, fiche Google Business. Vos clients vous trouvent.</p>
+      <a href="/tarifs.html">Comment ça marche →</a>
+    </div>
+    <div class="card">
+      <h3>Zéro maintenance</h3>
+      <p>Modifications par WhatsApp. 1 an de maintenance inclus.</p>
+      <a href="/tarifs.html">Ce qui est inclus →</a>
+    </div>
   </div>
-</div>
+</section>
 
-<!-- CE QUE VOUS RECEVEZ -->
-<div class="section section-dark">
-  <p class="section-label">Ce que vous recevez</p>
-  <h2>Tout est inclus, rien à ajouter</h2>
-  <ul class="check-list" style="max-width:560px;margin:40px auto 0">
-    <li>Un site vitrine de 5 pages avec vos photos et vos textes</li>
-    <li>Fiche Google My Business créée et optimisée (catégorie, photos, avis)</li>
-    <li>Formulaire de devis en ligne — vos clients vous écrivent directement</li>
-    <li>Intégration WhatsApp — un bouton pour que vos clients vous parlent</li>
-    <li>SEO local complet — mots-clés ville + métier, balises, schema.org</li>
-    <li>1 an de maintenance — modifications illimitées par WhatsApp</li>
-    <li>Design responsive — votre site est beau sur téléphone et ordinateur</li>
-  </ul>
-</div>
-
-<!-- EXEMPLES -->
-<div class="section">
-  <p class="section-label">Exemples</p>
+<section class="section section-alt">
   <h2>De vrais sites, de vrais artisans</h2>
-  <p>Cliquez pour les voir en taille réelle.</p>
-  <div style="margin-top:40px;max-width:900px;margin-left:auto;margin-right:auto">
-
-    <!-- PIERRE DUBOIS -->
-    <a href="/demo/" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;background:#fff;transition:transform .25s,box-shadow .25s;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:32px">
-      <div style="display:flex;align-items:center;gap:6px;padding:10px 16px;background:var(--bg3);border-bottom:1px solid var(--border2)">
-        <span style="width:9px;height:9px;border-radius:50%;background:#ff5f57"></span><span style="width:9px;height:9px;border-radius:50%;background:#febc2e"></span><span style="width:9px;height:9px;border-radius:50%;background:#28c840"></span>
-        <span style="font-size:10px;color:var(--text4);margin-left:6px">pierredubois-menuiserie.fr</span>
-      </div>
-      <div style="padding:32px 20px;text-align:center;background:linear-gradient(180deg,#fafcfd 0%,#f0f3f5 100%)">
-        <div style="font-weight:800;font-size:14px;letter-spacing:.03em;color:var(--text2);margin-bottom:16px">◆ BOISERIES <span style="color:#c4884d">DUBOIS</span></div>
-        <div style="font-weight:800;font-size:20px;margin-bottom:6px;color:var(--text)">Des meubles qui traversent les générations</div>
-        <div style="font-size:11px;color:var(--text4);margin-bottom:14px;max-width:300px;margin-left:auto;margin-right:auto">Artisan ébéniste. Meubles, escaliers, agencements sur mesure.</div>
-        <span style="display:inline-block;background:#c4884d;color:#fff;font-weight:700;font-size:11px;padding:8px 18px;border-radius:5px">Demander un devis →</span>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:16px;max-width:440px;margin-left:auto;margin-right:auto">
-          <div style="aspect-ratio:4/3;border-radius:4px;background:url('/demo/img/table-design.jpg') center/cover no-repeat;border:1px solid var(--border)"></div>
-          <div style="aspect-ratio:4/3;border-radius:4px;background:url('/demo/img/portail-domaine.jpg') center/cover no-repeat;border:1px solid var(--border)"></div>
-          <div style="aspect-ratio:4/3;border-radius:4px;background:url('/demo/img/terrasse-bois.jpg') center/cover no-repeat;border:1px solid var(--border)"></div>
-          <div style="aspect-ratio:4/3;border-radius:4px;background:url('/demo/img/atelier-travail.jpg') center/cover no-repeat;border:1px solid var(--border)"></div>
+  <p class="section-sub">Des sites livrés à des menuisiers. Cliquez pour visiter.</p>
+  <div class="demos">
+    <a href="/demo/" class="demo-card">
+      <div class="demo-browser-bar"><span></span><span></span><span></span> pierredubois-menuiserie.fr</div>
+      <div class="demo-preview">
+        <div class="demo-logo">◆ BOISERIES <span>DUBOIS</span></div>
+        <div class="demo-title">Des meubles qui traversent les générations</div>
+        <div class="demo-grid">
+          <div style="background:url('/demo/img/table-design.jpg') center/cover"></div>
+          <div style="background:url('/demo/img/portail-domaine.jpg') center/cover"></div>
+          <div style="background:url('/demo/img/terrasse-bois.jpg') center/cover"></div>
+          <div style="background:url('/demo/img/atelier-travail.jpg') center/cover"></div>
         </div>
       </div>
-      <div style="background:var(--bg2);padding:14px 18px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-        <span style="font-size:9px;font-weight:600;color:var(--text3);background:var(--bg4);padding:2px 10px;border-radius:10px">Menuiserie</span>
-        <span style="font-size:11px;color:var(--green);font-weight:600">✓ Site livré · Client satisfait</span>
-      </div>
+      <div class="demo-tag">✓ Site livré</div>
     </a>
-
-    <!-- KEVIN SALOU -->
-    <a href="/demo/sabois.html" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;background:#fff;transition:transform .25s,box-shadow .25s;box-shadow:0 2px 12px rgba(0,0,0,.06)">
-      <div style="display:flex;align-items:center;gap:6px;padding:10px 16px;background:var(--bg3);border-bottom:1px solid var(--border2)">
-        <span style="width:9px;height:9px;border-radius:50%;background:#ff5f57"></span><span style="width:9px;height:9px;border-radius:50%;background:#febc2e"></span><span style="width:9px;height:9px;border-radius:50%;background:#28c840"></span>
-        <span style="font-size:10px;color:var(--text4);margin-left:6px">sabois.fr</span>
-      </div>
-      <div style="padding:32px 20px;text-align:center;background:linear-gradient(180deg,#fafcfd 0%,#f0f3f5 100%)">
-        <div style="font-weight:800;font-size:14px;letter-spacing:.03em;color:var(--text2);margin-bottom:16px">◆ SABOIS <span style="color:#c4884d">Menuiserie</span></div>
-        <div style="font-weight:800;font-size:20px;margin-bottom:6px;color:var(--text)">L'alliance du bois et de l'exigence</div>
-        <div style="font-size:11px;color:var(--text4);margin-bottom:14px;max-width:300px;margin-left:auto;margin-right:auto">Agencement, parquet, ouvrages extérieurs. Bonnelles (78).</div>
-        <span style="display:inline-block;background:#c4884d;color:#fff;font-weight:700;font-size:11px;padding:8px 18px;border-radius:5px">Demander un devis →</span>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:16px;max-width:440px;margin-left:auto;margin-right:auto">
-          <div style="aspect-ratio:4/3;border-radius:4px;background:url('/demo/sabois/agencement.jpg') center/cover no-repeat;border:1px solid var(--border)"></div>
-          <div style="aspect-ratio:4/3;border-radius:4px;background:url('/demo/sabois/parquet.jpg') center/cover no-repeat;border:1px solid var(--border)"></div>
-          <div style="aspect-ratio:4/3;border-radius:4px;background:url('/demo/sabois/exterieurs.jpg') center/cover no-repeat;border:1px solid var(--border)"></div>
-          <div style="aspect-ratio:4/3;border-radius:4px;background:url('/demo/sabois/atelier.jpg') center/cover no-repeat;border:1px solid var(--border)"></div>
+    <a href="/demo/sabois.html" class="demo-card">
+      <div class="demo-browser-bar"><span></span><span></span><span></span> sabois.fr</div>
+      <div class="demo-preview">
+        <div class="demo-logo">◆ SABOIS <span>Menuiserie</span></div>
+        <div class="demo-title">L'alliance du bois et de l'exigence</div>
+        <div class="demo-grid">
+          <div style="background:url('/demo/sabois/agencement.jpg') center/cover"></div>
+          <div style="background:url('/demo/sabois/parquet.jpg') center/cover"></div>
+          <div style="background:url('/demo/sabois/exterieurs.jpg') center/cover"></div>
+          <div style="background:url('/demo/sabois/atelier.jpg') center/cover"></div>
         </div>
       </div>
-      <div style="background:var(--bg2);padding:14px 18px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-        <span style="font-size:9px;font-weight:600;color:var(--text3);background:var(--bg4);padding:2px 10px;border-radius:10px">Menuiserie</span>
-        <span style="font-size:11px;color:var(--green);font-weight:600">🏅 JO Paris 2024</span>
-      </div>
+      <div class="demo-tag">🏅 JO Paris 2024</div>
     </a>
   </div>
-  <p style="text-align:center;margin-top:20px;font-size:12px;color:var(--text4)"><a href="/exemples.html" style="color:#4f46e5;text-decoration:none;font-weight:600">Voir plus d'exemples →</a></p>
-</div>
+  <p style="text-align:center;margin-top:24px"><a href="/exemples.html">Voir plus d'exemples →</a></p>
+</section>
 
-<!-- TARIF -->
-<div class="section section-dark">
-  <p class="section-label">Tarif</p>
-  <h2>Un prix. Tout compris. Pas de surprise.</h2>
-  <div class="price-block" style="margin-top:40px">
-    <div class="price-amount">1090<span>€</span></div>
-    <p style="color:var(--text2);margin:8px 0 20px;font-size:14px">Création du site + 1 an de maintenance</p>
-    <ul class="check-list" style="text-align:left;max-width:360px;margin:0 auto 24px">
+<section class="section">
+  <h2>1090€ — tout inclus</h2>
+  <p class="section-sub">Un prix. Pas de surprise. Paiement APRÈS validation.</p>
+  <div class="price-block">
+    <div class="price-num">1090<span>€</span></div>
+    <ul class="price-features">
       <li>Site vitrine 5 pages</li>
       <li>SEO local + Google Business</li>
       <li>1 an d'hébergement</li>
       <li>1 an de maintenance WhatsApp</li>
     </ul>
-    <div class="guarantee-badge">Paiement APRÈS validation</div>
-    <p style="font-size:12px;color:var(--text4);margin-top:12px">Vous ne payez que quand le site vous plaît.</p>
+    <span class="guarantee">Paiement APRÈS validation</span>
   </div>
-</div>
+  <p style="text-align:center;margin-top:24px"><a href="/tarifs.html" class="btn-main">Voir le détail des tarifs →</a></p>
+</section>
 
-<!-- FAQ -->
-<div class="section">
-  <p class="section-label">FAQ</p>
-  <h2>Vos questions, nos réponses</h2>
-  <div style="max-width:640px;margin:40px auto 0">
-    <div class="faq-item">
-      <h4>Combien de temps pour avoir mon site ?</h4>
-      <p>Entre 5 et 10 jours ouvrés après réception de vos photos et textes. On vous envoie une première version, vous validez, on met en ligne.</p>
-    </div>
-    <div class="faq-item">
-      <h4>Est-ce que je peux modifier mon site moi-même ?</h4>
-      <p>Vous n'en avez pas besoin. Vous nous envoyez vos modifications par WhatsApp, et on s'en occupe dans la journée. C'est inclus la première année.</p>
-    </div>
-    <div class="faq-item">
-      <h4>Est-ce que je serai visible sur Google ?</h4>
-      <p>Oui. On optimise votre site pour les recherches locales : "menuisier Bonnelles", "électricien Rambouillet"... On crée et optimise aussi votre fiche Google Business. Vous serez trouvé sans payer de publicité.</p>
-    </div>
-    <div class="faq-item">
-      <h4>Et si je veux changer quelque chose après 1 an ?</h4>
-      <p>La maintenance reste à 20€/mois après la première année. WhatsApp illimité, modifications dans la journée, hébergement inclus.</p>
+<section class="section section-alt">
+  <h2>Qui suis-je</h2>
+  <p class="section-sub">Un artisan qui comprend les artisans.</p>
+  <div class="about">
+    <div class="about-avatar">ML</div>
+    <div>
+      <p><strong>Marius Lagrue</strong> — Apprenti menuisier et développeur. J'ai créé BotArmory parce que les artisans méritent mieux qu'un template Wix ou une agence qui facture 3000€ sans résultat.</p>
+      <p>Chaque site est fait main, avec vos photos et vos mots. Pas de templates génériques, pas de jargon.</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- QUI SUIS-JE -->
-<div class="section">
-  <p class="section-label">Qui suis-je</p>
-  <h2>Un artisan qui comprend les artisans</h2>
-  <p>Je crée des sites simples, élégants, qui vous ramènent des clients.</p>
-  <div style="display:flex;gap:32px;align-items:flex-start;max-width:640px;margin:40px auto 0;flex-wrap:wrap">
-    <div style="flex-shrink:0;width:80px;height:80px;border-radius:50%;background:var(--bg4);border:2px solid #4f46e5;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:#4f46e5">ML</div>
-    <div style="flex:1;min-width:260px">
-      <p style="color:var(--text2);line-height:1.7;margin-bottom:10px;font-size:15px">
-        Je m'appelle <strong style="color:var(--text)">Marius Lagrue</strong>. Apprenti menuisier et développeur. J'ai créé BotArmory pour une raison simple : les artisans méritent mieux qu'un template Wix ou une agence qui facture 3000€ sans résultat.
-      </p>
-      <p style="color:var(--text3);line-height:1.7;font-size:14px">
-        Chaque site est fait main, avec vos photos et vos mots. Pas de templates génériques, pas de jargon technique. Juste un site qui vous ressemble et qui vous ramène des clients.
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- CTA FINAL -->
-<div class="cta-section">
+<section class="cta-banner">
   <h2>Prêt à être visible sur Google ?</h2>
-  <p>Envoyez-nous 3 photos de votre travail. On vous répond dans la journée avec une proposition.</p>
-  <a href="/contact.html" class="btn-primary" style="display:inline-block">Recevoir un devis gratuit →</a>
-  <p class="form-note" style="margin-top:16px">🔒 Réponse sous 24h · Paiement APRÈS validation · Aucun engagement</p>
-</div>
+  <p>3 photos de votre travail suffisent. Réponse sous 24h.</p>
+  <a href="/contact.html" class="btn-main">Recevoir un devis gratuit →</a>
+</section>
 
-<footer class="footer">
+<footer class="site-footer">
   <span>© 2026 BotArmory — Marius Lagrue</span>
-  <div class="footer-links">
+  <div>
     <a href="/mentions-legales.html">Mentions légales</a>
     <a href="/cgv.html">CGV</a>
     <a href="/contact.html">Contact</a>
   </div>
 </footer>
+
 </body>
 </html>
