@@ -3,56 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
-<meta name="description" content="BotArmory — Sites web pour artisans. Photos réelles, livraison 48h, Google My Business offert. 390€.">
-<title>BotArmory — Un site pro pour votre artisanat, livré en 48h</title>
+<meta name="description" content="BotArmory — Sites web pour artisans par Marius Lagrue. Photos réelles, livraison 48h, Google My Business offert. 390€.">
+<title>BotArmory — Sites web pour artisans, livrés en 48h</title>
 <meta property="og:title" content="BotArmory — Sites web pour artisans">
 <meta property="og:description" content="Site vitrine avec vos photos, livré en 48h. Google My Business offert. 390€.">
 <meta property="og:url" content="https://botarmory.com/">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://botarmory.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
 <style>
-:root{--bg:#fff;--bg2:#f8f9fb;--bg3:#f0f2f5;--bg4:#e4e7ed;--text:#111318;--text2:#3e414a;--text3:#6b6f7c;--text4:#9ca0ad;--accent:#4f46e5;--accent2:#4338ca;--aglow:rgba(79,70,229,.08);--aglow2:rgba(79,70,229,.16);--border:rgba(0,0,0,.08);--border2:rgba(0,0,0,.04);--r:10px;--rs:7px;--rl:16px;--green:#16a34a}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;background:var(--bg)}
-body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.55}
-body::after{content:'';position:fixed;inset:0;opacity:.005;pointer-events:none;z-index:9999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-::selection{background:rgba(79,70,229,.18);color:#111318}
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--bg2)}
-::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
-
-.nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 36px;background:rgba(255,255,255,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
-.nav-brand{font-weight:800;font-size:17px;letter-spacing:.06em;color:var(--text)}
-.nav-brand span{color:var(--accent)}
-.nav-links{display:flex;gap:22px;align-items:center}
-.nav-links a{font-size:13px;color:var(--text3);text-decoration:none;font-weight:500;transition:color .2s}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:var(--rs);font-weight:600;font-size:12.5px!important;transition:background .2s,transform .15s}
-.nav-cta:hover{background:var(--accent2);transform:translateY(-1px)}
-
-.hero{position:relative;padding:100px 36px 0;text-align:center;overflow:hidden;background:var(--bg2)}
-.hero-badge{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;color:var(--text2);background:var(--bg3);border:1px solid var(--border);padding:5px 15px;border-radius:20px;margin-bottom:24px}
-.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero h1{font-size:clamp(30px,5vw,50px);font-weight:900;line-height:1.06;max-width:650px;margin:0 auto 14px;letter-spacing:-.035em}
-.hero h1 span{color:var(--accent);background:none;-webkit-text-fill-color:var(--accent)}
-.hero p.sub{color:var(--text3);font-size:16px;max-width:500px;margin:0 auto 32px;line-height:1.6}
-.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
-.btn-primary{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;font-weight:700;font-size:15px;padding:14px 32px;border-radius:var(--r);text-decoration:none;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 2px 20px rgba(79,70,229,.15)}
-.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 6px 30px rgba(79,70,229,.25)}
-.btn-secondary{display:inline-flex;align-items:center;gap:7px;background:var(--bg3);color:var(--text2);font-weight:600;font-size:15px;padding:14px 32px;border-radius:var(--r);text-decoration:none;border:1px solid var(--border);transition:border-color .2s,color .2s}
-.btn-secondary:hover{border-color:var(--text4);color:var(--text)}
-
-.hero-preview{max-width:860px;margin:0 auto;position:relative;z-index:1}
-.hero-browser{background:#fff;border:1px solid var(--border);border-radius:var(--rl) var(--rl) 0 0;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,.08)}
-.hero-browser-bar{display:flex;align-items:center;gap:6px;padding:11px 16px;background:var(--bg3);border-bottom:1px solid var(--border2)}
-.hero-browser-dot{width:9px;height:9px;border-radius:50%}
-.hero-browser-dot.r{background:#ff5f57}.hero-browser-dot.y{background:#febc2e}.hero-browser-dot.g{background:#28c840}
-.hero-browser-url{font-size:10.5px;color:var(--text4);margin-left:8px;flex:1;background:#fff;padding:4px 10px;border-radius:4px;border:1px solid var(--border2)}
-.hero-site-preview{background:linear-gradient(180deg,#fafcfd 0%,#f0f3f5 100%);padding:40px 32px;text-align:center;min-height:300px}
 .hero-site-preview .sp-logo{font-weight:800;font-size:15px;letter-spacing:.05em;margin-bottom:20px;color:var(--text2)}
 .hero-site-preview .sp-logo span{color:#c4884d}
 .hero-site-preview .sp-h1{font-weight:800;font-size:22px;line-height:1.2;margin-bottom:8px;color:var(--text)}
@@ -60,175 +23,28 @@ body::after{content:'';position:fixed;inset:0;opacity:.005;pointer-events:none;z
 .hero-site-preview .sp-cta{display:inline-block;background:#c4884d;color:#fff;font-weight:700;font-size:12px;padding:9px 20px;border-radius:5px}
 .hero-site-preview .sp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:20px;max-width:500px;margin-left:auto;margin-right:auto}
 .hero-site-preview .sp-img{aspect-ratio:4/3;background:var(--bg3);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid var(--border)}
-.hero-trust{display:flex;gap:32px;justify-content:center;margin-top:36px;flex-wrap:wrap;font-size:12.5px;color:var(--text3)}
-
-.section{padding:80px 36px;max-width:1100px;margin:0 auto}
-.section-dark{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
-.section-label{text-align:center;font-size:11px;font-weight:700;color:var(--text4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
-.section h2{text-align:center;font-size:clamp(22px,3.5vw,30px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
-.section h2+p{text-align:center;color:var(--text3);font-size:14px;max-width:460px;margin:0 auto 52px}
-
-/* STATS BAR - Commerce agent recommendation */
-.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;max-width:800px;margin:0 auto 56px;background:var(--border);border-radius:var(--rl);overflow:hidden}
-.stat-item{background:var(--bg3);padding:28px 20px;text-align:center}
-.stat-num{font-size:32px;font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--text)}
-.stat-label{font-size:11px;color:var(--text4);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
-
-/* HIGHLIGHTS */
-.highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.highlight{text-align:center;padding:40px 24px 32px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rl);transition:border-color .25s,transform .25s}
-.highlight:hover{border-color:var(--aglow2);transform:translateY(-3px)}
-.highlight-icon{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:var(--r);background:var(--bg4);margin-bottom:18px;font-size:24px}
-.highlight h4{font-size:16px;font-weight:700;margin-bottom:6px}
-.highlight p{font-size:13px;color:var(--text3);line-height:1.55}
-
-/* ── EXAMPLES GRID — V5 Artiste/Marketing/Commerce ── */
-.examples-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.example-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .35s cubic-bezier(.4,0,.2,1);box-shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04)}
-.example-card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 1px 3px rgba(0,0,0,.06),0 12px 36px rgba(79,70,229,.12)}
-
-/* Chrome bar */
-.example-chrome{height:28px;background:var(--bg3);display:flex;align-items:center;padding:0 12px;gap:8px;border-bottom:1px solid var(--border)}
-.example-chrome-dots{display:flex;gap:5px;flex-shrink:0}
-.example-chrome-dot{width:7px;height:7px;border-radius:50%}
-.example-chrome-dot.r{background:#ff5f57}.example-chrome-dot.y{background:#febb2e}.example-chrome-dot.g{background:#27c93f}
-.example-chrome-url{flex:1;background:#fff;border-radius:3px;height:16px;display:flex;align-items:center;padding:0 8px;font-size:7px;color:var(--text4);font-family:'Inter',sans-serif;border:1px solid var(--border2)}
-
-/* Inside site — LIGHT background (contrast) */
-.example-site{background:linear-gradient(180deg,#fafbfc 0%,#f0f2f5 100%);font-family:'Inter',sans-serif}
-
-/* Mini nav */
-.example-nav{display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #e5e7eb;background:#fff}
-.example-nav-logo{font-weight:800;font-size:8px;color:#111827;letter-spacing:.03em}
-.example-nav-links{display:flex;gap:10px}
-.example-nav-link{font-size:6.5px;color:#6b7280;font-weight:500}
-
-/* Mini hero */
-.example-hero{padding:16px 14px 14px;text-align:center}
-.example-hero-img{width:85%;height:70px;margin:0 auto 10px;border-radius:6px;background-size:cover;background-position:center}
-.example-hero-title{font-size:10px;font-weight:800;color:#111827;margin-bottom:3px;letter-spacing:-.01em}
-.example-hero-sub{font-size:7px;color:#6b7280;margin-bottom:8px;max-width:200px;margin-left:auto;margin-right:auto;line-height:1.4}
-.example-hero-cta{display:inline-block;font-size:7px;font-weight:700;padding:5px 14px;border-radius:5px;color:#fff}
-
-/* Mini services */
-.example-services{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:10px 14px}
-.example-service{text-align:center;padding:8px 4px;background:#fff;border-radius:5px;border:1px solid #e5e7eb}
-.example-service-icon{width:16px;height:16px;margin:0 auto 3px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px}
-.example-service-label{font-size:6.5px;color:#4b5563;font-weight:600}
-
-/* Mini social */
-.example-social{display:flex;align-items:center;justify-content:center;gap:5px;padding:8px 14px;border-top:1px solid #e5e7eb;font-size:7px;color:#6b7280;background:#fff}
-.example-stars{color:#f59e0b;font-size:8px}
-.example-review{font-size:6.5px;color:#9ca3af}
-
-/* Card footer — Commerce: results + testimonial */
-.example-footer{background:var(--bg2);padding:16px 18px;border-top:1px solid var(--border)}
-.example-footer h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
-.example-footer .trade-tag{display:inline-block;font-size:9px;font-weight:600;color:var(--text3);background:var(--bg4);padding:2px 10px;border-radius:10px;margin-bottom:10px}
-.example-result{font-size:11px;color:var(--green);margin-bottom:8px;display:flex;align-items:center;gap:4px;font-weight:600}
-.example-quote{font-size:10.5px;color:var(--text3);font-style:italic;line-height:1.5;margin-bottom:6px}
-.example-author{font-size:10px;color:var(--text);font-weight:600}
-.example-author span{color:var(--text4);font-weight:400}
-
-/* COMPARISON */
-.comp{max-width:680px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:32px}
-.comp-col{text-align:center}
-.comp-col.bad{color:var(--text4)}
-.comp-col.good{border:1px solid var(--aglow2);border-radius:var(--rl);padding:32px 24px;background:var(--bg3)}
-.comp-icon{font-size:36px;margin-bottom:12px}
-.comp-col h4{font-size:15px;font-weight:700;margin-bottom:4px}
-.comp-col ul{list-style:none;margin-top:16px;text-align:left;font-size:12.5px;color:var(--text3)}
-.comp-col li{padding:5px 0;display:flex;align-items:center;gap:7px}
-.comp-col.good li::before{content:'✓';color:var(--green);font-weight:700;font-size:11px}
-.comp-col.bad li::before{content:'✕';color:#ef4444;font-weight:700;font-size:11px}
-
-/* FAQ */
-.faq{max-width:600px;margin:0 auto}
-.faq-item{border-bottom:1px solid var(--border2);padding:18px 0}
-.faq-item summary{font-weight:600;font-size:14px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--text)}
-.faq-item summary::after{content:'+';font-size:16px;color:var(--text4)}
-.faq-item[open] summary::after{content:'−';color:var(--text4)}
-.faq-item p{font-size:13px;color:var(--text3);margin-top:8px;line-height:1.6;padding-right:24px}
-
-/* GUARANTEE BAR */
-.guarantee-bar{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:56px;font-size:12px;color:var(--text3)}
-.guarantee-item{display:flex;align-items:center;gap:6px;background:var(--bg3);padding:10px 18px;border-radius:20px;border:1px solid var(--border)}
-.guarantee-icon{font-size:14px}
-
-/* CTA */
-.cta-section{padding:80px 36px;text-align:center;background:var(--bg2);border-top:1px solid var(--border);position:relative}
-.cta-section::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
-.cta-section h2{font-size:26px;font-weight:800;margin-bottom:8px;letter-spacing:-.02em}
-.cta-section>p{color:var(--text3);font-size:14px;margin-bottom:28px;max-width:420px;margin-left:auto;margin-right:auto}
-.contact-form{max-width:460px;margin:0 auto;text-align:left}
-.form-row{display:flex;gap:10px;margin-bottom:10px}
-.contact-form input,.contact-form textarea{width:100%;padding:13px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-family:inherit;font-size:14px;outline:none;transition:border-color .2s}
-.contact-form input:focus,.contact-form textarea:focus{border-color:var(--accent)}
-.contact-form textarea{resize:vertical;min-height:80px;margin-bottom:12px}
-.contact-form button{display:block;width:100%;background:var(--accent);color:#fff;font-weight:700;font-size:15px;padding:14px;border-radius:var(--r);border:none;cursor:pointer;font-family:inherit;transition:background .2s;box-shadow:0 2px 12px rgba(79,70,229,.1)}
-.contact-form button:hover{background:var(--accent2)}
-.form-note{text-align:center;font-size:11px;color:var(--text4);margin-top:12px}
-
-.footer{padding:24px 36px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--text4)}
-.footer-links{display:flex;gap:18px}
-.footer-links a{color:var(--text4);text-decoration:none;transition:color .2s;font-size:11px}
-.footer-links a:hover{color:var(--text3)}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-.section{animation:fadeUp .6s ease-out both}
-.example-card{animation:fadeUp .5s ease-out both}
-.example-card:nth-child(1){animation-delay:.05s}
-.example-card:nth-child(2){animation-delay:.15s}
-.example-card:nth-child(3){animation-delay:.25s}
-
-/* PAGE SYSTEM */
-.page{display:none}
-.page.active{display:block;animation:fadeUp .35s ease-out both}
-.nav-links a.nav-link{cursor:pointer}
-.nav-links a.nav-link.active{color:var(--accent);font-weight:600}
-
-@media(max-width:768px){
-  .nav{padding:12px 18px}.nav-links{gap:14px}.nav-links a{font-size:11px}
-  .hero{padding:64px 20px 0}.hero h1{font-size:24px}.hero p.sub{font-size:14px}
-  .hero-site-preview{padding:28px 20px;min-height:240px}
-  .hero-site-preview .sp-h1{font-size:18px}.hero-site-preview .sp-grid{grid-template-columns:repeat(2,1fr)}
-  .hero-trust{gap:18px;font-size:11px}
-  .section{padding:56px 20px}.section h2{font-size:22px}
-  .stats-bar{grid-template-columns:repeat(2,1fr)}
-  .highlights{grid-template-columns:1fr}
-  .examples-grid{grid-template-columns:1fr}
-  .comp{grid-template-columns:1fr;gap:20px}
-  .footer{justify-content:center;text-align:center}.footer-links{justify-content:center}
-}
-@media(max-width:480px){
-  .hero h1{font-size:20px}.btn-primary,.btn-secondary{font-size:14px;padding:12px 22px}
-  .stats-bar{grid-template-columns:repeat(2,1fr)}
-  .stat-num{font-size:24px}
-}
+.emoji{font-size:28px;margin-bottom:8px}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BotArmory","description":"Sites web pour artisans livrés en 48h.","url":"https://botarmory.com/","offers":{"@type":"Offer","price":"390","priceCurrency":"EUR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BotArmory","description":"Sites web pour artisans livrés en 48h.","url":"https://botarmory.com/","provider":{"@type":"Person","name":"Marius Lagrue"},"offers":{"@type":"Offer","price":"390","priceCurrency":"EUR"}}</script>
 </head>
 <body>
 
 <nav class="nav">
-  <div class="nav-brand" onclick="navigate('accueil')" style="cursor:pointer">BOT<span>ARMORY</span></div>
+  <a href="/" class="nav-brand">BOT<span>ARMORY</span></a>
   <div class="nav-links">
-    <a onclick="navigate('exemples')" class="nav-link" data-page="exemples">Exemples</a>
-    <a onclick="navigate('tarifs')" class="nav-link" data-page="tarifs">390€</a>
-    <a onclick="navigate('contact')" class="nav-cta nav-link" data-page="contact">Démarrer</a>
+    <a href="/exemples.html">Exemples</a>
+    <a href="/tarifs.html">390€</a>
+    <a href="/contact.html" class="nav-cta">Démarrer</a>
   </div>
 </nav>
-
-<!-- ═══════════ PAGE: ACCUEIL ═══════════ -->
-<div class="page active" id="page-accueil">
 
 <header class="hero">
   <div class="hero-badge"><span class="hero-badge-dot"></span> Site livré en 48h</div>
   <h1>Un <span>vrai site web</span> pour votre artisanat</h1>
   <p class="sub">Vos photos, votre métier, votre histoire. Je crée votre site et je vous rends visible sur Google.</p>
   <div class="hero-actions">
-    <a onclick="navigate('contact')" class="btn-primary" style="cursor:pointer">Recevoir un devis gratuit →</a>
-    <a onclick="navigate('exemples')" class="btn-secondary" style="cursor:pointer">Voir des exemples</a>
+    <a href="/contact.html" class="btn-primary">Recevoir un devis →</a>
+    <a href="/exemples.html" class="btn-secondary">Voir des exemples</a>
   </div>
   <div class="hero-preview">
     <div class="hero-browser">
@@ -254,33 +70,30 @@ body::after{content:'';position:fixed;inset:0;opacity:.005;pointer-events:none;z
 
 <div class="section">
   <div class="stats-bar">
-    <div class="stat-item"><div class="stat-num accent">500+</div><div class="stat-label">Sites livrés</div></div>
-    <div class="stat-item"><div class="stat-num gold">4.8/5</div><div class="stat-label">Note moyenne</div></div>
     <div class="stat-item"><div class="stat-num accent">48h</div><div class="stat-label">Livraison</div></div>
     <div class="stat-item"><div class="stat-num gold">390€</div><div class="stat-label">Tout compris</div></div>
+    <div class="stat-item"><div class="stat-num green">✓</div><div class="stat-label">Paiement après validation</div></div>
+    <div class="stat-item"><div class="stat-num gold">1 an</div><div class="stat-label">Hébergement offert</div></div>
   </div>
+
   <p class="section-label">Pourquoi</p>
   <h2>Un site web qui travaille pour vous</h2>
   <p>Pendant que vous êtes à l'atelier, votre site trouve vos prochains clients.</p>
   <div class="highlights" style="margin-top:48px">
-    <div class="highlight"><div class="highlight-icon">📸</div><h4>Vos photos, pas des stock</h4><p>J'utilise les photos de VOS réalisations. Votre travail mérite d'être montré.</p></div>
-    <div class="highlight"><div class="highlight-icon">⚡</div><h4>En ligne en 48h</h4><p>Vous me donnez vos photos, je m'occupe de tout. Site prêt en 2 jours, hébergement inclus.</p></div>
-    <div class="highlight"><div class="highlight-icon">📍</div><h4>Trouvé sur Google</h4><p>Fiche Google My Business créée et optimisée. Vos clients vous trouvent.</p></div>
+    <div class="highlight"><div class="emoji">📸</div><h4>Vos photos, pas des stock</h4><p>J'utilise les photos de VOS réalisations. Votre travail mérite d'être montré.</p></div>
+    <div class="highlight"><div class="emoji">⚡</div><h4>En ligne en 48h</h4><p>Vous me donnez vos photos, je m'occupe de tout. Site prêt en 2 jours, hébergement inclus.</p></div>
+    <div class="highlight"><div class="emoji">📍</div><h4>Trouvé sur Google</h4><p>Fiche Google My Business créée et optimisée. Vos clients vous trouvent.</p></div>
   </div>
 </div>
-</div><!-- /page-accueil -->
 
-<!-- ═══════════ PAGE: EXEMPLES ═══════════ -->
-<div class="page" id="page-exemples">
-
-<div id="exemples" class="section section-dark">
+<div class="section section-dark">
   <p class="section-label">Exemples</p>
   <h2>Un vrai site, ça donne quoi ?</h2>
-  <p>Voici un site livré à un artisan. Cliquez pour le voir en taille réelle.</p>
+  <p>Des sites livrés à de vrais artisans. Cliquez pour les voir en taille réelle.</p>
   <div style="margin-top:40px;max-width:900px;margin-left:auto;margin-right:auto">
 
     <!-- PIERRE DUBOIS -->
-    <a href="/demo/" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;background:#fff;transition:transform .25s,box-shadow .25s;box-shadow:0 2px 12px rgba(0,0,0,.06)">
+    <a href="/demo/" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;background:#fff;transition:transform .25s,box-shadow .25s;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:32px">
       <div style="display:flex;align-items:center;gap:6px;padding:10px 16px;background:var(--bg3);border-bottom:1px solid var(--border2)">
         <span style="width:9px;height:9px;border-radius:50%;background:#ff5f57"></span>
         <span style="width:9px;height:9px;border-radius:50%;background:#febc2e"></span>
@@ -290,7 +103,7 @@ body::after{content:'';position:fixed;inset:0;opacity:.005;pointer-events:none;z
       <div style="padding:32px 20px;text-align:center;background:linear-gradient(180deg,#fafcfd 0%,#f0f3f5 100%)">
         <div style="font-weight:800;font-size:14px;letter-spacing:.03em;color:var(--text2);margin-bottom:16px">◆ BOISERIES <span style="color:#c4884d">DUBOIS</span></div>
         <div style="font-weight:800;font-size:20px;margin-bottom:6px;color:var(--text)">Des meubles qui traversent les générations</div>
-        <div style="font-size:11px;color:var(--text4);margin-bottom:14px;max-width:300px;margin-left:auto;margin-right:auto">Artisan ébéniste depuis 1998. Meubles, escaliers, agencements sur mesure.</div>
+        <div style="font-size:11px;color:var(--text4);margin-bottom:14px;max-width:300px;margin-left:auto;margin-right:auto">Artisan ébéniste. Meubles, escaliers, agencements sur mesure.</div>
         <span style="display:inline-block;background:#c4884d;color:#fff;font-weight:700;font-size:11px;padding:8px 18px;border-radius:5px">Demander un devis →</span>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:16px;max-width:440px;margin-left:auto;margin-right:auto">
           <div style="aspect-ratio:4/3;border-radius:4px;background:url('/demo/img/table-design.jpg') center/cover no-repeat;border:1px solid var(--border)"></div>
@@ -298,25 +111,17 @@ body::after{content:'';position:fixed;inset:0;opacity:.005;pointer-events:none;z
           <div style="aspect-ratio:4/3;border-radius:4px;background:url('/demo/img/terrasse-bois.jpg') center/cover no-repeat;border:1px solid var(--border)"></div>
           <div style="aspect-ratio:4/3;border-radius:4px;background:url('/demo/img/atelier-travail.jpg') center/cover no-repeat;border:1px solid var(--border)"></div>
         </div>
-        <div style="display:flex;align-items:center;justify-content:center;gap:5px;margin-top:12px;font-size:7px;color:#6b7280">
-          <span style="color:#f59e0b">★★★★★</span> 4.9 — 47 avis Google
-        </div>
       </div>
-      <div style="background:var(--bg2);padding:14px 18px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px">
+      <div style="background:var(--bg2);padding:14px 18px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         <span style="font-size:9px;font-weight:600;color:var(--text3);background:var(--bg4);padding:2px 10px;border-radius:10px">Menuiserie</span>
-        <span style="font-size:11px;color:var(--green);font-weight:600">✓ +12 clients/mois via Google</span>
-        <span style="font-size:10px;color:var(--text3);font-style:italic;margin-left:auto">"J'ai eu 3 appels la première semaine."</span>
+        <span style="font-size:11px;color:var(--green);font-weight:600">✓ Site livré · Client satisfait</span>
       </div>
     </a>
 
-    <p style="text-align:center;margin-top:14px;font-size:12px;color:var(--text4)">👆 Cliquez pour visiter le site complet de Pierre Dubois</p>
-
     <!-- KEVIN SALOU -->
-    <a href="/demo/sabois.html" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;background:#fff;transition:transform .25s,box-shadow .25s;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-top:32px">
+    <a href="/demo/sabois.html" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;background:#fff;transition:transform .25s,box-shadow .25s;box-shadow:0 2px 12px rgba(0,0,0,.06)">
       <div style="display:flex;align-items:center;gap:6px;padding:10px 16px;background:var(--bg3);border-bottom:1px solid var(--border2)">
-        <span style="width:9px;height:9px;border-radius:50%;background:#ff5f57"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#febc2e"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#28c840"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#ff5f57"></span><span style="width:9px;height:9px;border-radius:50%;background:#febc2e"></span><span style="width:9px;height:9px;border-radius:50%;background:#28c840"></span>
         <span style="font-size:10px;color:var(--text4);margin-left:6px">sabois.fr</span>
       </div>
       <div style="padding:32px 20px;text-align:center;background:linear-gradient(180deg,#fafcfd 0%,#f0f3f5 100%)">
@@ -331,116 +136,46 @@ body::after{content:'';position:fixed;inset:0;opacity:.005;pointer-events:none;z
           <div style="aspect-ratio:4/3;border-radius:4px;background:url('/demo/sabois/atelier.jpg') center/cover no-repeat;border:1px solid var(--border)"></div>
         </div>
       </div>
-      <div style="background:var(--bg2);padding:14px 18px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px">
+      <div style="background:var(--bg2);padding:14px 18px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         <span style="font-size:9px;font-weight:600;color:var(--text3);background:var(--bg4);padding:2px 10px;border-radius:10px">Menuiserie</span>
         <span style="font-size:11px;color:var(--green);font-weight:600">🏅 JO Paris 2024</span>
-        <span style="font-size:10px;color:var(--text3);font-style:italic;margin-left:auto">"Ingénieur devenu menuisier, chaque projet est unique."</span>
       </div>
     </a>
-    <p style="text-align:center;margin-top:14px;font-size:12px;color:var(--text4)">👆 Cliquez pour visiter le site complet de Kévin Salou</p>
-
   </div>
-
-  <div class="guarantee-bar">
-    <div class="guarantee-item"><span class="guarantee-icon">🔒</span> Paiement après livraison</div>
-    <div class="guarantee-item"><span class="guarantee-icon">🔄</span> Satisfait ou refait</div>
-    <div class="guarantee-item"><span class="guarantee-icon">📱</span> Site responsive mobile</div>
-    <div class="guarantee-item"><span class="guarantee-icon">🎓</span> Tuto vidéo 5 min offert</div>
-  </div>
+  <p style="text-align:center;margin-top:20px;font-size:12px;color:var(--text4)"><a href="/exemples.html" style="color:var(--accent);text-decoration:none;font-weight:600">Voir plus d'exemples →</a></p>
 </div>
-</div><!-- /page-exemples -->
 
-<!-- ═══════════ PAGE: TARIFS ═══════════ -->
-<div class="page" id="page-tarifs">
-
-<div id="tarif" class="section">
-  <p class="section-label">Comparaison</p>
-  <h2>390€ au lieu de 2000€</h2>
-  <p>Le même résultat qu'une agence, pour le prix d'un outil professionnel.</p>
-  <div class="comp" style="margin-top:48px">
-    <div class="comp-col bad">
-      <div class="comp-icon">💸</div>
-      <h4 style="color:var(--text4)">Agence web</h4>
-      <ul><li>1 500 — 5 000€</li><li>3 à 8 semaines</li><li>Photos de stock</li><li>Pas de Google My Business</li><li>Modifications payantes</li><li>Pas d'hébergement</li></ul>
-    </div>
-    <div class="comp-col good">
-      <div class="comp-icon">🚀</div>
-      <h4>BotArmory</h4>
-      <div style="font-size:44px;font-weight:900;letter-spacing:-.04em;margin:8px 0 2px">390<span style="font-size:18px;font-weight:500;color:var(--text3)">€</span></div>
-      <p style="font-size:12px;color:var(--text3);margin-bottom:16px">Paiement unique</p>
-      <ul><li>390€ tout inclus</li><li>Livré en 48h</li><li>Vos photos réelles</li><li>Google My Business offert</li><li>Modifs gratuites 1er mois</li><li>Hébergement 1 an offert</li></ul>
+<div class="section">
+  <p class="section-label">Qui suis-je</p>
+  <h2>Un artisan qui comprend les artisans</h2>
+  <p>Je crée des sites simples, élégants, qui vous ramènent des clients.</p>
+  <div style="display:flex;gap:32px;align-items:flex-start;max-width:640px;margin:40px auto 0;flex-wrap:wrap">
+    <div style="flex-shrink:0;width:80px;height:80px;border-radius:50%;background:var(--bg4);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:var(--accent)">ML</div>
+    <div style="flex:1;min-width:260px">
+      <p style="color:var(--text2);line-height:1.7;margin-bottom:10px;font-size:15px">
+        Je m'appelle <strong style="color:var(--text)">Marius Lagrue</strong>. Artisan et développeur, j'ai créé BotArmory pour aider les artisans à avoir une présence en ligne professionnelle sans se ruiner.
+      </p>
+      <p style="color:var(--text3);line-height:1.7;font-size:14px">
+        Chaque site est fait main, avec vos photos et vos mots. Pas de templates génériques, pas de jargon technique. Juste un site qui vous ressemble et qui vous ramène des clients.
+      </p>
     </div>
   </div>
 </div>
 
-<div class="section section-dark">
-  <p class="section-label">Questions</p>
-  <h2>On répond à tout</h2>
-  <div class="faq" style="margin-top:40px">
-    <details class="faq-item"><summary>Je n'ai pas de photos de mes réalisations.</summary><p>Pas de problème. Je peux utiliser des photos d'inspiration proches de votre métier pour démarrer. Vous les remplacerez dès que vous en avez.</p></details>
-    <details class="faq-item"><summary>Et si le site ne me plaît pas ?</summary><p>Satisfait ou refait, sans frais. Je modifie le design jusqu'à ce que vous soyez content. Vous ne payez que quand c'est parfait.</p></details>
-    <details class="faq-item"><summary>390€, c'est vraiment tout ?</summary><p>Oui. 390€ TTC, paiement unique. Pas d'abonnement. L'hébergement est offert la première année (ensuite ~5€/mois, sans obligation).</p></details>
-    <details class="faq-item"><summary>Je serai visible sur Google ?</summary><p>Oui. Fiche Google My Business créée et optimisée pour votre métier et votre ville. C'est la première chose que vos clients voient.</p></details>
-    <details class="faq-item"><summary>Et après la livraison ?</summary><p>Rien. Le site est hébergé et à jour. Si vous voulez modifier un texte ou une photo, vous me le dites et je le fais.</p></details>
-  </div>
-</div>
-
-<div style="max-width:600px;margin:0 auto;padding:40px 0;text-align:center">
-  <p class="section-label">Conditions</p>
-  <h2 style="font-size:20px;margin-bottom:20px">Comment ça marche</h2>
-  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;text-align:left">
-    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px">
-      <div style="font-weight:700;font-size:13px;margin-bottom:4px">1. Vous m'envoyez vos photos</div>
-      <div style="font-size:11px;color:var(--text3)">3 photos de votre travail + votre métier + votre ville. C'est tout ce dont j'ai besoin.</div>
-    </div>
-    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px">
-      <div style="font-weight:700;font-size:13px;margin-bottom:4px">2. Je crée votre site en 48h</div>
-      <div style="font-size:11px;color:var(--text3)">Vous recevez un aperçu. Vous pouvez demander toutes les modifications que vous voulez.</div>
-    </div>
-    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px">
-      <div style="font-weight:700;font-size:13px;margin-bottom:4px">3. Vous validez, vous payez</div>
-      <div style="font-size:11px;color:var(--text3)"><strong style="color:var(--accent)">Paiement APRÈS validation.</strong> Pas avant. Si ça ne vous plaît pas, vous ne payez rien.</div>
-    </div>
-    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px">
-      <div style="font-weight:700;font-size:13px;margin-bottom:4px">4. Site en ligne, Google activé</div>
-      <div style="font-size:11px;color:var(--text3)">Votre site est en ligne. Fiche Google My Business créée. Modifs gratuites le 1er mois.</div>
-    </div>
-  </div>
-</div>
-
-</div><!-- /page-tarifs -->
-
-<!-- ═══════════ PAGE: CONTACT ═══════════ -->
-<div class="page" id="page-contact">
-
-<div id="demarrer" class="cta-section">
+<div class="cta-section">
   <h2>Prêt à avoir un vrai site ?</h2>
-  <p>Envoyez-moi 3 photos de votre travail + votre métier. Je vous réponds dans la journée.</p>
-  <form action="https://formspree.io/f/mjgqprkr" method="POST" class="contact-form">
-    <div class="form-row"><input type="text" name="name" placeholder="Votre nom" required><input type="email" name="email" placeholder="Votre email" required></div>
-    <div class="form-row"><input type="text" name="metier" placeholder="Votre métier"><input type="text" name="ville" placeholder="Votre ville"></div>
-    <textarea name="message" placeholder="Parlez-moi de votre activité..." rows="3"></textarea>
-    <button type="submit">Recevoir un devis gratuit →</button>
-    <p class="form-note">🔒 Réponse sous 24h · Paiement après validation · Aucun engagement</p>
-  </form>
+  <p>Envoyez-moi 3 photos de votre travail. Je vous réponds dans la journée.</p>
+  <a href="/contact.html" class="btn-primary" style="display:inline-block">Recevoir un devis →</a>
+  <p class="form-note" style="margin-top:16px">🔒 Réponse sous 24h · Paiement après validation · Aucun engagement</p>
 </div>
-</div><!-- /page-contact -->
 
 <footer class="footer">
-  <span>© 2026 BotArmory · Sites web pour artisans</span>
-  <div class="footer-links"><a href="#">Mentions légales</a><a href="#">CGV</a><a onclick="navigate('contact')" style="cursor:pointer">Contact</a></div>
+  <span>© 2026 BotArmory — Marius Lagrue</span>
+  <div class="footer-links">
+    <a href="/mentions-legales.html">Mentions légales</a>
+    <a href="/cgv.html">CGV</a>
+    <a href="/contact.html">Contact</a>
+  </div>
 </footer>
-
-<script>
-function navigate(page){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+page).classList.add('active');
-  document.querySelectorAll('.nav-link').forEach(a=>a.classList.remove('active'));
-  var link=document.querySelector('.nav-link[data-page="'+page+'"]');
-  if(link)link.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-</script>
-
 </body>
 </html>
