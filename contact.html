@@ -54,6 +54,8 @@
   <form action="https://formspree.io/f/mjgqprkr" method="POST">
     <input type="hidden" name="_next" value="https://botarmory.com/merci.html">
     <input type="hidden" name="_subject" value="Nouveau contact BotArmory">
+    <!-- Honeypot anti-spam : invisible pour les humains -->
+    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
     <div class="form-row">
       <div class="form-group"><input type="text" name="name" placeholder="Votre nom" required></div>
       <div class="form-group"><input type="email" name="email" placeholder="Votre email" required></div>
