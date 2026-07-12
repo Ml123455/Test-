@@ -202,8 +202,19 @@ const cI = L.divIcon({html:'<div style="background:#9b59b6;color:#fff;border-rad
 const nI = L.divIcon({html:'<div style="background:#27ae60;color:#fff;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:9px;border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3)">⛺</div>',iconSize:[16,16],iconAnchor:[8,8],popupAnchor:[0,-8]});
 [{n:"J1 Marina Canet",lat:42.694,lon:3.027},{n:"J2 Le Palavas",lat:43.530,lon:3.932},{n:"J3 Bivouac Thueyts",lat:44.670,lon:4.230},{n:"J4 Camping La Palud",lat:43.782,lon:6.343},{n:"J5 Bivouac Serre-Ponçon",lat:44.515,lon:6.355},{n:"J6 Nuit Grenoble",lat:45.190,lon:5.730},{n:"J7 Refuge Aussois",lat:45.235,lon:6.750}].forEach(b=>L.marker([b.lat,b.lon],{icon:nI}).bindTooltip(b.n).addTo(map));
 
-// Itinéraire
-const itin = [[48.618,1.940],[42.705,3.030],[42.808,2.510],[43.529,3.930],[43.918,3.782],[43.610,3.877],[44.670,4.220],[43.949,4.806],[43.905,6.470],[43.780,6.342],[43.528,5.450],[44.510,6.350],[45.190,5.730],[45.453,5.592],[45.192,5.724],[45.230,6.740],[45.568,5.925],[45.899,6.129],[48.618,1.940]];
+// Itinéraire simplifié (1 point principal par jour)
+const itin = [
+  [48.618,1.940], // J0 Bonnelles
+  [42.705,3.030], // J1 Canet
+  [43.529,3.930], // J2 Palavas
+  [44.670,4.220], // J3 Thueyts
+  [43.905,6.470], // J4 Castillon/Verdon
+  [44.510,6.350], // J5 Serre-Ponçon
+  [45.190,5.730], // J6 Grenoble
+  [45.230,6.740], // J7 Aussois
+  [45.899,6.129], // J8 Annecy
+  [48.618,1.940], // Retour Bonnelles
+];
 L.polyline(itin,{color:'#e74c3c',weight:3,opacity:.7,dashArray:'10,6'}).addTo(map);
 
 L.control({position:'bottomright'}).onAdd=function(){
