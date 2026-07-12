@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Road trip via ferrata 8 jours — 2663 km, 3 ferratas, canyoning, rafting, rando glaciers. Départ Bonnelles. Budget 565-625€/pers.">
 <title>Road Trip Via Ferrata — 8 Jours</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧗</text></svg>">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -34,9 +36,9 @@ header p { opacity:.85; margin-top:4px; font-size:.8em; }
 @media (max-width: 400px) {
   .day-grid { grid-template-columns:1fr; padding:8px; }
   header h1 { font-size:1.2em; }
-  .day-body { font-size:.8em; }
+  .day-body { font-size:14px; }
   #map { height:280px; }
-  .budget-bar td { padding:3px 6px; font-size:.75em; }
+  .budget-bar td { padding:3px 6px; font-size:.85em; }
 }
 .j0 { background:#2c3e50 !important; }
 .j1,.j2 { background:linear-gradient(135deg,#1abc9c,#16a085) !important; }
@@ -44,18 +46,18 @@ header p { opacity:.85; margin-top:4px; font-size:.8em; }
 .j6 { background:linear-gradient(135deg,#f39c12,#e67e22) !important; }
 .j7 { background:linear-gradient(135deg,#9b59b6,#8e44ad) !important; }
 .j8 { background:linear-gradient(135deg,#3498db,#2980b9) !important; }
-footer { text-align:center; padding:30px; color:#888; font-size:.8em; }
+footer { text-align:center; padding:30px; color:#aaa; font-size:.8em; }
 </style>
 </head>
 <body>
 
 <header>
   <h1>🗺️ Road Trip Via Ferrata — 8 Jours</h1>
-  <p>Départ Bonnelles · 3 ferratas · Canyoning · Rafting · Rando · 5 soirées club</p>
-  <p style="font-size:.85em;margin-top:8px;">~2663 km · ~420-510€/pers · Canyoning + Rafting + Rando glaciers</p>
+  <p>Départ Bonnelles · 3 ferratas · Canyoning · Rafting · Rando · 3 clubs + 2 bars</p>
+  <p style="font-size:.85em;margin-top:8px;">~2663 km · ~565-625€/pers · Canyoning + Rafting + Rando glaciers</p>
 </header>
 
-<div class="day-grid">
+<div class="day-grid" role="main">
 
 <!-- J0 -->
 <div class="day-card">
@@ -85,7 +87,7 @@ footer { text-align:center; padding:30px; color:#888; font-size:.8em; }
   <div class="day-body">
     <div class="line"><span class="emoji">🏖️</span> <b>Matin :</b> Plage de Palavas-les-Flots — kayak de mer, 15 min de Montpellier. Dernière baignade dans le sel !</div>
     <div class="line"><span class="emoji">🧗</span> <b>Aprem :</b> Via Ferrata du Thaurac (AD, 2h). Gorges de l'Hérault — traversée de grotte, ambiance spéléo unique.</div>
-    <div class="line"><span class="emoji">🎉</span> <b>Soir :</b> Panama Café — GRATUIT, ambiance étudiante. <b>⚠️ 2.9★, videurs sélectifs, jeu-sam uniquement. Prévoir plan B.</b></div>
+    <div class="line"><span class="emoji">🎉</span> <b>Soir :</b> Panama Café — GRATUIT, ambiance étudiante. <b>⚠️ 2.9★, videurs sélectifs, jeu-sam uniquement. Plan B : Rockstore Montpellier (institution rock/électro).</b></div>
     <div class="good">✅ Location matos : Roc'N River (13€, 5min du site).</div>
   </div>
 </div>
@@ -97,7 +99,9 @@ footer { text-align:center; padding:30px; color:#888; font-size:.8em; }
     <div class="line"><span class="emoji">🛣️</span> <b>Route :</b> Montpellier → Thueyts (1h30, A75).</div>
     <div class="line"><span class="emoji">🧗</span> <b>Matin :</b> Via Ferrata Pont du Diable (AD, 2h). Tyrolienne de 90m au-dessus de la rivière Ardèche. Site volcanique exceptionnel.</div>
     <div class="line"><span class="emoji">🏊</span> <b>Aprem :</b> Baignade dans l'Ardèche, sous le pont. L'eau est fraîche, parfaite après l'effort.</div>
-    <div class="line"><span class="emoji">🎉</span> <b>Soir :</b> L'Esclave à Avignon (1h de route). <b>⚠️ 3.0★, club gay-friendly, porte sélective. À trancher avec le groupe.</b></div>
+    <div class="line"><span class="emoji">🎉</span> <b>Soir :</b> L'Esclave à Avignon (1h de route). <b>⚠️ 3.0★, club gay-friendly, porte sélective. Si pas à l'aise → bars chill place de l'Horloge.</b></div>
+    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> Avignon F1/hôtel (~25€/pers). Impossible de rentrer à Thueyts après le club (1h de route).</div>
+    <div class="warn">⚠️ Journée intense (ferrata + route + club). Pensez à bien vous hydrater.</div>
     <div class="good">✅ Location matos : Cimes-Canyons (sur place à Thueyts).</div>
   </div>
 </div>
@@ -109,7 +113,8 @@ footer { text-align:center; padding:30px; color:#888; font-size:.8em; }
     <div class="line"><span class="emoji">🛣️</span> <b>Route :</b> Avignon → Lac de Castillon (1h30).</div>
     <div class="line"><span class="emoji">🏊</span> <b>Matin :</b> Lac de Castillon — pédalo, paddle, kayak.</div>
     <div class="line"><span class="emoji">🌊</span> <b>Aprem :</b> <b>Canyoning débutant</b> dans le Verdon — rando aquatique, toboggans naturels, vasques. 2-3h, accessible à tous. 40-50€.</div>
-    <div class="line"><span class="emoji">🎉</span> <b>Soir :</b> Le Mistral à Aix-en-Provence. <b>⚠️ 2.2★/541 avis, cher (>20€), porte très sélective. Plan B recommandé.</b></div>
+    <div class="line"><span class="emoji">🎉</span> <b>Soir :</b> Le Mistral à Aix-en-Provence. <b>⚠️ 2.2★/541 avis, cher (>20€), porte très sélective. Plan B : Le Divino à Aix (bar lounge, 4.2★).</b></div>
+    <div class="warn">⚠️ Journée intense (canyoning + route + club). Pensez à bien vous hydrater.</div>
     <div class="good">✅ Canyoning encadré par un moniteur. Aucun matos à prévoir, tout fourni.</div>
   </div>
 </div>
@@ -121,7 +126,8 @@ footer { text-align:center; padding:30px; color:#888; font-size:.8em; }
     <div class="line"><span class="emoji">🛣️</span> <b>Route :</b> Aix → Embrun (2h, A51).</div>
     <div class="line"><span class="emoji">🛶</span> <b>Matin :</b> <b>Rafting sur la Durance</b> — descente de 11km, rapides classe 2-3, débutants OK. 35€, 2h sur l'eau. De Bleu à Blanc.</div>
     <div class="line"><span class="emoji">🏊</span> <b>Aprem :</b> Baignade Lac de Serre-Ponçon, kayak, paddle.</div>
-    <div class="line"><span class="emoji">🍺</span> <b>Soir :</b> Bars chill à Grenoble (1h30 de route). PAS de club.</div>
+    <div class="line"><span class="emoji">🍺</span> <b>Soir :</b> Bars chill à Grenoble (1h30 de route). PAS de club. Retour au bivouac Serre-Ponçon après les bars (30 min, Sam conducteur sobre).</div>
+    <div class="warn">⚠️ Journée intense (rafting + route + bars). Pensez à bien vous hydrater.</div>
     <div class="good">✅ Rafting encadré, matériel fourni. Juste prévoir un maillot et une serviette.</div>
   </div>
 </div>
@@ -143,7 +149,7 @@ footer { text-align:center; padding:30px; color:#888; font-size:.8em; }
   <div class="day-body">
     <div class="line"><span class="emoji">🛣️</span> <b>Route :</b> Grenoble → Aussois (1h30).</div>
     <div class="line"><span class="emoji">🥾</span> <b>Journée :</b> <b>Randonnée des Glaciers de la Vanoise</b> depuis le refuge du Fond d'Aussois. Sentier balisé, pas technique, vue sur les glaciers et la Dent Parrachée (3697m). 4-5h aller-retour, accessible.</div>
-    <div class="line"><span class="emoji">🎉</span> <b>Soir :</b> Le Corsaire à Chambéry — bar rooftop 4.8★/472 avis, bières, tapas. CO2 Club n'existe pas → remplacé.</div>
+    <div class="line"><span class="emoji">🎉</span> <b>Soir :</b> Le Corsaire à Chambéry — <b>bar</b> rooftop 4.8★/472 avis, bières, tapas. CO2 Club n'existe pas → remplacé.</div>
     <div class="good">✅ Rando gratuite, juste de bonnes chaussures. Pas de matos d'escalade.</div>
   </div>
 </div>
@@ -163,24 +169,26 @@ footer { text-align:center; padding:30px; color:#888; font-size:.8em; }
 
 <!-- BUDGET -->
 <div class="budget-bar">
-  <h3>💰 Budget — ~420-510€ par personne (4-5 pers)</h3>
+  <h3>💰 Budget — ~565-625€ par personne (4-5 pers)</h3>
   <table>
     <tr><td>⛽ Essence (2663 km · Honda Jazz 5L)</td><td>77-96€</td></tr>
     <tr><td>🛣️ Péages</td><td>33-42€</td></tr>
     <tr><td>🏕️ Campings (J1+J2+J4)</td><td>~55€</td></tr>
+    <tr><td>🏨 Nuit J3 (Avignon F1/hôtel)</td><td>~25€</td></tr>
     <tr><td>🏨 Nuit J6 (F1)</td><td>~25-30€</td></tr>
+    <tr><td>🏔️ Refuge Aussois J7</td><td>~20€</td></tr>
     <tr><td>🌊 Canyoning Verdon</td><td>45€</td></tr>
     <tr><td>🛶 Rafting Durance</td><td>35€</td></tr>
     <tr><td>🧗 Location matos ferrata (3j)</td><td>~40€</td></tr>
-    <tr><td>🎉 Clubs (5 soirs)</td><td>50-75€</td></tr>
+    <tr><td>🎉 Clubs/Bars (5 soirs)</td><td>50-75€</td></tr>
     <tr><td>🍽️ Bouffe (8j × 20€)</td><td>160€</td></tr>
-    <tr class="total"><td>TOTAL</td><td>~420-510€</td></tr>
+    <tr class="total"><td>TOTAL</td><td>~565-625€</td></tr>
   </table>
-  <p style="font-size:.8em;color:#888;">+ location matos ferrata 13-15€ si besoin · + guide cordata Verdon ~60€</p>
+  <p style="font-size:.8em;color:#aaa;">+ location matos ferrata 13-15€ si besoin · + guide cordata Verdon ~60€</p>
 </div>
 
 <!-- MAP -->
-<div id="map-container"><button class="fs-btn" onclick="toggleFS()" title="Plein écran">⛶</button><div id="map"></div></div>
+<div id="map-container" aria-label="Carte interactive du road trip"><button class="fs-btn" onclick="toggleFS()" title="Plein écran">⛶</button><div id="map"></div></div>
 
 <footer>
   Carte générée avec OpenStreetMap · Clubs vérifiés Google 07/2026 · Canyoning + Rafting + Rando · Zéro galère<br>
@@ -247,10 +255,10 @@ baignades.forEach(s=>{
 const cI = L.divIcon({html:'<div style="background:#9b59b6;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:10px;border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3)">🎉</div>',iconSize:[20,20],iconAnchor:[10,10],popupAnchor:[0,-10]});
 const clubs = [
   {n:"Speakeasy",lat:42.698,lon:2.891,j:"J1",city:"Perpignan",detail:"✅ 3.9★ — House music, cocktails, centre-ville. ~10€"},
-  {n:"Panama Café ⚠️",lat:43.610,lon:3.877,j:"J2",city:"Montpellier",detail:"⚠️ 2.9★/1009 avis — Gratuit mais videurs sélectifs, jeu-sam uniquement. Prévoyez un plan B"},
-  {n:"L'Esclave ⚠️",lat:43.949,lon:4.806,j:"J3",city:"Avignon",detail:"⚠️ 3.0★ — Club gay-friendly, porte sélective, petite salle. À trancher avec le groupe"},
-  {n:"Le Mistral ⚠️",lat:43.528,lon:5.450,j:"J4",city:"Aix-en-Provence",detail:"⚠️ 2.2★/541 avis — Institution mais cher (>20€), porte très sélective. Plan B recommandé"},
-  {n:"Le Corsaire",lat:45.567,lon:5.922,j:"J7",city:"Chambéry",detail:"✅ Bar rooftop 4.8★/472 avis — Bières, tapas, terrasse. CO2 Club n'existe pas → remplacé"},
+  {n:"Panama Café ⚠️",lat:43.610,lon:3.877,j:"J2",city:"Montpellier",detail:"⚠️ 2.9★/1009 avis — Gratuit mais videurs sélectifs, jeu-sam. Plan B : Rockstore Montpellier (rock/électro)"},
+  {n:"L'Esclave ⚠️",lat:43.949,lon:4.806,j:"J3",city:"Avignon",detail:"⚠️ 3.0★ — Club gay-friendly, porte sélective. Si pas à l'aise → bars chill place de l'Horloge"},
+  {n:"Le Mistral ⚠️",lat:43.528,lon:5.450,j:"J4",city:"Aix-en-Provence",detail:"⚠️ 2.2★/541 avis — Institution, cher (>20€), porte très sélective. Plan B : Le Divino (bar lounge, 4.2★)"},
+  {n:"Le Corsaire",lat:45.567,lon:5.922,j:"J7",city:"Chambéry",detail:"✅ Bar rooftop 4.8★/472 avis — Bières, tapas, terrasse (bar, pas club)"},
 ];
 clubs.forEach(c=>{
   L.marker([c.lat,c.lon],{icon:cI})
@@ -263,7 +271,7 @@ const nI = L.divIcon({html:'<div style="background:#27ae60;color:#fff;border-rad
 const nuits = [
   {n:"Camping La Marina",lat:42.694,lon:3.027,j:"J1",detail:"Canet — bord de mer, douche, 15-20€/pers"},
   {n:"Camping Le Palavas",lat:43.530,lon:3.932,j:"J2",detail:"Palavas — bord de mer, douche, 15-20€/pers"},
-  {n:"Bivouac forêt Thueyts",lat:44.670,lon:4.230,j:"J3",detail:"Forêt Ardèche — bivouac toléré, gratuit"},
+  {n:"Nuit Avignon F1",lat:43.949,lon:4.806,j:"J3",detail:"Avignon — hôtel/F1, ~25€/pers"},
   {n:"Camping La Palud",lat:43.782,lon:6.343,j:"J4",detail:"Verdon — douche, 15€/pers"},
   {n:"Bivouac Serre-Ponçon",lat:44.515,lon:6.355,j:"J5",detail:"Bord de lac — bivouac toléré, gratuit"},
   {n:"Nuit Grenoble F1",lat:45.190,lon:5.730,j:"J6",detail:"Hôtel F1 — douche, ~25-30€/pers"},
@@ -293,7 +301,7 @@ L.polyline(itin,{color:'#e74c3c',weight:3,opacity:.7,dashArray:'10,6'}).addTo(ma
 const legend = L.control({position:'bottomright'});
 legend.onAdd = function(){
   const d=L.DomUtil.create('div','legend');
-  d.innerHTML='<b>Légende</b>🧗 Ferrata (3) · ⚡ Aventure (3) · 🏊 Baignade (7) · 🎉 Club (5) · ⛺ Nuit<br><span style="color:#e74c3c">━</span> Itinéraire principal';
+  d.innerHTML='<b>Légende</b>🧗 Ferrata (3) · ⚡ Aventure (3) · 🏊 Baignade (7) · 🎉 Club/Bar (5) · ⛺ Nuit<br><span style="color:#e74c3c">━</span> Itinéraire principal';
   return d;
 };
 legend.addTo(map);
