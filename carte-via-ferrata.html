@@ -35,11 +35,11 @@ const fIcon = L.divIcon({html:'<div style="background:#e74c3c;color:#fff;border-
 const ferratas = [
   {n:"Via Ferrata du Fenouillèdes", lat:42.808, lon:2.510, j:"J1", note:"★ 4.8/5 · 1900+ avis", d:"2 parcours F→AD — ambiance cathare", loc:"✅ Location Speleteaux St-Paul"},
   {n:"Via Ferrata du Thaurac", lat:43.918, lon:3.782, j:"J2", note:"★ Gorges Hérault (AD)", d:"Falaise calcaire — traversée de grotte", loc:"✅ Roc'N River 5min (13€), Cabesto"},
-  {n:"Via Ferrata Pont du Diable (Thueyts)", lat:44.6697, lon:4.2202, j:"J3", note:"★ Ardèche — tyrolienne 90m", d:"Basalte et rivière — spot mythique", loc:"❌ AUCUNE location sur place !"},
+  {n:"Via Ferrata Pont du Diable (Thueyts)", lat:44.6697, lon:4.2202, j:"J3", note:"★ Ardèche — tyrolienne 90m", d:"Basalte et rivière — spot mythique", loc:"✅ Cimes-Canyons (Thueyts ou Aubenas)"},
   {n:"Via Cordata Trou du Renard (Verdon)", lat:43.780, lon:6.342, j:"J4", note:"⚠️ Via CORDATA", d:"Cordes fixes + tyrolienne + rappels", loc:"⚠️ Guide ou matos fourni obligatoire"},
-  {n:"Via Ferrata Aiguillette du Lauzet", lat:44.940, lon:6.560, j:"J5", note:"★ Vallée Guisane 2611m", d:"Serre Chevalier — 900m D+, altitude", loc:"❌ AUCUNE location (ferrata isolée)"},
+  {n:"Via Ferrata Aiguillette du Lauzet", lat:44.940, lon:6.560, j:"J5", note:"★ Vallée Guisane 2611m", d:"Serre Chevalier — 900m D+, altitude", loc:"❌ Louer à Grenoble avant (Takamaka 15€)"},
   {n:"Via Ferrata de la Bastille", lat:45.192, lon:5.724, j:"J6 ☀️", note:"★ Grenoble — 45 min", d:"Urbaine, panorama — en option jour repos", loc:"✅ Takamaka/La Boîte à Skis (15€)"},
-  {n:"Via Ferrata du Diable (Aussois) 🏆", lat:45.230, lon:6.740, j:"J7", note:"★ 7 parcours F→TD, 3760m", d:"+ longue de France — gorges de l'Arc", loc:"❌ AUCUNE location sur place !"},
+  {n:"Via Ferrata du Diable (Aussois) 🏆", lat:45.230, lon:6.740, j:"J7", note:"★ 7 parcours F→TD, 3760m", d:"+ longue de France — gorges de l'Arc", loc:"❌ Louer à Grenoble avant et garder !"},
 ];
 
 ferratas.forEach(f => {
@@ -99,10 +99,10 @@ const itin = [
   {l:"J2 🏖️", lat:43.529, lon:3.930, d:"Palavas — kayak"},
   {l:"J2 🧗", lat:43.918, lon:3.782, d:"Thaurac — loc 13€"},
   {l:"J2 🎉", lat:43.610, lon:3.877, d:"Panama Café (gratuit!)"},
-  {l:"J3 🏊🛶", lat:44.382, lon:4.417, d:"Pont d'Arc — canoë"},
-  {l:"J3 🧗", lat:44.6697, lon:4.2202, d:"Thueyts — ❌ pas de loc"},
-  {l:"J3 🎉", lat:43.949, lon:4.806, d:"L'Esclave Avignon"},
-  {l:"J4 🏊🛶", lat:43.905, lon:6.470, d:"Lac Castillon"},
+  {l:"J3 🧗", lat:44.6697, lon:4.2202, d:"Thueyts — ✅ loc Cimes-Canyons"},
+  {l:"J3 🏊🛶", lat:44.382, lon:4.417, d:"Pont d'Arc — canoë aprem"},
+  {l:"J3 🎉", lat:43.949, lon:4.806, d:"Avignon — L'Esclave"},
+  {l:"J4 🏊🛶", lat:43.905, lon:6.470, d:"Lac Castillon — matin"},
   {l:"J4 🧗⚠️", lat:43.780, lon:6.342, d:"Cordata Verdon"},
   {l:"J4 🎉", lat:43.528, lon:5.450, d:"Mistral Aix (20€)"},
   {l:"J5 🏊🛶", lat:44.510, lon:6.350, d:"Serre-Ponçon — kayak"},
@@ -144,13 +144,13 @@ L.control({position:'bottomright'}).onAdd=function(){
     <b>J0</b> 🏠 Bonnelles → 🚗 660 km → Canet (nuit)<br><br>
     <b>J1 🌊</b> 🏖️ Canet + 🛶 → 🧗 Fenouillèdes → 🎉 Speakeasy<br>
     <b>J2 🌊</b> 🏖️ Palavas + 🛶 → 🧗 Thaurac → 🎉 Panama (gratuit)<br>
-    <b>J3</b> 🏊🛶 Pont d'Arc canoë → 🧗 Thueyts → 🎉 L'Esclave<br>
+    <b>J3</b> 🧗 Thueyts (loc✅) → 🏊🛶 Pont d'Arc canoë → 🎉 L'Esclave<br>
     <b>J4</b> 🏊🛶 Castillon → ⚠️ Cordata Verdon → 🎉 Mistral<br>
     <b>J5</b> 🏊🛶 Serre-Ponçon → 🧗 Lauzet → 🍺 chill bars<br>
     <b>J6 ☀️</b> 🏊🛶 Paladru → 🧗 Bastille (option) → REPOS<br>
     <b>J7 🏆</b> 🧗 Diable 3760m → 🎉 CO2 Chambéry<br>
     <b>J8</b> 🏊🛶 Annecy → 🏠 retour Bonnelles<br>
-    <small style="color:#e74c3c">⚠️ J3+J5+J7 = prévoir matos (pas de location)</small><br>
+    <small style="color:#e74c3c">⚠️ J5+J7 = louer matos à Grenoble avant et garder</small><br>
     <small style="color:#9b59b6">🎉 Clubs: J1 J2 J3 J4 J7</small>
   </details>
   <details style="margin-top:3px;font-size:10px;color:#333;line-height:1.5;">
