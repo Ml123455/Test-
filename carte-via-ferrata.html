@@ -54,7 +54,7 @@ footer { text-align:center; padding:30px; color:#aaa; font-size:.8em; }
 <header>
   <h1>🗺️ Road Trip Via Ferrata — 8 Jours</h1>
   <p>Départ Bonnelles · 3 ferratas · Canyoning · Rafting · Rando · 3 clubs + 2 bars</p>
-  <p style="font-size:.85em;margin-top:8px;">~2663 km · ~470-490€/pers · Canyoning + Rafting + Rando glaciers</p>
+  <p style="font-size:.85em;margin-top:8px;">~2663 km · ~450-470€/pers · Canyoning + Rafting + Rando glaciers</p>
 </header>
 
 <div class="day-grid" role="main">
@@ -88,6 +88,7 @@ footer { text-align:center; padding:30px; color:#aaa; font-size:.8em; }
     <div class="line"><span class="emoji">🏖️</span> <b>Matin :</b> Plage de Palavas-les-Flots — kayak de mer, 15 min de Montpellier. Dernière baignade dans le sel !</div>
     <div class="line"><span class="emoji">🧗</span> <b>Aprem :</b> Via Ferrata du Thaurac (AD, 2h). Gorges de l'Hérault — traversée de grotte, ambiance spéléo unique.</div>
     <div class="line"><span class="emoji">🎉</span> <b>Soir :</b> Panama Café — GRATUIT, ambiance étudiante. <b>⚠️ 2.9★, videurs sélectifs, jeu-sam uniquement. Plan B : Rockstore Montpellier (institution rock/électro).</b></div>
+    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> Bivouac plage Palavas (gratuit). Dernière nuit au bord de mer !</div>
     <div class="good">✅ Location matos : Roc'N River (13€, 5min du site).</div>
   </div>
 </div>
@@ -100,7 +101,7 @@ footer { text-align:center; padding:30px; color:#aaa; font-size:.8em; }
     <div class="line"><span class="emoji">🧗</span> <b>Matin :</b> Via Ferrata Pont du Diable (AD, 2h). Tyrolienne de 90m au-dessus de la rivière Ardèche. Site volcanique exceptionnel.</div>
     <div class="line"><span class="emoji">🏊</span> <b>Aprem :</b> Baignade dans l'Ardèche, sous le pont. L'eau est fraîche, parfaite après l'effort.</div>
     <div class="line"><span class="emoji">🎉</span> <b>Soir :</b> L'Esclave à Avignon (1h de route). <b>⚠️ 3.0★, club gay-friendly, porte sélective. Si pas à l'aise → bars chill place de l'Horloge.</b></div>
-    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> Camping Avignon (~12-15€/pers). Île de la Barthelasse ou Camping du Pont d'Avignon.</div>
+    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> Bivouac Avignon (gratuit). Île de la Barthelasse ou berges du Rhône.</div>
     <div class="warn">⚠️ Journée intense (ferrata + route + club). Pensez à bien vous hydrater.</div>
     <div class="good">✅ Location matos : Cimes-Canyons (sur place à Thueyts).</div>
   </div>
@@ -169,17 +170,17 @@ footer { text-align:center; padding:30px; color:#aaa; font-size:.8em; }
 
 <!-- BUDGET -->
 <div class="budget-bar">
-  <h3>💰 Budget — ~470-490€ par personne (4-5 pers)</h3>
+  <h3>💰 Budget — ~450-470€ par personne (4-5 pers)</h3>
   <table>
     <tr><td>⛽🛣️ Trajet (essence + péages · ~300€ total)</td><td>~60-75€</td></tr>
-    <tr><td>🏕️ Campings municipaux (J1+J2+J3+J4)</td><td>~45-50€</td></tr>
+    <tr><td>🏕️ Campings (J1 Canet + J4 Verdon)</td><td>~25-30€</td></tr>
     <tr><td>🏔️ Refuge Aussois J7</td><td>~20€</td></tr>
     <tr><td>🌊 Canyoning Verdon</td><td>45€</td></tr>
     <tr><td>🛶 Rafting Durance</td><td>35€</td></tr>
     <tr><td>🧗 Location matos ferrata (3j)</td><td>~40€</td></tr>
     <tr><td>🎉 Clubs/Bars (5 soirs)</td><td>50-75€</td></tr>
     <tr><td>🍽️ Bouffe (8j × 20€)</td><td>160€</td></tr>
-    <tr class="total"><td>TOTAL</td><td>~470-490€</td></tr>
+    <tr class="total"><td>TOTAL</td><td>~450-470€</td></tr>
   </table>
   <p style="font-size:.8em;color:#aaa;">+ location matos ferrata 13-15€ si besoin · + guide cordata Verdon ~60€</p>
 </div>
@@ -266,9 +267,9 @@ clubs.forEach(c=>{
 // ⛺ Nuits — avec popups
 const nI = L.divIcon({html:'<div style="background:#27ae60;color:#fff;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:9px;border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3)">⛺</div>',iconSize:[16,16],iconAnchor:[8,8],popupAnchor:[0,-8]});
 const nuits = [
-  {n:"Camping La Marina",lat:42.694,lon:3.027,j:"J1",detail:"Canet — bord de mer, douche, 15-20€/pers"},
-  {n:"Camping Le Palavas",lat:43.530,lon:3.932,j:"J2",detail:"Palavas — bord de mer, douche, 15-20€/pers"},
-  {n:"Camping Avignon",lat:43.953,lon:4.803,j:"J3",detail:"Île de la Barthelasse — camping, ~12-15€/pers"},
+  {n:"Camping La Marina",lat:42.694,lon:3.027,j:"J1",detail:"Canet — bord de mer, douche, 12-15€/pers"},
+  {n:"Bivouac Plage Palavas",lat:43.529,lon:3.930,j:"J2",detail:"Bord de mer — bivouac, gratuit"},
+  {n:"Bivouac Avignon",lat:43.953,lon:4.803,j:"J3",detail:"Île de la Barthelasse — bivouac, gratuit"},
   {n:"Camping La Palud",lat:43.782,lon:6.343,j:"J4",detail:"Verdon — douche, 15€/pers"},
   {n:"Bivouac Serre-Ponçon",lat:44.515,lon:6.355,j:"J5",detail:"Bord de lac — bivouac toléré, gratuit"},
   {n:"Bivouac Lac Paladru",lat:45.453,lon:5.592,j:"J6",detail:"Bord du lac — bivouac, gratuit"},
