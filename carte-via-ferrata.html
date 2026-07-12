@@ -24,8 +24,12 @@ header p { opacity:.85; margin-top:4px; font-size:.8em; }
 .budget-bar table { margin:8px auto; border-collapse:collapse; font-size:.8em; }
 .budget-bar td { padding:4px 10px; border-bottom:1px solid #333; }
 .budget-bar .total { font-weight:bold; color:#f39c12; font-size:1.1em; }
-#map-container { margin:15px auto; max-width:1400px; padding:0 12px; }
+#map-container { margin:15px auto; max-width:1400px; padding:0 12px; position:relative; }
 #map { height:350px; border-radius:10px; }
+.fs-btn { position:absolute; top:10px; right:10px; z-index:1000; background:#16213e; color:#eee; border:1px solid #555; border-radius:6px; padding:6px 10px; cursor:pointer; font-size:16px; }
+.fs-btn:hover { background:#e74c3c; }
+#map-container:fullscreen #map { height:100vh; border-radius:0; }
+#map-container:-webkit-full-screen #map { height:100vh; border-radius:0; }
 .legend { background:#16213e; color:#eee; padding:8px 10px; border-radius:6px; font-size:11px; line-height:1.6; }
 @media (max-width: 400px) {
   .day-grid { grid-template-columns:1fr; padding:8px; }
@@ -176,7 +180,7 @@ footer { text-align:center; padding:30px; color:#888; font-size:.8em; }
 </div>
 
 <!-- MAP -->
-<div id="map-container"><div id="map"></div></div>
+<div id="map-container"><button class="fs-btn" onclick="toggleFS()" title="Plein écran">⛶</button><div id="map"></div></div>
 
 <footer>
   Carte générée avec OpenStreetMap · Clubs vérifiés · Canyoning + Rafting + Rando · Zéro galère<br>
@@ -187,6 +191,14 @@ footer { text-align:center; padding:30px; color:#888; font-size:.8em; }
 <script>
 const map = L.map('map').setView([44.3, 4.5], 7);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18}).addTo(map);
+
+// Plein écran
+function toggleFS(){
+  const c=document.getElementById('map-container');
+  if(document.fullscreenElement){document.exitFullscreen();}
+  else{c.requestFullscreen();}
+}
+document.addEventListener('fullscreenchange',()=>{setTimeout(()=>map.invalidateSize(),300);});
 
 // 🧗 3 ferratas
 const fI = L.divIcon({html:'<div style="background:#e74c3c;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3)">🧗</div>',iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-12]});
