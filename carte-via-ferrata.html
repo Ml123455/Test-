@@ -184,13 +184,13 @@ const bivouacIcon = L.divIcon({
 });
 
 const bivouacs = [
-  {jour:"J1", name:"Bivouac forêt Canet 🌲", lat:42.7000, lon:3.0250, detail:"Forêt proche plage — bivouac gratuit après le club", regle:"🌲 Gratuit — bivouac sauvage 19h→9h", zone:"Canet-en-Roussillon"},
-  {jour:"J2", name:"Camping Le Palavas 🚿", lat:43.5300, lon:3.9320, detail:"Homair 4★ — 8 ha, plage+étang, piscine, douches", regle:"🏕️ ~15-20€ — douche après 2 jours", zone:"Palavas-les-Flots"},
-  {jour:"J3", name:"Bivouac forêt Ardèche 🌲", lat:44.3850, lon:4.4200, detail:"Forêt proche Pont d'Arc — bivouac gratuit, feu interdit", regle:"🌲 Gratuit — camping sauvage toléré 19h→9h", zone:"Vallon Pont d'Arc"},
-  {jour:"J4", name:"Bivouac forêt Verdon 🌲", lat:43.7800, lon:6.3500, detail:"Sous les pins, proche La Palud — bivouac gratuit autorisé", regle:"🌲 Gratuit — Parc Naturel, 19h→9h", zone:"La Palud-sur-Verdon"},
-  {jour:"J5", name:"Bivouac forêt Serre-Ponçon 🌲", lat:44.5150, lon:6.3550, detail:"Forêt en bordure du lac — spot bivouac sauvage", regle:"🌲 Gratuit — loin des routes", zone:"Savines-le-Lac"},
-  {jour:"J6", name:"Bivouac forêt Vercors 🌲", lat:45.2000, lon:5.7000, detail:"Forêt proche Grenoble — accès rapide au club", regle:"🌲 Gratuit — bivouac toléré", zone:"Grenoble / Vercors"},
-  {jour:"J7", name:"Camping La Buidonnière 🚿", lat:45.2280, lon:6.7450, detail:"Camping municipal 3★ — 140 emplacements, sanitaires neufs", regle:"🏕️ ~12-15€ — douche avant retour J8", zone:"Aussois"},
+  {jour:"J1", name:"Camping La Marina de Canet 🚿", lat:42.6940, lon:3.0270, detail:"Homair — 276 empl., proche plage, douches — obligatoire après mer/sel", regle:"🏕️ ~15-20€ — mer = sel, faut se rincer", zone:"Canet-en-Roussillon"},
+  {jour:"J2", name:"Camping Le Palavas 🚿", lat:43.5300, lon:3.9320, detail:"Homair 4★ — 8 ha, plage+étang, douches — dernier sel avant eau douce", regle:"🏕️ ~15-20€ — mer = sel, dernière douche confort", zone:"Palavas-les-Flots"},
+  {jour:"J3", name:"Bivouac Ardèche 🌲💧", lat:44.3850, lon:4.4200, detail:"Baignade Pont d'Arc le jour même → propre pour le club", regle:"🌲 Gratuit — baignade eau douce = douche naturelle", zone:"Vallon Pont d'Arc"},
+  {jour:"J4", name:"Bivouac Verdon 🌲💧", lat:43.7800, lon:6.3500, detail:"Baignade Lac de Castillon le jour même → propre", regle:"🌲 Gratuit — baignade lac = douche naturelle", zone:"La Palud-sur-Verdon"},
+  {jour:"J5", name:"Bivouac Serre-Ponçon 🌲💧", lat:44.5150, lon:6.3550, detail:"Baignade lac le jour même → propre pour le club", regle:"🌲 Gratuit — baignade lac = douche naturelle", zone:"Savines-le-Lac"},
+  {jour:"J6", name:"Bivouac Vercors 🌲💧", lat:45.2000, lon:5.7000, detail:"Baignade Lac de Paladru le jour même → propre", regle:"🌲 Gratuit — baignade lac = douche naturelle", zone:"Grenoble / Vercors"},
+  {jour:"J7", name:"Bivouac Vanoise 🌲💧", lat:45.2350, lon:6.7500, detail:"Torrent de montagne pour se rincer — ou camping La Buidonnière si besoin", regle:"🌲 Gratuit — ou 🏕️ 12€ si douche souhaitée", zone:"Aussois"},
   {jour:"J8", name:"Plage Lac d'Annecy 🌲", lat:45.8990, lon:6.1290, detail:"Jour repos — bivouac plage ou retour direct Bonnelles", regle:"🌲 Gratuit ou camping si douche souhaitée", zone:"Annecy"},
 ];
 
@@ -315,7 +315,8 @@ console.log('Road Trip Via Ferrata 7j: 🏖️+🧗+🎉 chaque jour');
     <summary style="cursor:pointer;font-weight:bold;">💰 Budget estimé (4-5 pers.)</summary>
     <b>Essence</b> — ~3000 km, 7L/100, 1.80€/L = <b>~380€</b> (75-95€/pers.)<br>
     <b>Via ferrata</b> — gratuit en autonome (louer matos ~15€/j)<br>
-    <b>Bivouac/camping</b> — J2 camping Le Palavas + J7 camping La Buidonnière = <b>~30€/pers.</b><br>
+    <b>Camping</b> — J1 La Marina + J2 Le Palavas (mer, sel → douche obligatoire) = <b>~35€/pers.</b><br>
+    <b>Bivouac</b> — J3→J8 forêt + baignade eau douce = <b>0€</b><br>
     <b>Clubs</b> — 7 soirées × ~8€ = <b>~55€/pers.</b><br>
     <b>Bouffe</b> — 8j × 20€ = <b>~160€/pers.</b><br>
     <b>Péages</b> — ~200€ (40-50€/pers.)<br>
