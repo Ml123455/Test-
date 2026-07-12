@@ -290,11 +290,13 @@ const itin = [
 ];
 L.polyline(itin,{color:'#e74c3c',weight:3,opacity:.7,dashArray:'10,6'}).addTo(map);
 
-L.control({position:'bottomright'}).onAdd=function(){
+const legend = L.control({position:'bottomright'});
+legend.onAdd = function(){
   const d=L.DomUtil.create('div','legend');
   d.innerHTML='<b>Légende</b>🧗 Ferrata (3) · ⚡ Aventure (3) · 🏊 Baignade (7) · 🎉 Club (5) · ⛺ Nuit<br><span style="color:#e74c3c">━</span> Itinéraire principal';
   return d;
-}.addTo(map);
+};
+legend.addTo(map);
 </script>
 
 </body>
