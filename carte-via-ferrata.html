@@ -52,7 +52,7 @@ const eIcon = L.divIcon({html:'<div style="background:#1abc9c;color:#fff;border-
 const eau = [
   {n:"Plage de Canet-en-Roussillon", lat:42.705, lon:3.030, t:"🏖️ MER · 🛶", j:"J1", d:"Sable fin, 20 min Perpignan — paddle dispo"},
   {n:"Plage de Palavas-les-Flots", lat:43.529, lon:3.930, t:"🏖️ MER · 🛶", j:"J2", d:"15 min Montpellier — kayak/paddle sur place"},
-  {n:"Pont d'Arc / Gorges Ardèche", lat:44.382, lon:4.417, t:"🌊 Rivière · 🛶", j:"J3", d:"🏆 Spot #1 canoë France — descente 8km ~20€"},
+  {n:"Rivière Ardèche (Pont du Diable)", lat:44.670, lon:4.220, t:"🌊 Rivière", j:"J3", d:"Baignade sous le pont — la rivière coule en bas de la ferrata"},
   {n:"Lac de Castillon", lat:43.905, lon:6.470, t:"🏖️ Lac · 🛶", j:"J4", d:"Pédalo, paddle, kayak — proche Verdon"},
   {n:"Lac de Serre-Ponçon", lat:44.510, lon:6.350, t:"🏖️ Lac · 🛶", j:"J5", d:"Plus grand lac alpin — kayak/paddle location"},
   {n:"Lac de Paladru", lat:45.453, lon:5.592, t:"🏖️ Lac · 🛶", j:"J6 ☀️", d:"Repos — paddle balade tranquille"},
@@ -81,7 +81,7 @@ const nuits = [
   {j:"J0", n:"Départ soir → Canet", lat:45.500, lon:2.000, d:"660 km — partir 18h, arriver minuit. Ou départ 4h matin J1", r:"🚗 Nuit dans la voiture (relais conducteur)", z:"A6/A75"},
   {j:"J1", n:"Camping La Marina de Canet 🚿", lat:42.694, lon:3.027, d:"Douche après mer/sel — réserver !", r:"🏕️ ~20€ — mer = sel → douche", z:"Canet"},
   {j:"J2", n:"Camping Le Palavas 🚿", lat:43.530, lon:3.932, d:"Dernière nuit mer — après, eau douce", r:"🏕️ ~20€ — réserver !", z:"Palavas"},
-  {j:"J3", n:"Bivouac Ardèche 🌲💧", lat:44.390, lon:4.425, d:"PNR Monts d'Ardèche — bivouac toléré 19h→9h", r:"🌲 Gratuit — hors site classé", z:"Pont d'Arc"},
+  {j:"J3", n:"Bivouac proche Thueyts 🌲💧", lat:44.670, lon:4.230, d:"PNR Monts d'Ardèche — bivouac toléré 19h→9h. Baignade sur place", r:"🌲 Gratuit — hors site classé", z:"Thueyts"},
   {j:"J4", n:"Camping La Palud 🚿", lat:43.782, lon:6.343, d:"⚠️ Bivouac Verdon = INTERDIT (135€). Camping municipal", r:"🏕️ ~12-15€", z:"La Palud"},
   {j:"J5", n:"Bivouac Serre-Ponçon 🌲💧", lat:44.515, lon:6.355, d:"Hors cœur Parc Écrins — bivouac toléré", r:"🌲 Gratuit", z:"Savines"},
   {j:"J6 ☀️", n:"Nuit Grenoble 🏨", lat:45.190, lon:5.730, d:"REPOS — F1/hôtel ~30€. VRAI sommeil avant J7 !", r:"🏨 ~25-30€ — repos obligatoire", z:"Grenoble"},
@@ -100,7 +100,7 @@ const itin = [
   {l:"J2 🧗", lat:43.918, lon:3.782, d:"Thaurac — loc 13€"},
   {l:"J2 🎉", lat:43.610, lon:3.877, d:"Panama Café (gratuit!)"},
   {l:"J3 🧗", lat:44.6697, lon:4.2202, d:"Thueyts — ✅ loc Cimes-Canyons"},
-  {l:"J3 🏊🛶", lat:44.382, lon:4.417, d:"Pont d'Arc — canoë aprem"},
+  {l:"J3 🏊", lat:44.6697, lon:4.2202, d:"Baignade rivière Ardèche (sous le Pont du Diable!)"},
   {l:"J3 🎉", lat:43.949, lon:4.806, d:"Avignon — L'Esclave"},
   {l:"J4 🏊🛶", lat:43.905, lon:6.470, d:"Lac Castillon — matin"},
   {l:"J4 🧗⚠️", lat:43.780, lon:6.342, d:"Cordata Verdon"},
@@ -144,7 +144,7 @@ L.control({position:'bottomright'}).onAdd=function(){
     <b>J0</b> 🏠 Bonnelles → 🚗 660 km → Canet (nuit)<br><br>
     <b>J1 🌊</b> 🏖️ Canet + 🛶 → 🧗 Fenouillèdes → 🎉 Speakeasy<br>
     <b>J2 🌊</b> 🏖️ Palavas + 🛶 → 🧗 Thaurac → 🎉 Panama (gratuit)<br>
-    <b>J3</b> 🧗 Thueyts (loc✅) → 🏊🛶 Pont d'Arc canoë → 🎉 L'Esclave<br>
+    <b>J3</b> 🧗 Thueyts + 🏊 baignade rivière → 🎉 L'Esclave Avignon<br>
     <b>J4</b> 🏊🛶 Castillon → ⚠️ Cordata Verdon → 🎉 Mistral<br>
     <b>J5</b> 🏊🛶 Serre-Ponçon → 🧗 Lauzet → 🍺 chill bars<br>
     <b>J6 ☀️</b> 🏊🛶 Paladru → 🧗 Bastille (option) → REPOS<br>
