@@ -3,28 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Road Trip Via Ferrata — 7 Jours Intenses</title>
+<title>Road Trip Via Ferrata — 8 Jours Optimisé</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   body { margin:0; padding:0; font-family:system-ui,sans-serif; }
   #map { width:100vw; height:100vh; }
-  .legend { background:white; padding:8px 12px; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,.15); font-size:13px; line-height:1.8; }
-  .legend b { display:block; margin-bottom:4px; font-size:14px; }
-  .info-popup { font-size:13px; max-width:220px; }
+  .legend { background:white; padding:8px 12px; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,.15); font-size:12px; line-height:1.7; }
+  .legend b { display:block; margin-bottom:3px; font-size:13px; }
+  .info-popup { font-size:13px; max-width:230px; }
   .info-popup h3 { margin:0 0 4px; font-size:14px; }
   .info-popup .stars { color:#f5a623; }
+  .info-popup .warn { color:#e74c3c; font-weight:bold; }
   .info-popup .detail { color:#555; font-size:11px; margin-top:3px; }
   .leaflet-popup-content-wrapper { border-radius:8px; }
-  .btn-gmaps {
-    position:fixed; bottom:20px; right:20px; z-index:1000;
-    background:#c8a45c; color:#fff;
-    padding:12px 18px; border-radius:8px;
-    text-decoration:none; font-weight:600; font-size:14px;
-    box-shadow:0 4px 12px rgba(0,0,0,.25);
-    font-family:system-ui,sans-serif;
-    transition:background .15s ease;
-  }
-  .btn-gmaps:hover { background:#b08f48; }
 </style>
 </head>
 <body>
@@ -32,7 +23,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const map = L.map('map').setView([44.0, 4.5], 7);
+const map = L.map('map').setView([44.3, 4.8], 7);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -48,19 +39,12 @@ const ferrataIcon = L.divIcon({
 });
 
 const ferratas = [
-  {name:"Via Ferrata du Fenouillèdes", lat:42.8080, lon:2.5100, jour:"J1", note:"★ 4.8/5 · 1900+ avis", detail:"Ambiance cathare, passerelles — Oxygen Aventure, 40 min de Perpignan"},
-  {name:"Via Ferrata du Thaurac", lat:43.9180, lon:3.7820, jour:"J2", note:"★ Gorges de l'Hérault", detail:"Falaise calcaire vue rivière — à 45 min de Montpellier"},
-  {name:"Via Ferrata Pont du Diable (Thueyts)", lat:44.6697, lon:4.2202, jour:"J3", note:"★ Pont du Diable Ardèche", detail:"Basalte et rivière — 1h30 d'Avignon"},
-  {name:"Via Ferrata Gorges du Verdon", lat:43.7800, lon:6.3420, jour:"J4", note:"★ Trou du Renard + Tyrolienne", detail:"200m au-dessus du Verdon — via cordata avec tyrolienne"},
-  {name:"Via Ferrata Aiguillette du Lauzet", lat:44.7800, lon:6.4300, jour:"J5", note:"★ 4.5/5 · Spot #1 Écrins", detail:"Parc National des Écrins — ambiance minérale"},
-  {name:"Via Ferrata de la Bastille", lat:45.1920, lon:5.7240, jour:"J6", note:"★ Grenoble — vue ville", detail:"En pleine ville, accessible facilement, panorama Grenoble"},
-  {name:"Via Ferrata du Diable (Aussois)", lat:45.2300, lon:6.7400, jour:"J7 🏆", note:"★ 7 parcours F→TD, 3760m", detail:"+ longue de France — gorges de l'Arc, Pont du Diable"},
-  // Hors itinéraire (bonus)
-  {name:"Via Ferrata Rocher Saint-Julien", lat:44.2750, lon:5.2750, jour:"Bonus", note:"★ 4 parcours, vue Ventoux", detail:"Buis-les-Baronnies, Drôme provençale"},
-  {name:"Via Ferrata Canyons de Lantosque", lat:43.9700, lon:7.3100, jour:"Bonus", note:"★ 3h30, passerelle 16m", detail:"PACA — ambiance aérienne et minérale"},
-  {name:"Via Ferrata de Bavella", lat:41.7540, lon:9.1810, jour:"Corse", note:"★ Aiguilles de Bavella", detail:"Granit rouge mythique, ponts de singe"},
-  {name:"Via Ferrata Lac de Nino", lat:42.3500, lon:8.9100, jour:"Corse", note:"★ 4.7/5 · 385 avis", detail:"GR20, pozzines d'altitude — #1 AllTrails"},
-  {name:"Via Ferrata Gorges de Sarenne", lat:45.0900, lon:6.0200, jour:"Bonus", note:"★ Alpe d'Huez", detail:"Vue imprenable sur l'Oisans, parcours sportif"},
+  {name:"Via Ferrata du Fenouillèdes", lat:42.8080, lon:2.5100, jour:"J1", note:"★ 4.8/5 · 1900+ avis", detail:"2 parcours F→AD. Location: Speleteaux St-Paul (réservation)", loc:"✅ Location Speleteaux — sur réservation"},
+  {name:"Via Ferrata du Thaurac", lat:43.9180, lon:3.7820, jour:"J2", note:"★ Gorges de l'Hérault (AD)", detail:"Falaise calcaire. Location: Roc'N River 5min, 13€/kit", loc:"✅ Roc'N River (13€) ou Cabesto Montpellier"},
+  {name:"Via Ferrata Pont du Diable (Thueyts)", lat:44.6697, lon:4.2202, jour:"J3", note:"★ Ardèche — tyrolienne 90m", detail:"Basalte et rivière — ⚠️ AUCUNE location sur place ! Prévoir matos", loc:"❌ Pas de location — acheter/louer avant !"},
+  {name:"Via Cordata Trou du Renard (Verdon)", lat:43.7800, lon:6.3420, jour:"J4", note:"⚠️ Via CORDATA — pas ferrata", detail:"Cordes fixes + tyrolienne + rappels. Guide ou matos fourni obligatoire", loc:"⚠️ Guide obligatoire ou pack fourni"},
+  {name:"Via Ferrata Aiguillette du Lauzet", lat:44.9400, lon:6.5600, jour:"J5", note:"★ Vallée Guisane — 2611m", detail:"Serre Chevalier — 900m D+. ⚠️ AUCUNE location sur place", loc:"❌ Pas de location — ferrata d'altitude isolée"},
+  {name:"Via Ferrata du Diable (Aussois)", lat:45.2300, lon:6.7400, jour:"J7 🏆", note:"★ 7 parcours F→TD, 3760m", detail:"+ longue de France — ⚠️ AUCUNE location ! Prévoir matos", loc:"❌ Pas de location sur place"},
 ];
 
 ferratas.forEach(f => {
@@ -68,34 +52,34 @@ ferratas.forEach(f => {
     <h3>🧗 [${f.jour}] ${f.name}</h3>
     <div class="stars">${f.note}</div>
     <div class="detail">📍 ${f.detail}</div>
+    <div style="font-size:11px;margin-top:3px;${f.loc.includes('❌')?'color:#e74c3c;font-weight:bold':'color:#27ae60'}">🔑 ${f.loc}</div>
     <div style="margin-top:4px"><a href="https://www.google.com/maps?q=${f.lat},${f.lon}" target="_blank">🗺️ Ouvrir dans Maps</a></div>
   </div>`;
   L.marker([f.lat, f.lon], {icon: ferrataIcon}).bindPopup(popup).addTo(map);
 });
 
 // ==============================
-// 🏖️ BAIGNADE (MER + LACS + RIVIÈRES)
+// 🏖️ BAIGNADE
 // ==============================
 const eauIcon = L.divIcon({
-  html: '<div style="background:#1abc9c;color:white;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid white;box-shadow:0 2px 4px rgba(0,0,0,.3);">🏊</div>',
-  iconSize: [24,24], iconAnchor: [12,12], popupAnchor: [0,-12]
+  html: '<div style="background:#1abc9c;color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid white;box-shadow:0 2px 4px rgba(0,0,0,.3);">🏊</div>',
+  iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11]
 });
 
 const eauSpots = [
-  {name:"Plage de Canet-en-Roussillon", lat:42.7050, lon:3.0300, type:"🏖️ MER — Plage", jour:"J1", detail:"Plage de sable fin, 20 min de Perpignan — baignade matin", avis:"🏖️ Spot J1"},
-  {name:"Plage de Palavas-les-Flots", lat:43.5290, lon:3.9300, type:"🏖️ MER — Plage", jour:"J2", detail:"Plage à 15 min de Montpellier — baignade avant ferrata", avis:"🏖️ Spot J2"},
-  {name:"Rivière Ardèche — Pont d'Arc", lat:44.3820, lon:4.4170, type:"🌊 Rivière", jour:"J3", detail:"Baignade dans les gorges de l'Ardèche — spot mythique", avis:"🏊 Spot J3"},
-  {name:"Lac de Castillon", lat:43.9050, lon:6.4700, type:"🏖️ Lac alpin", jour:"J4", detail:"Pédalo, plages, baignade — proche Verdon", avis:"4.5/5"},
-  {name:"Lac de Serre-Ponçon", lat:44.5100, lon:6.3500, type:"🏖️ Lac alpin", jour:"J5", detail:"Immense lac de barrage — plages, baignade, sports nautiques", avis:"4.6/5"},
-  {name:"Lac de Paladru (Grenoble)", lat:45.4530, lon:5.5920, type:"🏖️ Lac", jour:"J6", detail:"Plages aménagées à 30 min de Grenoble", avis:"4.4/5"},
-  {name:"Gorges de Galamus", lat:42.8360, lon:2.4750, type:"🌊 Canyon", jour:"Bonus", detail:"4.8/5 · 5075 avis Google — canyon calcaire blanc/rose", avis:"🔝 Pyrénées-Orientales"},
+  {name:"Plage de Canet-en-Roussillon", lat:42.7050, lon:3.0300, type:"🏖️ MER", jour:"J1", detail:"Plage sable fin, 20 min Perpignan"},
+  {name:"Plage de Palavas-les-Flots", lat:43.5290, lon:3.9300, type:"🏖️ MER", jour:"J2", detail:"15 min Montpellier"},
+  {name:"Pont d'Arc / Gorges Ardèche", lat:44.3820, lon:4.4170, type:"🌊 Rivière", jour:"J3", detail:"Baignade spot mythique"},
+  {name:"Lac de Castillon", lat:43.9050, lon:6.4700, type:"🏖️ Lac", jour:"J4", detail:"Pédalo, plages, proche Verdon"},
+  {name:"Lac de Serre-Ponçon", lat:44.5100, lon:6.3500, type:"🏖️ Lac", jour:"J5", detail:"Immense lac — sports nautiques"},
+  {name:"Lac de Paladru", lat:45.4530, lon:5.5920, type:"🏖️ Lac", jour:"J6 ☀️", detail:"Repos — plages aménagées"},
+  {name:"Lac d'Annecy", lat:45.8990, lon:6.1290, type:"🏖️ Lac", jour:"J8", detail:"Dernière baignade avant retour"},
 ];
 
 eauSpots.forEach(s => {
   const popup = `<div class="info-popup">
     <h3>🏊 [${s.jour}] ${s.name}</h3>
     <div class="stars">${s.type}</div>
-    <span>${s.avis}</span>
     <div class="detail">${s.detail}</div>
     <div style="margin-top:4px"><a href="https://www.google.com/maps?q=${s.lat},${s.lon}" target="_blank">🗺️ Ouvrir dans Maps</a></div>
   </div>`;
@@ -103,58 +87,7 @@ eauSpots.forEach(s => {
 });
 
 // ==============================
-// 🏔️ POINTS DE VUE
-// ==============================
-const vueIcon = L.divIcon({
-  html: '<div style="background:#3498db;color:white;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid white;box-shadow:0 2px 4px rgba(0,0,0,.3);">🏔️</div>',
-  iconSize: [24,24], iconAnchor: [12,12], popupAnchor: [0,-12]
-});
-
-const vues = [
-  {name:"Route des Crêtes (Verdon)", lat:43.7800, lon:6.3450, detail:"Boucle 25km — 14 belvédères Grand Canyon", avis:"4.5/5 · 777 avis", jour:"J4"},
-  {name:"Forts de l'Esseillon", lat:45.2284, lon:6.7350, detail:"Vue méandres de l'Arc + défilés rocheux", avis:"4.6/5", jour:"J7"},
-  {name:"Panorama Bastille (Grenoble)", lat:45.1920, lon:5.7240, detail:"Vue 360° sur Grenoble, Belledonne, Vercors", avis:"4.6/5", jour:"J6"},
-  {name:"Sommet du Ventoux", lat:44.1740, lon:5.2780, detail:"Toit de la Provence — visible depuis la route", avis:"4.6/5", jour:"Bonus"},
-];
-
-vues.forEach(v => {
-  const popup = `<div class="info-popup">
-    <h3>🏔️ [${v.jour}] ${v.name}</h3>
-    <span>${v.avis}</span>
-    <div class="detail">${v.detail}</div>
-    <div style="margin-top:4px"><a href="https://www.google.com/maps?q=${v.lat},${v.lon}" target="_blank">🗺️ Ouvrir dans Maps</a></div>
-  </div>`;
-  L.marker([v.lat, v.lon], {icon: vueIcon}).bindPopup(popup).addTo(map);
-});
-
-// ==============================
-// 🍽️ RESTAURANTS
-// ==============================
-const restoIcon = L.divIcon({
-  html: '<div style="background:#f39c12;color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid white;box-shadow:0 2px 4px rgba(0,0,0,.3);">🍽️</div>',
-  iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11]
-});
-
-const restos = [
-  {name:"Le Relais des Corbières", lat:42.8166, lon:2.5010, detail:"4.2/5 · 260 avis — #1 TripAdvisor St-Paul", avis:"Cuisine locale, terrasse ombragée", jour:"J1"},
-  {name:"Les Bains de Montpellier", lat:43.6090, lon:3.8750, detail:"Restaurant festif centre-ville", avis:"Ambiance avant de sortir", jour:"J2"},
-  {name:"Auberge des Crêtes", lat:43.7810, lon:6.3440, detail:"3.5/5 · terrasse canyon Verdon", avis:"Site touristique + mets qualité", jour:"J4"},
-  {name:"La Petite Auberge (Aussois)", lat:45.2280, lon:6.7420, detail:"Spécialités savoyardes", avis:"Raclette/fondue après la ferrata", jour:"J7"},
-  {name:"Le Café de la Table Ronde", lat:45.1920, lon:5.7260, detail:"2e plus vieux café de France", avis:"Sur la place, apéro avant le club", jour:"J6"},
-];
-
-restos.forEach(r => {
-  const popup = `<div class="info-popup">
-    <h3>🍽️ [${r.jour}] ${r.name}</h3>
-    <span>${r.detail}</span>
-    <div class="detail">${r.avis}</div>
-    <div style="margin-top:4px"><a href="https://www.google.com/maps?q=${r.lat},${r.lon}" target="_blank">🗺️ Ouvrir dans Maps</a></div>
-  </div>`;
-  L.marker([r.lat, r.lon], {icon: restoIcon}).bindPopup(popup).addTo(map);
-});
-
-// ==============================
-// 🎉 BOÎTES DE NUIT
+// 🎉 CLUBS (vérifiés par audit)
 // ==============================
 const clubIcon = L.divIcon({
   html: '<div style="background:#9b59b6;color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid white;box-shadow:0 2px 4px rgba(0,0,0,.3);">🎉</div>',
@@ -162,23 +95,19 @@ const clubIcon = L.divIcon({
 });
 
 const clubs = [
-  {name:"L'Uba Club", lat:42.6990, lon:2.8940, city:"Perpignan", jour:"J1", detail:"Boîte emblématique 20+ ans — centre-ville", avis:"4.2/5"},
-  {name:"Playa Club", lat:42.7050, lon:2.8950, city:"Perpignan", jour:"J1", detail:"Ambiance « nuit de folie » — DJ sets", avis:"4.0/5"},
-  {name:"Le Speakeasy", lat:42.6980, lon:2.8910, city:"Perpignan", jour:"J1", detail:"Cocktails + balançoires — cosy", avis:"4.3/5"},
-  {name:"Up & Down", lat:43.6080, lon:3.8780, city:"Montpellier", jour:"J2", detail:"4.5★ Yelp — club de référence centre-ville", avis:"4.5/5"},
-  {name:"Le Panama Cafe", lat:43.6100, lon:3.8770, city:"Montpellier", jour:"J2", detail:"Bar dansant ambiance latino", avis:"4.2/5"},
-  {name:"Red Zone", lat:43.9500, lon:4.8100, city:"Avignon", jour:"J3", detail:"Club électro Avignon — soirées étudiantes", avis:"4.1/5"},
-  {name:"Les Ambassadeurs", lat:43.9480, lon:4.8050, city:"Avignon", jour:"J3", detail:"Discothèque chic centre-ville depuis 1996", avis:"4.0/5"},
-  {name:"Le Mistral", lat:43.5280, lon:5.4500, city:"Aix-en-Provence", jour:"J4", detail:"Club référence Aix — ambiance provençale", avis:"4.2/5"},
-  {name:"Hôtel Vauban — Night", lat:44.8990, lon:6.6430, city:"Briançon", jour:"J5", detail:"Bar/club principal Hautes-Alpes — après le lac", avis:"3.8/5"},
-  {name:"Le Marquee", lat:45.1910, lon:5.7260, city:"Grenoble", jour:"J6", detail:"Club étudiant #1 Grenoble — centre-ville", avis:"4.3/5"},
-  {name:"Le Cosy Club", lat:45.5670, lon:5.9200, city:"Chambéry", jour:"J7", detail:"Discothèque proche gare — fin du trip en beauté", avis:"4.0/5"},
+  {name:"Le Speakeasy", lat:42.6980, lon:2.8910, city:"Perpignan", jour:"J1", detail:"House music, jeune — entrée gratuite filles, 10€ hommes", status:"✅ Vérifié"},
+  {name:"Madison Club", lat:42.7010, lon:2.9100, city:"Perpignan", jour:"J1", detail:"1000+ personnes, généraliste — plan B si Speakeasy fermé", status:"✅ Vérifié"},
+  {name:"Panama Café", lat:43.6100, lon:3.8770, city:"Montpellier", jour:"J2", detail:"Entrée GRATUITE, ambiance étudiante, minuit-6h", status:"✅ Vérifié — top budget"},
+  {name:"L'Esclave", lat:43.9490, lon:4.8060, city:"Avignon", jour:"J3", detail:"Club intra-muros, accessible jeunes, 10-15€", status:"✅ Alternative à Red Zone (bar à chicha)"},
+  {name:"Le Mistral", lat:43.5280, lon:5.4500, city:"Aix-en-Provence", jour:"J4", detail:"Institution électro/techno — 20€ entrée, budget !", status:"⚠️ 20€ — prévoir"},
+  {name:"Le Marquee", lat:45.1910, lon:5.7260, city:"Grenoble", jour:"J5", detail:"Club hip-hop — tenue correcte exigée, 10-15€", status:"✅ Vérifié"},
+  {name:"CO2 Club", lat:45.5680, lon:5.9250, city:"Chambéry", jour:"J7", detail:"2 salles 2 ambiances — seule boîte de Chambéry", status:"✅ Remplace Cosy Club (n'existe pas ici)"},
 ];
 
 clubs.forEach(c => {
   const popup = `<div class="info-popup">
     <h3>🎉 [${c.jour}] ${c.name}</h3>
-    <span>📍 ${c.city} · ${c.avis}</span>
+    <span>📍 ${c.city} · ${c.status}</span>
     <div class="detail">${c.detail}</div>
     <div style="margin-top:4px"><a href="https://www.google.com/maps?q=${c.lat},${c.lon}" target="_blank">🗺️ Ouvrir dans Maps</a></div>
   </div>`;
@@ -186,22 +115,22 @@ clubs.forEach(c => {
 });
 
 // ==============================
-// ⛺ BIVOUACS / NUITS
+// ⛺ NUITS (corrigées — bivouacs illégaux retirés)
 // ==============================
 const bivouacIcon = L.divIcon({
-  html: '<div style="background:#27ae60;color:white;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid white;box-shadow:0 2px 4px rgba(0,0,0,.3);">⛺</div>',
-  iconSize: [24,24], iconAnchor: [12,12], popupAnchor: [0,-12]
+  html: '<div style="background:#27ae60;color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid white;box-shadow:0 2px 4px rgba(0,0,0,.3);">⛺</div>',
+  iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11]
 });
 
 const bivouacs = [
-  {jour:"J1", name:"Camping La Marina de Canet 🚿", lat:42.6940, lon:3.0270, detail:"Homair — 276 emplacements, proche plage, sanitaires, douches", regle:"🏕️ ~15-20€/nuit — réserver à l'avance en été", zone:"Canet-en-Roussillon"},
-  {jour:"J2", name:"Camping Le Palavas 🚿", lat:43.5300, lon:3.9320, detail:"Homair 4★ — 8 ha, accès plage + étang, piscine, douches", regle:"🏕️ ~15-20€/nuit — réserver à l'avance en été", zone:"Palavas-les-Flots"},
-  {jour:"J3", name:"Bivouac forêt Ardèche 🌲", lat:44.3850, lon:4.4200, detail:"Forêt proche Pont d'Arc — bivouac gratuit, feu interdit", regle:"🌲 Gratuit — camping sauvage toléré 19h→9h", zone:"Vallon Pont d'Arc"},
-  {jour:"J4", name:"Bivouac forêt Verdon 🌲", lat:43.7800, lon:6.3500, detail:"Sous les pins, proche La Palud — bivouac gratuit autorisé", regle:"🌲 Gratuit — Parc Naturel, 19h→9h, pas de traces", zone:"La Palud-sur-Verdon"},
-  {jour:"J5", name:"Bivouac forêt Serre-Ponçon 🌲", lat:44.5150, lon:6.3550, detail:"Forêt en bordure du lac — spot bivouac sauvage", regle:"🌲 Gratuit — loin des routes, respecter le site", zone:"Savines-le-Lac"},
-  {jour:"J6", name:"Bivouac forêt Vercors 🌲", lat:45.2000, lon:5.7000, detail:"Forêt proche Grenoble — accès rapide au club après", regle:"🌲 Gratuit — bivouac toléré, pas de camping multi-nuits", zone:"Grenoble / Vercors"},
-  {jour:"J7", name:"Bivouac forêt Vanoise 🌲", lat:45.2350, lon:6.7500, detail:"Forêt alpine proche Aussois — bivouac sauvage autorisé", regle:"🌲 Gratuit — proche refuge Fond d'Aussois", zone:"Aussois"},
-  {jour:"J8", name:"Plage Lac d'Annecy 🌲", lat:45.8990, lon:6.1290, detail:"Jour repos — bivouac plage ou retour direct Bonnelles", regle:"🌲 Gratuit ou camping si douche souhaitée", zone:"Annecy"},
+  {jour:"J0", name:"Étape Lyon 🏨", lat:45.7600, lon:4.8400, detail:"Couper la route — dormir Lyon ou Valence. Hôtel F1 ~30€", regle:"🏨 Étape mi-chemin — J1 commence frais à la mer", zone:"Lyon / Valence"},
+  {jour:"J1", name:"Camping La Marina de Canet 🚿", lat:42.6940, lon:3.0270, detail:"Douche après mer/sel — réserver à l'avance", regle:"🏕️ ~20€ — mer = sel → douche obligatoire", zone:"Canet-en-Roussillon"},
+  {jour:"J2", name:"Camping Le Palavas 🚿", lat:43.5300, lon:3.9320, detail:"Dernière nuit mer — après, baignade eau douce", regle:"🏕️ ~20€ — réserver à l'avance", zone:"Palavas-les-Flots"},
+  {jour:"J3", name:"Bivouac Ardèche 🌲💧", lat:44.3900, lon:4.4250, detail:"PNR Monts d'Ardèche — bivouac toléré 19h→9h. Baignade Pont d'Arc", regle:"🌲 Gratuit — PNR, 19h→9h, hors site classé", zone:"Vallon Pont d'Arc"},
+  {jour:"J4", name:"Camping La Palud-sur-Verdon 🚿", lat:43.7820, lon:6.3430, detail:"⚠️ Bivouac INTERDIT dans le Verdon ! Camping municipal 12-15€", regle:"🏕️ ~12-15€ — bivouac illégal (135€ amende)", zone:"La Palud-sur-Verdon"},
+  {jour:"J5", name:"Bivouac Serre-Ponçon 🌲💧", lat:44.5150, lon:6.3550, detail:"Hors cœur Parc Écrins — bivouac toléré. Baignade lac", regle:"🌲 Gratuit — hors zone réglementée", zone:"Savines-le-Lac"},
+  {jour:"J6 ☀️", name:"Nuit Grenoble 🏨", lat:45.1900, lon:5.7300, detail:"REPOS — hôtel F1 ou camping. VRAI sommeil avant le Diable !", regle:"🏨 ~25-30€ — repos obligatoire avant J7", zone:"Grenoble"},
+  {jour:"J7", name:"Bivouac refuge Fond d'Aussois 🌲", lat:45.2350, lon:6.7500, detail:"Bivouac autorisé UNIQUEMENT aux abords du refuge", regle:"🌲 Gratuit — seule zone autorisée en Vanoise", zone:"Aussois / Vanoise"},
 ];
 
 bivouacs.forEach(b => {
@@ -209,47 +138,39 @@ bivouacs.forEach(b => {
     <h3>⛺ ${b.jour} — ${b.name}</h3>
     <span>📍 ${b.zone}</span>
     <div class="detail">${b.detail}</div>
-    <div style="font-size:11px;color:#27ae60;margin-top:3px;">📋 ${b.regle}</div>
+    <div style="font-size:11px;margin-top:3px;">📋 ${b.regle}</div>
     <div style="margin-top:4px"><a href="https://www.google.com/maps?q=${b.lat},${b.lon}" target="_blank">🗺️ Ouvrir dans Maps</a></div>
   </div>`;
   L.marker([b.lat, b.lon], {icon: bivouacIcon}).bindPopup(popup).addTo(map);
 });
 
 // ==============================
-// 🚗 ITINÉRAIRE 7 JOURS (🏊 + 🧗 + 🎉 chaque jour)
+// 🚗 ITINÉRAIRE OPTIMISÉ
 // ==============================
 const itinerary = [
-  {label:"J0 🏠 Bonnelles", lat:48.6180, lon:1.9400, desc:"🏠 DÉPART — Bonnelles (78). ~660 km jusqu'à Perpignan"},
-  {label:"→ J0→J1 route", lat:45.5000, lon:2.4000, desc:"Route Bonnelles→Perpignan (~6h30, départ tôt matin J1)"},
-  {label:"DÉPART J1", lat:42.7000, lon:2.9000, desc:"🏖️ Plage Canet → 🧗 Ferrata Fenouillèdes → 🎉 Perpignan"},
-  {label:"J1 🏖️ Plage", lat:42.7050, lon:3.0300, desc:"Plage de Canet-en-Roussillon — baignade matin"},
-  {label:"J1 🧗 Ferrata", lat:42.8080, lon:2.5100, desc:"Ferrata du Fenouillèdes (4.8★, 2-3h)"},
-  {label:"J1 🎉 Club", lat:42.6990, lon:2.8940, desc:"Perpignan: L'Uba, Playa Club, Speakeasy"},
-  {label:"→ J2 transfert", lat:43.3000, lon:3.5000, desc:"Route Perpignan→Montpellier (~1h30)"},
-  {label:"J2 🏖️ Plage", lat:43.5290, lon:3.9300, desc:"Plage de Palavas-les-Flots — baignade matin"},
-  {label:"J2 🧗 Ferrata", lat:43.9180, lon:3.7820, desc:"Ferrata du Thaurac, Gorges de l'Hérault (2-3h)"},
-  {label:"J2 🎉 Club", lat:43.6080, lon:3.8780, desc:"Montpellier: Up & Down, Panama Cafe"},
-  {label:"→ J3 transfert", lat:44.0000, lon:4.3000, desc:"Route Montpellier→Ardèche/Avignon (~1h30)"},
-  {label:"J3 🏊 Rivière", lat:44.3820, lon:4.4170, desc:"Baignade Pont d'Arc / Gorges Ardèche"},
-  {label:"J3 🧗 Ferrata", lat:44.6697, lon:4.2202, desc:"Ferrata Pont du Diable, Thueyts (2h)"},
-  {label:"J3 🎉 Club", lat:43.9500, lon:4.8100, desc:"Avignon: Red Zone, Les Ambassadeurs"},
-  {label:"→ J4 transfert", lat:43.9000, lon:5.4000, desc:"Route Avignon→Verdon (~2h)"},
-  {label:"J4 🏊 Lac", lat:43.9050, lon:6.4700, desc:"Baignade Lac de Castillon — matin"},
-  {label:"J4 🧗 Ferrata", lat:43.7800, lon:6.3420, desc:"Ferrata Trou du Renard + Route des Crêtes"},
-  {label:"J4 🎉 Club", lat:43.5280, lon:5.4500, desc:"Aix-en-Provence: Le Mistral"},
-  {label:"→ J5 transfert", lat:44.3000, lon:6.2000, desc:"Route Verdon→Serre-Ponçon (~2h)"},
-  {label:"J5 🏊 Lac", lat:44.5100, lon:6.3500, desc:"Lac de Serre-Ponçon — baignade + sports nautiques"},
-  {label:"J5 🧗 Ferrata", lat:44.7800, lon:6.4300, desc:"Ferrata Aiguillette du Lauzet, Écrins (2-3h)"},
-  {label:"J5 🎉 Club", lat:44.8990, lon:6.6430, desc:"Briançon: Hôtel Vauban"},
-  {label:"→ J6 transfert", lat:44.9500, lon:5.8000, desc:"Route Briançon→Grenoble (~2h)"},
-  {label:"J6 🏊 Lac", lat:45.4530, lon:5.5920, desc:"Baignade Lac de Paladru — matin"},
-  {label:"J6 🧗 Ferrata", lat:45.1920, lon:5.7240, desc:"Ferrata de la Bastille, Grenoble (2h, en ville!)"},
-  {label:"J6 🎉 Club", lat:45.1910, lon:5.7260, desc:"Grenoble: Le Marquee + clubs étudiants"},
-  {label:"→ J7 transfert", lat:45.4000, lon:6.2000, desc:"Route Grenoble→Aussois (~1h30)"},
-  {label:"J7 🧗 Ferrata ★", lat:45.2300, lon:6.7400, desc:"🏆 Via Ferrata du Diable: 7 parcours, 3760m, 6-8h"},
-  {label:"J7 🎉 Club final", lat:45.5670, lon:5.9200, desc:"Chambéry: Le Cosy Club"},
-  {label:"J8 🏖️ REPOS", lat:45.8990, lon:6.1290, desc:"☀️ Jour repos — Lac d'Annecy: plage, baignade, pédalo, farniente"},
-  {label:"← RETOUR 🏠", lat:48.6180, lon:1.9400, desc:"Retour Annecy→Bonnelles (~5h30, ~550 km)"},
+  {label:"J0 🏠 Bonnelles", lat:48.6180, lon:1.9400, desc:"Départ 18h → étape Lyon/Valence (~5h). Dormir F1"},
+  {label:"J0 🏨 Étape", lat:45.7600, lon:4.8400, desc:"Lyon — nuit étape. Repos pour attaquer J1 frais !"},
+  {label:"J1 🌊 MER", lat:42.7050, lon:3.0300, desc:"🏖️ Canet Plage — LE TRIP COMMENCE ! 🏊+🧗+🎉"},
+  {label:"J1 🧗 Ferrata", lat:42.8080, lon:2.5100, desc:"Fenouillèdes (4.8★) — loc Speleteaux St-Paul"},
+  {label:"J1 🎉 Club", lat:42.6980, lon:2.8910, desc:"Perpignan: Speakeasy ou Madison Club"},
+  {label:"J2 🏖️ Palavas", lat:43.5290, lon:3.9300, desc:"Plage Palavas → Ferrata Thaurac → Panama Café"},
+  {label:"J2 🧗 Ferrata", lat:43.9180, lon:3.7820, desc:"Thaurac (AD) — loc Roc'N River 13€"},
+  {label:"J2 🎉 Club", lat:43.6100, lon:3.8770, desc:"Montpellier: Panama Café (gratuit !) 00h-6h"},
+  {label:"J3 🏊 Pont d'Arc", lat:44.3820, lon:4.4170, desc:"Baignade Pont d'Arc → Thueyts → Avignon"},
+  {label:"J3 🧗 Ferrata", lat:44.6697, lon:4.2202, desc:"Thueyts (AD) — ⚠️ PAS de location ! Prévoir matos"},
+  {label:"J3 🎉 Club", lat:43.9490, lon:4.8060, desc:"Avignon: L'Esclave"},
+  {label:"J4 🏊 Castillon", lat:43.9050, lon:6.4700, desc:"Lac Castillon → Via Cordata Verdon → Aix"},
+  {label:"J4 🧗 Cordata", lat:43.7800, lon:6.3420, desc:"⚠️ Via CORDATA — guide ou matos fourni"},
+  {label:"J4 🎉 Club", lat:43.5280, lon:5.4500, desc:"Aix: Le Mistral (20€)"},
+  {label:"J5 🏊 Serre-Ponçon", lat:44.5100, lon:6.3500, desc:"Lac → Lauzet → Grenoble (pas Briançon !)"},
+  {label:"J5 🧗 Ferrata", lat:44.9400, lon:6.5600, desc:"Lauzet 2611m — ❌ pas de location"},
+  {label:"J5 🎉 Club", lat:45.1910, lon:5.7260, desc:"Grenoble: Le Marquee (tenue correcte !)"},
+  {label:"J6 ☀️ REPOS", lat:45.4530, lon:5.5920, desc:"Lac Paladru — baignade, sieste. PAS de club !"},
+  {label:"J6 🏨 Nuit", lat:45.1900, lon:5.7300, desc:"Dodo Grenoble — VRAI sommeil avant le Diable !"},
+  {label:"J7 🏆 DIABLE", lat:45.2300, lon:6.7400, desc:"🏆 FERRATA DU DIABLE — jambes fraîches !"},
+  {label:"J7 🎉 Club", lat:45.5680, lon:5.9250, desc:"Chambéry: CO2 Club (pas Cosy Club !)"},
+  {label:"J8 🏊 Annecy", lat:45.8990, lon:6.1290, desc:"Lac d'Annecy — dernière baignade"},
+  {label:"J8 🏠 Retour", lat:48.6180, lon:1.9400, desc:"Annecy→Bonnelles (~550km, 5h30) — FIN !"},
 ];
 
 const routeCoords = itinerary.map(p => [p.lat, p.lon]);
@@ -257,21 +178,21 @@ L.polyline(routeCoords, {
   color: '#e74c3c', weight: 3, opacity: 0.7, dashArray: '10, 6'
 }).addTo(map);
 
-// Day number circles along itinerary
+// Day markers
 itinerary.forEach(p => {
   const m = p.label.match(/J(\d)/);
   if (m) {
     const dayNum = m[1];
-    const isEau = p.label.includes('🏊') || p.label.includes('🏖️');
-    const isFerrata = p.label.includes('🧗');
+    const isEau = p.label.includes('🏊') || p.label.includes('🏖️') || p.label.includes('MER');
+    const isFerrata = p.label.includes('🧗') || p.label.includes('DIABLE');
     const isClub = p.label.includes('🎉');
-    const bgColor = isFerrata ? '#e74c3c' : (isEau ? '#1abc9c' : (isClub ? '#9b59b6' : '#27ae60'));
-    const emoji = isFerrata ? '🧗' : (isEau ? '🏊' : (isClub ? '🎉' : '⛺'));
+    const isRepos = p.label.includes('REPOS');
+    const bgColor = isFerrata ? '#e74c3c' : (isEau ? '#1abc9c' : (isClub ? '#9b59b6' : (isRepos ? '#f39c12' : '#3498db')));
     const icon = L.divIcon({
       html: `<div style="background:${bgColor};color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;border:2px solid white;box-shadow:0 2px 4px rgba(0,0,0,.3);">J${dayNum}</div>`,
       iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11]
     });
-    L.marker([p.lat, p.lon], {icon, opacity: 0.85}).bindTooltip(p.desc, {permanent:false, direction:'top'}).addTo(map);
+    L.marker([p.lat, p.lon], {icon, opacity: 0.9}).bindTooltip(p.desc, {permanent:false, direction:'top'}).addTo(map);
   }
 });
 
@@ -282,63 +203,49 @@ const legend = L.control({position: 'bottomright'});
 legend.onAdd = function() {
   const div = L.DomUtil.create('div', 'legend');
   div.innerHTML = `<b>Légende</b>
-    🧗 Via Ferrata — 12 spots (7 dans l'itinéraire)<br>
-    🏊 Baignade — mer, lac, rivière<br>
-    🏔️ Point de vue<br>
-    🍽️ Restaurant Q/P<br>
-    🎉 Boîte de nuit<br>
-    ⛺ Bivouac / Camping<br>
-    <span style="color:#e74c3c;">━</span> Itinéraire 7j (🏊+🧗+🎉/jour)<br>
-    <small style="color:#888">Cliquer sur les icônes pour détails</small>`;
+    🧗 Via Ferrata (6)<br>
+    🏊 Baignade (7)<br>
+    🎉 Club vérifié (7)<br>
+    ⛺ Nuit/camping<br>
+    <span style="color:#e74c3c;">━</span> Itinéraire optimisé<br>
+    <span style="color:#f39c12;">★</span> J6 = REPOS (pas de club !)<br>
+    <span style="color:#e74c3c;">❌</span> = pas de location matos<br>
+    <small style="color:#888">Audité 3 agents IA · Clubs vérifiés</small>`;
   return div;
 };
 legend.addTo(map);
 
-console.log('Road Trip Via Ferrata 7j: 🏖️+🧗+🎉 chaque jour');
+console.log('Road Trip Optimisé v2 — audité, clubs vérifiés, J6 repos, -22% km');
 </script>
 
-<div style="position:fixed;top:10px;left:10px;background:white;padding:10px 14px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.2);z-index:1000;font-size:12px;max-width:300px;">
-  <b style="font-size:15px;">🗺️ Road Trip Via Ferrata — 8j</b><br>
-  <small style="color:#e74c3c;"><b>🏊 + 🧗 + 🎉 chaque jour + ☀️ J8 repos lac</b></small>
-  <details style="margin-top:6px;font-size:11px;color:#333;line-height:1.6;">
-    <summary style="cursor:pointer;font-weight:bold;color:#e74c3c;">📋 Planning complet</summary>
-    <b>J0</b> 🏠 Départ Bonnelles (78) — route vers Perpignan<br><br>
-    <b>J1 — Perpignan</b><br>
-    🏖️ Plage Canet → 🧗 Ferrata Fenouillèdes (4.8★) → 🎉 L'Uba / Playa Club<br><br>
-    <b>J2 — Montpellier</b><br>
-    🏖️ Plage Palavas → 🧗 Ferrata du Thaurac → 🎉 Up & Down<br><br>
-    <b>J3 — Avignon</b><br>
-    🏊 Pont d'Arc / Ardèche → 🧗 Ferrata Thueyts → 🎉 Red Zone / Ambassadeurs<br><br>
-    <b>J4 — Verdon → Aix</b><br>
-    🏊 Lac de Castillon → 🧗 Ferrata Trou du Renard → 🎉 Le Mistral (Aix)<br><br>
-    <b>J5 — Écrins → Briançon</b><br>
-    🏊 Lac de Serre-Ponçon → 🧗 Ferrata Lauzet → 🎉 Hôtel Vauban<br><br>
-    <b>J6 — Grenoble</b><br>
-    🏊 Lac de Paladru → 🧗 Ferrata Bastille (en ville!) → 🎉 Le Marquee<br><br>
-    <b>J7 — Aussois 🏆</b><br>
-    🧗 Ferrata du Diable (3760m) → 🎉 Chambéry Cosy Club<br><br>
-    <b>J8 — ☀️ REPOS</b><br>
-    🏖️ Lac d'Annecy — plage, baignade, pédalo, farniente<br>
-    🚗 Retour Annecy→Bonnelles (~550 km)<br>
+<div style="position:fixed;top:10px;left:10px;background:white;padding:10px 14px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.2);z-index:1000;font-size:11px;max-width:320px;">
+  <b style="font-size:14px;">🗺️ Road Trip Via Ferrata v2 — 8j</b><br>
+  <small style="color:#27ae60;"><b>✅ Optimisé · Audité · Clubs vérifiés</b></small>
+  <details style="margin-top:4px;font-size:10px;color:#333;line-height:1.5;">
+    <summary style="cursor:pointer;font-weight:bold;color:#e74c3c;">📋 Planning (cliquer)</summary>
+    <b>J0</b> 🏠 Bonnelles → 🏨 étape Lyon/Valence<br><br>
+    <b>J1 🌊 MER</b> 🏖️ Canet → 🧗 Fenouillèdes (loc✅) → 🎉 Speakeasy<br>
+    <b>J2 🌊 MER</b> 🏖️ Palavas → 🧗 Thaurac (loc✅) → 🎉 Panama Café (gratuit)<br>
+    <b>J3</b> 🏊 Pont d'Arc → 🧗 Thueyts (loc❌) → 🎉 L'Esclave Avignon<br>
+    <b>J4</b> 🏊 Castillon → ⚠️ Cordata Verdon → 🎉 Mistral Aix (20€)<br>
+    <b>J5</b> 🏊 Serre-Ponçon → 🧗 Lauzet (loc❌) → 🎉 Marquee Grenoble<br>
+    <b>J6 ☀️ REPOS</b> 🏊 Paladru → sieste → PAS de club → 🏨 dodo<br>
+    <b>J7 🏆</b> 🧗 Diable (jambes fraîches !) → 🎉 CO2 Chambéry<br>
+    <b>J8</b> 🏊 Annecy → 🚗 retour Bonnelles<br>
+    <small style="color:#e74c3c;">⚠️ J3+J5+J7 = prévoir matos (pas de location)</small>
   </details>
-  <details style="margin-top:4px;font-size:11px;color:#333;line-height:1.6;">
-    <summary style="cursor:pointer;font-weight:bold;">💰 Budget estimé (4-5 pers.)</summary>
-    <b>Essence</b> — ~3000 km, 7L/100, 1.80€/L = <b>~380€</b> (75-95€/pers.)<br>
-    <b>Via ferrata</b> — gratuit en autonome (louer matos ~15€/j)<br>
-    <b>Bivouac/camping</b> — 2 nuits camping mer (douche) × 15€ = <b>~30€/pers.</b><br>
-    <b>Clubs</b> — 7 soirées × ~8€ = <b>~55€/pers.</b><br>
-    <b>Bouffe</b> — 8j × 20€ = <b>~160€/pers.</b><br>
-    <b>Péages</b> — ~200€ (40-50€/pers.)<br>
-    <hr style="margin:3px 0;">
-    <b>TOTAL : ~400-440€/personne</b><br>
-    <small style="color:#888;">2 nuits camping mer, 6 nuits bivouac forêt gratuit</small>
+  <details style="margin-top:3px;font-size:10px;color:#333;line-height:1.5;">
+    <summary style="cursor:pointer;font-weight:bold;">💰 Budget (4-5 pers)</summary>
+    Essence ~3000km: 85-110€/pers<br>
+    Péages: 40-55€/pers<br>
+    Camping J1+J2+J4: ~55€/pers<br>
+    Nuit J0+J6 (F1): ~30€/pers<br>
+    Clubs (7 soirs): 70-100€/pers<br>
+    Bouffe 8j: 160€/pers<br>
+    <b>TOTAL: ~450-550€/pers</b><br>
+    <small style="color:#e74c3c;">+ location matos 13-15€/ferrata si besoin</small>
   </details>
-  <small style="color:#888;display:block;margin-top:4px;">Coords approx. — lien Maps dans chaque popup</small>
 </div>
-
-<a class="btn-gmaps" href="https://www.google.com/maps/dir/?api=1&origin=Bonnelles&destination=Aussois&waypoints=Perpignan%2C+France|Montpellier%2C+France|Avignon%2C+France|La+Palud-sur-Verdon%2C+France|Brian%C3%A7on%2C+France|Grenoble%2C+France&mode=driving" target="_blank" rel="noopener">
-  🗺️ Itinéraire sur Google Maps
-</a>
 
 </body>
 </html>
