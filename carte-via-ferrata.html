@@ -208,6 +208,8 @@ bivouacs.forEach(b => {
 // 🚗 ITINÉRAIRE 7 JOURS (🏊 + 🧗 + 🎉 chaque jour)
 // ==============================
 const itinerary = [
+  {label:"J0 🏠 Bonnelles", lat:48.6180, lon:1.9400, desc:"🏠 DÉPART — Bonnelles (78). ~660 km jusqu'à Perpignan"},
+  {label:"→ J0→J1 route", lat:45.5000, lon:2.4000, desc:"Route Bonnelles→Perpignan (~6h30, départ tôt matin J1)"},
   {label:"DÉPART J1", lat:42.7000, lon:2.9000, desc:"🏖️ Plage Canet → 🧗 Ferrata Fenouillèdes → 🎉 Perpignan"},
   {label:"J1 🏖️ Plage", lat:42.7050, lon:3.0300, desc:"Plage de Canet-en-Roussillon — baignade matin"},
   {label:"J1 🧗 Ferrata", lat:42.8080, lon:2.5100, desc:"Ferrata du Fenouillèdes (4.8★, 2-3h)"},
@@ -235,6 +237,7 @@ const itinerary = [
   {label:"→ J7 transfert", lat:45.4000, lon:6.2000, desc:"Route Grenoble→Aussois (~1h30)"},
   {label:"J7 🧗 Ferrata ★", lat:45.2300, lon:6.7400, desc:"🏆 Via Ferrata du Diable: 7 parcours, 3760m, 6-8h"},
   {label:"J7 🎉 Club final", lat:45.5670, lon:5.9200, desc:"Chambéry: Le Cosy Club — fin du trip!"},
+  {label:"← RETOUR 🏠", lat:48.6180, lon:1.9400, desc:"Retour Chambéry→Bonnelles (~5h, ~450 km) — arrivée J8"},
 ];
 
 const routeCoords = itinerary.map(p => [p.lat, p.lon]);
