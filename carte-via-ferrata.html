@@ -15,6 +15,16 @@
   .info-popup .stars { color:#f5a623; }
   .info-popup .detail { color:#555; font-size:11px; margin-top:3px; }
   .leaflet-popup-content-wrapper { border-radius:8px; }
+  .btn-gmaps {
+    position:fixed; bottom:20px; right:20px; z-index:1000;
+    background:#c8a45c; color:#fff;
+    padding:12px 18px; border-radius:8px;
+    text-decoration:none; font-weight:600; font-size:14px;
+    box-shadow:0 4px 12px rgba(0,0,0,.25);
+    font-family:system-ui,sans-serif;
+    transition:background .15s ease;
+  }
+  .btn-gmaps:hover { background:#b08f48; }
 </style>
 </head>
 <body>
@@ -41,8 +51,8 @@ const ferratas = [
   {name:"Via Ferrata du Fenouillèdes", lat:42.8080, lon:2.5100, jour:"J1", note:"★ 4.8/5 · 1900+ avis", detail:"Ambiance cathare, passerelles — Oxygen Aventure, 40 min de Perpignan"},
   {name:"Via Ferrata du Thaurac", lat:43.9180, lon:3.7820, jour:"J2", note:"★ Gorges de l'Hérault", detail:"Falaise calcaire vue rivière — à 45 min de Montpellier"},
   {name:"Via Ferrata Pont du Diable (Thueyts)", lat:44.6697, lon:4.2202, jour:"J3", note:"★ Pont du Diable Ardèche", detail:"Basalte et rivière — 1h30 d'Avignon"},
-  {name:"Via Ferrata Gorges du Verdon", lat:43.7800, lon:6.3420, jour:"J4", note:"⚠️ Via CORDATA (pas ferrata classique)", detail:"Trou du Renard — cordes fixes + tyrolienne + saut → matos spécifique"},
-  {name:"Via Ferrata Aiguillette du Lauzet", lat:44.9400, lon:6.5600, jour:"J5", note:"★ 4.5/5 · Vallée Guisane", detail:"Serre Chevalier — enchaînement possible Croix de Toulouse + Neyzets"},
+  {name:"Via Ferrata Gorges du Verdon", lat:43.7800, lon:6.3420, jour:"J4", note:"★ Trou du Renard + Tyrolienne", detail:"200m au-dessus du Verdon — via cordata avec tyrolienne"},
+  {name:"Via Ferrata Aiguillette du Lauzet", lat:44.7800, lon:6.4300, jour:"J5", note:"★ 4.5/5 · Spot #1 Écrins", detail:"Parc National des Écrins — ambiance minérale"},
   {name:"Via Ferrata de la Bastille", lat:45.1920, lon:5.7240, jour:"J6", note:"★ Grenoble — vue ville", detail:"En pleine ville, accessible facilement, panorama Grenoble"},
   {name:"Via Ferrata du Diable (Aussois)", lat:45.2300, lon:6.7400, jour:"J7 🏆", note:"★ 7 parcours F→TD, 3760m", detail:"+ longue de France — gorges de l'Arc, Pont du Diable"},
   // Hors itinéraire (bonus)
@@ -184,13 +194,13 @@ const bivouacIcon = L.divIcon({
 });
 
 const bivouacs = [
-  {jour:"J1", name:"Camping La Marina de Canet 🚿", lat:42.6940, lon:3.0270, detail:"Homair — 276 empl., proche plage, douches — obligatoire après mer/sel", regle:"🏕️ ~15-20€ — mer = sel, faut se rincer", zone:"Canet-en-Roussillon"},
-  {jour:"J2", name:"Camping Le Palavas 🚿", lat:43.5300, lon:3.9320, detail:"Homair 4★ — 8 ha, plage+étang, douches — dernier sel avant eau douce", regle:"🏕️ ~15-20€ — mer = sel, dernière douche confort", zone:"Palavas-les-Flots"},
-  {jour:"J3", name:"Bivouac Ardèche 🌲💧", lat:44.3850, lon:4.4200, detail:"Baignade Pont d'Arc le jour même → propre pour le club", regle:"🌲 Gratuit — baignade eau douce = douche naturelle", zone:"Vallon Pont d'Arc"},
-  {jour:"J4", name:"Bivouac Verdon 🌲💧", lat:43.7800, lon:6.3500, detail:"Baignade Lac de Castillon le jour même → propre", regle:"🌲 Gratuit — baignade lac = douche naturelle", zone:"La Palud-sur-Verdon"},
-  {jour:"J5", name:"Bivouac Serre-Ponçon 🌲💧", lat:44.5150, lon:6.3550, detail:"Baignade lac le jour même → propre pour le club", regle:"🌲 Gratuit — baignade lac = douche naturelle", zone:"Savines-le-Lac"},
-  {jour:"J6", name:"Bivouac Vercors 🌲💧", lat:45.2000, lon:5.7000, detail:"Baignade Lac de Paladru le jour même → propre", regle:"🌲 Gratuit — baignade lac = douche naturelle", zone:"Grenoble / Vercors"},
-  {jour:"J7", name:"Bivouac Vanoise 🌲💧", lat:45.2350, lon:6.7500, detail:"Torrent de montagne pour se rincer — ou camping La Buidonnière si besoin", regle:"🌲 Gratuit — ou 🏕️ 12€ si douche souhaitée", zone:"Aussois"},
+  {jour:"J1", name:"Camping La Marina de Canet 🚿", lat:42.6940, lon:3.0270, detail:"Homair — 276 emplacements, proche plage, sanitaires, douches", regle:"🏕️ ~15-20€/nuit — réserver à l'avance en été", zone:"Canet-en-Roussillon"},
+  {jour:"J2", name:"Camping Le Palavas 🚿", lat:43.5300, lon:3.9320, detail:"Homair 4★ — 8 ha, accès plage + étang, piscine, douches", regle:"🏕️ ~15-20€/nuit — réserver à l'avance en été", zone:"Palavas-les-Flots"},
+  {jour:"J3", name:"Bivouac forêt Ardèche 🌲", lat:44.3850, lon:4.4200, detail:"Forêt proche Pont d'Arc — bivouac gratuit, feu interdit", regle:"🌲 Gratuit — camping sauvage toléré 19h→9h", zone:"Vallon Pont d'Arc"},
+  {jour:"J4", name:"Bivouac forêt Verdon 🌲", lat:43.7800, lon:6.3500, detail:"Sous les pins, proche La Palud — bivouac gratuit autorisé", regle:"🌲 Gratuit — Parc Naturel, 19h→9h, pas de traces", zone:"La Palud-sur-Verdon"},
+  {jour:"J5", name:"Bivouac forêt Serre-Ponçon 🌲", lat:44.5150, lon:6.3550, detail:"Forêt en bordure du lac — spot bivouac sauvage", regle:"🌲 Gratuit — loin des routes, respecter le site", zone:"Savines-le-Lac"},
+  {jour:"J6", name:"Bivouac forêt Vercors 🌲", lat:45.2000, lon:5.7000, detail:"Forêt proche Grenoble — accès rapide au club après", regle:"🌲 Gratuit — bivouac toléré, pas de camping multi-nuits", zone:"Grenoble / Vercors"},
+  {jour:"J7", name:"Bivouac forêt Vanoise 🌲", lat:45.2350, lon:6.7500, detail:"Forêt alpine proche Aussois — bivouac sauvage autorisé", regle:"🌲 Gratuit — proche refuge Fond d'Aussois", zone:"Aussois"},
   {jour:"J8", name:"Plage Lac d'Annecy 🌲", lat:45.8990, lon:6.1290, detail:"Jour repos — bivouac plage ou retour direct Bonnelles", regle:"🌲 Gratuit ou camping si douche souhaitée", zone:"Annecy"},
 ];
 
@@ -209,9 +219,9 @@ bivouacs.forEach(b => {
 // 🚗 ITINÉRAIRE 7 JOURS (🏊 + 🧗 + 🎉 chaque jour)
 // ==============================
 const itinerary = [
-  {label:"J0 🏠 Bonnelles", lat:48.6180, lon:1.9400, desc:"Transfert J0 soir → Canet (660 km, ~6h30)"},
-  {label:"→ transfert", lat:43.0000, lon:2.6000, desc:"Route de nuit — arrivée matin J1"},
-  {label:"J1 🌊 DÉPART MER", lat:42.7050, lon:3.0300, desc:"🏖️ Canet Plage — LE TRIP COMMENCE ! 🏊 + 🧗 + 🎉"},
+  {label:"J0 🏠 Bonnelles", lat:48.6180, lon:1.9400, desc:"🏠 DÉPART — Bonnelles (78). ~660 km jusqu'à Perpignan"},
+  {label:"→ J0→J1 route", lat:45.5000, lon:2.4000, desc:"Route Bonnelles→Perpignan (~6h30, départ tôt matin J1)"},
+  {label:"DÉPART J1", lat:42.7000, lon:2.9000, desc:"🏖️ Plage Canet → 🧗 Ferrata Fenouillèdes → 🎉 Perpignan"},
   {label:"J1 🏖️ Plage", lat:42.7050, lon:3.0300, desc:"Plage de Canet-en-Roussillon — baignade matin"},
   {label:"J1 🧗 Ferrata", lat:42.8080, lon:2.5100, desc:"Ferrata du Fenouillèdes (4.8★, 2-3h)"},
   {label:"J1 🎉 Club", lat:42.6990, lon:2.8940, desc:"Perpignan: L'Uba, Playa Club, Speakeasy"},
@@ -292,8 +302,8 @@ console.log('Road Trip Via Ferrata 7j: 🏖️+🧗+🎉 chaque jour');
   <small style="color:#e74c3c;"><b>🏊 + 🧗 + 🎉 chaque jour + ☀️ J8 repos lac</b></small>
   <details style="margin-top:6px;font-size:11px;color:#333;line-height:1.6;">
     <summary style="cursor:pointer;font-weight:bold;color:#e74c3c;">📋 Planning complet</summary>
-    <b>J0</b> 🏠 Bonnelles → 🚗 transfert nuit (660 km)<br><br>
-    <b>J1 🌊 — DÉPART MER — Perpignan</b><br>
+    <b>J0</b> 🏠 Départ Bonnelles (78) — route vers Perpignan<br><br>
+    <b>J1 — Perpignan</b><br>
     🏖️ Plage Canet → 🧗 Ferrata Fenouillèdes (4.8★) → 🎉 L'Uba / Playa Club<br><br>
     <b>J2 — Montpellier</b><br>
     🏖️ Plage Palavas → 🧗 Ferrata du Thaurac → 🎉 Up & Down<br><br>
@@ -315,18 +325,20 @@ console.log('Road Trip Via Ferrata 7j: 🏖️+🧗+🎉 chaque jour');
     <summary style="cursor:pointer;font-weight:bold;">💰 Budget estimé (4-5 pers.)</summary>
     <b>Essence</b> — ~3000 km, 7L/100, 1.80€/L = <b>~380€</b> (75-95€/pers.)<br>
     <b>Via ferrata</b> — gratuit en autonome (louer matos ~15€/j)<br>
-    <b>Camping</b> — J1 La Marina + J2 Le Palavas (mer, sel → douche obligatoire) = <b>~35€/pers.</b><br>
-    <b>Bivouac</b> — J3→J8 forêt + baignade eau douce = <b>0€</b><br>
+    <b>Bivouac/camping</b> — 2 nuits camping mer (douche) × 15€ = <b>~30€/pers.</b><br>
     <b>Clubs</b> — 7 soirées × ~8€ = <b>~55€/pers.</b><br>
     <b>Bouffe</b> — 8j × 20€ = <b>~160€/pers.</b><br>
     <b>Péages</b> — ~200€ (40-50€/pers.)<br>
     <hr style="margin:3px 0;">
-    <b>TOTAL : ~450-550€/personne</b><br>
-    <small style="color:#e74c3c;">⚠️ J1=660km route → partez la veille ou arrivez tôt !</small><br>
-    <small style="color:#888;">Budget réaliste après audit. Via cordata Verdon = matos spécifique.</small>
+    <b>TOTAL : ~400-440€/personne</b><br>
+    <small style="color:#888;">2 nuits camping mer, 6 nuits bivouac forêt gratuit</small>
   </details>
   <small style="color:#888;display:block;margin-top:4px;">Coords approx. — lien Maps dans chaque popup</small>
 </div>
+
+<a class="btn-gmaps" href="https://www.google.com/maps/dir/?api=1&origin=Bonnelles&destination=Aussois&waypoints=Perpignan%2C+France|Montpellier%2C+France|Avignon%2C+France|La+Palud-sur-Verdon%2C+France|Brian%C3%A7on%2C+France|Grenoble%2C+France&mode=driving" target="_blank" rel="noopener">
+  🗺️ Itinéraire sur Google Maps
+</a>
 
 </body>
 </html>
