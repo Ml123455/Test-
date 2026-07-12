@@ -184,13 +184,14 @@ const bivouacIcon = L.divIcon({
 });
 
 const bivouacs = [
-  {jour:"J1", name:"Camping de l'Agly", lat:42.8100, lon:2.5050, detail:"Bord de l'Agly, 10 min de la ferrata — ou rentrer dormir à Perpignan", regle:"Camping — emplacements ombragés", zone:"Saint-Paul-de-Fenouillet"},
-  {jour:"J2", name:"Camping Montpellier Plage", lat:43.5300, lon:3.9350, detail:"Camping proche Palavas — ou auberge de jeunesse Montpellier", regle:"Camping ou auberge — ville animée le soir", zone:"Montpellier / Palavas"},
-  {jour:"J3", name:"Camping Pont d'Arc", lat:44.3830, lon:4.4180, detail:"Bivouac rivière Ardèche — retour Avignon pour le club (1h)", regle:"Bivouac toléré Parc Naturel — 19h→9h", zone:"Vallon Pont d'Arc"},
-  {jour:"J4", name:"Bivouac Gorges du Verdon", lat:43.7830, lon:6.3450, detail:"Proche La Palud — ou camping avec sanitaires", regle:"⛺ Bivouac 19h→9h autorisé", zone:"La Palud-sur-Verdon"},
-  {jour:"J5", name:"Bivouac Lac de Serre-Ponçon", lat:44.5150, lon:6.3550, detail:"Au bord du lac — ou camping Savines-le-Lac", regle:"Bivouac toléré — emplacements dédiés", zone:"Savines-le-Lac / Serre-Ponçon"},
-  {jour:"J6", name:"Auberge Grenoble / Camping", lat:45.1900, lon:5.7300, detail:"Dormir à Grenoble pour profiter du club — auberge ou camping proche", regle:"Camping ou auberge — ville étudiante", zone:"Grenoble centre"},
-  {jour:"J7", name:"Refuge Fond d'Aussois", lat:45.2350, lon:6.7500, detail:"Bivouac autorisé aux abords du refuge Vanoise — soirée Chambéry possible", regle:"⛺ Autorisé refuge — pas de feu", zone:"Aussois / Vanoise"},
+  {jour:"J1", name:"Camping Canet Plage 🚿", lat:42.7050, lon:3.0250, detail:"Camping bord de mer — DOUCHE + sanitaires, poser la tente dans l'herbe", regle:"🏕️ Camping payant (~15€) — seule nuit confort", zone:"Canet-en-Roussillon"},
+  {jour:"J2", name:"Camping Palavas 🚿", lat:43.5300, lon:3.9300, detail:"Camping à 200m de la plage — DOUCHE, dernier confort avant la nature", regle:"🏕️ Camping payant (~15€) — profitez de la douche!", zone:"Palavas-les-Flots"},
+  {jour:"J3", name:"Bivouac forêt Ardèche 🌲", lat:44.3850, lon:4.4200, detail:"Forêt proche Pont d'Arc — bivouac gratuit, feu interdit", regle:"🌲 Gratuit — camping sauvage toléré 19h→9h", zone:"Vallon Pont d'Arc"},
+  {jour:"J4", name:"Bivouac forêt Verdon 🌲", lat:43.7800, lon:6.3500, detail:"Sous les pins, proche La Palud — bivouac gratuit autorisé", regle:"🌲 Gratuit — Parc Naturel, 19h→9h, pas de traces", zone:"La Palud-sur-Verdon"},
+  {jour:"J5", name:"Bivouac forêt Serre-Ponçon 🌲", lat:44.5150, lon:6.3550, detail:"Forêt en bordure du lac — spot bivouac sauvage", regle:"🌲 Gratuit — loin des routes, respecter le site", zone:"Savines-le-Lac"},
+  {jour:"J6", name:"Bivouac forêt Vercors 🌲", lat:45.2000, lon:5.7000, detail:"Forêt proche Grenoble — accès rapide au club après", regle:"🌲 Gratuit — bivouac toléré, pas de camping multi-nuits", zone:"Grenoble / Vercors"},
+  {jour:"J7", name:"Bivouac forêt Vanoise 🌲", lat:45.2350, lon:6.7500, detail:"Forêt alpine proche Aussois — bivouac sauvage autorisé", regle:"🌲 Gratuit — proche refuge Fond d'Aussois", zone:"Aussois"},
+  {jour:"J8", name:"Plage Lac d'Annecy 🌲", lat:45.8990, lon:6.1290, detail:"Jour repos — bivouac plage ou retour direct Bonnelles", regle:"🌲 Gratuit ou camping si douche souhaitée", zone:"Annecy"},
 ];
 
 bivouacs.forEach(b => {
@@ -314,13 +315,13 @@ console.log('Road Trip Via Ferrata 7j: 🏖️+🧗+🎉 chaque jour');
     <summary style="cursor:pointer;font-weight:bold;">💰 Budget estimé (4-5 pers.)</summary>
     <b>Essence</b> — ~3000 km, 7L/100, 1.80€/L = <b>~380€</b> (75-95€/pers.)<br>
     <b>Via ferrata</b> — gratuit en autonome (louer matos ~15€/j)<br>
-    <b>Bivouac/camping</b> — 8 nuits × ~12€ = <b>~100€/pers.</b><br>
+    <b>Bivouac/camping</b> — 2 nuits camping mer (douche) × 15€ = <b>~30€/pers.</b><br>
     <b>Clubs</b> — 7 soirées × ~8€ = <b>~55€/pers.</b><br>
     <b>Bouffe</b> — 8j × 20€ = <b>~160€/pers.</b><br>
     <b>Péages</b> — ~200€ (40-50€/pers.)<br>
     <hr style="margin:3px 0;">
-    <b>TOTAL : ~470-520€/personne</b><br>
-    <small style="color:#888;">En autonomie. Avec guides pro : +40-60€/ferrata</small>
+    <b>TOTAL : ~400-440€/personne</b><br>
+    <small style="color:#888;">2 nuits camping mer, 6 nuits bivouac forêt gratuit</small>
   </details>
   <small style="color:#888;display:block;margin-top:4px;">Coords approx. — lien Maps dans chaque popup</small>
 </div>
