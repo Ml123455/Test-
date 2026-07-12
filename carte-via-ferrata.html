@@ -226,17 +226,54 @@ aventures.forEach(a=>{
   L.marker([a.lat,a.lon],{icon:aI}).bindPopup(html,{maxWidth:280}).bindTooltip(a.n).addTo(map);
 });
 
-// 🏊
+// 🏊 Baignades — avec photos
 const eI = L.divIcon({html:'<div style="background:#1abc9c;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:10px;border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3)">🏊</div>',iconSize:[20,20],iconAnchor:[10,10],popupAnchor:[0,-10]});
-[{n:"Canet",lat:42.705,lon:3.030},{n:"Palavas",lat:43.529,lon:3.930},{n:"Ardèche (Thueyts)",lat:44.670,lon:4.220},{n:"Lac Castillon",lat:43.905,lon:6.470},{n:"Lac Serre-Ponçon",lat:44.510,lon:6.350},{n:"Lac Paladru",lat:45.453,lon:5.592},{n:"Lac Annecy",lat:45.899,lon:6.129}].forEach(s=>L.marker([s.lat,s.lon],{icon:eI}).bindTooltip(s.n).addTo(map));
+const baignades = [
+  {n:"Canet Plage",lat:42.705,lon:3.030,img:null,detail:"Sable fin, paddle, première baignade mer 🌊"},
+  {n:"Palavas-les-Flots",lat:43.529,lon:3.930,img:null,detail:"Kayak de mer, plage à 15 min de Montpellier"},
+  {n:"Ardèche (Thueyts)",lat:44.670,lon:4.220,img:"Pont_du_diable_à_Thueyts_(07).jpg",detail:"Baignade sous le Pont du Diable, eau fraîche"},
+  {n:"Lac de Castillon",lat:43.905,lon:6.470,img:"Lac_de_castillon_la_colle.jpg",detail:"Pédalo, paddle, kayak. Proche Verdon"},
+  {n:"Lac de Serre-Ponçon",lat:44.510,lon:6.350,img:"Lac_de_Serre_Poncon-Panorama.jpg",detail:"Kayak, paddle, baignade. Vue montagnes"},
+  {n:"Lac de Paladru",lat:45.453,lon:5.592,img:"Lac_de_Paladru_3.JPG",detail:"Eau à 24°C, plages aménagées, farniente ☀️"},
+  {n:"Lac d'Annecy",lat:45.899,lon:6.129,img:"Lac_d%27Annecy.jpg",detail:"Eau la plus pure d'Europe, dernière baignade"},
+];
+baignades.forEach(s=>{
+  let html = `<b>🏊 ${s.n}</b><br>${s.detail}`;
+  if(s.img) html = `<img src="https://commons.wikimedia.org/wiki/Special:FilePath/${s.img}?width=260" style="width:100%;border-radius:6px;margin-bottom:4px" onerror="this.style.display='none'">` + html;
+  L.marker([s.lat,s.lon],{icon:eI}).bindPopup(html,{maxWidth:280}).bindTooltip(s.n).addTo(map);
+});
 
-// 🎉
+// 🎉 Clubs — avec popups
 const cI = L.divIcon({html:'<div style="background:#9b59b6;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:10px;border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3)">🎉</div>',iconSize:[20,20],iconAnchor:[10,10],popupAnchor:[0,-10]});
-[{n:"Speakeasy Perpignan",lat:42.698,lon:2.891,j:"J1"},{n:"Panama Café Montpellier",lat:43.610,lon:3.877,j:"J2"},{n:"L'Esclave Avignon",lat:43.949,lon:4.806,j:"J3"},{n:"Mistral Aix",lat:43.528,lon:5.450,j:"J4"},{n:"CO2 Chambéry",lat:45.568,lon:5.925,j:"J7"}].forEach(c=>L.marker([c.lat,c.lon],{icon:cI}).bindTooltip(`${c.j} ${c.n}`).addTo(map));
+const clubs = [
+  {n:"Speakeasy",lat:42.698,lon:2.891,j:"J1",city:"Perpignan",detail:"House music, cocktails, centre-ville. Entrée ~10€"},
+  {n:"Panama Café",lat:43.610,lon:3.877,j:"J2",city:"Montpellier",detail:"Entrée GRATUITE, ambiance étudiante, 00h-6h"},
+  {n:"L'Esclave",lat:43.949,lon:4.806,j:"J3",city:"Avignon",detail:"Club intra-muros, ambiance jeune, 10-15€"},
+  {n:"Le Mistral",lat:43.528,lon:5.450,j:"J4",city:"Aix-en-Provence",detail:"Institution électro/techno. ~20€"},
+  {n:"CO2 Club",lat:45.568,lon:5.925,j:"J7",city:"Chambéry",detail:"2 salles, 2 ambiances. Dernière soirée !"},
+];
+clubs.forEach(c=>{
+  L.marker([c.lat,c.lon],{icon:cI})
+    .bindPopup(`<b>🎉 ${c.n}</b> — ${c.city}<br>${c.detail}`,{maxWidth:250})
+    .bindTooltip(`${c.j} ${c.n}`).addTo(map);
+});
 
-// ⛺
+// ⛺ Nuits — avec popups
 const nI = L.divIcon({html:'<div style="background:#27ae60;color:#fff;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:9px;border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3)">⛺</div>',iconSize:[16,16],iconAnchor:[8,8],popupAnchor:[0,-8]});
-[{n:"J1 Marina Canet",lat:42.694,lon:3.027},{n:"J2 Le Palavas",lat:43.530,lon:3.932},{n:"J3 Bivouac Thueyts",lat:44.670,lon:4.230},{n:"J4 Camping La Palud",lat:43.782,lon:6.343},{n:"J5 Bivouac Serre-Ponçon",lat:44.515,lon:6.355},{n:"J6 Nuit Grenoble",lat:45.190,lon:5.730},{n:"J7 Refuge Aussois",lat:45.235,lon:6.750}].forEach(b=>L.marker([b.lat,b.lon],{icon:nI}).bindTooltip(b.n).addTo(map));
+const nuits = [
+  {n:"Camping La Marina",lat:42.694,lon:3.027,j:"J1",detail:"Canet — bord de mer, douche, 15-20€/pers"},
+  {n:"Camping Le Palavas",lat:43.530,lon:3.932,j:"J2",detail:"Palavas — bord de mer, douche, 15-20€/pers"},
+  {n:"Bivouac forêt Thueyts",lat:44.670,lon:4.230,j:"J3",detail:"Forêt Ardèche — bivouac toléré, gratuit"},
+  {n:"Camping La Palud",lat:43.782,lon:6.343,j:"J4",detail:"Verdon — douche, 15€/pers"},
+  {n:"Bivouac Serre-Ponçon",lat:44.515,lon:6.355,j:"J5",detail:"Bord de lac — bivouac toléré, gratuit"},
+  {n:"Nuit Grenoble F1",lat:45.190,lon:5.730,j:"J6",detail:"Hôtel F1 — douche, ~25-30€/pers"},
+  {n:"Refuge Aussois",lat:45.235,lon:6.750,j:"J7",detail:"Refuge montagne — 20€/pers"},
+];
+nuits.forEach(b=>{
+  L.marker([b.lat,b.lon],{icon:nI})
+    .bindPopup(`<b>⛺ ${b.j} — ${b.n}</b><br>${b.detail}`,{maxWidth:250})
+    .bindTooltip(b.n).addTo(map);
+});
 
 // Itinéraire simplifié (1 point principal par jour)
 const itin = [
