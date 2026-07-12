@@ -67,13 +67,13 @@ const eauIcon = L.divIcon({
 });
 
 const eauSpots = [
-  {name:"Plage de Canet-en-Roussillon", lat:42.7050, lon:3.0300, type:"🏖️ MER", jour:"J1", detail:"Plage sable fin, 20 min Perpignan"},
-  {name:"Plage de Palavas-les-Flots", lat:43.5290, lon:3.9300, type:"🏖️ MER", jour:"J2", detail:"15 min Montpellier"},
-  {name:"Pont d'Arc / Gorges Ardèche", lat:44.3820, lon:4.4170, type:"🌊 Rivière", jour:"J3", detail:"Baignade spot mythique"},
-  {name:"Lac de Castillon", lat:43.9050, lon:6.4700, type:"🏖️ Lac", jour:"J4", detail:"Pédalo, plages, proche Verdon"},
-  {name:"Lac de Serre-Ponçon", lat:44.5100, lon:6.3500, type:"🏖️ Lac", jour:"J5", detail:"Immense lac — sports nautiques"},
-  {name:"Lac de Paladru", lat:45.4530, lon:5.5920, type:"🏖️ Lac", jour:"J6 ☀️", detail:"Repos — plages aménagées"},
-  {name:"Lac d'Annecy", lat:45.8990, lon:6.1290, type:"🏖️ Lac", jour:"J8", detail:"Dernière baignade avant retour"},
+  {name:"Plage de Canet-en-Roussillon", lat:42.7050, lon:3.0300, type:"🏖️ MER", jour:"J1", detail:"Plage sable fin, 20 min Perpignan — 🛶 paddle possible"},
+  {name:"Plage de Palavas-les-Flots", lat:43.5290, lon:3.9300, type:"🏖️ MER + 🛶", jour:"J2", detail:"15 min Montpellier — location paddle/kayak sur place"},
+  {name:"Pont d'Arc / Gorges Ardèche", lat:44.3820, lon:4.4170, type:"🌊 Rivière + 🛶", jour:"J3", detail:"🏆 Spot #1 canoë-kayak France — descente 8km, location ~20€"},
+  {name:"Lac de Castillon", lat:43.9050, lon:6.4700, type:"🏖️ Lac + 🛶", jour:"J4", detail:"Pédalo, paddle, kayak — proche Verdon"},
+  {name:"Lac de Serre-Ponçon", lat:44.5100, lon:6.3500, type:"🏖️ Lac + 🛶", jour:"J5", detail:"Kayak/paddle sur le plus grand lac alpin — location sur place"},
+  {name:"Lac de Paladru", lat:45.4530, lon:5.5920, type:"🏖️ Lac + 🛶", jour:"J6 ☀️", detail:"Repos — paddle balade tranquille"},
+  {name:"Lac d'Annecy", lat:45.8990, lon:6.1290, type:"🏖️ Lac + 🛶", jour:"J8", detail:"Dernière baignade + paddle avant retour"},
 ];
 
 eauSpots.forEach(s => {
@@ -96,12 +96,10 @@ const clubIcon = L.divIcon({
 
 const clubs = [
   {name:"Le Speakeasy", lat:42.6980, lon:2.8910, city:"Perpignan", jour:"J1", detail:"House music, jeune — entrée gratuite filles, 10€ hommes", status:"✅ Vérifié"},
-  {name:"Madison Club", lat:42.7010, lon:2.9100, city:"Perpignan", jour:"J1", detail:"1000+ personnes, généraliste — plan B si Speakeasy fermé", status:"✅ Vérifié"},
-  {name:"Panama Café", lat:43.6100, lon:3.8770, city:"Montpellier", jour:"J2", detail:"Entrée GRATUITE, ambiance étudiante, minuit-6h", status:"✅ Vérifié — top budget"},
-  {name:"L'Esclave", lat:43.9490, lon:4.8060, city:"Avignon", jour:"J3", detail:"Club intra-muros, accessible jeunes, 10-15€", status:"✅ Alternative à Red Zone (bar à chicha)"},
-  {name:"Le Mistral", lat:43.5280, lon:5.4500, city:"Aix-en-Provence", jour:"J4", detail:"Institution électro/techno — 20€ entrée, budget !", status:"⚠️ 20€ — prévoir"},
-  {name:"Le Marquee", lat:45.1910, lon:5.7260, city:"Grenoble", jour:"J5", detail:"Club hip-hop — tenue correcte exigée, 10-15€", status:"✅ Vérifié"},
-  {name:"CO2 Club", lat:45.5680, lon:5.9250, city:"Chambéry", jour:"J7", detail:"2 salles 2 ambiances — seule boîte de Chambéry", status:"✅ Remplace Cosy Club (n'existe pas ici)"},
+  {name:"Panama Café", lat:43.6100, lon:3.8770, city:"Montpellier", jour:"J2", detail:"Entrée GRATUITE, ambiance étudiante, minuit-6h", status:"✅ Top budget"},
+  {name:"L'Esclave", lat:43.9490, lon:4.8060, city:"Avignon", jour:"J3", detail:"Club intra-muros, accessible jeunes, 10-15€", status:"✅ Vérifié"},
+  {name:"Le Mistral", lat:43.5280, lon:5.4500, city:"Aix-en-Provence", jour:"J4", detail:"Institution électro/techno — 20€ entrée", status:"⚠️ 20€ — prévoir budget"},
+  {name:"CO2 Club", lat:45.5680, lon:5.9250, city:"Chambéry", jour:"J7 🏆", detail:"2 salles 2 ambiances — dernière soirée !", status:"✅ Vérifié"},
 ];
 
 clubs.forEach(c => {
@@ -162,9 +160,9 @@ const itinerary = [
   {label:"J4 🏊 Castillon", lat:43.9050, lon:6.4700, desc:"Lac Castillon → Via Cordata Verdon → Aix"},
   {label:"J4 🧗 Cordata", lat:43.7800, lon:6.3420, desc:"⚠️ Via CORDATA — guide ou matos fourni"},
   {label:"J4 🎉 Club", lat:43.5280, lon:5.4500, desc:"Aix: Le Mistral (20€)"},
-  {label:"J5 🏊 Serre-Ponçon", lat:44.5100, lon:6.3500, desc:"Lac → Lauzet → Grenoble (pas Briançon !)"},
+  {label:"J5 🏊 Serre-Ponçon", lat:44.5100, lon:6.3500, desc:"🛶 Kayak/paddle → 🧗 Lauzet → 🍺 Chill Grenoble (pas de club)"},
   {label:"J5 🧗 Ferrata", lat:44.9400, lon:6.5600, desc:"Lauzet 2611m — ❌ pas de location"},
-  {label:"J5 🎉 Club", lat:45.1910, lon:5.7260, desc:"Grenoble: Le Marquee (tenue correcte !)"},
+  {label:"J5 🏨 Grenoble", lat:45.1900, lon:5.7300, desc:"Soirée chill Grenoble — bars, pas de club"},
   {label:"J6 ☀️ REPOS", lat:45.4530, lon:5.5920, desc:"Lac Paladru — baignade, sieste. PAS de club !"},
   {label:"J6 🏨 Nuit", lat:45.1900, lon:5.7300, desc:"Dodo Grenoble — VRAI sommeil avant le Diable !"},
   {label:"J7 🏆 DIABLE", lat:45.2300, lon:6.7400, desc:"🏆 FERRATA DU DIABLE — jambes fraîches !"},
@@ -205,7 +203,7 @@ legend.onAdd = function() {
   div.innerHTML = `<b>Légende</b>
     🧗 Via Ferrata (6)<br>
     🏊 Baignade (7)<br>
-    🎉 Club vérifié (7)<br>
+    🎉 Club vérifié (5 soirs)<br>
     ⛺ Nuit/camping<br>
     <span style="color:#e74c3c;">━</span> Itinéraire optimisé<br>
     <span style="color:#f39c12;">★</span> J6 = REPOS (pas de club !)<br>
@@ -228,11 +226,12 @@ console.log('Road Trip Optimisé v2 — audité, clubs vérifiés, J6 repos, -22
     <b>J2 🌊 MER</b> 🏖️ Palavas → 🧗 Thaurac (loc✅) → 🎉 Panama Café (gratuit)<br>
     <b>J3</b> 🏊 Pont d'Arc → 🧗 Thueyts (loc❌) → 🎉 L'Esclave Avignon<br>
     <b>J4</b> 🏊 Castillon → ⚠️ Cordata Verdon → 🎉 Mistral Aix (20€)<br>
-    <b>J5</b> 🏊 Serre-Ponçon → 🧗 Lauzet (loc❌) → 🎉 Marquee Grenoble<br>
-    <b>J6 ☀️ REPOS</b> 🏊 Paladru → sieste → PAS de club → 🏨 dodo<br>
+    <b>J5</b> 🏊🛶 Serre-Ponçon (kayak) → 🧗 Lauzet → 🍺 chill Grenoble (pas de club)<br>
+    <b>J6 ☀️ REPOS</b> 🏊🛶 Paladru (paddle) → sieste → PAS de club → 🏨 dodo<br>
     <b>J7 🏆</b> 🧗 Diable (jambes fraîches !) → 🎉 CO2 Chambéry<br>
-    <b>J8</b> 🏊 Annecy → 🚗 retour Bonnelles<br>
-    <small style="color:#e74c3c;">⚠️ J3+J5+J7 = prévoir matos (pas de location)</small>
+    <b>J8</b> 🏊🛶 Annecy → 🚗 retour Bonnelles<br>
+    <small style="color:#e74c3c;">⚠️ J3+J5+J7 = prévoir matos (pas de location)</small><br>
+    <small style="color:#9b59b6;">🎉 5 clubs: J1 J2 J3 J4 J7</small>
   </details>
   <details style="margin-top:3px;font-size:10px;color:#333;line-height:1.5;">
     <summary style="cursor:pointer;font-weight:bold;">💰 Budget (4-5 pers)</summary>
@@ -240,7 +239,7 @@ console.log('Road Trip Optimisé v2 — audité, clubs vérifiés, J6 repos, -22
     Péages: 40-55€/pers<br>
     Camping J1+J2+J4: ~55€/pers<br>
     Nuit J0+J6 (F1): ~30€/pers<br>
-    Clubs (7 soirs): 70-100€/pers<br>
+    Clubs (5 soirs): 50-75€/pers<br>
     Bouffe 8j: 160€/pers<br>
     <b>TOTAL: ~450-550€/pers</b><br>
     <small style="color:#e74c3c;">+ location matos 13-15€/ferrata si besoin</small>
