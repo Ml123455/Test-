@@ -180,7 +180,9 @@ legend.onAdd = function() {
     🏊 Rivière / Cascade / Baignade (6)<br>
     🍽️ Restaurant Q/P (5)<br>
     🎉 Boîte de nuit (4)<br>
-    <small style="color:#888">Coords approx. — ouvrir Maps pour précis</small>`;
+    ⛺ Bivouac (6 nuits)<br>
+    <span style="color:#e74c3c;">━</span> Itinéraire 7j<br>
+    <small style="color:#888">Cliquer sur chaque icône pour détails</small>`;
   return div;
 };
 legend.addTo(map);
@@ -202,15 +204,99 @@ hubs.forEach(h => {
   }).bindTooltip(h.name, {permanent:false, direction:'center'}).addTo(map);
 });
 
+// ==============================
+// ⛺ BIVOUACS
+// ==============================
+const bivouacIcon = L.divIcon({
+  html: '<div style="background:#27ae60;color:white;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid white;box-shadow:0 2px 4px rgba(0,0,0,.3);">⛺</div>',
+  iconSize: [24,24], iconAnchor: [12,12], popupAnchor: [0,-12]
+});
+
+const bivouacs = [
+  {jour:"J1", name:"Camping de l'Agly", lat:42.8100, lon:2.5050, detail:"Bord de l'Agly, au cœur du Pays Cathare — emplacements ombragés", regle:"Camping — bivouac toléré à proximité", zone:"Saint-Paul-de-Fenouillet"},
+  {jour:"J2", name:"Bivouac Monts d'Ardèche", lat:44.6700, lon:4.2200, detail:"Parc Naturel Régional — bivouac toléré de 19h à 9h", regle:"⛺ Toléré — pas de camping sauvage multi-nuits", zone:"Thueyts / Pont du Diable"},
+  {jour:"J3", name:"Camping Baronnies Provençales", lat:44.2780, lon:5.2700, detail:"Vue sur le Rocher Saint-Julien et le Ventoux", regle:"Camping — bivouac possible sur demande", zone:"Buis-les-Baronnies"},
+  {jour:"J4", name:"Bivouac Gorges du Verdon", lat:43.7830, lon:6.3450, detail:"Proche La Palud-sur-Verdon — zone de bivouac autorisée", regle:"⛺ Bivouac 19h→9h — respecter les sentiers", zone:"La Palud-sur-Verdon"},
+  {jour:"J5", name:"Bivouac Parc National Écrins", lat:44.7700, lon:6.4200, detail:"Cœur du parc — +1h de marche des routes, 19h→9h", regle:"⛺ Autorisé cœur de parc — pas de feu, pas de déchets", zone:"Aiguillette du Lauzet"},
+  {jour:"J6", name:"Refuge du Fond d'Aussois", lat:45.2350, lon:6.7500, detail:"Bivouac autorisé aux abords du refuge — Vanoise", regle:"⛺ Autorisé uniquement près des refuges", zone:"Aussois / Via Ferrata du Diable"},
+];
+
+bivouacs.forEach(b => {
+  const popup = `<div class="info-popup">
+    <h3>⛺ ${b.jour} — ${b.name}</h3>
+    <span>📍 ${b.zone}</span>
+    <div class="detail">${b.detail}</div>
+    <div style="font-size:11px;color:#27ae60;margin-top:3px;">📋 ${b.regle}</div>
+    <div style="margin-top:4px"><a href="https://www.google.com/maps?q=${b.lat},${b.lon}" target="_blank">🗺️ Ouvrir dans Maps</a></div>
+  </div>`;
+  L.marker([b.lat, b.lon], {icon: bivouacIcon}).bindPopup(popup).addTo(map);
+});
+
+// ==============================
+// 🚗 ITINÉRAIRE 7 JOURS
+// ==============================
+const itinerary = [
+  {label:"DÉPART", lat:42.7000, lon:2.9000, desc:"J1 — Perpignan / Arrivée région"},
+  {label:"J1 ● Ferrata Fenouillèdes", lat:42.8080, lon:2.5100, desc:"Via Ferrata du Fenouillèdes (4.8★)"},
+  {label:"J1 ▼ Bivouac", lat:42.8100, lon:2.5050, desc:"Camping de l'Agly — bord de rivière"},
+  {label:"J2 ▲ Route", lat:43.5000, lon:3.2000, desc:"Transfert P-O → Ardèche (~3h)"},
+  {label:"J2 ● Ferrata Thueyts", lat:44.6697, lon:4.2202, desc:"Via Ferrata Pont du Diable (Ardèche)"},
+  {label:"J2 ▼ Bivouac", lat:44.6700, lon:4.2200, desc:"Bivouac Monts d'Ardèche"},
+  {label:"J3 ▲ Route", lat:44.4700, lon:4.7500, desc:"Ardèche → Drôme (~2h)"},
+  {label:"J3 ● Ferrata Buis", lat:44.2750, lon:5.2750, desc:"Via Ferrata Rocher Saint-Julien"},
+  {label:"J3 ▼ Bivouac", lat:44.2780, lon:5.2700, desc:"Camping Baronnies — vue Ventoux"},
+  {label:"J4 ▲ Route", lat:44.0000, lon:5.8000, desc:"Drôme → Verdon (~3h)"},
+  {label:"J4 ● Ferrata Verdon", lat:43.7800, lon:6.3420, desc:"Via Ferrata Trou du Renard + Route des Crêtes"},
+  {label:"J4 ▼ Bivouac", lat:43.7830, lon:6.3450, desc:"Bivouac Gorges du Verdon"},
+  {label:"J5 ▲ Route", lat:44.1000, lon:6.2500, desc:"Verdon → Écrins (~2h30)"},
+  {label:"J5 ● Lac Castillon", lat:43.9050, lon:6.4700, desc:"Baignade Lac de Castillon — matin"},
+  {label:"J5 ▼ Bivouac", lat:44.7700, lon:6.4200, desc:"Bivouac Parc National Écrins"},
+  {label:"J6 ● Ferrata Lauzet", lat:44.7800, lon:6.4300, desc:"Via Ferrata Aiguillette du Lauzet"},
+  {label:"J6 ▲ Route", lat:44.9500, lon:6.5500, desc:"Écrins → Maurienne (~2h)"},
+  {label:"J6 ▼ Bivouac", lat:45.2350, lon:6.7500, desc:"Refuge Fond d'Aussois — Vanoise"},
+  {label:"J7 ● Ferrata Diable ★", lat:45.2300, lon:6.7400, desc:"🏆 Clou du voyage — Via Ferrata du Diable (7 parcours, 3760m)"},
+  {label:"J7 ◆ Forts Esseillon", lat:45.2284, lon:6.7350, desc:"Panorama final — Pont du Diable + Forts"},
+];
+
+const routeCoords = itinerary.map(p => [p.lat, p.lon]);
+L.polyline(routeCoords, {
+  color: '#e74c3c', weight: 3, opacity: 0.7,
+  dashArray: '10, 6'
+}).addTo(map);
+
+// Journey day markers (numbered circles)
+itinerary.forEach((p, i) => {
+  if (p.label.startsWith('J')) {
+    const dayNum = p.label.match(/J(\d)/)?.[1] || '';
+    const isFerrata = p.label.includes('●');
+    const isBivouac = p.label.includes('▼');
+    const bgColor = isFerrata ? '#e74c3c' : (isBivouac ? '#27ae60' : '#3498db');
+    const icon = L.divIcon({
+      html: `<div style="background:${bgColor};color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;border:2px solid white;box-shadow:0 2px 4px rgba(0,0,0,.3);">${dayNum}</div>`,
+      iconSize: [22,22], iconAnchor: [11,11], popupAnchor: [0,-11]
+    });
+    L.marker([p.lat, p.lon], {icon, opacity: 0.85}).bindTooltip(p.desc, {permanent:false, direction:'top'}).addTo(map);
+  }
+});
+
 // Note méthodologique
-console.log('Carte générée via Overpass OSM + web_search cross-ref. Coordonnées approximatives (centres de commune/zone). Pour précision GPS : ouvrir lien Maps dans chaque popup.');
+console.log('Carte via ferrata + itinéraire 7j + bivouacs. Coordonnées approximatives.');
 </script>
 
 <div style="position:fixed;top:10px;left:10px;background:white;padding:10px 14px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.2);z-index:1000;font-size:13px;max-width:280px;">
-  <b style="font-size:15px;">🗺️ Trip Via Ferrata France</b><br>
-  <small style="color:#888;">12 ferratas · hors Bretagne</small><br>
-  <small style="color:#c0392b;">🔄 En attente Google Places API pour notes/lat-long précis</small><br>
-  <small style="color:#888;">Coordonnées : centres communaux OSM</small>
+  <b style="font-size:15px;">🗺️ Trip Via Ferrata — 7 jours</b><br>
+  <small style="color:#e74c3c;">12 ferratas · 6 bivouacs · 5 spots baignade</small><br>
+  <small style="color:#888;">Itinéraire Sud→Nord : PO → Ardèche → Drôme → Verdon → Écrins → Maurienne</small><br>
+  <details style="margin-top:4px;font-size:11px;color:#555;">
+    <summary style="cursor:pointer;font-weight:bold;">📋 Planning détaillé</summary>
+    <b>J1</b> Perpignan → Ferrata Fenouillèdes → 🌙 Camping Agly<br>
+    <b>J2</b> Route → Ferrata Thueyts → 🌙 Bivouac Monts d'Ardèche<br>
+    <b>J3</b> Route → Ferrata Buis-les-Baronnies → 🌙 Camping Baronnies<br>
+    <b>J4</b> Route → Ferrata Verdon + Route des Crêtes → 🌙 Bivouac Verdon<br>
+    <b>J5</b> Baignade Lac Castillon → Route → 🌙 Bivouac Parc Écrins<br>
+    <b>J6</b> Ferrata Lauzet → Route → 🌙 Refuge Fond d'Aussois<br>
+    <b>J7</b> 🏆 Ferrata du Diable (3760m) + Forts Esseillon → Retour
+  </details>
 </div>
 
 </body>
