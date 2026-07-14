@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Week-end via ferrata Ardèche — 3.5 jours, 2 personnes, Honda Jazz, budget 300€/pers. Départ Bonnelles.">
+<title>Ardèche Express — 3.5 Jours</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:system-ui,sans-serif; background:#1a1a2e; color:#eee; }
+.day-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:10px; padding:12px; max-width:1000px; margin:0 auto; }
+.day-card { background:#16213e; border-radius:10px; overflow:hidden; box-shadow:0 3px 15px rgba(0,0,0,.3); }
+.day-header { padding:12px 15px; font-weight:bold; font-size:1em; display:flex; align-items:center; gap:8px; }
+.day-header .num { background:#fff; color:#1a1a2e; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:.8em; }
+.day-body { padding:12px 15px; line-height:1.6; font-size:.85em; }
+.day-body .line { display:flex; align-items:flex-start; gap:6px; margin-bottom:6px; }
+.day-body .emoji { font-size:1.1em; width:22px; text-align:center; flex-shrink:0; }
+.day-body .good { background:#27ae6020; border-left:3px solid #27ae60; padding:6px 10px; border-radius:0 6px 6px 0; font-size:.8em; margin-top:8px; }
+header { background:linear-gradient(135deg,#1abc9c,#16a085); padding:20px 15px; text-align:center; }
+header h1 { font-size:1.4em; }
+header p { opacity:.85; margin-top:4px; font-size:.8em; }
+.budget-bar { background:#0f3460; padding:15px; text-align:center; }
+.budget-bar table { margin:8px auto; border-collapse:collapse; font-size:.8em; }
+.budget-bar td { padding:4px 10px; border-bottom:1px solid #333; }
+.budget-bar .total { font-weight:bold; color:#f39c12; font-size:1.1em; }
+#map-container { margin:15px auto; max-width:1000px; padding:0 12px; position:relative; }
+#map { height:350px; border-radius:10px; }
+.fs-btn { position:absolute; top:10px; right:10px; z-index:1000; background:#16213e; color:#eee; border:1px solid #555; border-radius:6px; padding:6px 10px; cursor:pointer; font-size:16px; }
+.fs-btn:hover { background:#1abc9c; }
+#map-container:fullscreen #map { height:100vh; border-radius:0; }
+#map-container:-webkit-full-screen #map { height:100vh; border-radius:0; }
+.legend { background:#16213e; color:#eee; padding:8px 10px; border-radius:6px; font-size:11px; line-height:1.6; }
+.j0 { background:#2c3e50 !important; }
+.j1 { background:linear-gradient(135deg,#1abc9c,#16a085) !important; }
+.j2 { background:linear-gradient(135deg,#e74c3c,#c0392b) !important; }
+.j3 { background:linear-gradient(135deg,#f39c12,#e67e22) !important; }
+footer { text-align:center; padding:30px; color:#aaa; font-size:.8em; }
+@media (max-width:400px) {
+  .day-grid { grid-template-columns:1fr; padding:8px; }
+  .day-body { font-size:14px; }
+  #map { height:280px; }
+  .budget-bar td { padding:3px 6px; font-size:.85em; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🗺️ Ardèche Express — 3.5 Jours</h1>
+  <p>2 personnes · Honda Jazz · Départ Bonnelles · Dimanche → Mercredi</p>
+  <p style="font-size:.85em;margin-top:8px;">~1140 km · ~215-265€/pers · Via Ferrata + Canyoning + Canoë</p>
+</header>
+
+<div class="day-grid" role="main">
+
+<!-- J1 -->
+<div class="day-card">
+  <div class="day-header j1"><span class="num">J1</span> 🌊 Dim — Via Ferrata Pont du Diable</div>
+  <div class="day-body">
+    <div class="line"><span class="emoji">🚗</span> <b>Matin :</b> Départ 6h de Bonnelles. ~570 km via A6/A7/A75 (5h30). Arrivée 11h30 à Thueyts.</div>
+    <div class="line"><span class="emoji">🧗</span> <b>Aprem :</b> Via Ferrata du Pont du Diable (AD, 2h). Tyrolienne 90m au-dessus de l'Ardèche. Location matos 13€ Cimes-Canyons sur place.</div>
+    <div class="line"><span class="emoji">🏊</span> <b>Fin aprem :</b> Baignade dans l'Ardèche sous le pont. Eau fraîche, parfaite après l'effort.</div>
+    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> Bivouac forêt Thueyts (gratuit).</div>
+    <div class="good">✅ Ferrata accessible dès 1m40/45kg. Pas besoin d'être expert.</div>
+  </div>
+</div>
+
+<!-- J2 -->
+<div class="day-card">
+  <div class="day-header j2"><span class="num">J2</span> 🌊 Lun — Canyoning Bésorgues</div>
+  <div class="day-body">
+    <div class="line"><span class="emoji">🚗</span> <b>Route :</b> Thueyts → Vallon Pont d'Arc (1h, D104).</div>
+    <div class="line"><span class="emoji">🌊</span> <b>Matin :</b> <b>Canyoning débutant</b> dans les gorges de la Bésorgues. Toboggans naturels, vasques, sauts (optionnels). 2-3h, accessible à tous. <b>À partir de 34€/pers</b> (matériel fourni).</div>
+    <div class="line"><span class="emoji">🏊</span> <b>Aprem :</b> Baignade au Pont d'Arc. Plage de sable, eau turquoise. LE spot carte postale de l'Ardèche.</div>
+    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> Bivouac Vallon Pont d'Arc (gratuit).</div>
+    <div class="good">✅ Canyoning encadré par moniteur diplômé. Combinaison, casque, baudrier fournis. Juste prévoir un maillot.</div>
+  </div>
+</div>
+
+<!-- J3 -->
+<div class="day-card">
+  <div class="day-header j3"><span class="num">J3</span> 🛶 Mar — Descente de l'Ardèche</div>
+  <div class="day-body">
+    <div class="line"><span class="emoji">🛶</span> <b>Journée :</b> <b>Descente canoë de l'Ardèche</b> — parcours Vallon → Saint-Martin (8 km, 2-3h) ou Vallon → Sauze (24 km, journée). Location ~20€/pers. Baignade au fil de l'eau.</div>
+    <div class="line"><span class="emoji">🍽️</span> <b>Midi :</b> Pique-nique sur une plage au bord de l'eau.</div>
+    <div class="line"><span class="emoji">🏊</span> <b>Aprem :</b> Baignade, chill. Dernière soirée dans le sud.</div>
+    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> Bivouac (gratuit) ou camping municipal (~10€) pour douche avant retour.</div>
+    <div class="good">✅ Canoë accessible à tous. Gilets fournis. Parcours adapté débutants.</div>
+  </div>
+</div>
+
+</div>
+
+<!-- BUDGET -->
+<div class="budget-bar">
+  <h3>💰 Budget — ~215-265€ par personne (2 pers)</h3>
+  <table>
+    <tr><td>⛽🛣️ Trajet (~1140 km · ~60€ péages)</td><td>~84€</td></tr>
+    <tr><td>🧗 Via Ferrata (location matos)</td><td>13€</td></tr>
+    <tr><td>🌊 Canyoning débutant</td><td>34-45€</td></tr>
+    <tr><td>🛶 Canoë Ardèche</td><td>~20€</td></tr>
+    <tr><td>🏕️ Camping municipal J3 (option)</td><td>~10€</td></tr>
+    <tr><td>🍽️ Bouffe (3j × 20€)</td><td>60€</td></tr>
+    <tr class="total"><td>TOTAL</td><td>~215-265€</td></tr>
+  </table>
+  <p style="font-size:.8em;color:#aaa;">Reste ~35-85€ de marge sur les 300€ → resto, bières, souvenirs</p>
+</div>
+
+<!-- MAP -->
+<div id="map-container"><button class="fs-btn" onclick="toggleFS()" title="Plein écran">⛶</button><div id="map"></div></div>
+
+<footer>
+  Carte OpenStreetMap · Trip 2 personnes · Honda Jazz · Zéro stress<br>
+  https://botarmory.com/ardeche-express.html
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const map = L.map('map').setView([44.5, 4.3], 9);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18}).addTo(map);
+
+function toggleFS(){
+  const c=document.getElementById('map-container');
+  if(document.fullscreenElement){document.exitFullscreen();}
+  else{c.requestFullscreen();}
+}
+document.addEventListener('fullscreenchange',()=>{setTimeout(()=>map.invalidateSize(),300);});
+
+// Ferrata
+const fI = L.divIcon({html:'<div style="background:#e74c3c;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid #fff;">🧗</div>',iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-12]});
+L.marker([44.6697,4.2202],{icon:fI}).bindPopup('<b>🧗 Via Ferrata Pont du Diable</b><br>AD, 2h · Tyrolienne 90m<br>Location 13€ Cimes-Canyons<br><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pont_du_diable_à_Thueyts_(07).jpg?width=260" style="width:100%;border-radius:6px;margin-top:4px" onerror="this.style.display=none">',{maxWidth:280}).addTo(map);
+
+// Canyoning
+const aI = L.divIcon({html:'<div style="background:#f39c12;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid #fff;">🌊</div>',iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-12]});
+L.marker([44.665,4.315],{icon:aI}).bindPopup('<b>🌊 Canyoning Bésorgues</b><br>Débutant, 2-3h · Dès 34€<br>Toboggans, vasques, sauts<br>Matériel fourni',{maxWidth:250}).addTo(map);
+
+// Canoë
+const cI = L.divIcon({html:'<div style="background:#3498db;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid #fff;">🛶</div>',iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-12]});
+L.marker([44.384,4.418],{icon:cI}).bindPopup('<b>🛶 Descente canoë Ardèche</b><br>Vallon Pont d\'Arc → Saint-Martin<br>8 km, 2-3h · ~20€/pers',{maxWidth:250}).addTo(map);
+
+// Baignades
+const eI = L.divIcon({html:'<div style="background:#1abc9c;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:10px;border:2px solid #fff;">🏊</div>',iconSize:[20,20],iconAnchor:[10,10],popupAnchor:[0,-10]});
+[{n:"Baignade Thueyts",lat:44.670,lon:4.220},{n:"Pont d'Arc",lat:44.382,lon:4.418}].forEach(s=>L.marker([s.lat,s.lon],{icon:eI}).bindTooltip(s.n).addTo(map));
+
+// Nuits
+const nI = L.divIcon({html:'<div style="background:#27ae60;color:#fff;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:9px;border:2px solid #fff;">⛺</div>',iconSize:[16,16],iconAnchor:[8,8],popupAnchor:[0,-8]});
+[{n:"Bivouac Thueyts J1",lat:44.670,lon:4.230},{n:"Bivouac Vallon J2",lat:44.390,lon:4.390},{n:"Bivouac/Camping J3",lat:44.380,lon:4.420}].forEach(b=>L.marker([b.lat,b.lon],{icon:nI}).bindTooltip(b.n).addTo(map));
+
+// Itinéraire
+L.polyline([[48.618,1.940],[44.670,4.220],[44.384,4.418],[48.618,1.940]],{color:'#1abc9c',weight:3,opacity:.7,dashArray:'10,6'}).addTo(map);
+
+// Légende
+const legend = L.control({position:'bottomright'});
+legend.onAdd = function(){
+  const d=L.DomUtil.create('div','legend');
+  d.innerHTML='<b>Légende</b>🧗 Via Ferrata · 🌊 Canyoning · 🛶 Canoë · 🏊 Baignade · ⛺ Nuit<br><span style="color:#1abc9c">━</span> Itinéraire A/R';
+  return d;
+};
+legend.addTo(map);
+</script>
+</body>
+</html>
