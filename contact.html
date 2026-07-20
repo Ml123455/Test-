@@ -50,19 +50,24 @@
 
 <div class="contact-wrap">
   <h2>Un site web pour mon activité</h2>
-  <p class="sub">Dites-moi votre métier et votre ville. Je vous réponds avec un exemple de site.</p>
+  <p class="sub">Décrivez votre activité en quelques phrases. Un vrai artisan sait expliquer ce qu'il fait — ça nous aide à filtrer les robots.</p>
   <form action="https://formspree.io/f/mjgqprkr" method="POST">
     <input type="hidden" name="_next" value="https://botarmory.com/merci.html">
     <input type="hidden" name="_subject" value="Nouveau contact BotArmory">
     <!-- Honeypot anti-spam : invisible pour les humains -->
     <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+    <!-- Piège à bots n°2 : champ "website" caché -->
+    <input type="text" name="website" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off">
     <div class="form-row">
       <div class="form-group"><input type="text" name="name" placeholder="Votre nom" required></div>
       <div class="form-group"><input type="email" name="email" placeholder="Votre email" required></div>
     </div>
     <div class="form-row">
-      <div class="form-group"><input type="text" name="metier" placeholder="Votre métier"></div>
-      <div class="form-group"><input type="text" name="ville" placeholder="Votre ville"></div>
+      <div class="form-group"><input type="text" name="metier" placeholder="Votre métier (ex: menuisier, plombier)"></div>
+      <div class="form-group"><input type="text" name="ville" placeholder="Votre ville + code postal"></div>
+    </div>
+    <div class="form-group">
+      <textarea name="activite" placeholder="Décrivez votre activité en détail — que faites-vous concrètement ? Depuis combien de temps ? Quelle est votre clientèle ?" required minlength="30"></textarea>
     </div>
     <button type="submit" class="btn-submit">Je veux un site →</button>
     <p class="form-note">Gratuit · Sans engagement · Réponse sous 24h</p>
