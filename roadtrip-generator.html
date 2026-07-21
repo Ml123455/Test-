@@ -231,10 +231,10 @@ const STEPS=[{
 },{
   id:'dates',h2:'Dernière étape ! 📅',sub:'Tu pars quand ?',
   items:[
-    {e:'📅',t:'Week-end (3 jours)',a(){dSet('we');document.getElementById('jours').value='3'}},
-    {e:'📅',t:'1 semaine (7 jours)',a(){dSet('wk');document.getElementById('jours').value='7'}},
-    {e:'📅',t:'10 jours',a(){dSet('10d');document.getElementById('jours').value='10'}},
-    {e:'✏️',t:'Je choisis mes dates',a(){document.getElementById('dateStart').focus()}},
+    {e:'📅',t:'Week-end (3 jours)',a(){dSet('we');document.getElementById('jours').value='3';finishOnboard()}},
+    {e:'📅',t:'1 semaine (7 jours)',a(){dSet('wk');document.getElementById('jours').value='7';finishOnboard()}},
+    {e:'📅',t:'10 jours',a(){dSet('10d');document.getElementById('jours').value='10';finishOnboard()}},
+    {e:'✏️',t:'Je choisis mes dates',a(){finishOnboard();setTimeout(function(){var d=document.getElementById('dateStart');d.focus();d.scrollIntoView({behavior:'smooth'})},300)}},
   ],selIdx:-1
 }];
 
@@ -305,6 +305,7 @@ function renderOb(){
 function setKiff(v){S.kiff=v;document.querySelectorAll('.kc').forEach(function(c,i){c.classList.toggle('on',i+1===v)})}
 function obNext(){if(obStep>=OB){document.getElementById('ob').style.display='none';return}obStep++;renderOb()}
 function obPrev(){if(obStep>1){obStep--;renderOb()}}
+function finishOnboard(){document.getElementById('ob').style.display='none'}
 
 // Update button handlers
 document.getElementById('obNext').onclick=obNext;
