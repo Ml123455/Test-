@@ -8,33 +8,42 @@
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'Segoe UI',system-ui,sans-serif; background:#0d1117; color:#c9d1d9; display:flex; min-height:100vh; }
-.left { width:380px; background:#161b22; padding:20px; overflow-y:auto; flex-shrink:0; display:flex; flex-direction:column; border-right:1px solid #21262d; }
+.left { width:380px; min-width:380px; background:#161b22; padding:18px 16px; overflow-y:auto; flex-shrink:0; border-right:1px solid #21262d; display:flex; flex-direction:column; }
 .right { flex:1; display:flex; flex-direction:column; }
 #map { flex:1; min-height:400px; }
-.preview { background:#161b22; max-height:380px; overflow-y:auto; border-top:2px solid #58a6ff; }
-.preview-inner { padding:12px; }
-label { display:block; margin:9px 0 3px; font-size:.7em; text-transform:uppercase; letter-spacing:.06em; color:#8b949e; }
-input, select { width:100%; padding:8px 10px; background:#0d1117; border:1px solid #30363d; border-radius:6px; color:#c9d1d9; font-size:.82em; transition:border-color .15s; }
-input:focus, select:focus { outline:none; border-color:#58a6ff; box-shadow:0 0 0 3px rgba(88,166,255,.15); }
-.btn { display:block; width:100%; margin-top:14px; padding:11px; background:linear-gradient(135deg,#58a6ff,#1f6feb); color:#fff; border:none; border-radius:6px; font-weight:600; font-size:.9em; cursor:pointer; transition:opacity .15s; }
+.preview { background:#161b22; max-height:360px; overflow-y:auto; border-top:2px solid #58a6ff; }
+.preview-inner { padding:10px; }
+label { display:block; margin:8px 0 2px; font-size:.68em; text-transform:uppercase; letter-spacing:.06em; color:#8b949e; }
+input, select { width:100%; padding:7px 9px; background:#0d1117; border:1px solid #30363d; border-radius:5px; color:#c9d1d9; font-size:.8em; }
+input:focus, select:focus { outline:none; border-color:#58a6ff; }
+.btn { display:block; width:100%; margin-top:12px; padding:10px; background:linear-gradient(135deg,#58a6ff,#1f6feb); color:#fff; border:none; border-radius:6px; font-weight:600; font-size:.88em; cursor:pointer; transition:opacity .15s; }
 .btn:hover { opacity:.9; }
-h2 { font-size:1em; margin-bottom:4px; color:#58a6ff; font-weight:600; }
-.budget-line { display:flex; justify-content:space-between; padding:3px 8px; border-bottom:1px solid #21262d; font-size:.78em; }
-.budget-total { font-weight:700; font-size:.95em; color:#f78166; }
-.day-card { background:#0d1117; margin:4px 8px; border-radius:8px; overflow:hidden; border:1px solid #21262d; }
-.day-card-header { display:flex; align-items:center; padding:5px 10px; gap:6px; font-size:.75em; font-weight:600; border-bottom:1px solid #21262d; }
-.day-card-body { display:flex; gap:10px; padding:8px 10px; }
-.day-card-img { width:100px; height:70px; border-radius:6px; object-fit:cover; flex-shrink:0; background:#1a1f2b; border:1px solid #21262d; }
-.day-card-info { flex:1; font-size:.74em; line-height:1.65; }
-.day-card-info span { display:block; }
-.hero-img-wrap { position:relative; margin:0 8px 8px 8px; border-radius:10px; overflow:hidden; height:160px; }
+h2 { font-size:.95em; margin-bottom:3px; color:#58a6ff; font-weight:600; }
+.budget-line { display:flex; justify-content:space-between; padding:3px 6px; border-bottom:1px solid #21262d; font-size:.76em; }
+.budget-total { font-weight:700; font-size:.9em; color:#f78166; }
+.day-card { background:#0d1117; margin:4px 6px; border-radius:8px; overflow:hidden; border:1px solid #21262d; }
+.day-card-header { display:flex; align-items:center; padding:4px 8px; gap:6px; font-size:.73em; font-weight:600; border-bottom:1px solid #21262d; }
+.day-card-body { display:flex; gap:8px; padding:6px 8px; }
+.day-card-img { width:90px; height:64px; border-radius:5px; object-fit:cover; flex-shrink:0; background:#1a1f2b; border:1px solid #21262d; }
+.day-card-info { flex:1; font-size:.72em; line-height:1.6; }
+.hero-img-wrap { position:relative; margin:0 6px 6px 6px; border-radius:8px; overflow:hidden; height:150px; }
 .hero-img { width:100%; height:100%; object-fit:cover; }
-.hero-overlay { position:absolute; bottom:0; left:0; right:0; padding:20px 14px 10px; background:linear-gradient(transparent,rgba(0,0,0,.75)); }
-.hero-overlay b { font-size:1em; color:#fff; }
-.info { font-size:.7em; color:#8b949e; margin-top:4px; min-height:1.2em; }
-.spinner { display:inline-block; width:13px; height:13px; border:2px solid #58a6ff; border-top-color:transparent; border-radius:50%; animation:spin .6s linear infinite; vertical-align:middle; margin-left:6px; }
+.hero-overlay { position:absolute; bottom:0; left:0; right:0; padding:16px 12px 8px; background:linear-gradient(transparent,rgba(0,0,0,.8)); }
+.hero-overlay b { font-size:.95em; color:#fff; }
+.info { font-size:.68em; color:#8b949e; margin-top:3px; min-height:1.1em; }
+.spinner { display:inline-block; width:12px; height:12px; border:2px solid #58a6ff; border-top-color:transparent; border-radius:50%; animation:spin .6s linear infinite; vertical-align:middle; margin-left:5px; }
 @keyframes spin { to { transform:rotate(360deg); } }
-@media (max-width:768px) { body { flex-direction:column; } .left { width:100%; max-height:55vh; } }
+
+/* Waypoints */
+.wp-row { display:flex; gap:5px; align-items:center; margin-top:3px; }
+.wp-row input { flex:1; }
+.wp-remove { background:#30363d; border:none; color:#f85149; cursor:pointer; padding:4px 8px; border-radius:4px; font-size:.8em; font-weight:bold; }
+.wp-remove:hover { background:#f85149; color:#fff; }
+.add-wp { display:inline-block; margin-top:3px; font-size:.7em; color:#58a6ff; cursor:pointer; }
+.add-wp:hover { text-decoration:underline; }
+.wp-list { margin-bottom:2px; }
+
+@media (max-width:768px) { body { flex-direction:column; } .left { width:100%; min-width:auto; max-height:55vh; } }
 </style>
 </head>
 <body>
@@ -42,11 +51,14 @@ h2 { font-size:1em; margin-bottom:4px; color:#58a6ff; font-weight:600; }
 <div class="left">
   <h2>🛣️ Road Trip Generator</h2>
 
-  <label>🏠 Départ (ville)</label>
-  <input id="depart" value="Bonnelles" placeholder="Ex: Paris, Lyon, Bordeaux...">
+  <label>🏠 Départ</label>
+  <input id="depart" value="Bonnelles" placeholder="Ville de départ">
 
-  <label>📍 Où tu veux aller ?</label>
-  <input id="dest" value="Cassis" placeholder="Ville, région...">
+  <label>📍 Destination</label>
+  <input id="dest" value="Cassis" placeholder="Ville d'arrivée">
+
+  <label>🗺️ Étapes intermédiaires <span class="add-wp" onclick="addWaypoint()">+ ajouter</span></label>
+  <div class="wp-list" id="waypoints"></div>
 
   <label>📅 Jours</label>
   <select id="jours">
@@ -64,7 +76,7 @@ h2 { font-size:1em; margin-bottom:4px; color:#58a6ff; font-weight:600; }
     <option value="6">6</option>
   </select>
 
-  <label>💰 Budget max / personne</label>
+  <label>💰 Budget max / pers</label>
   <select id="budget">
     <option value="200">200€</option>
     <option value="300">300€</option>
@@ -76,7 +88,7 @@ h2 { font-size:1em; margin-bottom:4px; color:#58a6ff; font-weight:600; }
   <label>🎯 Type d'activités</label>
   <select id="type">
     <option value="multi" selected>Multi-activités</option>
-    <option value="eau">Eau (kayak, canyon, snorkeling)</option>
+    <option value="eau">Eau (kayak, canyon)</option>
     <option value="montagne">Montagne (rando, escalade)</option>
     <option value="chill">Chill (plage, visites)</option>
   </select>
@@ -84,24 +96,24 @@ h2 { font-size:1em; margin-bottom:4px; color:#58a6ff; font-weight:600; }
   <label>⛺ Hébergement</label>
   <select id="heberg">
     <option value="bivouac">Bivouac (gratuit)</option>
-    <option value="mixte" selected>Mixte (1 bivouac + campings)</option>
-    <option value="camping">Camping uniquement</option>
+    <option value="mixte" selected>Mixte (bivouac + camping)</option>
+    <option value="camping">Camping (15€/nuit)</option>
   </select>
 
-  <label>🔄 Changer de spot chaque jour ?</label>
+  <label>🔄 Itinérant ?</label>
   <select id="itinerant">
-    <option value="oui" selected>Oui — road trip itinérant</option>
-    <option value="non">Non — camp de base fixe</option>
+    <option value="oui" selected>Oui — spot différent/jour</option>
+    <option value="non">Non — camp de base</option>
   </select>
 
   <button class="btn" onclick="generate()">🔄 Générer le road trip</button>
   <div class="info" id="status"></div>
-  <div id="budget-preview" style="margin-top:12px;"></div>
+  <div id="budget-preview" style="margin-top:10px;"></div>
 </div>
 
 <div class="right">
   <div id="map"></div>
-  <div class="preview"><div class="preview-inner" id="trip-preview">Entre une destination et clique Générer →</div></div>
+  <div class="preview"><div class="preview-inner" id="trip-preview">Entre ta destination, ajoute des étapes, et clique Générer →</div></div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -111,9 +123,19 @@ let map, markers=[], routeLayers=[];
 function initMap() {
   if (map) { map.remove(); markers=[]; routeLayers=[]; }
   map = L.map('map').setView([46.5, 3.5], 6);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18, attribution:'&copy; <a href="https://openstreetmap.org">OSM</a>'}).addTo(map);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18, attribution:'&copy; OSM'}).addTo(map);
 }
 initMap();
+
+let wpCount = 0;
+function addWaypoint() {
+  wpCount++;
+  const div = document.createElement('div');
+  div.className = 'wp-row';
+  div.id = 'wp-'+wpCount;
+  div.innerHTML = `<input placeholder="Ex: Lyon, Bordeaux..." id="wpinput-${wpCount}"><button class="wp-remove" onclick="document.getElementById('wp-${wpCount}').remove()">×</button>`;
+  document.getElementById('waypoints').appendChild(div);
+}
 
 function mI(emoji, bg, s) {
   return L.divIcon({html:`<div style="background:${bg};color:#fff;border-radius:50%;width:${s}px;height:${s}px;display:flex;align-items:center;justify-content:center;font-size:${s*0.45}px;border:2px solid #0d1117;box-shadow:0 2px 8px rgba(0,0,0,.5)">${emoji}</div>`,iconSize:[s,s],iconAnchor:[s/2,s/2],popupAnchor:[0,-s/2]});
@@ -135,11 +157,10 @@ async function getRouteOSRM(waypoints) {
     const r = await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?geometries=geojson&overview=full`);
     const d = await r.json();
     if (!d.routes || !d.routes.length) return null;
-    return {km:Math.round(d.routes[0].distance/1000), geom:d.routes[0].geometry};
+    return {km:Math.round(d.routes[0].distance/1000)/* one-way total */, geom:d.routes[0].geometry};
   } catch(e) { return null; }
 }
 
-// --- WIKIPEDIA IMAGE FETCH (high-res) ---
 const imageCache = {};
 async function fetchCityImage(cityName, fullName) {
   let clean = cityName.replace(/^(En route|Étape|proche)\s*/i, '').trim();
@@ -147,29 +168,18 @@ async function fetchCityImage(cityName, fullName) {
   if (imageCache[clean]) return imageCache[clean];
 
   const queries = [clean, clean + ' France', clean.replace(/\s*\(.*\)/, '').trim()];
-
   for (const q of queries) {
     try {
       const r = await fetch(`https://fr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(q)}`);
       if (!r.ok) continue;
       const d = await r.json();
-
-      // Prefer originalimage (full res), fallback to thumbnail upgraded to 800px
       let imgUrl = null;
-      if (d.originalimage && d.originalimage.source) {
-        imgUrl = d.originalimage.source;
-      } else if (d.thumbnail && d.thumbnail.source) {
-        // Upgrade thumbnail resolution: replace /320px- → /800px-
-        imgUrl = d.thumbnail.source.replace(/\/\d+px-/, '/800px-');
-      }
-      if (imgUrl) {
-        imageCache[clean] = imgUrl;
-        return imgUrl;
-      }
+      if (d.originalimage && d.originalimage.source) imgUrl = d.originalimage.source;
+      else if (d.thumbnail && d.thumbnail.source) imgUrl = d.thumbnail.source.replace(/\/\d+px-/, '/800px-');
+      if (imgUrl) { imageCache[clean] = imgUrl; return imgUrl; }
     } catch(e) { continue; }
   }
-  imageCache[clean] = null;
-  return null;
+  imageCache[clean] = null; return null;
 }
 
 async function reverseGeocode(lat, lon) {
@@ -177,17 +187,14 @@ async function reverseGeocode(lat, lon) {
     const r = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`);
     await new Promise(r2=>setTimeout(r2,1100));
     const d = await r.json();
-    if (d.address) {
-      return d.address.city || d.address.town || d.address.village || d.address.municipality || d.name || '';
-    }
-  } catch(e) {}
-  return '';
+    if (d.address) return d.address.city || d.address.town || d.address.village || d.address.municipality || d.name || '';
+  } catch(e) {} return '';
 }
 
 const ACT = {
-  mer:  [{e:'🛶',n:'Kayak de mer',p:28},{e:'🤿',n:'Snorkeling',p:5},{e:'🏄',n:'Surf',p:30},{e:'🏊',n:'Baignade',p:0},{e:'🥾',n:'Rando côtière',p:0}],
-  riv:  [{e:'🛶',n:'Canoë/Kayak',p:22},{e:'💧',n:'Canyoning',p:40},{e:'🏊',n:'Baignade rivière',p:0},{e:'🥾',n:'Rando',p:0},{e:'🕳️',n:'Spéléo',p:15}],
-  mont: [{e:'🧗',n:'Escalade',p:35},{e:'🥾',n:'Rando',p:0},{e:'💧',n:'Canyoning',p:40},{e:'🏊',n:'Lac',p:0}],
+  mer:  [{e:'🛶',n:'Kayak de mer',p:28},{e:'🤿',n:'Snorkeling',p:5},{e:'🏄',n:'Surf',p:30},{e:'🏊',n:'Baignade',p:0},{e:'🥾',n:'Rando côtière',p:0},{e:'⛵',n:'Voile',p:35},{e:'🍷',n:'Dégustation vins',p:12}],
+  riv:  [{e:'🛶',n:'Canoë/Kayak',p:22},{e:'💧',n:'Canyoning',p:40},{e:'🏊',n:'Baignade',p:0},{e:'🥾',n:'Rando',p:0},{e:'🕳️',n:'Spéléo',p:15},{e:'🧗',n:'Via ferrata',p:30},{e:'🎣',n:'Pêche',p:8}],
+  mont: [{e:'🧗',n:'Escalade',p:35},{e:'🥾',n:'Rando alpine',p:0},{e:'💧',n:'Canyoning',p:40},{e:'🏊',n:'Lac de montagne',p:0},{e:'🚵',n:'VTT',p:25},{e:'🪂',n:'Parapente',p:75},{e:'🏔️',n:'Alpinisme',p:50}],
 };
 
 function getEnv(lat, lon) {
@@ -203,14 +210,14 @@ function pickActs(env, type, count) {
   if (type==='multi') pool = [...ACT[env]];
   else if (type==='eau') pool = [...(ACT.mer||[]), ...(ACT.riv||[])];
   else if (type==='montagne') pool = [...ACT.mont];
-  else pool = ACT[env]?.filter(a=>a.p<20) || ACT.riv;
+  else pool = ACT[env]?.filter(a=>a.p<=15) || ACT.riv;
   const shuffled = [...pool].sort(()=>Math.random()-.5);
   return shuffled.slice(0, Math.min(count, shuffled.length));
 }
 
 async function generate() {
   const statusEl = document.getElementById('status');
-  statusEl.innerHTML = 'Recherche<span class="spinner"></span>';
+  statusEl.innerHTML = 'Recherche...<span class="spinner"></span>';
   const departName = document.getElementById('depart').value.trim()||'Bonnelles';
   const destName = document.getElementById('dest').value.trim()||'Cassis';
   const jours = parseInt(document.getElementById('jours').value);
@@ -220,46 +227,79 @@ async function generate() {
   const heberg = document.getElementById('heberg').value;
   const itinerant = document.getElementById('itinerant').value;
 
-  const [depart, dest] = await Promise.all([geocode(departName), geocode(destName)]);
-  if (!depart || !dest) {
-    statusEl.textContent = '❌ Ville introuvable';
-    return;
+  // Gather waypoints
+  const wpInputs = document.querySelectorAll('#waypoints input');
+  const wpNames = [];
+  wpInputs.forEach(inp => { const v = inp.value.trim(); if (v) wpNames.push(v); });
+
+  // Geocode all: depart + waypoints + dest
+  const allNames = [departName, ...wpNames, destName];
+  const allGeo = [];
+  for (const n of allNames) {
+    const g = await geocode(n);
+    if (!g) { statusEl.textContent = `❌ "${n}" introuvable`; return; }
+    allGeo.push(g);
   }
 
-  const allWaypoints = [depart, dest];
-  const route = await getRouteOSRM(allWaypoints);
-  if (!route) { statusEl.textContent='❌ Pas de route'; return; }
+  const [depart, ...rest] = allGeo;
+  const dest = rest.pop();
+  const wps = rest; // waypoints between
 
-  statusEl.innerHTML = `✅ ${depart.name} → ${dest.name} (${route.km} km aller)`;
+  const route = await getRouteOSRM(allGeo);
+  if (!route) { statusEl.textContent='❌ Pas de route entre ces villes'; return; }
+
+  const kmOneWay = route.km;
+  statusEl.innerHTML = `✅ ${allGeo.map(g=>g.name).join(' → ')} (${kmOneWay} km)`;
   statusEl.style.color = '#58a6ff';
 
+  // Build days along the full route (waypoints included)
   let days = [];
   const env = getEnv(dest.lat, dest.lon);
+  const coords = route.geom.coordinates;
 
   if (itinerant === 'oui' && jours >= 3) {
-    const coords = route.geom.coordinates;
-    const segment = Math.floor(coords.length / (jours - 1));
+    // Distribute days along the route, pin waypoints to their segments
+    const segmentLen = Math.floor(coords.length / (jours - 1));
+    // Find indices of each waypoint on route
+    const wpIndices = wps.map(w => {
+      let best = 0, bestD = Infinity;
+      coords.forEach((c,i) => {
+        const d = Math.hypot(c[1]-w.lat, c[0]-w.lon);
+        if (d < bestD) { bestD = d; best = i; }
+      });
+      return best;
+    });
 
     for (let j = 1; j <= jours; j++) {
       let idx;
-      if (j === 1) idx = Math.floor(segment * 0.25);
+      if (j === 1) idx = Math.floor(segmentLen * 0.25);
       else if (j === jours) idx = coords.length - 1;
-      else idx = Math.floor(segment * (j - 0.5));
+      else idx = Math.floor(segmentLen * (j - 0.5));
+
+      // If a waypoint is close, snap to it
+      for (let wi = 0; wi < wpIndices.length; wi++) {
+        if (Math.abs(idx - wpIndices[wi]) < segmentLen * 0.6) {
+          idx = wpIndices[wi];
+          wpIndices[wi] = -1; // consumed
+          break;
+        }
+      }
 
       const c = coords[Math.min(idx, coords.length-1)];
       const lat = c[1], lon = c[0];
       const acts = pickActs(env, type, j===1?1:2);
 
       let dayName;
+      // Check if this stop matches a waypoint
+      const nearWp = wps.find(w => Math.hypot(lat-w.lat, lon-w.lon) < 0.3);
       if (j === 1) dayName = `Départ ${depart.name}`;
       else if (j === jours) dayName = dest.name;
+      else if (nearWp) dayName = nearWp.name;
       else dayName = `Étape ${j}`;
 
       days.push({
-        day: j,
-        name: dayName,
-        lat, lon, acts,
-        nuit: heberg==='bivouac'?0:(heberg==='mixte'&&j<=1?0:14),
+        day: j, name: dayName, lat, lon, acts,
+        nuit: heberg==='bivouac'?0:(heberg==='mixte'&&j<=1?0:(heberg==='camping'?15:14)),
         nuitLabel: j===1&&heberg!=='camping'?'Bivouac':'Camping'
       });
     }
@@ -267,25 +307,19 @@ async function generate() {
     for (let j = 1; j <= jours; j++) {
       const acts = pickActs(env, type, j===1?1:2);
       days.push({
-        day: j,
-        name: dest.name,
-        lat: dest.lat + (Math.random()-.5)*0.05,
-        lon: dest.lon + (Math.random()-.5)*0.05,
-        acts,
-        nuit: heberg==='bivouac'?0:(heberg==='mixte'&&j<=1?0:14),
+        day: j, name: dest.name,
+        lat: dest.lat + (Math.random()-.5)*0.05, lon: dest.lon + (Math.random()-.5)*0.05,
+        acts, nuit: heberg==='bivouac'?0:(heberg==='mixte'&&j<=1?0:15),
         nuitLabel: j===1&&heberg!=='camping'?'Bivouac':'Camping'
       });
     }
   }
 
-  // --- BUDGET: clearer calculation, all integers ---
-  const kmAllerRetour = route.km * 2;
-  const essenceL_100km = 7;        // 7L/100km
-  const prixLitre = 1.80;           // €/L
-  const coutKmEssence = (essenceL_100km / 100) * prixLitre; // 0.126 €/km
-  const coutKmPeage = 0.06;         // €/km péage
-  const coutTotalVoiture = Math.round(kmAllerRetour * (coutKmEssence + coutKmPeage)); // total voiture
-  const trajet = Math.round(coutTotalVoiture / pers); // par personne
+  // --- BUDGET (varies with km now) ---
+  const kmAR = kmOneWay * 2;
+  const coutKm = (7/100)*1.80 + 0.06; // essence + péage = 0.186€/km
+  const coutVoiture = Math.round(kmAR * coutKm);
+  const trajet = Math.round(coutVoiture / pers);
 
   let actTotal = 0, nuits = 0;
   days.forEach(d => { d.acts.forEach(a => actTotal += a.p); nuits += d.nuit; });
@@ -293,36 +327,34 @@ async function generate() {
   const total = trajet + actTotal + nuits + bouffe;
 
   document.getElementById('budget-preview').innerHTML = `
-    <h2>💰 ${total}€/pers ${total<=budget?'✅':'⚠️ +'+ (total-budget)+'€'}</h2>
-    <div class="budget-line"><span>⛽🛣️ Trajet A/R (${kmAllerRetour} km)</span><span>${trajet}€/pers</span></div>
+    <h2>💰 ${total}€/pers ${total<=budget?'✅':'⚠️ +'+(total-budget)+'€'}</h2>
+    <div class="budget-line"><span>⛽🛣️ Trajet A/R ${kmAR}km (voiture=${coutVoiture}€ ÷ ${pers})</span><span>${trajet}€</span></div>
     <div class="budget-line"><span>🎯 Activités</span><span>${actTotal}€</span></div>
-    <div class="budget-line"><span>⛺ Nuits (${heberg==='bivouac'?'bivouac':heberg})</span><span>${nuits}€</span></div>
-    <div class="budget-line" style="font-weight:600;"><span>🍽️ Bouffe (${jours}j × 15€)</span><span>${bouffe}€</span></div>
+    <div class="budget-line"><span>⛺ Nuits</span><span>${nuits}€</span></div>
+    <div class="budget-line" style="font-weight:600;"><span>🍽️ Bouffe (${jours}j×15€)</span><span>${bouffe}€</span></div>
   `;
 
-  // --- FETCH IMAGES ---
+  // Images
   const imgPromises = days.map(async d => {
     let city = d.name;
-    if (city.match(/^Étape\s*\d+$/i) || city.match(/^En route/i)) {
-      const realCity = await reverseGeocode(d.lat, d.lon);
-      if (realCity) city = realCity;
+    if (city.match(/^(Étape\s*\d+|En route)$/i)) {
+      const rc = await reverseGeocode(d.lat, d.lon);
+      if (rc) city = rc;
     }
-    const img = await fetchCityImage(city, d.name);
-    return { day: d.day, img, city };
+    return { day: d.day, img: await fetchCityImage(city, d.name) };
   });
   const dayImages = await Promise.all(imgPromises);
   const imgMap = {};
   dayImages.forEach(di => { imgMap[di.day] = di.img; });
 
-  // Hero image
   const destImg = imgMap[days.length] || null;
 
-  // Preview
+  // Preview HTML
   let html = '';
   if (destImg) {
-    html += `<div class="hero-img-wrap"><img class="hero-img" src="${destImg}" alt="${dest.name}" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="hero-overlay"><b>${depart.name} → ${dest.name}</b> · ${jours}j · ${pers} pers</div></div>`;
+    html += `<div class="hero-img-wrap"><img class="hero-img" src="${destImg}" alt="${dest.name}" onerror="this.parentElement.style.display='none'"><div class="hero-overlay"><b>${depart.name} → ${dest.name}</b> · ${jours}j · ${pers} pers</div></div>`;
   } else {
-    html += `<div style="padding:0 8px 6px 8px;"><b>🗺️ ${depart.name} → ${dest.name}</b> · ${jours}j · ${pers} pers</div>`;
+    html += `<div style="padding:0 6px 4px 6px;"><b>🗺️ ${depart.name} → ${dest.name}</b> · ${jours}j · ${pers} pers</div>`;
   }
 
   days.forEach(d => {
@@ -332,16 +364,15 @@ async function generate() {
     html += `<div class="day-card-header" style="color:${color}">📍 J${d.day} — ${d.name}</div>`;
     html += `<div class="day-card-body">`;
     if (img) {
-      html += `<img class="day-card-img" src="${img}" alt="${d.name}" loading="lazy" onerror="this.style.display='none'">`;
+      html += `<img class="day-card-img" src="${img}" alt="${d.name}" onerror="this.style.display='none'">`;
     } else {
-      html += `<div class="day-card-img" style="display:flex;align-items:center;justify-content:center;font-size:1.6em;background:#161b22;">🗺️</div>`;
+      html += `<div class="day-card-img" style="display:flex;align-items:center;justify-content:center;font-size:1.4em;background:#161b22;">🗺️</div>`;
     }
     html += `<div class="day-card-info">`;
     d.acts.forEach(a => { html += `<span>${a.e} ${a.n} (${a.p}€)</span>`; });
-    html += `<span style="margin-top:3px;color:#8b949e;">⛺ ${d.nuitLabel} · ${d.nuit}€</span>`;
+    html += `<span style="margin-top:2px;color:#8b949e;">⛺ ${d.nuitLabel} · ${d.nuit}€</span>`;
     html += `</div></div></div>`;
   });
-
   document.getElementById('trip-preview').innerHTML = html;
 
   // Map
@@ -354,16 +385,23 @@ async function generate() {
   markers.push(L.marker([depart.lat, depart.lon], {icon: mI('🚗','#58a6ff',28)})
     .bindPopup(`<b>🚗 DÉPART</b><br>${depart.name}`).addTo(map));
 
+  // Waypoints
+  wps.forEach((w, i) => {
+    markers.push(L.marker([w.lat, w.lon], {icon: mI('📍','#d2a850',22)})
+      .bindPopup(`<b>🗺️ Étape</b><br>${w.name}`).addTo(map));
+  });
+
   days.forEach(d => {
     const c = COLORS[(d.day-1)%COLORS.length];
     const img = imgMap[d.day];
-    let popupContent = `<b>J${d.day} — ${d.name}</b><br>${d.acts.map(a=>a.e+' '+a.n+' ('+a.p+'€)').join('<br>')}<br>⛺ ${d.nuitLabel} · ${d.nuit}€`;
-    if (img) popupContent += `<br><img src="${img}" style="width:200px;border-radius:6px;margin-top:6px" loading="lazy">`;
+    let pc = `<b>J${d.day} — ${d.name}</b><br>${d.acts.map(a=>a.e+' '+a.n+' ('+a.p+'€)').join('<br>')}<br>⛺ ${d.nuitLabel} · ${d.nuit}€`;
+    if (img) pc += `<br><img src="${img}" style="width:180px;border-radius:5px;margin-top:4px">`;
     markers.push(L.marker([d.lat, d.lon], {icon: mI(d.day.toString(),c,24)})
-      .bindPopup(popupContent, {maxWidth:250}).addTo(map));
+      .bindPopup(pc, {maxWidth:230}).addTo(map));
   });
 
-  map.fitBounds([[depart.lat,depart.lon],[dest.lat,dest.lon]], {padding:[50,50]});
+  const allLats = allGeo.map(g=>g.lat), allLons = allGeo.map(g=>g.lon);
+  map.fitBounds([[Math.min(...allLats),Math.min(...allLons)],[Math.max(...allLats),Math.max(...allLons)]], {padding:[50,50]});
 }
 
 const COLORS = ['#58a6ff','#f78166','#d2a850','#3fb950','#bc8cff','#f0883e','#79c0ff','#ff7b72','#56d364','#e3b341'];
