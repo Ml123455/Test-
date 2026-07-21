@@ -48,8 +48,8 @@ footer { text-align:center; padding:30px; color:#aaa; font-size:.8em; }
 
 <header>
   <h1>🗺️ Raid Trip Ardèche — 5 Jours</h1>
-  <p>4 personnes · Voiture · Départ centre France · Samedi → Mercredi</p>
-  <p style="font-size:.85em;margin-top:8px;">~1300 km · 400€/pers · Canoë + Canyoning + Via Ferrata + Escalade + Spéléo</p>
+  <p>4 personnes · Voiture · Départ Bonnelles · Samedi → Mercredi</p>
+  <p style="font-size:.85em;margin-top:8px;">~1140 km · 400€/pers · Canoë + Canyoning + Via Ferrata + Escalade + Spéléo</p>
 </header>
 
 <div class="day-grid" role="main">
@@ -58,7 +58,7 @@ footer { text-align:center; padding:30px; color:#aaa; font-size:.8em; }
 <div class="day-card">
   <div class="day-header j1"><span class="num">J1</span> 🛶 Sam — Arrivée & Canoë Ardèche</div>
   <div class="day-body">
-    <div class="line"><span class="emoji">🚗</span> <b>Matin :</b> Départ 6h. ~650 km via A6/A7/A75. Arrivée 12h à Vallon-Pont-d'Arc.</div>
+    <div class="line"><span class="emoji">🚗</span> <b>Matin :</b> Départ 6h de Bonnelles. ~570 km via A6/A7/A75 (5h30). Arrivée 11h30 à Vallon-Pont-d'Arc.</div>
     <div class="line"><span class="emoji">🛶</span> <b>Aprem :</b> <b>Descente des Gorges de l'Ardèche</b> — 24 km de Vallon à Sauze. Baignade, falaises. Navette retour incluse. <b>~22€/pers</b>.</div>
     <div class="line"><span class="emoji">⛺</span> <b>Soir :</b> Installation camping municipal, apéro, feu de camp.</div>
     <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> Camping Vallon-Pont-d'Arc (~10€/pers).</div>
@@ -108,7 +108,7 @@ footer { text-align:center; padding:30px; color:#aaa; font-size:.8em; }
   <div class="day-header" style="background:linear-gradient(135deg,#2ecc71,#27ae60);"><span class="num">J5</span> 🏊 Mer — Baignade & Retour</div>
   <div class="day-body">
     <div class="line"><span class="emoji">🏊</span> <b>Matin :</b> Démontage du camp, direction <b>cascade du Ray-Pic</b>. Dernier plouf dans un cadre volcanique. <b>Gratuit</b>.</div>
-    <div class="line"><span class="emoji">🚗</span> <b>Aprem :</b> Route retour ~650 km. Arrivée en soirée. Des souvenirs plein la tête.</div>
+    <div class="line"><span class="emoji">🚗</span> <b>Aprem :</b> Route retour ~570 km vers Bonnelles. Arrivée en soirée.</div>
     <div class="good">✅ Départ 10h max pour éviter les bouchons du retour. Arrivée estimée 18-19h.</div>
   </div>
 </div>
@@ -119,7 +119,7 @@ footer { text-align:center; padding:30px; color:#aaa; font-size:.8em; }
 <div class="budget-bar">
   <h3>💰 Budget — 400€ par personne (4 pers)</h3>
   <table>
-    <tr><td>⛽🛣️ Trajet (~1300 km · péages A10/A71/A75)</td><td>~75€</td></tr>
+    <tr><td>⛽🛣️ Trajet (~1140 km · péages A6/A7/A75)</td><td>~75€</td></tr>
     <tr><td>🛶 Canoë Ardèche J1</td><td>22€</td></tr>
     <tr><td>💧 Canyoning J2 (guide + matériel)</td><td>40€</td></tr>
     <tr><td>🧗 Via Ferrata J3 (location matos)</td><td>30€</td></tr>
@@ -167,7 +167,7 @@ async function loadRoute(waypoints, color){
 }
 
 // Coordonnées
-const DEPART = [46.80, 2.40];    // Centre France
+const DEPART = [48.618, 1.940];    // Bonnelles (78)
 const CAMPING = [44.384, 4.418]; // Vallon-Pont-d'Arc
 const CHASSEZAC = [44.425, 4.295];
 const VIAFERRATA = [44.408, 4.395];
@@ -199,7 +199,7 @@ function makeSmall(emoji, bg) {
 }
 
 // 🚗 DÉPART
-L.marker(DEPART, {icon: makeIcon('🚗','#1abc9c')}).bindPopup('<b>🚗 DÉPART J1</b><br>Centre France<br>Départ 6h · ~650 km').addTo(map);
+L.marker(DEPART, {icon: makeIcon('🚗','#1abc9c')}).bindPopup('<b>🚗 DÉPART J1</b><br>Bonnelles (78)<br>Départ 6h · ~570 km').addTo(map);
 
 // J1 — Canoë + Camping
 L.marker(CAMPING, {icon: makeIcon('🛶','#1abc9c')}).bindPopup('<b>J1 — Vallon-Pont-d\'Arc</b><br>🛶 Canoë 24 km · 22€/pers<br>⛺ Camping 4 nuits').addTo(map);
@@ -215,7 +215,7 @@ L.marker(BALAZUC, {icon: makeIcon('🪢','#f39c12')}).bindPopup('<b>J3 — Escal
 L.marker(STMARCEL, {icon: makeIcon('🕳️','#9b59b6')}).bindPopup('<b>J4 — Grotte de Saint-Marcel</b><br>🕳️ Spéléo 1h · 15€/pers<br>🥾 Rando aquatique le matin (gratuit)').addTo(map);
 
 // J5 — Cascade
-L.marker(RAYPIC, {icon: makeIcon('🏊','#2ecc71')}).bindPopup('<b>J5 — Cascade du Ray-Pic</b><br>🏊 Dernier plouf · Gratuit<br>Puis retour ~650 km').addTo(map);
+L.marker(RAYPIC, {icon: makeIcon('🏊','#2ecc71')}).bindPopup('<b>J5 — Cascade du Ray-Pic</b><br>🏊 Dernier plouf · Gratuit<br>Puis retour ~570 km vers Bonnelles').addTo(map);
 
 // Légende
 const legend = L.control({position:'bottomright'});
