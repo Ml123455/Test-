@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Raid Trip Calanques — 5 jours, 4 personnes. Kayak de mer, escalade, rando, snorkeling. Départ Bonnelles. ~400€/pers.">
-<title>Raid Trip Calanques — 5 Jours · 4 Pers · ~400€/pers</title>
+<meta name="description" content="Road Trip Côte d'Azur — 5 jours, 4 personnes. Kayak, escalade, rando, snorkeling. Campings différents chaque soir. Départ Bonnelles. ~400€/pers.">
+<title>Road Trip Côte d'Azur — 5 Jours · 4 Pers · ~400€/pers</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -25,7 +25,7 @@ header p { opacity:.85; margin-top:4px; font-size:.8em; }
 .budget-bar td { padding:4px 10px; border-bottom:1px solid #333; }
 .budget-bar .total { font-weight:bold; color:#f39c12; font-size:1.1em; }
 #map-container { margin:15px auto; max-width:1000px; padding:0 12px; position:relative; }
-#map { height:350px; border-radius:10px; }
+#map { height:380px; border-radius:10px; }
 .fs-btn { position:absolute; top:10px; right:10px; z-index:1000; background:#16213e; color:#eee; border:1px solid #555; border-radius:6px; padding:6px 10px; cursor:pointer; font-size:16px; }
 .fs-btn:hover { background:#0077b6; }
 #map-container.map-fullscreen { position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:9999; margin:0; padding:0; max-width:100%; }
@@ -47,68 +47,70 @@ footer { text-align:center; padding:30px; color:#aaa; font-size:.8em; }
 <body>
 
 <header>
-  <h1>🏖️ Raid Trip Calanques — 5 Jours</h1>
+  <h1>🏖️ Road Trip Côte d'Azur — 5 Jours</h1>
   <p>4 personnes · Voiture · Départ Bonnelles (78) · Samedi → Mercredi</p>
-  <p style="font-size:.85em;margin-top:8px;">~1540 km · ~400€/pers · Kayak mer + Escalade + Rando + Snorkeling</p>
+  <p style="font-size:.85em;margin-top:8px;">Camping différent chaque soir · ~400€/pers · Kayak + Escalade + Rando + Snorkeling</p>
 </header>
 
 <div class="day-grid" role="main">
 
 <!-- J1 -->
 <div class="day-card">
-  <div class="day-header j1"><span class="num">J1</span> 🚗 Sam — Route & Kayak de mer</div>
+  <div class="day-header j1"><span class="num">J1</span> 🚗 Sam — Bonnelles → Cassis (770 km)</div>
   <div class="day-body">
-    <div class="line"><span class="emoji">🚗</span> <b>Matin :</b> Départ 6h de Bonnelles. ~770 km via A6/A7/A8/A50 (7h). Arrivée 13h à Cassis.</div>
-    <div class="line"><span class="emoji">🛶</span> <b>Aprem :</b> <b>Kayak de mer dans les Calanques</b> — départ plage de Port-Miou, direction Calanque de Port-Pin. 2-3h, débutants OK. <b>~30€/pers</b> (location kayak + gilet).</div>
-    <div class="line"><span class="emoji">⛺</span> <b>Soir :</b> Installation camping Les Cigales (Cassis), apéro face à la mer.</div>
-    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> Camping Cassis (~15€/pers).</div>
-    <div class="good">✅ Calanques accessibles uniquement à pied ou en kayak. Eau turquoise, falaises blanches.</div>
+    <div class="line"><span class="emoji">🚗</span> <b>Matin :</b> Départ 6h de Bonnelles. A6/A7/A8/A50. Arrivée 13h à Cassis.</div>
+    <div class="line"><span class="emoji">🛶</span> <b>Aprem :</b> <b>Kayak de mer</b> Port-Miou → Calanque de Port-Pin. 2-3h. <b>~30€/pers</b>.</div>
+    <div class="line"><span class="emoji">🏊</span> <b>Fin aprem :</b> Baignade plage de la Grande Mer. Glace, rosé.</div>
+    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> 🏕️ Camping Les Cigales — Cassis (~15€/pers).</div>
+    <div class="good">✅ 770 km · 7h · 1 pause péage · Arrivée 13h · Kayak réservé 14h30</div>
   </div>
 </div>
 
 <!-- J2 -->
 <div class="day-card">
-  <div class="day-header j2"><span class="num">J2</span> 🥾 Dim — Rando Calanques + Snorkeling</div>
+  <div class="day-header j2"><span class="num">J2</span> 🥾 Dim — Cassis → La Ciotat (15 km)</div>
   <div class="day-body">
-    <div class="line"><span class="emoji">🥾</span> <b>Journée :</b> <b>Rando Cassis → Calanque d'En-Vau</b> — le plus beau spot des Calanques. 3h aller-retour, vue panoramique sur la Méditerranée. <b>Gratuit</b>.</div>
-    <div class="line"><span class="emoji">🤿</span> <b>Aprem :</b> Snorkeling à En-Vau — eau cristalline, poissons, posidonies. Masque et tuba (prévoir ou louer ~5€).</div>
-    <div class="line"><span class="emoji">🍽️</span> <b>Soir :</b> Resto à Cassis — poissons grillés, rosé de Provence.</div>
-    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> Camping Cassis.</div>
-    <div class="good">✅ En-Vau = plage de galets blancs entourée de falaises de 300m. Spectaculaire. Départ tôt (8h) pour éviter la foule.</div>
+    <div class="line"><span class="emoji">🥾</span> <b>Matin :</b> <b>Rando Crêtes de Cassis</b> → Calanque d'En-Vau. 3h, vue mer de folie. <b>Gratuit</b>.</div>
+    <div class="line"><span class="emoji">🤿</span> <b>Midi :</b> Snorkeling à En-Vau. Pique-nique sur la plage de galets.</div>
+    <div class="line"><span class="emoji">🚗</span> <b>Aprem :</b> 15 min de route → La Ciotat. Baignade plage Lumière.</div>
+    <div class="line"><span class="emoji">🍽️</span> <b>Soir :</b> Resto port de La Ciotat — poissons, rosé.</div>
+    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> 🏕️ Camping La Baie des Anges — La Ciotat (~15€/pers).</div>
+    <div class="good">✅ En-Vau = plus belle calanque. Départ 8h pour éviter la foule. Parking 8€.</div>
   </div>
 </div>
 
 <!-- J3 -->
 <div class="day-card">
-  <div class="day-header j3"><span class="num">J3</span> 🧗 Lun — Escalade + Baignade</div>
+  <div class="day-header j3"><span class="num">J3</span> 🧗 Lun — La Ciotat → Sanary (35 km)</div>
   <div class="day-body">
-    <div class="line"><span class="emoji">🧗</span> <b>Matin :</b> <b>Escalade dans les Calanques</b> avec guide — secteur En-Vau ou Morgiou. Voies 5a-6b, calcaire blanc face à la mer. <b>~45€/pers</b> (guide + matos).</div>
-    <div class="line"><span class="emoji">🏊</span> <b>Aprem :</b> Baignade plage de la Grande Mer à Cassis. Sable, eau turquoise, glace à l'italienne.</div>
-    <div class="line"><span class="emoji">🍖</span> <b>Soir :</b> BBQ camping.</div>
-    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> Camping Cassis.</div>
-    <div class="good">✅ Escalade calcaire en bord de mer — une des plus belles vues de France. Guide indispensable (zones réglementées).</div>
+    <div class="line"><span class="emoji">🧗</span> <b>Matin :</b> <b>Escalade falaises de La Ciotat</b> avec guide — Secteur du Mugel, calcaire blanc face mer. Voies 5a-6b. <b>~45€/pers</b>.</div>
+    <div class="line"><span class="emoji">🚗</span> <b>Midi :</b> 30 min → Sanary-sur-Mer. Pique-nique plage.</div>
+    <div class="line"><span class="emoji">🏊</span> <b>Aprem :</b> Baignade plage de Portissol. Marché provençal (si lundi).</div>
+    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> 🏕️ Camping Le Vallon — Sanary (~14€/pers).</div>
+    <div class="good">✅ Mugel = site d'escalade mythique. Calcaire blanc, vue mer. Guide obligatoire.</div>
   </div>
 </div>
 
 <!-- J4 -->
 <div class="day-card">
-  <div class="day-header j4"><span class="num">J4</span> 🛶 Mar — Kayak journée + Plage</div>
+  <div class="day-header j4"><span class="num">J4</span> 🛶 Mar — Sanary → Porquerolles (40 km + ferry)</div>
   <div class="day-body">
-    <div class="line"><span class="emoji">🛶</span> <b>Matin :</b> <b>Kayak de mer — parcours complet</b> Cassis → Calanque de Sugiton (2h aller). Pique-nique sur une plage secrète. <b>~35€/pers</b> (location journée).</div>
-    <div class="line"><span class="emoji">🏊</span> <b>Aprem :</b> Retour kayak, baignade, plage. Dernière après-midi chill.</div>
-    <div class="line"><span class="emoji">🌙</span> <b>Soir :</b> Dernière soirée — apéro sur le port de Cassis.</div>
-    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> Camping Cassis.</div>
-    <div class="good">✅ Kayak journée = accès à des calanques inaccessibles à pied. Prévoir crème solaire et eau (pas d'ombre sur l'eau).</div>
+    <div class="line"><span class="emoji">🚗</span> <b>Matin :</b> Départ 7h30 → Tour Fondue (45 min). Ferry 8h30 → Porquerolles (15 min, ~25€/pers A/R).</div>
+    <div class="line"><span class="emoji">🛶</span> <b>Journée :</b> <b>Kayak de mer autour de Porquerolles</b> — plage Notre-Dame, eau caraïbes, snorkeling réserve. Location kayak ~30€/pers.</div>
+    <div class="line"><span class="emoji">🤿</span> <b>Aprem :</b> Snorkeling dans la réserve marine. Sentier sous-marin du Langoustier.</div>
+    <div class="line"><span class="emoji">🍽️</span> <b>Soir :</b> Dernier ferry 18h30. Repas au camping.</div>
+    <div class="line"><span class="emoji">🌙</span> <b>Nuit :</b> 🏕️ Camping La Presqu'île — Giens (~14€/pers).</div>
+    <div class="good">✅ Porquerolles = les Caraïbes à 15 min de ferry. Eau transparente, plages de sable blanc.</div>
   </div>
 </div>
 
 <!-- J5 -->
 <div class="day-card">
-  <div class="day-header" style="background:linear-gradient(135deg,#e63946,#c1121f);"><span class="num">J5</span> 🏊 Mer — Dernier plouf & Retour</div>
+  <div class="day-header" style="background:linear-gradient(135deg,#e63946,#c1121f);"><span class="num">J5</span> 🚗 Mer — Giens → Bonnelles (850 km)</div>
   <div class="day-body">
-    <div class="line"><span class="emoji">🏊</span> <b>Matin :</b> Démontage du camp, dernier bain à la plage de Port-Miou. <b>Gratuit</b>.</div>
-    <div class="line"><span class="emoji">🚗</span> <b>Aprem :</b> Route retour ~770 km vers Bonnelles via A8/A7/A6. Départ 11h, arrivée ~19h.</div>
-    <div class="good">✅ Départ avant midi pour éviter les bouchons de Lyon. Arrivée estimée 19-20h.</div>
+    <div class="line"><span class="emoji">🏊</span> <b>Matin :</b> Dernier bain plage de l'Almanarre (Giens). Spot de kitesurf, sable fin.</div>
+    <div class="line"><span class="emoji">🚗</span> <b>10h :</b> Départ retour. Giens → Bonnelles ~850 km via A8/A7/A6 (8h). Arrivée ~19h.</div>
+    <div class="good">✅ Départ 10h max. Pause déjeuner sur aire d'autoroute. Arrivée estimée 19-20h.</div>
   </div>
 </div>
 
@@ -118,31 +120,31 @@ footer { text-align:center; padding:30px; color:#aaa; font-size:.8em; }
 <div class="budget-bar">
   <h3>💰 Budget — ~400€ par personne (4 pers)</h3>
   <table>
-    <tr><td>⛽🛣️ Trajet (~1540 km · péages A6/A7/A8/A50)</td><td>~75€</td></tr>
-    <tr><td>🛶 Kayak mer J1 (demi-journée)</td><td>30€</td></tr>
-    <tr><td>🥾 Rando + Snorkeling J2</td><td>5€</td></tr>
+    <tr><td>⛽🛣️ Trajet (~1900 km · péages A6/A7/A8/A50)</td><td>~95€</td></tr>
+    <tr><td>🛶 Kayak Cassis J1 (demi-journée)</td><td>30€</td></tr>
+    <tr><td>🥾 Rando + 🤿 Snorkeling J2</td><td>0€</td></tr>
     <tr><td>🧗 Escalade J3 (guide + matos)</td><td>45€</td></tr>
-    <tr><td>🛶 Kayak mer J4 (journée)</td><td>35€</td></tr>
-    <tr><td>⛺ Camping (4 nuits × 15€)</td><td>60€</td></tr>
-    <tr><td>🎒 Location matos (tentes, masques)</td><td>25€</td></tr>
-    <tr><td>🍽️ Nourriture (5j × 17€)</td><td>85€</td></tr>
-    <tr><td>📦 Marge (parkings, resto J2, imprévus)</td><td>40€</td></tr>
+    <tr><td>⛴️ Ferry Porquerolles J4 (A/R)</td><td>25€</td></tr>
+    <tr><td>🛶 Kayak Porquerolles J4</td><td>30€</td></tr>
+    <tr><td>⛺ Campings (Cassis+Ciotat+Sanary+Giens)</td><td>58€</td></tr>
+    <tr><td>🍽️ Nourriture (5j × 15€)</td><td>75€</td></tr>
+    <tr><td>📦 Marge (parkings, resto J2, glaces)</td><td>42€</td></tr>
     <tr class="total"><td>TOTAL</td><td>~400€</td></tr>
   </table>
-  <p style="font-size:.8em;color:#aaa;">~1 600€ au total pour le groupe · Camping à Cassis · 1 resto · Parkings Calanques payants (8€/j)</p>
+  <p style="font-size:.8em;color:#aaa;">~1 600€ au total · 4 campings différents · 1 resto · Parkings Calanques 8€/j · Ferry Porquerolles 25€</p>
 </div>
 
 <!-- MAP -->
 <div id="map-container"><button class="fs-btn" onclick="toggleFS()" title="Plein écran">⛶</button><div id="map"></div></div>
 
 <footer>
-  Carte OpenStreetMap · Raid 4 personnes · 5 jours · Calanques<br>
+  Carte OpenStreetMap · Road Trip 4 personnes · 5 jours · Côte d'Azur<br>
   https://botarmory.com/calanques-express.html
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const map = L.map('map').setView([43.9, 4.5], 7);
+const map = L.map('map').setView([44.0, 5.0], 7);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18}).addTo(map);
 
 function toggleFS(){
@@ -155,59 +157,65 @@ async function loadRoute(waypoints, color){
   const coords = waypoints.map(w => `${w[1]},${w[0]}`).join(';');
   try {
     const r = await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?geometries=geojson&overview=full`);
-    const d = await r.json();
-    L.geoJSON(d.routes[0].geometry,{style:{color:color,weight:3,opacity:.8}}).addTo(map);
+    L.geoJSON(r.routes[0].geometry,{style:{color:color,weight:3,opacity:.8}}).addTo(map);
   }catch(e){
     L.polyline(waypoints,{color:color,weight:2,opacity:.5}).addTo(map);
   }
 }
 
-// Coordonnées
-const DEPART = [48.618, 1.940];    // Bonnelles
-const CASSIS = [43.213, 5.538];    // Camping Cassis
-const PORTMIOU = [43.208, 5.520];  // Kayak J1 départ
-const ENVAU = [43.190, 5.510];     // Rando + escalade
-const SUGITON = [43.216, 5.454];   // Kayak J4
+// Coordonnées — Road trip le long de la côte
+const DEPART  = [48.618, 1.940];   // Bonnelles
+const CASSIS  = [43.213, 5.538];   // J1 — Camping Cassis
+const CIOTAT  = [43.177, 5.614];   // J2 — Camping La Ciotat
+const SANARY  = [43.117, 5.808];   // J3 — Camping Sanary
+const GIENS   = [43.050, 6.128];   // J4 — Giens / Porquerolles
+const PORQUER = [43.009, 6.217];   // Porquerolles (ferry)
 
-// Routes
-loadRoute([DEPART, CASSIS], '#0077b6');          // J1 ALLER
-loadRoute([CASSIS, PORTMIOU], '#0077b6');        // J1 kayak
-loadRoute([CASSIS, ENVAU], '#e76f51');            // J2 rando
-loadRoute([CASSIS, ENVAU], '#2a9d8f');            // J3 escalade
-loadRoute([CASSIS, SUGITON], '#e9c46a');          // J4 kayak
-loadRoute([CASSIS, DEPART], '#e63946');           // J5 RETOUR
+// EN-Vau
+const ENVAU = [43.190, 5.513];
+
+// Routes — chaque segment = un jour
+loadRoute([DEPART, CASSIS], '#0077b6');        // J1
+loadRoute([CASSIS, CIOTAT], '#e76f51');         // J2
+loadRoute([CIOTAT, SANARY], '#2a9d8f');         // J3
+loadRoute([SANARY, GIENS], '#e9c46a');           // J4
+loadRoute([GIENS, DEPART], '#e63946');           // J5
 
 // Icônes
-function makeIcon(emoji, bg) {
-  return L.divIcon({html:`<div style="background:${bg};color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:13px;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)">${emoji}</div>`,iconSize:[26,26],iconAnchor:[13,13],popupAnchor:[0,-13]});
+function mI(emoji, bg, size) {
+  return L.divIcon({html:`<div style="background:${bg};color:#fff;border-radius:50%;width:${size}px;height:${size}px;display:flex;align-items:center;justify-content:center;font-size:${size*0.5}px;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)">${emoji}</div>`,iconSize:[size,size],iconAnchor:[size/2,size/2],popupAnchor:[0,-size/2]});
 }
 
-// 🚗 DÉPART
-L.marker(DEPART, {icon: makeIcon('🚗','#0077b6')}).bindPopup('<b>🚗 DÉPART J1</b><br>Bonnelles (78)<br>Départ 6h · ~770 km · 7h').addTo(map);
+// Départ
+L.marker(DEPART, {icon: mI('🚗','#0077b6',26)}).bindPopup('<b>🚗 DÉPART</b><br>Bonnelles (78)<br>Sam 6h').addTo(map);
 
-// ⛺ CASSIS
-L.marker(CASSIS, {icon: makeIcon('⛺','#0077b6')}).bindPopup('<b>Camping Cassis</b><br>⛺ 4 nuits · ~15€/pers<br>Base du séjour').addTo(map);
+// J1 — Cassis
+L.marker(CASSIS, {icon: mI('1','#0077b6',22)}).bindPopup('<b>J1 — Cassis</b><br>🛶 Kayak Port-Miou<br>🏕️ Camping Les Cigales').addTo(map);
 
-// 🛶 Port-Miou J1
-L.marker(PORTMIOU, {icon: makeIcon('🛶','#0077b6')}).bindPopup('<b>J1 — Kayak Port-Miou</b><br>🛶 Port-Miou → Port-Pin<br>2-3h · ~30€/pers').addTo(map);
+// J2 — La Ciotat
+L.marker(CIOTAT, {icon: mI('2','#e76f51',22)}).bindPopup('<b>J2 — La Ciotat</b><br>🥾 Rando En-Vau<br>🤿 Snorkeling<br>🏕️ Camping Baie des Anges').addTo(map);
 
-// 🥾 En-Vau J2+J3
-L.marker(ENVAU, {icon: makeIcon('🥾','#e76f51')}).bindPopup('<b>J2-J3 — Calanque d\'En-Vau</b><br>🥾 Rando 3h (gratuit)<br>🤿 Snorkeling · 🧗 Escalade 45€').addTo(map);
+// En-Vau
+L.marker(ENVAU, {icon: mI('🥾','#e76f51',20)}).bindPopup('<b>Calanque d\'En-Vau</b><br>🥾 Rando 3h · 🤿 Snorkeling').addTo(map);
 
-// 🛶 Sugiton J4
-L.marker(SUGITON, {icon: makeIcon('🛶','#e9c46a')}).bindPopup('<b>J4 — Kayak Sugiton</b><br>🛶 Journée complète<br>~35€/pers').addTo(map);
+// J3 — Sanary
+L.marker(SANARY, {icon: mI('3','#2a9d8f',22)}).bindPopup('<b>J3 — Sanary</b><br>🧗 Escalade La Ciotat<br>🏊 Plage Portissol<br>🏕️ Camping Le Vallon').addTo(map);
+
+// J4 — Giens/Porquerolles
+L.marker(GIENS, {icon: mI('4','#e9c46a',22)}).bindPopup('<b>J4 — Giens</b><br>⛴️ Ferry Porquerolles<br>🛶 Kayak journée<br>🏕️ Camping Presqu\'île').addTo(map);
+L.marker(PORQUER, {icon: mI('🏝️','#e9c46a',20)}).bindPopup('<b>Porquerolles</b><br>⛴️ Ferry 25€ A/R<br>🛶 Kayak · 🤿 Snorkeling').addTo(map);
 
 // Légende
 const legend = L.control({position:'bottomright'});
 legend.onAdd = function(){
   const d=L.DomUtil.create('div','legend');
-  d.innerHTML='<b>🗺️ Itinéraire</b><br>'
-    +'<span style="color:#0077b6">━</span> J1 Aller<br>'
-    +'<span style="color:#e76f51">━</span> J2 Rando<br>'
-    +'<span style="color:#2a9d8f">━</span> J3 Escalade<br>'
-    +'<span style="color:#e9c46a">━</span> J4 Kayak journée<br>'
-    +'<span style="color:#e63946">━</span> J5 Retour<br>'
-    +'🚗 Départ · ⛺ Cassis · 🛶 Kayak · 🥾 Rando · 🧗 Escalade';
+  d.innerHTML='<b>🗺️ Road Trip — 4 étapes</b><br>'
+    +'<span style="color:#0077b6">━</span> J1 Bonnelles→Cassis (770 km)<br>'
+    +'<span style="color:#e76f51">━</span> J2 Cassis→La Ciotat (15 km)<br>'
+    +'<span style="color:#2a9d8f">━</span> J3 La Ciotat→Sanary (35 km)<br>'
+    +'<span style="color:#e9c46a">━</span> J4 Sanary→Giens (40 km)<br>'
+    +'<span style="color:#e63946">━</span> J5 Giens→Bonnelles (850 km)<br>'
+    +'① Cassis · ② La Ciotat · ③ Sanary · ④ Giens';
   return d;
 };
 legend.addTo(map);
