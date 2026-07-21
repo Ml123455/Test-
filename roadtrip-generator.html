@@ -34,7 +34,7 @@ h2 { font-size:1.1em; margin-bottom:6px; color:#1abc9c; }
   <input id="depart" value="Bonnelles" placeholder="Ex: Paris, Lyon, Bordeaux...">
 
   <label>📍 Où tu veux aller ?</label>
-  <input id="dest" value="Cassis" placeholder="Ville, région, département...">
+  <input id="dest" value="Cassis" placeholder="Ville, région...">
 
   <label>📅 Jours</label>
   <select id="jours">
@@ -63,10 +63,10 @@ h2 { font-size:1.1em; margin-bottom:6px; color:#1abc9c; }
 
   <label>🎯 Type d'activités</label>
   <select id="type">
-    <option value="multi" selected>Multi-activités (mix)</option>
+    <option value="multi" selected>Multi-activités</option>
     <option value="eau">Eau (kayak, canyon, snorkeling)</option>
-    <option value="montagne">Montagne (rando, escalade, via ferrata)</option>
-    <option value="chill">Chill (plage, baignade, visites)</option>
+    <option value="montagne">Montagne (rando, escalade)</option>
+    <option value="chill">Chill (plage, visites)</option>
   </select>
 
   <label>⛺ Hébergement</label>
@@ -94,10 +94,10 @@ h2 { font-size:1.1em; margin-bottom:6px; color:#1abc9c; }
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-let map, markers=[], polylines=[];
+let map, markers=[], routeLayers=[];
 
 function initMap() {
-  if (map) { map.remove(); markers=[]; polylines=[]; }
+  if (map) { map.remove(); markers=[]; routeLayers=[]; }
   map = L.map('map').setView([46.5, 3.5], 6);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18}).addTo(map);
 }
@@ -110,108 +110,54 @@ function mI(emoji, bg, s) {
 async function geocode(q) {
   try {
     const r = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q+' France')}&format=json&limit=1`);
+    await new Promise(r2=>setTimeout(r2,1100)); // respect rate limit
     const d = await r.json();
     if (d.length) return {lat:parseFloat(d[0].lat), lon:parseFloat(d[0].lon), name:d[0].display_name.split(',')[0]};
   } catch(e) {}
   return null;
 }
 
-async function getRoute(from, to) {
+async function getRouteOSRM(waypoints) {
   try {
-    const r = await fetch(`https://router.project-osrm.org/route/v1/driving/${from.lon},${from.lat};${to.lon},${to.lat}?geometries=geojson&overview=full`);
+    const coords = waypoints.map(w => `${w.lon},${w.lat}`).join(';');
+    const r = await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?geometries=geojson&overview=full`);
     const d = await r.json();
     return {km:Math.round(d.routes[0].distance/1000), geom:d.routes[0].geometry};
   } catch(e) { return null; }
 }
 
-// Types d'activités par environnement
-const ACTIVITIES = {
-  mer:    [{e:'🛶',n:'Kayak de mer',p:28},{e:'🤿',n:'Snorkeling',p:5},{e:'🏄',n:'Surf',p:30},{e:'⛴️',n:'Balade en bateau',p:25},{e:'🏊',n:'Baignade plage',p:0},{e:'🥾',n:'Rando côtière',p:0}],
-  riv:    [{e:'🛶',n:'Canoë/Kayak rivière',p:22},{e:'💧',n:'Canyoning',p:40},{e:'🏊',n:'Baignade rivière',p:0},{e:'🥾',n:'Rando',p:0},{e:'🕳️',n:'Spéléo',p:15}],
-  mont:   [{e:'🧗',n:'Escalade/Via Ferrata',p:35},{e:'🥾',n:'Rando montagne',p:0},{e:'🪂',n:'Parapente',p:85},{e:'💧',n:'Canyoning',p:40},{e:'🏊',n:'Lac',p:0}],
-  ville:  [{e:'🏛️',n:'Visite centre',p:0},{e:'🍽️',n:'Resto typique',p:25},{e:'🥾',n:'Balade urbaine',p:0},{e:'🎭',n:'Musée/Activité',p:12}],
+// Activités par type de terrain
+const ACT = {
+  mer:  [{e:'🛶',n:'Kayak de mer',p:28},{e:'🤿',n:'Snorkeling',p:5},{e:'🏄',n:'Surf',p:30},{e:'🏊',n:'Baignade',p:0},{e:'🥾',n:'Rando côtière',p:0}],
+  riv:  [{e:'🛶',n:'Canoë/Kayak',p:22},{e:'💧',n:'Canyoning',p:40},{e:'🏊',n:'Baignade rivière',p:0},{e:'🥾',n:'Rando',p:0},{e:'🕳️',n:'Spéléo',p:15}],
+  mont: [{e:'🧗',n:'Escalade',p:35},{e:'🥾',n:'Rando',p:0},{e:'💧',n:'Canyoning',p:40},{e:'🏊',n:'Lac',p:0}],
 };
 
 function getEnv(lat, lon) {
-  // Simplifié: détecte si côte, montagne ou intérieur
-  if (lon < -1.5 && lat > 43 && lat < 48) return 'mer';   // Atlantique
-  if (lon > 5 && lat > 43 && lat < 44.5) return 'mer';     // Côte d'Azur
-  if (lat > 44.5 && lon > 6.5) return 'mont';               // Alpes
-  if (lat < 43.5 && lon > 2 && lon < 7) return 'mer';       // Méditerranée
-  if (lat > 42.5 && lat < 43 && lon > 7 && lon < 8) return 'mer'; // Corse
-  if (lat > 45 && lon > 6) return 'mont';                   // Alpes Nord
-  if (lat > 42.5 && lat < 43.5 && lon > -2 && lon < 2) return 'mont'; // Pyrénées
-  // Par défaut regarde la distance à la côte
-  return 'riv'; // intérieur = rivière
+  if (lon < -1.5 && lat > 43 && lat < 48) return 'mer';
+  if (lon > 5 && lat > 43 && lat < 44.5) return 'mer';
+  if (lat > 44.5 && lon > 6.5) return 'mont';
+  if (lat < 43.5 && lon > 2 && lon < 7) return 'mer';
+  if (lat > 42.5 && lat < 43.5 && lon > -2 && lon < 2) return 'mont';
+  if (lat > 45 && lon > 6) return 'mont';
+  return 'riv';
 }
 
-// Villes-étapes le long de la route (pour road trip itinérant)
-const STEPS = {
-  mer: [{n:'Cassis',c:[43.213,5.538]},{n:'La Ciotat',c:[43.177,5.614]},{n:'Bandol',c:[43.137,5.754]},{n:'Sanary',c:[43.117,5.808]},{n:'Hyères',c:[43.120,6.128]},{n:'Saint-Tropez',c:[43.270,6.640]},{n:'Nice',c:[43.710,7.262]},{n:'Menton',c:[43.775,7.496]},{n:'Biarritz',c:[43.483,-1.559]},{n:'Saint-Jean-de-Luz',c:[43.388,-1.663]},{n:'Arcachon',c:[44.658,-1.169]},{n:'La Rochelle',c:[46.159,-1.151]},{n:'Quiberon',c:[47.479,-3.120]},{n:'Saint-Malo',c:[48.650,-2.026]},{n:'Deauville',c:[49.360,0.073]},{n:'Calais',c:[50.951,1.857]}],
-  riv: [{n:'Vallon-Pont-d\'Arc',c:[44.384,4.418]},{n:'Castellane',c:[43.847,6.514]},{n:'Millau',c:[44.098,3.078]},{n:'Sarlat',c:[44.890,1.217]},{n:'Annecy',c:[45.899,6.129]},{n:'Gérardmer',c:[48.073,6.878]}],
-  mont:[{n:'Chamonix',c:[45.924,6.870]},{n:'Briançon',c:[44.900,6.635]},{n:'Barcelonnette',c:[44.386,6.652]},{n:'Gavarnie',c:[42.733,-0.009]},{n:'Ax-les-Thermes',c:[42.720,1.839]},{n:'La Bresse',c:[48.006,6.876]}],
-};
-
-function buildTrip(depart, dest, jours, pers, budget, type, heberg, itinerant) {
-  const env = getEnv(dest.lat, dest.lon);
-  const isCoastal = (env === 'mer');
-
-  // Sélectionne les activités
-  let pool = [];
-  if (type === 'multi') pool = [...ACTIVITIES[env], ...(isCoastal?ACTIVITIES.riv.slice(0,2):ACTIVITIES.mont.slice(0,2))];
-  else if (type === 'eau') pool = [...ACTIVITIES.mer.slice(0,3), ...ACTIVITIES.riv.slice(0,2)];
-  else if (type === 'montagne') pool = [...ACTIVITIES.mont, ...ACTIVITIES.riv.slice(0,1)];
-  else pool = [...ACTIVITIES.mer.filter(a=>a.p<20), ...ACTIVITIES.ville];
-
-  // Construit les jours
-  let days = [];
-  let actIdx = 0;
-  const steps = STEPS[env] || STEPS.riv;
-  // Trouve les steps proches de la destination
-  const nearSteps = steps.filter(s => {
-    const dlat = s.c[0] - dest.lat, dlon = s.c[1] - dest.lon;
-    return Math.sqrt(dlat*dlat+dlon*dlon) < 2.0;
-  }).slice(0, jours);
-  // Si pas assez de steps, utilise des steps le long de la côte
-  const useSteps = nearSteps.length >= jours-1 ? nearSteps : steps.slice(0, jours);
-
-  for (let j=1; j<=jours; j++) {
-    let day = {day:j, activities:[], lat:dest.lat, lon:dest.lon, name:dest.name};
-    if (itinerant === 'oui' && j <= useSteps.length && j < jours) {
-      day.lat = useSteps[j-1].c[0];
-      day.lon = useSteps[j-1].c[1];
-      day.name = useSteps[j-1].n;
-    }
-
-    if (j === 1) {
-      day.activities.push({emoji:'🚗', name:`Route ${depart.name} → ${day.name}`, price:0, lat:depart.lat, lon:depart.lon});
-      day.activities.push(pool[actIdx % pool.length]); actIdx++;
-    } else if (j === jours) {
-      day.activities.push(pool[actIdx % pool.length]); actIdx++;
-      day.activities.push({emoji:'🚗', name:`Retour → ${depart.name}`, price:0, lat:dest.lat, lon:dest.lon});
-      day.activities.push({emoji:'🏊', name:'Dernier bain', price:0, lat:day.lat, lon:day.lon});
-    } else {
-      day.activities.push(pool[actIdx % pool.length]); actIdx++;
-      if (j < jours-1 || actIdx < jours+1) {
-        day.activities.push(pool[actIdx % pool.length]); actIdx++;
-      }
-    }
-
-    // Ajoute la nuit
-    const nuitPrice = heberg==='bivouac'?0:(heberg==='mixte'&&j<=1?0:(heberg==='mixte'?12:14));
-    day.activities.push({emoji:j===1&&heberg!=='camping'?'⛺':'🏕️', name:`Nuit J${j} — ${heberg==='bivouac'?'Bivouac':'Camping'}`, price:nuitPrice, lat:day.lat, lon:day.lon});
-    days.push(day);
-  }
-
-  return {days, env, pool, dest};
+function pickActs(env, type, count) {
+  let pool;
+  if (type==='multi') pool = [...ACT[env]];
+  else if (type==='eau') pool = [...(ACT.mer||[]), ...(ACT.riv||[])];
+  else if (type==='montagne') pool = [...ACT.mont];
+  else pool = ACT[env]?.filter(a=>a.p<20) || ACT.riv;
+  // shuffle + take
+  const shuffled = [...pool].sort(()=>Math.random()-.5);
+  return shuffled.slice(0, Math.min(count, shuffled.length));
 }
 
 async function generate() {
   document.getElementById('status').textContent = 'Recherche...';
-  document.getElementById('status').style.color = '#f39c12';
-
-  const departName = document.getElementById('depart').value.trim() || 'Bonnelles';
-  const destName = document.getElementById('dest').value.trim() || 'Cassis';
+  const departName = document.getElementById('depart').value.trim()||'Bonnelles';
+  const destName = document.getElementById('dest').value.trim()||'Cassis';
   const jours = parseInt(document.getElementById('jours').value);
   const pers = parseInt(document.getElementById('pers').value);
   const budget = parseInt(document.getElementById('budget').value);
@@ -219,86 +165,111 @@ async function generate() {
   const heberg = document.getElementById('heberg').value;
   const itinerant = document.getElementById('itinerant').value;
 
-  // Géocode
   const [depart, dest] = await Promise.all([geocode(departName), geocode(destName)]);
   if (!depart || !dest) {
     document.getElementById('status').textContent = '❌ Ville introuvable';
     return;
   }
 
-  // Route
-  const route = await getRoute(depart, dest);
-  const kmRoute = route ? route.km : Math.round(Math.sqrt(Math.pow(dest.lat-depart.lat,2)+Math.pow(dest.lon-depart.lon,2))*111);
-  document.getElementById('status').textContent = `✅ ${depart.name} → ${dest.name} (${kmRoute} km)`;
+  // Route principale
+  const allWaypoints = [depart, dest];
+  const route = await getRouteOSRM(allWaypoints);
+  if (!route) { document.getElementById('status').textContent='❌ Pas de route'; return; }
+
+  document.getElementById('status').textContent = `✅ ${depart.name} → ${dest.name} (${route.km} km)`;
   document.getElementById('status').style.color = '#1abc9c';
 
-  // Build trip
-  const trip = buildTrip(depart, dest, jours, pers, budget, type, heberg, itinerant);
+  // Générer les étapes itinérantes le long de la route
+  let days = [];
+  const env = getEnv(dest.lat, dest.lon);
+  
+  if (itinerant === 'oui' && jours >= 3) {
+    // Interpoler des points le long de la géométrie de la route
+    const coords = route.geom.coordinates;
+    const segment = Math.floor(coords.length / (jours - 1));
+    
+    for (let j = 1; j <= jours; j++) {
+      let idx;
+      if (j === 1) idx = 0 + Math.floor(segment * 0.3);
+      else if (j === jours) idx = coords.length - 1 - Math.floor(segment * 0.3);
+      else idx = Math.floor(segment * (j - 1));
+      
+      const c = coords[Math.min(idx, coords.length-1)];
+      const lat = c[1], lon = c[0];
+      const acts = pickActs(env, type, 2);
+      days.push({
+        day: j,
+        name: j===1 ? `En route (proche ${depart.name})` : j===jours ? dest.name : `Étape ${j}`,
+        lat, lon, acts,
+        nuit: heberg==='bivouac'?0:(heberg==='mixte'&&j<=1?0:(heberg==='mixte'?12:14)),
+        nuitLabel: j===1&&heberg!=='camping'?'Bivouac':'Camping'
+      });
+    }
+  } else {
+    // Camp de base fixe
+    for (let j = 1; j <= jours; j++) {
+      const acts = pickActs(env, type, j===1?1:(j===jours?2:2));
+      days.push({
+        day: j,
+        name: dest.name,
+        lat: dest.lat + (Math.random()-.5)*0.05,
+        lon: dest.lon + (Math.random()-.5)*0.05,
+        acts,
+        nuit: heberg==='bivouac'?0:(heberg==='mixte'&&j<=1?0:14),
+        nuitLabel: j===1&&heberg!=='camping'?'Bivouac':'Camping'
+      });
+    }
+  }
 
   // Budget
-  const kmTotal = kmRoute * 2;
-  const essence = Math.round(kmTotal * 0.07 * 1.80 / pers);
-  const peages = Math.round(kmTotal * 0.06 / pers);
-  const trajet = essence + peages;
-  let actTotal = 0;
-  let nuits = 0;
-  trip.days.forEach(d => d.activities.forEach(a => {
-    if (a.emoji === '⛺' || a.emoji === '🏕️') nuits += a.price;
-    else actTotal += a.price;
-  }));
+  const kmTotal = route.km * 2;
+  const trajet = Math.round(kmTotal * 0.07 * 1.80 / pers + kmTotal * 0.06 / pers);
+  let actTotal = 0, nuits = 0;
+  days.forEach(d => { d.acts.forEach(a => actTotal += a.p); nuits += d.nuit; });
   const bouffe = jours * 15;
   const total = trajet + actTotal + nuits + bouffe;
 
-  // Budget preview
   document.getElementById('budget-preview').innerHTML = `
     <h2>💰 ~${total}€/pers ${total<=budget?'✅':'⚠️+'+ (total-budget)+'€'}</h2>
-    <div class="budget-line"><span>⛽🛣️ Trajet (${kmTotal*2} km)</span><span>${trajet}€</span></div>
+    <div class="budget-line"><span>⛽🛣️ Trajet (${kmTotal*2} km A/R)</span><span>${trajet}€</span></div>
     <div class="budget-line"><span>🎯 Activités</span><span>${actTotal}€</span></div>
     <div class="budget-line"><span>⛺ Nuits</span><span>${nuits}€</span></div>
     <div class="budget-line"><span>🍽️ Bouffe</span><span>${bouffe}€</span></div>
   `;
 
-  // Trip preview
+  // Preview
   let html = `<b>🗺️ ${depart.name} → ${dest.name} — ${jours}j · ${pers} pers</b><br>`;
-  trip.days.forEach(d => {
-    html += `<div class="day-preview"><b>J${d.day}</b> 📍 ${d.name} &nbsp;`;
-    html += d.activities.filter(a=>a.emoji!=='⛺'&&a.emoji!=='🏕️').map(a=>`${a.emoji} ${a.name}`).join(' · ');
-    html += `</div>`;
+  days.forEach(d => {
+    html += `<div class="day-preview"><b>J${d.day}</b> 📍 ${d.name}<br>`;
+    html += d.acts.map(a=>`${a.e} ${a.n} (${a.p}€)`).join(' · ');
+    html += ` | ⛺ ${d.nuitLabel} (${d.nuit}€)</div>`;
   });
   document.getElementById('trip-preview').innerHTML = html;
 
   // Carte
   markers.forEach(m => map.removeLayer(m));
-  polylines.forEach(p => map.removeLayer(p));
-  markers = []; polylines = [];
+  routeLayers.forEach(l => map.removeLayer(l));
+  markers = []; routeLayers = [];
 
   const COLORS = ['#1abc9c','#e74c3c','#f39c12','#2ecc71','#9b59b6','#3498db','#e67e22','#e84393','#00b894','#6c5ce7'];
-  const bounds = [[depart.lat, depart.lon], [dest.lat, dest.lon]];
-  map.fitBounds(bounds, {padding:[60,60]});
+  
+  // Route réelle via OSRM
+  L.geoJSON(route.geom, {style:{color:'#1abc9c',weight:3,opacity:.6,dashArray:'8,6'}}).addTo(map);
+  routeLayers.push('route');
 
   // Départ
   markers.push(L.marker([depart.lat, depart.lon], {icon: mI('🚗','#1abc9c',28)})
-    .bindPopup(`<b>DÉPART</b><br>${depart.name}`).addTo(map));
+    .bindPopup(`<b>🚗 DÉPART</b><br>${depart.name}`).addTo(map));
 
   // Jours
-  const allCoords = [[depart.lat, depart.lon]];
-  trip.days.forEach(d => {
-    const color = COLORS[(d.day-1) % COLORS.length];
-    markers.push(L.marker([d.lat, d.lon], {icon: mI(d.day.toString(),color,22)})
-      .bindPopup(`<b>J${d.day} — ${d.name}</b><br>${d.activities.filter(a=>a.emoji!=='⛺'&&a.emoji!=='🏕️').map(a=>a.emoji+' '+a.name).join('<br>')}`).addTo(map));
-    allCoords.push([d.lat, d.lon]);
+  days.forEach(d => {
+    const c = COLORS[(d.day-1)%COLORS.length];
+    markers.push(L.marker([d.lat, d.lon], {icon: mI(d.day.toString(),c,24)})
+      .bindPopup(`<b>J${d.day} — ${d.name}</b><br>${d.acts.map(a=>a.e+' '+a.n+' ('+a.p+'€)').join('<br>')}<br>⛺ ${d.nuitLabel}`).addTo(map));
   });
-  allCoords.push([depart.lat, depart.lon]);
 
-  // Route (aller simple pour lisibilité)
-  for (let i=0; i<allCoords.length-1; i++) {
-    if (i < trip.days.length+1) {
-      const color = COLORS[i % COLORS.length];
-      polylines.push(L.polyline([allCoords[i], allCoords[i+1]], {color, weight:2.5, opacity:.7}).addTo(map));
-    }
-  }
+  map.fitBounds([[depart.lat,depart.lon],[dest.lat,dest.lon]], {padding:[50,50]});
 }
-
 </script>
 </body>
 </html>
