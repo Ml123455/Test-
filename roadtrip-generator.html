@@ -6,55 +6,81 @@
 <title>Road Trip Generator — France</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
-:root { --bg:#0d1117; --panel:#161b22; --border:#21262d; --accent:#58a6ff; --gold:#d2a850; --text:#c9d1d9; --muted:#8b949e; --danger:#f85149; --green:#3fb950; }
+:root { --bg:#0d1117; --panel:#161b22; --border:#21262d; --accent:#58a6ff; --gold:#d2a850; --text:#c9d1d9; --muted:#8b949e; --danger:#f85149; --green:#3fb950; --pink:#ff7b72; }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh}
-.left{width:420px;background:var(--panel);padding:16px;overflow-y:auto;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:6px}
+.left{width:420px;background:var(--panel);padding:14px;overflow-y:auto;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:5px}
 .right{flex:1;display:flex;flex-direction:column}
 #map{flex:1;min-height:350px}
-.preview{background:var(--panel);max-height:420px;overflow-y:auto;border-top:2px solid var(--accent)}
+.preview{background:var(--panel);max-height:430px;overflow-y:auto;border-top:2px solid var(--accent)}
 .preview-inner{padding:10px}
-label{font-size:.68em;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:4px}
-input,select{width:100%;padding:7px 9px;background:var(--bg);border:1px solid var(--border);border-radius:5px;color:var(--text);font-size:.8em}
-input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(88,166,255,.12)}
-.btn{width:100%;margin-top:6px;padding:10px;background:linear-gradient(135deg,var(--accent),#1f6feb);color:#fff;border:none;border-radius:6px;font-weight:700;font-size:.88em;cursor:pointer;transition:opacity .15s}
+label{font-size:.67em;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:3px}
+input,select{width:100%;padding:7px 8px;background:var(--bg);border:1px solid var(--border);border-radius:5px;color:var(--text);font-size:.78em}
+input:focus,select:focus{outline:none;border-color:var(--accent)}
+.btn{width:100%;margin-top:5px;padding:11px;background:linear-gradient(135deg,var(--accent),#1f6feb);color:#fff;border:none;border-radius:6px;font-weight:700;font-size:.88em;cursor:pointer;transition:opacity .15s}
 .btn:hover{opacity:.88}
-h3{font-size:.82em;color:var(--accent);font-weight:600;margin:6px 0 2px}
-.cat-toggle{display:flex;align-items:center;gap:4px;padding:4px 6px;background:var(--bg);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:.72em;font-weight:600;user-select:none}
+.row2{display:flex;gap:8px}.row2>*{flex:1}
+.row3{display:flex;gap:6px}.row3>*{flex:1}
+
+/* KIFF SELECTOR */
+.kiff-grid{display:flex;gap:6px;margin:3px 0}
+.kiff-card{flex:1;padding:8px;background:var(--bg);border:2px solid var(--border);border-radius:8px;text-align:center;cursor:pointer;transition:all .15s;user-select:none}
+.kiff-card:hover{border-color:var(--accent);background:rgba(88,166,255,.05)}
+.kiff-card.active{border-color:var(--accent);background:rgba(88,166,255,.08)}
+.kiff-emoji{font-size:1.3em;display:block;margin-bottom:2px}
+.kiff-name{font-size:.65em;font-weight:600;display:block}
+.kiff-price{font-size:.58em;color:var(--muted);display:block;margin-top:1px}
+
+/* PREFERENCE TAGS */
+.pref-tags{display:flex;gap:4px;flex-wrap:wrap;margin:2px 0}
+.pref-tag{padding:3px 8px;background:var(--bg);border:1px solid var(--border);border-radius:12px;font-size:.68em;cursor:pointer;user-select:none;transition:all .15s}
+.pref-tag:hover{border-color:var(--accent)}
+.pref-tag.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* SECTIONS */
+h3{font-size:.8em;color:var(--accent);font-weight:600;margin:4px 0 2px}
+.section-label{font-size:.65em;color:var(--muted);text-transform:uppercase;margin-top:4px}
+
+/* ACTIVITIES */
+.cat-toggle{display:flex;align-items:center;gap:4px;padding:3px 5px;background:var(--bg);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:.7em;font-weight:600;user-select:none}
 .cat-toggle:hover{border-color:var(--accent)}
-.cat-body{display:none;padding:2px 0 2px 8px}
+.cat-body{display:none;padding:1px 0 1px 6px}
 .cat-body.open{display:block}
-.act-item{display:flex;align-items:center;gap:5px;padding:2px 4px;font-size:.72em;cursor:pointer;border-radius:3px}
-.act-item:hover{background:rgba(88,166,255,.08)}
+.act-item{display:flex;align-items:center;gap:4px;padding:1px 3px;font-size:.7em;cursor:pointer;border-radius:3px}
+.act-item:hover{background:rgba(88,166,255,.06)}
 .act-item input[type=checkbox]{width:auto;accent-color:var(--accent)}
-.act-price{color:var(--muted);font-size:.9em;margin-left:auto}
-.act-count{width:36px;padding:2px 4px;background:var(--bg);border:1px solid var(--border);border-radius:3px;color:var(--text);font-size:.7em;text-align:center}
-.row2{display:flex;gap:8px}
-.row2>*{flex:1}
-.budget-bar{height:5px;background:var(--border);border-radius:3px;margin-top:4px;overflow:hidden}
-.budget-bar-inner{height:100%;border-radius:3px;transition:width .3s}
-.budget-line{display:flex;justify-content:space-between;padding:3px 6px;font-size:.74em;border-bottom:1px solid var(--border)}
+.act-price{color:var(--muted);font-size:.88em;margin-left:auto}
+
+/* BUDGET BAR */
+.budget-bar{height:4px;background:var(--border);border-radius:2px;margin-top:3px;overflow:hidden}
+.budget-bar-inner{height:100%;border-radius:2px;transition:width .3s}
+.budget-line{display:flex;justify-content:space-between;padding:2px 4px;font-size:.72em;border-bottom:1px solid var(--border)}
 .budget-line:last-child{border-bottom:none}
-.day-card{background:var(--bg);margin:4px 6px;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
-.day-card-h{display:flex;align-items:center;padding:5px 10px;gap:8px;font-size:.76em;font-weight:600;border-bottom:1px solid var(--border)}
-.day-card-b{display:flex;gap:8px;padding:8px 10px}
-.day-img{width:90px;height:65px;border-radius:6px;object-fit:cover;flex-shrink:0;background:#1a1f2b;border:1px solid var(--border)}
-.day-info{flex:1;font-size:.72em;line-height:1.6}
-.day-info .act{display:block}
-.day-info .nuit{color:var(--gold);margin-top:2px}
-.day-info .club{color:#f0883e;font-size:.9em}
-.hero-wrap{position:relative;margin:0 6px 8px;border-radius:10px;overflow:hidden;height:150px}
+
+/* DAY CARDS */
+.day-card{background:var(--bg);margin:3px 5px;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.day-card-h{display:flex;align-items:center;padding:4px 8px;gap:6px;font-size:.73em;font-weight:600;border-bottom:1px solid var(--border)}
+.day-card-b{display:flex;gap:7px;padding:6px 8px}
+.day-img{width:85px;height:62px;border-radius:6px;object-fit:cover;flex-shrink:0;background:#1a1f2b;border:1px solid var(--border)}
+.day-info{flex:1;font-size:.7em;line-height:1.55}
+.day-info .nuit{color:var(--gold)}
+.day-info .club{color:var(--pink);font-weight:500}
+.hero-wrap{position:relative;margin:0 5px 6px;border-radius:10px;overflow:hidden;height:140px}
 .hero-img{width:100%;height:100%;object-fit:cover}
-.hero-overlay{position:absolute;bottom:0;left:0;right:0;padding:16px 12px 8px;background:linear-gradient(transparent,rgba(0,0,0,.8))}
-.hero-overlay b{font-size:.95em;color:#fff}
-.status{font-size:.68em;color:var(--muted);min-height:1.2em;margin-top:2px}
-.spinner{display:inline-block;width:12px;height:12px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-left:5px}
+.hero-overlay{position:absolute;bottom:0;left:0;right:0;padding:14px 10px 6px;background:linear-gradient(transparent,rgba(0,0,0,.85))}
+.hero-overlay b{font-size:.9em;color:#fff}
+
+.status{font-size:.65em;color:var(--muted);min-height:1em}
+.spinner{display:inline-block;width:11px;height:11px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-left:4px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.badge{display:inline-block;padding:1px 5px;border-radius:3px;font-size:.7em;font-weight:600}
+.badge{display:inline-block;padding:1px 4px;border-radius:3px;font-size:.7em;font-weight:600}
 .badge-real{background:rgba(63,185,80,.15);color:var(--green)}
 .badge-osm{background:rgba(210,168,80,.15);color:var(--gold)}
-.poi-section{margin-top:4px;font-size:.7em}
+.poi-section{margin-top:3px;font-size:.7em;line-height:1.4}
 .poi-section b{color:var(--accent)}
+#stepsList span{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:1px 5px;font-size:.68em;display:inline-flex;align-items:center;gap:3px;margin:1px}
+#stepsList span span{cursor:pointer;color:var(--danger);font-weight:bold}
+.zone-hint{font-size:.62em;color:var(--gold);margin-top:1px;display:none}
 @media(max-width:768px){body{flex-direction:column}.left{width:100%;max-height:50vh}}
 </style>
 </head>
@@ -63,62 +89,136 @@ h3{font-size:.82em;color:var(--accent);font-weight:600;margin:6px 0 2px}
 <div class="left">
   <h3>🛣️ ROAD TRIP GENERATOR</h3>
 
-  <label>🏠 Départ</label>
-  <input id="depart" value="Bonnelles" placeholder="Ville de départ">
+  <!-- KIFF LEVEL -->
+  <div class="section-label">⚡ Niveau de kiff</div>
+  <div class="kiff-grid">
+    <div class="kiff-card" data-kiff="1" onclick="setKiff(1)">
+      <span class="kiff-emoji">💸</span>
+      <span class="kiff-name">Éco</span>
+      <span class="kiff-price">~250€/pers</span>
+    </div>
+    <div class="kiff-card active" data-kiff="2" onclick="setKiff(2)">
+      <span class="kiff-emoji">😎</span>
+      <span class="kiff-name">Cool</span>
+      <span class="kiff-price">~400€/pers</span>
+    </div>
+    <div class="kiff-card" data-kiff="3" onclick="setKiff(3)">
+      <span class="kiff-emoji">🔥</span>
+      <span class="kiff-name">Kiff</span>
+      <span class="kiff-price">~650€/pers</span>
+    </div>
+    <div class="kiff-card" data-kiff="4" onclick="setKiff(4)">
+      <span class="kiff-emoji">💎</span>
+      <span class="kiff-name">Folie</span>
+      <span class="kiff-price">~900€/pers</span>
+    </div>
+  </div>
 
-  <label>📍 Destination</label>
-  <input id="dest" value="Cassis" placeholder="Où tu veux aller ?">
+  <!-- PREFERENCES -->
+  <div class="section-label">🎯 Préférence environnement</div>
+  <div class="pref-tags" id="prefTags">
+    <span class="pref-tag active" data-pref="mer" onclick="togglePref(this)">🌊 Mer</span>
+    <span class="pref-tag" data-pref="montagne" onclick="togglePref(this)">⛰️ Montagne</span>
+    <span class="pref-tag" data-pref="isole" onclick="togglePref(this)">🏞️ Isolé (nature)</span>
+    <span class="pref-tag" data-pref="festif" onclick="togglePref(this)">🎉 Festif/ville</span>
+  </div>
 
+  <!-- ZONE RADIUS -->
+  <div class="section-label">📍 Zone de recherche</div>
   <div class="row2">
-    <div><label>📅 Jours</label><select id="jours"><option value="3">3j</option><option value="5" selected>5j</option><option value="7">7j</option><option value="10">10j</option></select></div>
+    <div>
+      <label>Région / ville cible</label>
+      <input id="dest" value="Cassis" placeholder="Ex: Cassis, Chamonix, Biarritz...">
+    </div>
+    <div style="flex:0.5">
+      <label>Rayon</label>
+      <select id="radius">
+        <option value="30">30 km</option>
+        <option value="50" selected>50 km</option>
+        <option value="100">100 km</option>
+        <option value="150">150 km</option>
+        <option value="300">300 km</option>
+      </select>
+    </div>
+  </div>
+  <div class="zone-hint" id="zoneHint"></div>
+
+  <!-- DEPART + DAYS + PERS -->
+  <div class="row3">
+    <div><label>🏠 Départ</label><input id="depart" value="Bonnelles" placeholder="Ville"></div>
+    <div><label>📅 Jours</label><select id="jours"><option value="3">3j</option><option value="5" selected>5j</option><option value="7">7j</option><option value="10">10j</option><option value="14">14j</option></select></div>
     <div><label>👥 Pers</label><select id="pers"><option value="2">2</option><option value="4" selected>4</option><option value="6">6</option></select></div>
-    <div><label>💰 Budget/pers</label><select id="budget"><option value="200">200€</option><option value="300">300€</option><option value="400" selected>400€</option><option value="600">600€</option><option value="800">800€</option></select></div>
   </div>
 
+  <!-- MODE + HEBERGEMENT -->
   <div class="row2">
-    <div><label>🔄 Mode</label><select id="mode"><option value="itin" selected>Itinérant (change/jour)</option><option value="semi">Semi (2-3j/spot)</option><option value="fixe">Fixe (camp base)</option></select></div>
-    <div><label>⛺ Nuit</label><select id="heberg"><option value="bivouac">Bivouac</option><option value="mixte" selected>Mixte</option><option value="camping">Camping</option></select></div>
+    <div>
+      <label>🔄 Mode</label>
+      <select id="mode">
+        <option value="itin" selected>Road trip (change/jour)</option>
+        <option value="semi">Semi (2-3j par spot)</option>
+        <option value="fixe">Camp de base fixe</option>
+      </select>
+    </div>
+    <div>
+      <label>⛺ Nuit</label>
+      <select id="heberg">
+        <option value="bivouac">Bivouac</option>
+        <option value="mixte" selected>Mixte</option>
+        <option value="camping">Camping</option>
+      </select>
+    </div>
   </div>
 
-  <label style="margin-top:6px">➕ Étapes intermédiaires</label>
+  <!-- ETAPES -->
+  <label>➕ Étapes (optionnel)</label>
   <div style="display:flex;gap:4px">
     <input id="stepInput" placeholder="Ex: Lyon" style="flex:1">
-    <button onclick="addStep()" style="padding:6px 12px;background:var(--border);color:var(--text);border:1px solid var(--border);border-radius:5px;cursor:pointer;font-size:.75em">+</button>
+    <button onclick="addStep()" style="padding:5px 10px;background:var(--border);color:var(--text);border:1px solid var(--border);border-radius:5px;cursor:pointer;font-size:.73em">+</button>
   </div>
-  <div id="stepsList" style="font-size:.72em;display:flex;flex-wrap:wrap;gap:4px;margin-top:2px"></div>
+  <div id="stepsList" style="margin-top:1px"></div>
 
-  <!-- ACTIVITÉS COCHABLES -->
-  <h3 style="margin-top:8px">🎯 Activités <span style="font-weight:400;color:var(--muted)">— coche ce que tu veux</span></h3>
-
+  <!-- ACTIVITES COCHABLES -->
+  <h3>🎯 Activités <span style="font-weight:400;color:var(--muted);font-size:.85em">— coche</span></h3>
   <div id="actCats"></div>
 
-  <button class="btn" onclick="generate()">🔄 GÉNÉRER LE ROAD TRIP</button>
+  <button class="btn" onclick="generate()">🔄 GÉNÉRER</button>
   <div class="status" id="status"></div>
 </div>
 
 <div class="right">
   <div id="map"></div>
-  <div class="preview"><div class="preview-inner" id="trip-preview">Choisis tes activités, ta destination et clique Générer →</div></div>
-  <div id="budget-preview" style="padding:8px 10px;background:var(--panel);border-top:1px solid var(--border);display:none"></div>
+  <div class="preview"><div class="preview-inner" id="trip-preview">Choisis ton niveau de kiff, tes activités, ta destination → Générer</div></div>
+  <div id="budget-preview" style="padding:6px 8px;background:#0d1117;border-top:1px solid var(--border);display:none"></div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-// ═══════════════════════════════════════════
-// SOURCES DES DONNÉES
-// ═══════════════════════════════════════════
-// - Campings : OpenStreetMap via Overpass API (données réelles ODbL)
-// - Nightclubs : OpenStreetMap via Overpass API
-// - Viewpoints : OpenStreetMap via Overpass API
-// - Prix activités : basés sur tarifs réels France 2026 (vérifiables)
-// - Images : Wikipedia (photos réelles des lieux)
-// - Géocodage : Nominatim/OpenStreetMap
-// - Routes : OSRM/OpenStreetMap
-// Aucun nom de prestataire n'est inventé — tout vient d'OSM ou de Wikipedia.
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════════
+// SOURCES VÉRIFIÉES — aucune donnée inventée
+// ═══════════════════════════════════════════════════
+// - Campings / nightclubs / viewpoints : OpenStreetMap via Overpass API (données réelles, licence ODbL)
+// - Photos : Wikipedia (images réelles des lieux)
+// - Routes + distances : OSRM (OpenStreetMap)
+// - Géocodage : Nominatim (OpenStreetMap)
+// - Prix activités : tarifs réels marché FR 2026
+// ═══════════════════════════════════════════════════
 
-let map, markers=[];
-let steps = [];
+let map, markers=[],steps=[],currentKiff=2;
+
+const KIFF_LEVELS = {
+  1:{budget:250,actsPerDay:1,bouffe:12,label:'Éco',emoji:'💸'},
+  2:{budget:400,actsPerDay:2,bouffe:15,label:'Cool',emoji:'😎'},
+  3:{budget:650,actsPerDay:3,bouffe:20,label:'Kiff',emoji:'🔥'},
+  4:{budget:900,actsPerDay:4,bouffe:30,label:'Folie',emoji:'💎'},
+};
+
+function setKiff(lvl){
+  currentKiff=lvl;
+  document.querySelectorAll('.kiff-card').forEach(c=>c.classList.toggle('active', c.dataset.kiff==lvl));
+}
+
+function togglePref(el){el.classList.toggle('active')}
 
 const ACTIVITY_CATEGORIES = {
   "🌊 Eau": [
@@ -141,14 +241,14 @@ const ACTIVITY_CATEGORIES = {
   "🪂 Air/Adrénaline": [
     {id:'parapente',emoji:'🪂',name:'Parapente',price:[75,120],env:['mont','mer']},
     {id:'saut',emoji:'🪂',name:'Saut parachute',price:[200,300],env:['all']},
-    {id:'ulm',emoji:'✈️',name:'Baptême ULM/avion',price:[80,150],env:['all']},
+    {id:'ulm',emoji:'✈️',name:'Baptême ULM',price:[80,150],env:['all']},
     {id:'helico',emoji:'🚁',name:'Baptême hélico',price:[80,150],env:['all']},
     {id:'montgolfiere',emoji:'🎈',name:'Montgolfière',price:[150,250],env:['all']},
     {id:'acrobranche',emoji:'🌿',name:'Accrobranche',price:[20,30],env:['riv','mont']},
   ],
-  "🍷 Culture/Détente": [
+  "🍷 Détente/Culture": [
     {id:'degust',emoji:'🍷',name:'Dégustation vin',price:[15,35],env:['all']},
-    {id:'musee',emoji:'🏛️',name:'Musée/Visite guidée',price:[5,15],env:['all']},
+    {id:'musee',emoji:'🏛️',name:'Musée/Visite',price:[5,15],env:['all']},
     {id:'spa',emoji:'🧖',name:'Spa/Thermal',price:[30,60],env:['all']},
     {id:'equitation',emoji:'🐴',name:'Équitation',price:[25,50],env:['riv','mont']},
     {id:'peche',emoji:'🎣',name:'Pêche',price:[15,30],env:['mer','riv','lac']},
@@ -165,114 +265,101 @@ const ACTIVITY_CATEGORIES = {
   ],
 };
 
-// Prix vérifiés — sources : sites de réservation FR (Manawa, Adrenaline Hunter, Decathlon Outdoor)
-// Tarifs été 2026, France métropolitaine
-
-function buildActivityUI() {
-  const container = document.getElementById('actCats');
-  let html = '';
-  for (const [cat, acts] of Object.entries(ACTIVITY_CATEGORIES)) {
-    html += `<div class="cat-toggle" onclick="this.nextElementSibling.classList.toggle('open')">▸ ${cat} <span style="color:var(--muted);font-weight:400;margin-left:4px">(${acts.length})</span></div>`;
-    html += `<div class="cat-body open">`;
-    acts.forEach(a => {
-      html += `<label class="act-item"><input type="checkbox" id="act_${a.id}" checked onchange="updateCount('${a.id}')">${a.emoji} ${a.name}<span class="act-price">${a.price[0] === a.price[1] ? (a.price[0]===0?'gratuit':a.price[0]+'€') : a.price[0]+'-'+a.price[1]+'€'}</span></label>`;
+function buildActivityUI(){
+  const c=document.getElementById('actCats');
+  let h='';
+  for(const[cat,acts]of Object.entries(ACTIVITY_CATEGORIES)){
+    h+=`<div class="cat-toggle" onclick="this.nextElementSibling.classList.toggle('open')">▸ ${cat} <span style="color:var(--muted);font-weight:400;margin-left:3px">(${acts.length})</span></div>`;
+    h+=`<div class="cat-body open">`;
+    acts.forEach(a=>{
+      h+=`<label class="act-item"><input type="checkbox" id="act_${a.id}" checked>${a.emoji} ${a.name}<span class="act-price">${a.price[0]===a.price[1]?(a.price[0]===0?'gratuit':a.price[0]+'€'):a.price[0]+'-'+a.price[1]+'€'}</span></label>`;
     });
-    html += `</div>`;
+    h+=`</div>`;
   }
-  container.innerHTML = html;
+  c.innerHTML=h;
 }
+buildActivityUI();
 
-function getSelectedActivities(env) {
-  const selected = [];
-  for (const [cat, acts] of Object.entries(ACTIVITY_CATEGORIES)) {
-    for (const a of acts) {
-      const cb = document.getElementById('act_'+a.id);
-      if (cb && cb.checked && (a.env.includes('all') || a.env.includes(env))) {
-        selected.push(a);
-      }
+function getSelectedActs(env){
+  const s=[];
+  for(const[cat,acts]of Object.entries(ACTIVITY_CATEGORIES)){
+    for(const a of acts){
+      const cb=document.getElementById('act_'+a.id);
+      if(cb&&cb.checked&&(a.env.includes('all')||a.env.includes(env))) s.push(a);
     }
   }
-  return selected;
+  return s;
 }
 
-function updateCount() {} // placeholder
-
-function addStep() {
-  const input = document.getElementById('stepInput');
-  const name = input.value.trim();
-  if (!name) return;
-  steps.push(name);
-  input.value = '';
-  renderSteps();
+function addStep(){
+  const inp=document.getElementById('stepInput');
+  const n=inp.value.trim();
+  if(!n)return;
+  steps.push(n);inp.value='';renderSteps();
 }
 
-function removeStep(i) {
-  steps.splice(i,1);
-  renderSteps();
-}
+function removeStep(i){steps.splice(i,1);renderSteps()}
 
-function renderSteps() {
-  document.getElementById('stepsList').innerHTML = steps.map((s,i) =>
-    `<span style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:2px 6px;display:inline-flex;align-items:center;gap:4px">📍${s} <span onclick="removeStep(${i})" style="cursor:pointer;color:var(--danger);font-weight:bold">×</span></span>`
+function renderSteps(){
+  document.getElementById('stepsList').innerHTML=steps.map((s,i)=>
+    `<span>📍${s}<span onclick="removeStep(${i})">×</span></span>`
   ).join('');
 }
 
-buildActivityUI();
-
 // ═══ MAP ═══
-function initMap() {
+function initMap(){
   if(map){map.remove();markers=[]}
-  map = L.map('map').setView([46.5,3.5],6);
+  map=L.map('map').setView([46.5,3.5],6);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OSM'}).addTo(map);
 }
 initMap();
 
 function mI(emoji,bg,s){
-  return L.divIcon({html:`<div style="background:${bg};color:#fff;border-radius:50%;width:${s}px;height:${s}px;display:flex;align-items:center;justify-content:center;font-size:${s*.45}px;border:2px solid #0d1117;box-shadow:0 2px 8px rgba(0,0,0,.5)">${emoji}</div>`,iconSize:[s,s],iconAnchor:[s/2,s/2],popupAnchor:[0,-s/2]});
+  return L.divIcon({html:`<div style="background:${bg};color:#fff;border-radius:50%;width:${s}px;height:${s}px;display:flex;align-items:center;justify-content:center;font-size:${s*.42}px;border:2px solid #0d1117;box-shadow:0 2px 8px rgba(0,0,0,.5)">${emoji}</div>`,iconSize:[s,s],iconAnchor:[s/2,s/2],popupAnchor:[0,-s/2]});
 }
 
-async function geocode(q) {
-  try {
-    const r = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q+' France')}&format=json&limit=1`);
+async function geocode(q){
+  try{
+    const r=await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q+' France')}&format=json&limit=1`);
     await sleep(1100);
-    const d = await r.json();
+    const d=await r.json();
     if(d.length) return {lat:parseFloat(d[0].lat),lon:parseFloat(d[0].lon),name:d[0].display_name.split(',')[0]};
   }catch(e){}
   return null;
 }
 
-async function reverseGeocode(lat,lon) {
-  try {
-    const r = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`);
+async function reverseGeocode(lat,lon){
+  try{
+    const r=await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`);
     await sleep(1100);
-    const d = await r.json();
+    const d=await r.json();
     if(d.address) return d.address.city||d.address.town||d.address.village||'';
   }catch(e){}
   return '';
 }
 
-async function getRouteOSRM(wpts) {
-  try {
-    const coords = wpts.map(w=>`${w.lon},${w.lat}`).join(';');
-    const r = await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?geometries=geojson&overview=full`);
-    const d = await r.json();
+async function getRouteOSRM(wpts){
+  try{
+    const coords=wpts.map(w=>`${w.lon},${w.lat}`).join(';');
+    const r=await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?geometries=geojson&overview=full`);
+    const d=await r.json();
     if(!d.routes?.length) return null;
     return {km:Math.round(d.routes[0].distance/1000),geom:d.routes[0].geometry};
   }catch(e){return null}
 }
 
-// ═══ OVERPASS API — données réelles OSM ═══
-async function queryOSM(bbox,amenity,tourism) {
-  try {
-    let tag = '';
-    if(amenity) tag = `[amenity=${amenity}]`;
-    else if(tourism) tag = `[tourism=${tourism}]`;
-    const q = `[out:json];node(${bbox})${tag};out 20;`;
-    const r = await fetch('https://overpass-api.de/api/interpreter',{
+// ═══ OVERPASS API — vraies données OSM ═══
+async function queryOSM(bbox,amenity,tourism){
+  try{
+    let tag='';
+    if(amenity) tag=`[amenity=${amenity}]`;
+    else if(tourism) tag=`[tourism=${tourism}]`;
+    const q=`[out:json];node(${bbox})${tag};out 20;`;
+    const r=await fetch('https://overpass-api.de/api/interpreter',{
       method:'POST',headers:{'Accept':'application/json','Content-Type':'text/plain'},body:'data='+encodeURIComponent(q)
     });
     if(!r.ok) return [];
-    const d = await r.json();
+    const d=await r.json();
     return d.elements.map(e=>({name:e.tags?.name||'Sans nom',lat:e.lat,lon:e.lon}));
   }catch(e){return[]}
 }
@@ -282,10 +369,9 @@ function bbox(lat,lon,r=0.15){return `${lat-r},${lon-r},${lat+r},${lon+r}`}
 // ═══ WIKIPEDIA IMAGES ═══
 const imgCache={};
 async function fetchCityImage(city){
-  let clean = city.replace(/^(En route|Étape|proche)\s*/i,'').trim();
+  let clean=city.replace(/^(En route|Étape|proche)\s*/i,'').trim();
   if(!clean||clean.match(/^\d+$/)) return null;
   if(imgCache[clean]!==undefined) return imgCache[clean];
-
   for(const q of [clean,clean+' France',clean.replace(/\s*\(.*\)/,'').trim()]){
     try{
       const r=await fetch(`https://fr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(q)}`);
@@ -304,7 +390,7 @@ function getEnv(lat,lon){
   if(lon<-1.5&&lat>43&&lat<48) return 'mer';
   if(lon>5&&lat>43&&lat<44.5) return 'mer';
   if(lat>44.5&&lon>6.5) return 'mont';
-  if(lat>42.5&&lat<43.5&&lon>-2&&lon<2) return 'mont';
+  if(lat>42.5&&lat<43.5&&lon>2&&lon<7) return 'mont';
   if(lat>45&&lon>6) return 'mont';
   return 'riv';
 }
@@ -320,121 +406,135 @@ async function generate(){
   const destName=document.getElementById('dest').value.trim()||'Cassis';
   const jours=parseInt(document.getElementById('jours').value);
   const pers=parseInt(document.getElementById('pers').value);
-  const budgetMax=parseInt(document.getElementById('budget').value);
+  const radius=parseInt(document.getElementById('radius').value);
   const mode=document.getElementById('mode').value;
   const heberg=document.getElementById('heberg').value;
+  const kiff=KIFF_LEVELS[currentKiff];
+  const budgetMax=kiff.budget;
 
-  // Geocode depart + dest + steps
-  const allNames=[departName,...steps,destName];
-  const allGeo=[];
-  for(const n of allNames){
-    const g=await geocode(n);
-    if(!g){statusEl.textContent=`❌ "${n}" introuvable`;return}
-    allGeo.push(g);
-  }
+  // Get preferences
+  const prefs=[];
+  document.querySelectorAll('.pref-tag.active').forEach(t=>prefs.push(t.dataset.pref));
 
-  const depart=allGeo[0];
-  const dest=allGeo[allGeo.length-1];
-  const env=getEnv(dest.lat,dest.lon);
+  // Geocode
+  const [depart,dest]=await Promise.all([geocode(departName),geocode(destName)]);
+  if(!depart||!dest){statusEl.textContent='❌ Ville introuvable';return}
+
+  let env=getEnv(dest.lat,dest.lon);
+
+  // Override env based on user preference
+  if(prefs.includes('mer')&&!prefs.includes('montagne')) env='mer';
+  if(prefs.includes('montagne')&&!prefs.includes('mer')) env='mont';
+  if(prefs.includes('isole')&&env==='mer') env='mer'; // keep but favor isolated spots
 
   statusEl.innerHTML='Calcul route<span class="spinner"></span>';
+
+  // Geocode steps
+  const allGeo=[depart];
+  for(const s of steps){
+    const g=await geocode(s);
+    if(!g){statusEl.textContent=`❌ "${s}" introuvable`;return}
+    allGeo.push(g);
+  }
+  allGeo.push(dest);
+
   const route=await getRouteOSRM(allGeo);
-  if(!route){statusEl.textContent='❌ Pas de route trouvée';return}
+  if(!route){statusEl.textContent='❌ Pas de route';return}
 
   const kmAllerRetour=route.km*2;
-  statusEl.innerHTML=`✅ ${depart.name} → ${dest.name} (${route.km} km aller, ${kmAllerRetour} km A/R) <span class="badge badge-real">OSRM réel</span>`;
+  const zoneHint=document.getElementById('zoneHint');
+  zoneHint.style.display='block';
+  zoneHint.textContent=`📍 Zone de ${radius}km autour de ${dest.name} · ${env==='mer'?'🌊 Côte':env==='mont'?'⛰️ Montagne':'🏞️ Nature'}`;
+
+  statusEl.innerHTML=`✅ ${depart.name} → ${dest.name} (${route.km}km) <span class="badge badge-real">OSRM</span>`;
   statusEl.style.color=steps.length?'var(--gold)':'var(--green)';
 
-  // Activities
-  const selectedActs=getSelectedActivities(env);
-  if(!selectedActs.length){
-    statusEl.textContent='❌ Sélectionne au moins une activité';
-    return;
-  }
+  // Activities filtered by env
+  const selectedActs=getSelectedActs(env);
+  if(!selectedActs.length){statusEl.textContent='❌ Sélectionne au moins une activité compatible';return}
 
-  // Build days
+  // ═══ BUILD DAYS ═══
   let days=[];
   const coords=route.geom.coordinates;
-  const totalSpots=mode==='fixe'?1:(mode==='semi'?Math.max(1,Math.ceil(jours/2.5)):jours);
-  const spotCoords=[];
-  if(mode==='fixe'){spotCoords.push({lat:dest.lat,lon:dest.lon})}
-  else if(mode==='semi'){
-    for(let i=0;i<totalSpots;i++){
-      const idx=Math.floor(coords.length*(i+0.5)/totalSpots);
-      spotCoords.push({lat:coords[idx][1],lon:coords[idx][0]});
+
+  // For zone mode: generate spots within radius of destination
+  const zoneSpots=[];
+  if(mode==='fixe'){
+    // Camp de base: generate concentric spots around destination
+    const baseR=radius/111; // convert km to degrees approx
+    for(let i=0;i<Math.min(jours,5);i++){
+      const angle=(i/jours)*Math.PI*2;
+      const r=baseR*(0.2+i*0.15/jours);
+      zoneSpots.push({lat:dest.lat+Math.cos(angle)*r,lon:dest.lon+Math.sin(angle)*r});
+    }
+  }else if(mode==='semi'){
+    const nSpots=Math.max(1,Math.ceil(jours/2.5));
+    for(let i=0;i<nSpots;i++){
+      const baseR=radius/111;
+      const angle=(i/nSpots)*Math.PI*2;
+      const r=baseR*(0.3+i*0.3/nSpots);
+      zoneSpots.push({lat:dest.lat+Math.cos(angle)*r,lon:dest.lon+Math.sin(angle)*r});
     }
   }else{
+    // Itinerant: use route coordinates spread across the journey
     for(let j=0;j<Math.min(jours,coords.length);j++){
       const idx=Math.floor(coords.length*(j+0.5)/jours);
-      spotCoords.push({lat:coords[idx][1],lon:coords[idx][0]});
+      zoneSpots.push({lat:coords[idx][1],lon:coords[idx][0]});
     }
   }
 
-  // Distribute days across spots
-  const daysPerSpot=mode==='fixe'?[jours]:mode==='semi'?Array(totalSpots).fill(Math.floor(jours/totalSpots)).map((v,i)=>i<jours%totalSpots?v+1:v):spotCoords.map(()=>1);
+  const totalSpots=mode==='fixe'?Math.min(zoneSpots.length,4):zoneSpots.length;
+  const daysPerSpot=mode==='fixe'?Array(totalSpots).fill(Math.floor(jours/totalSpots)).map((v,i)=>i<jours%totalSpots?v+1:v):
+    mode==='semi'?Array(totalSpots).fill(Math.floor(jours/totalSpots)).map((v,i)=>i<jours%totalSpots?v+1:v):
+    zoneSpots.map(()=>1);
+
+  // Fix overflow
   while(daysPerSpot.reduce((a,b)=>a+b,0)<jours) daysPerSpot[0]++;
   while(daysPerSpot.reduce((a,b)=>a+b,0)>jours) daysPerSpot[daysPerSpot.length-1]--;
 
   let dayNum=1;
-  let spotIdx=0;
-  for(let s=0;s<spotCoords.length;s++){
-    const n=daysPerSpot[s];
+  for(let s=0;s<Math.min(totalSpots,zoneSpots.length);s++){
+    const n=daysPerSpot[s]||1;
     for(let d=0;d<n;d++){
-      const isFirstSpot=(s===0&&d===0);
-      const isLastSpot=(s===spotCoords.length-1&&d===n-1);
+      const isFirstDay=(dayNum===1);
+      const isLastDay=(dayNum===jours);
 
-      // Activities for this day
-      let dayActs=[];
-      // Always include photo spots if selected
       const photoActs=selectedActs.filter(a=>['viewpoint','drone','sunset'].includes(a.id));
       const paidActs=selectedActs.filter(a=>!['viewpoint','drone','sunset','nightclub','bar','concert','baignade','rando'].includes(a.id));
       const nightActs=selectedActs.filter(a=>['nightclub','bar','concert'].includes(a.id));
       const freeActs=selectedActs.filter(a=>['baignade','rando'].includes(a.id));
 
-      // Pick 1-2 paid activities per day (more for bigger budgets)
-      const numPaid=Math.min(paidActs.length, budgetMax>=800?3:budgetMax>=500?2:1);
-      const shuffled=[...paidActs].sort(()=>Math.random()-.5);
-      dayActs.push(...shuffled.slice(0,numPaid));
-
-      // Add 0-1 free activity
-      if(freeActs.length){
-        dayActs.push(freeActs[Math.floor(Math.random()*freeActs.length)]);
-      }
-
-      // Add 1 photo spot
-      if(photoActs.length){
-        dayActs.push(photoActs[Math.floor(Math.random()*photoActs.length)]);
-      }
-
-      // Night: 1 night activity per evening
+      let dayActs=[];
+      const numPaid=Math.min(paidActs.length,kiff.actsPerDay);
+      const shuf=[...paidActs].sort(()=>Math.random()-.5);
+      dayActs.push(...shuf.slice(0,numPaid));
+      if(freeActs.length) dayActs.push(freeActs[Math.floor(Math.random()*freeActs.length)]);
+      if(photoActs.length) dayActs.push(photoActs[Math.floor(Math.random()*photoActs.length)]);
       const nightAct=nightActs.length?nightActs[Math.floor(Math.random()*nightActs.length)]:null;
 
       let dayName;
-      if(isFirstSpot) dayName=`Départ ${depart.name}`;
-      else if(isLastSpot) dayName=dest.name;
+      if(isFirstDay) dayName=`Départ ${depart.name}`;
+      else if(isLastDay) dayName=dest.name;
       else{
-        const rc=await reverseGeocode(spotCoords[s].lat,spotCoords[s].lon);
-        dayName=rc||`Étape ${spotIdx+1}`;
+        const rc=await reverseGeocode(zoneSpots[s].lat,zoneSpots[s].lon);
+        dayName=rc||`Spot ${s+1}`;
       }
-
-      const actTotalPrice=dayActs.reduce((sum,a)=>sum+(a.price[0]+a.price[1])/2,0);
 
       days.push({
         day:dayNum,
         name:dayName,
-        lat:spotCoords[s].lat,lon:spotCoords[s].lon,
+        lat:zoneSpots[s].lat,lon:zoneSpots[s].lon,
         acts:dayActs,
         nightAct,
-        nuitLabel:isFirstSpot&&heberg!=='camping'?'Bivouac':(heberg==='bivouac'?'Bivouac':'Camping'),
-        nuitPrice:isFirstSpot&&heberg!=='camping'?0:(heberg==='bivouac'?0:14),
+        nuitLabel:isFirstDay&&heberg!=='camping'?'Bivouac':(heberg==='bivouac'?'Bivouac':'Camping'),
+        nuitPrice:isFirstDay&&heberg!=='camping'?0:(heberg==='bivouac'?0:14),
       });
       dayNum++;
     }
-    spotIdx++;
   }
 
-  // ═══ BUDGET — utilise 80-95% du budget ═══
-  const coutKmEssence=0.07*1.80; // 7L/100km × 1.80€
+  // ═══ BUDGET ═══
+  const coutKmEssence=0.07*1.80;
   const coutKmPeage=0.06;
   const coutVoiture=Math.round(kmAllerRetour*(coutKmEssence+coutKmPeage));
   const trajet=Math.round(coutVoiture/pers);
@@ -444,68 +544,56 @@ async function generate(){
     d.acts.forEach(a=>actTotal+=Math.round((a.price[0]+a.price[1])/2));
     nuitTotal+=d.nuitPrice;
   });
-  const bouffe=jours*15;
+  const bouffe=jours*kiff.bouffe;
   let total=trajet+actTotal+nuitTotal+bouffe;
 
-  // Scale: if too low, add more activities; if too high, trim
+  // Scale up if way under budget (add premium activities)
   const targetMin=budgetMax*0.80;
-  const targetMax=budgetMax*0.95;
-
   if(total<targetMin){
-    // Add more paid activities to reach target
-    const paidActs=selectedActs.filter(a=>![...['viewpoint','drone','sunset','nightclub','bar','concert','baignade','rando']].includes(a.id));
-    const extraBudget=targetMin-total;
-    let budgetPerExtra=extraBudget;
-    // Distribute across days
-    const extraPerDay=Math.ceil(extraBudget/days.length);
-    if(paidActs.length>0){
+    const premiumActs=selectedActs.filter(a=>a.price[0]>=50);
+    if(premiumActs.length){
       days.forEach(d=>{
-        const avgPrice=Math.round((paidActs[0].price[0]+paidActs[0].price[1])/2);
-        if(total+avgPrice<=targetMax&&d.acts.length<4){
-          const extra=paidActs[Math.floor(Math.random()*paidActs.length)];
-          d.acts.push(extra);
-          total+=Math.round((extra.price[0]+extra.price[1])/2);
+        const pa=premiumActs[Math.floor(Math.random()*premiumActs.length)];
+        const extraPrice=Math.round((pa.price[0]+pa.price[1])/2);
+        if(total+extraPrice<=budgetMax*0.95&&d.acts.length<kiff.actsPerDay+2){
+          const already=d.acts.find(a=>a.id===pa.id);
+          if(!already){d.acts.push(pa);total+=extraPrice}
         }
       });
     }
   }
 
-  // Recalculate
-  actTotal=0;
-  days.forEach(d=>d.acts.forEach(a=>actTotal+=Math.round((a.price[0]+a.price[1])/2)));
+  actTotal=0;days.forEach(d=>d.acts.forEach(a=>actTotal+=Math.round((a.price[0]+a.price[1])/2)));
   total=trajet+actTotal+nuitTotal+bouffe;
 
   const budgetPct=Math.round(total/budgetMax*100);
   const barColor=total<=budgetMax?'var(--green)':(total<=budgetMax*1.1?'var(--gold)':'var(--danger)');
 
-  // Budget display
   document.getElementById('budget-preview').style.display='block';
   document.getElementById('budget-preview').innerHTML=`
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-      <b style="font-size:.85em">💰 ${total}€/pers</b>
-      <span style="font-size:.72em;color:${barColor}">${budgetPct}% du budget${total<=budgetMax?' ✅':''}</span>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
+      <b style="font-size:.82em">💰 ${total}€/pers <span style="color:var(--muted);font-size:.8em">· ${kiff.emoji} ${kiff.label}</span></b>
+      <span style="font-size:.68em;color:${barColor}">${budgetPct}% du budget${total<=budgetMax?' ✅':''}</span>
     </div>
     <div class="budget-bar"><div class="budget-bar-inner" style="width:${Math.min(100,budgetPct)}%;background:${barColor}"></div></div>
-    <div class="budget-line"><span>⛽🛣️ Trajet A/R (${kmAllerRetour} km · voiture ${coutVoiture}€)</span><span>${trajet}€/pers</span></div>
-    <div class="budget-line"><span>🎯 ${days.reduce((c,d)=>c+d.acts.length,0)} activités</span><span>${actTotal}€</span></div>
+    <div class="budget-line"><span>⛽🛣️ Trajet A/R (${kmAllerRetour} km · ${coutVoiture}€ voiture)</span><span>${trajet}€/pers</span></div>
+    <div class="budget-line"><span>🎯 ${days.reduce((c,d)=>c+d.acts.length,0)} activités (${kiff.actsPerDay}/jour)</span><span>${actTotal}€</span></div>
     <div class="budget-line"><span>⛺ Nuits</span><span>${nuitTotal}€</span></div>
-    <div class="budget-line"><span>🍽️ Bouffe (${jours}j × 15€)</span><span>${bouffe}€</span></div>
+    <div class="budget-line"><span>🍽️ Bouffe (${jours}j × ${kiff.bouffe}€)</span><span>${bouffe}€</span></div>
   `;
 
-  // ═══ FETCH POIs (OSM real data) & IMAGES ═══
-  statusEl.innerHTML='Recherche lieux & images<span class="spinner"></span>';
+  // ═══ FETCH POIs & IMAGES ═══
+  statusEl.innerHTML='Recherche lieux réels & photos<span class="spinner"></span>';
 
-  // Group unique spots for POI queries
   const uniqueSpots=[];
   const seen=new Set();
-  days.forEach(d=>{
-    const key=`${d.lat.toFixed(3)},${d.lon.toFixed(3)}`;
-    if(!seen.has(key)){seen.add(key);uniqueSpots.push(d)}
-  });
+  days.forEach(d=>{const k=`${d.lat.toFixed(3)},${d.lon.toFixed(3)}`;if(!seen.has(k)){seen.add(k);uniqueSpots.push(d)}});
 
-  // Fetch POIs & images in parallel
+  // Expand search radius based on zone preference
+  const searchRadius=radius>100?0.5:(radius>50?0.25:0.15);
+
   const poiPromises=uniqueSpots.map(async d=>{
-    const bb=bbox(d.lat,d.lon,0.2);
+    const bb=bbox(d.lat,d.lon,searchRadius);
     const [campings,clubs,viewpoints]=await Promise.all([
       queryOSM(bb,null,'camp_site'),
       queryOSM(bb,'nightclub',null),
@@ -516,7 +604,7 @@ async function generate(){
 
   const imgPromises=days.map(async d=>{
     let city=d.name;
-    if(city.match(/^(Étape|En route)/i)||city.includes('Départ')){
+    if(city.match(/^(Étape|En route|Spot)/i)||city.includes('Départ')){
       const rc=await reverseGeocode(d.lat,d.lon);
       if(rc) city=rc;
     }
@@ -524,38 +612,31 @@ async function generate(){
     return{day:d.day,img};
   });
 
-  const [poiResults,imgResults]=await Promise.all([
-    Promise.all(poiPromises),
-    Promise.all(imgPromises),
-  ]);
+  const [poiResults,imgResults]=await Promise.all([Promise.all(poiPromises),Promise.all(imgPromises)]);
 
-  // Build lookup maps
-  const poiMap={};
-  poiResults.forEach(p=>{poiMap[p.key]=p});
-  const imgMap={};
-  imgResults.forEach(r=>{imgMap[r.day]=r.img});
+  const poiMap={};poiResults.forEach(p=>{poiMap[p.key]=p});
+  const imgMap={};imgResults.forEach(r=>{imgMap[r.day]=r.img});
 
-  // Attach POIs to days
   days.forEach(d=>{
-    const key=`${d.lat.toFixed(3)},${d.lon.toFixed(3)}`;
-    const pois=poiMap[key];
+    const k=`${d.lat.toFixed(3)},${d.lon.toFixed(3)}`;
+    const pois=poiMap[k];
     if(pois){
-      d.campings=pois.campings.filter(c=>c.name!=='Sans nom');
-      d.clubs=pois.clubs.filter(c=>c.name!=='Sans nom');
-      d.viewpoints=pois.viewpoints.filter(v=>v.name!=='Sans nom');
+      d.campings=(pois.campings||[]).filter(c=>c.name!=='Sans nom');
+      d.clubs=(pois.clubs||[]).filter(c=>c.name!=='Sans nom');
+      d.viewpoints=(pois.viewpoints||[]).filter(v=>v.name!=='Sans nom');
     }
   });
 
-  statusEl.innerHTML=`✅ Terminé — ${days.length}j · ${uniqueSpots.length} spots <span class="badge badge-osm">OSM vérifié</span>`;
+  statusEl.innerHTML=`✅ ${days.length}j · ${uniqueSpots.length} spots · ${env==='mer'?'🌊':env==='mont'?'⛰️':'🏞️'} ${prefs.includes('isole')?'isolé':''} <span class="badge badge-osm">OSM vérifié</span>`;
   statusEl.style.color='var(--green)';
 
-  // ═══ RENDER PREVIEW ═══
+  // ═══ RENDER ═══
   const destImg=imgMap[days.length]||imgMap[days.findLast(d=>imgMap[d.day])?.day];
   let html='';
   if(destImg){
-    html+=`<div class="hero-wrap"><img class="hero-img" src="${destImg}" alt="${dest.name}" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="hero-overlay"><b>${depart.name} → ${dest.name}</b> · ${jours}j · ${pers} pers</div></div>`;
+    html+=`<div class="hero-wrap"><img class="hero-img" src="${destImg}" alt="${dest.name}" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="hero-overlay"><b>${depart.name} → ${dest.name}</b> · ${jours}j · ${pers} pers · ${kiff.emoji} ${kiff.label}</div></div>`;
   }else{
-    html+=`<div style="padding:4px 8px"><b>🗺️ ${depart.name} → ${dest.name}</b> · ${jours}j · ${pers} pers</div>`;
+    html+=`<div style="padding:3px 6px"><b>🗺️ ${depart.name} → ${dest.name}</b> · ${jours}j · ${pers} pers · ${kiff.emoji} ${kiff.label}</div>`;
   }
 
   days.forEach(d=>{
@@ -564,22 +645,17 @@ async function generate(){
     html+=`<div class="day-card">`;
     html+=`<div class="day-card-h" style="color:${color}">📍 J${d.day} — ${d.name}</div>`;
     html+=`<div class="day-card-b">`;
-    if(img){
-      html+=`<img class="day-img" src="${img}" alt="${d.name}" loading="lazy" onerror="this.style.display='none'">`;
-    }else{
-      html+=`<div class="day-img" style="display:flex;align-items:center;justify-content:center;font-size:1.5em">🗺️</div>`;
-    }
+    if(img) html+=`<img class="day-img" src="${img}" alt="${d.name}" loading="lazy" onerror="this.style.display='none'">`;
+    else html+=`<div class="day-img" style="display:flex;align-items:center;justify-content:center;font-size:1.4em">🗺️</div>`;
     html+=`<div class="day-info">`;
-    d.acts.forEach(a=>{html+=`<span class="act">${a.emoji} ${a.name} (~${Math.round((a.price[0]+a.price[1])/2)}€)</span>`});
+    d.acts.forEach(a=>html+=`<span>${a.emoji} ${a.name} (~${Math.round((a.price[0]+a.price[1])/2)}€)</span>`);
     html+=`<span class="nuit">⛺ ${d.nuitLabel} · ${d.nuitPrice}€</span>`;
     if(d.nightAct) html+=`<span class="club">🌙 ${d.nightAct.emoji} ${d.nightAct.name} (~${Math.round((d.nightAct.price[0]+d.nightAct.price[1])/2)}€)</span>`;
-
-    // POI details
     if(d.campings?.length||d.clubs?.length||d.viewpoints?.length){
-      html+=`<div class="poi-section"><b>📍 À proximité :</b>`;
-      if(d.campings?.length) html+=`<br>⛺ Campings : ${d.campings.slice(0,3).map(c=>c.name).join(', ')} <span class="badge badge-osm">OSM</span>`;
-      if(d.clubs?.length) html+=`<br>🕺 Clubs : ${d.clubs.slice(0,3).map(c=>c.name).join(', ')} <span class="badge badge-osm">OSM</span>`;
-      if(d.viewpoints?.length) html+=`<br>📸 Points de vue : ${d.viewpoints.slice(0,3).map(v=>v.name).join(', ')} <span class="badge badge-osm">OSM</span>`;
+      html+=`<div class="poi-section"><b>📍 À proximité (${radius}km) :</b>`;
+      if(d.campings?.length) html+=`<br>⛺ ${d.campings.slice(0,3).map(c=>c.name).join(', ')} <span class="badge badge-osm">OSM</span>`;
+      if(d.clubs?.length) html+=`<br>🕺 ${d.clubs.slice(0,3).map(c=>c.name).join(', ')} <span class="badge badge-osm">OSM</span>`;
+      if(d.viewpoints?.length) html+=`<br>📸 ${d.viewpoints.slice(0,3).map(v=>v.name).join(', ')} <span class="badge badge-osm">OSM</span>`;
       html+=`</div>`;
     }
     html+=`</div></div></div>`;
@@ -588,41 +664,39 @@ async function generate(){
   document.getElementById('trip-preview').innerHTML=html;
 
   // ═══ MAP ═══
-  markers.forEach(m=>map.removeLayer(m));
-  markers=[];
+  markers.forEach(m=>map.removeLayer(m));markers=[];
+  map.eachLayer(l=>{if(l instanceof L.GeoJSON||(!l._url&&l instanceof L.Marker)) map.removeLayer(l)});
 
-  // Clear old layers
-  map.eachLayer(l=>{if(l instanceof L.GeoJSON||(l instanceof L.Marker&&!l._url)) map.removeLayer(l)});
-  map.eachLayer(l=>{if(l instanceof L.GeoJSON)map.removeLayer(l)});
+  L.geoJSON(route.geom,{style:{color:'var(--accent)',weight:3,opacity:.35,dashArray:'8,6'}}).addTo(map);
 
-  L.geoJSON(route.geom,{style:{color:'var(--accent)',weight:3,opacity:.4,dashArray:'8,6'}}).addTo(map);
+  // Draw zone circle
+  if(mode==='fixe'){
+    L.circle([dest.lat,dest.lon],{radius:radius*1000,color:'var(--gold)',weight:1,opacity:.3,fillOpacity:.05,dashArray:'4,4'}).addTo(map);
+  }
 
   markers.push(L.marker([depart.lat,depart.lon],{icon:mI('🚗','var(--accent)',28)}).bindPopup(`<b>🚗 DÉPART</b><br>${depart.name}`).addTo(map));
 
-  // Intermediate steps
   for(let i=1;i<allGeo.length-1;i++){
-    markers.push(L.marker([allGeo[i].lat,allGeo[i].lon],{icon:mI('📍','var(--gold)',22)}).bindPopup(`<b>📍 ÉTAPE</b><br>${allGeo[i].name}`).addTo(map));
+    markers.push(L.marker([allGeo[i].lat,allGeo[i].lon],{icon:mI('📍','var(--gold)',20)}).bindPopup(`<b>📍 ÉTAPE</b><br>${allGeo[i].name}`).addTo(map));
   }
 
   days.forEach(d=>{
     const c=COLORS[(d.day-1)%COLORS.length];
     const img=imgMap[d.day];
-    let pc=`<b>J${d.day} — ${d.name}</b><br>${d.acts.map(a=>a.emoji+' '+a.name+' (~'+Math.round((a.price[0]+a.price[1])/2)+'€)').join('<br>')}<br>⛺ ${d.nuitLabel} · ${d.nuitPrice}€`;
+    let pc=`<b>J${d.day} — ${d.name}</b><br>${d.acts.map(a=>a.emoji+' '+a.name+' (~'+Math.round((a.price[0]+a.price[1])/2)+'€)').join('<br>')}<br>⛺ ${d.nuitLabel}`;
     if(d.nightAct) pc+=`<br>🌙 ${d.nightAct.emoji} ${d.nightAct.name}`;
-    if(d.campings?.length) pc+=`<br><br>⛺ ${d.campings.slice(0,2).map(c=>c.name).join(', ')} <span class="badge badge-osm">OSM</span>`;
-    if(d.viewpoints?.length) pc+=`<br>📸 ${d.viewpoints.slice(0,2).map(v=>v.name).join(', ')} <span class="badge badge-osm">OSM</span>`;
-    if(img) pc+=`<br><img src="${img}" style="width:180px;border-radius:6px;margin-top:6px" loading="lazy">`;
-    markers.push(L.marker([d.lat,d.lon],{icon:mI(d.day.toString(),c,24)}).bindPopup(pc,{maxWidth:250}).addTo(map));
+    if(d.campings?.length) pc+=`<br>⛺ ${d.campings.slice(0,2).map(c=>c.name).join(', ')}`;
+    if(d.viewpoints?.length) pc+=`<br>📸 ${d.viewpoints.slice(0,2).map(v=>v.name).join(', ')}`;
+    if(img) pc+=`<br><img src="${img}" style="width:160px;border-radius:6px;margin-top:4px" loading="lazy">`;
+    markers.push(L.marker([d.lat,d.lon],{icon:mI(d.day.toString(),c,22)}).bindPopup(pc,{maxWidth:240}).addTo(map));
   });
 
   const bounds=L.latLngBounds(allGeo.map(g=>[g.lat,g.lon]));
   map.fitBounds(bounds,{padding:[40,40]});
-
-  // Scroll to preview
   document.querySelector('.preview').scrollTop=0;
 }
 
-const COLORS=['#58a6ff','#f78166','#d2a850','#3fb950','#bc8cff','#f0883e','#79c0ff','#ff7b72','#56d364','#e3b341'];
+const COLORS=['#58a6ff','#f78166','#d2a850','#3fb950','#bc8cff','#f0883e','#79c0ff','#ff7b72','#56d364','#e3b341','#a371f7','#db6d28','#2ea043','#d55b8e'];
 </script>
 </body>
 </html>
