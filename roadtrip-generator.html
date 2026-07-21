@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Road Trip Generator</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:system-ui,sans-serif; background:#1a1a2e; color:#eee; display:flex; min-height:100vh; }
+.left { width:380px; background:#0f3460; padding:20px; overflow-y:auto; flex-shrink:0; }
+.right { flex:1; display:flex; flex-direction:column; }
+#map { flex:1; min-height:400px; }
+.preview { background:#16213e; padding:15px; max-height:300px; overflow-y:auto; font-size:.85em; border-top:2px solid #1abc9c; }
+label { display:block; margin:12px 0 4px; font-size:.8em; text-transform:uppercase; letter-spacing:.05em; color:#aaa; }
+input, select { width:100%; padding:8px 10px; background:#16213e; border:1px solid #333; border-radius:4px; color:#eee; font-size:.9em; }
+input:focus, select:focus { outline:none; border-color:#1abc9c; }
+.btn { display:block; width:100%; margin-top:16px; padding:12px; background:#1abc9c; color:#1a1a2e; border:none; border-radius:6px; font-weight:bold; font-size:1em; cursor:pointer; }
+.btn:hover { background:#16a085; }
+h2 { font-size:1.2em; margin-bottom:8px; color:#1abc9c; }
+.budget-line { display:flex; justify-content:space-between; padding:3px 0; border-bottom:1px solid #1a1a2e; }
+.budget-total { font-weight:bold; font-size:1.1em; color:#f39c12; margin-top:6px; }
+.day-preview { background:#0f3460; padding:8px 10px; margin:4px 0; border-radius:4px; }
+@media (max-width:768px) {
+  body { flex-direction:column; }
+  .left { width:100%; max-height:50vh; }
+}
+</style>
+</head>
+<body>
+
+<div class="left">
+  <h2>🛣️ Road Trip Generator</h2>
+  <label>Départ</label>
+  <input id="depart" value="Bonnelles (78)" placeholder="Ville de départ">
+
+  <label>Destination</label>
+  <select id="dest">
+    <option value="calanques">Calanques / Cassis</option>
+    <option value="ardeche" selected>Ardèche / Vallon-Pont-d'Arc</option>
+    <option value="bretagne">Bretagne / Quiberon</option>
+    <option value="basque">Pays Basque / Biarritz</option>
+    <option value="corse">Corse / Porto-Vecchio</option>
+    <option value="verdon">Verdon / Castellane</option>
+  </select>
+
+  <label>Jours</label>
+  <select id="jours">
+    <option value="3">3 jours (week-end)</option>
+    <option value="5" selected>5 jours</option>
+    <option value="7">7 jours (1 semaine)</option>
+  </select>
+
+  <label>Personnes</label>
+  <select id="pers">
+    <option value="2">2</option>
+    <option value="4" selected>4</option>
+    <option value="6">6</option>
+  </select>
+
+  <label>Budget max / personne</label>
+  <select id="budget">
+    <option value="300">300€</option>
+    <option value="400" selected>400€</option>
+    <option value="500">500€</option>
+  </select>
+
+  <label>Activités</label>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;">
+    <label style="display:inline-flex;align-items:center;gap:4px;margin:0;text-transform:none;font-size:.85em;color:#eee;"><input type="checkbox" id="act-kayak" checked onchange="update()"> 🛶 Kayak</label>
+    <label style="display:inline-flex;align-items:center;gap:4px;margin:0;text-transform:none;font-size:.85em;color:#eee;"><input type="checkbox" id="act-canyon" checked onchange="update()"> 💧 Canyon</label>
+    <label style="display:inline-flex;align-items:center;gap:4px;margin:0;text-transform:none;font-size:.85em;color:#eee;"><input type="checkbox" id="act-escalade" checked onchange="update()"> 🧗 Escalade</label>
+    <label style="display:inline-flex;align-items:center;gap:4px;margin:0;text-transform:none;font-size:.85em;color:#eee;"><input type="checkbox" id="act-rando" checked onchange="update()"> 🥾 Rando</label>
+    <label style="display:inline-flex;align-items:center;gap:4px;margin:0;text-transform:none;font-size:.85em;color:#eee;"><input type="checkbox" id="act-snorkel" onchange="update()"> 🤿 Snorkeling</label>
+    <label style="display:inline-flex;align-items:center;gap:4px;margin:0;text-transform:none;font-size:.85em;color:#eee;"><input type="checkbox" id="act-ferry" onchange="update()"> ⛴️ Ferry</label>
+  </div>
+
+  <label>Hébergement</label>
+  <select id="heberg">
+    <option value="bivouac" selected>Bivouac (gratuit)</option>
+    <option value="mixte">Mixte (1 bivouac + campings)</option>
+    <option value="camping">Camping uniquement</option>
+  </select>
+
+  <button class="btn" onclick="update()">🔄 Générer le trip</button>
+
+  <div id="budget-preview" style="margin-top:16px;"></div>
+</div>
+
+<div class="right">
+  <div id="map"></div>
+  <div class="preview" id="trip-preview">
+    Remplissez le formulaire et cliquez sur Générer →
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// Base de données destinations
+const DB = {
+  calanques: {
+    name:'Calanques / Cassis', center:[43.2,5.5], zoom:7, km:770,
+    spots:[
+      {day:1,emoji:'🛶',name:'Kayak Port-Miou',lat:43.208,lon:5.520,price:30},
+      {day:1,emoji:'⛺',name:'Bivouac Cassis',lat:43.213,lon:5.538,price:0},
+      {day:2,emoji:'🥾',name:'Rando En-Vau + Snorkeling',lat:43.190,lon:5.513,price:0},
+      {day:2,emoji:'🏕️',name:'Camping La Ciotat',lat:43.177,lon:5.614,price:15},
+      {day:3,emoji:'🧗',name:'Escalade falaises',lat:43.165,lon:5.610,price:45},
+      {day:3,emoji:'🏕️',name:'Camping Sanary',lat:43.117,lon:5.808,price:14},
+      {day:4,emoji:'⛴️',name:'Ferry Porquerolles',lat:43.050,lon:6.128,price:25},
+      {day:4,emoji:'🛶',name:'Kayak Porquerolles',lat:43.009,lon:6.217,price:30},
+      {day:4,emoji:'🏕️',name:'Camping Giens',lat:43.050,lon:6.128,price:14},
+      {day:5,emoji:'🏊',name:'Plage + Retour',lat:43.050,lon:6.140,price:0},
+    ]
+  },
+  ardeche: {
+    name:'Ardèche / Vallon', center:[44.42,4.35], zoom:8, km:570,
+    spots:[
+      {day:1,emoji:'🚗',name:'Arrivée Vallon',lat:44.384,lon:4.418,price:0},
+      {day:1,emoji:'🛶',name:'Canoë Gorges Ardèche',lat:44.384,lon:4.418,price:22},
+      {day:1,emoji:'⛺',name:'Bivouac Vallon',lat:44.390,lon:4.390,price:0},
+      {day:2,emoji:'💧',name:'Canyoning Chassezac',lat:44.425,lon:4.295,price:40},
+      {day:2,emoji:'🏕️',name:'Camping Vallon',lat:44.390,lon:4.390,price:10},
+      {day:3,emoji:'🧗',name:'Via Ferrata Coudes',lat:44.408,lon:4.395,price:30},
+      {day:3,emoji:'🪢',name:'Escalade Balazuc',lat:44.507,lon:4.374,price:35},
+      {day:4,emoji:'🕳️',name:'Spéléo St-Marcel',lat:44.332,lon:4.534,price:15},
+      {day:5,emoji:'🏊',name:'Cascade Ray-Pic',lat:44.717,lon:4.273,price:0},
+    ]
+  },
+  bretagne: {
+    name:'Bretagne / Quiberon', center:[47.5,-3.1], zoom:7, km:480,
+    spots:[
+      {day:1,emoji:'🚗',name:'Arrivée Quiberon',lat:47.479,lon:-3.120,price:0},
+      {day:1,emoji:'🛶',name:'Kayak mer Baie',lat:47.479,lon:-3.120,price:25},
+      {day:2,emoji:'🥾',name:'Rando Côte Sauvage',lat:47.500,lon:-3.150,price:0},
+      {day:3,emoji:'🧗',name:'Escalade Presqu\'île',lat:47.520,lon:-3.140,price:35},
+      {day:3,emoji:'🤿',name:'Snorkeling',lat:47.460,lon:-3.100,price:5},
+      {day:4,emoji:'🏄',name:'Surf Plouharnel',lat:47.550,lon:-3.150,price:30},
+      {day:5,emoji:'🏊',name:'Plage + Retour',lat:47.480,lon:-3.120,price:0},
+    ]
+  },
+  basque: {
+    name:'Pays Basque / Biarritz', center:[43.48,-1.56], zoom:8, km:750,
+    spots:[
+      {day:1,emoji:'🚗',name:'Arrivée Biarritz',lat:43.483,lon:-1.559,price:0},
+      {day:1,emoji:'🏄',name:'Surf Côte des Basques',lat:43.480,lon:-1.570,price:30},
+      {day:2,emoji:'💧',name:'Canyoning Pays Basque',lat:43.200,lon:-1.350,price:40},
+      {day:3,emoji:'🥾',name:'Rando Rhune',lat:43.300,lon:-1.600,price:0},
+      {day:3,emoji:'🧗',name:'Escalade',lat:43.350,lon:-1.700,price:35},
+      {day:4,emoji:'🛶',name:'Kayak mer St-Jean',lat:43.400,lon:-1.660,price:28},
+      {day:5,emoji:'🏊',name:'Plage + Retour',lat:43.483,lon:-1.559,price:0},
+    ]
+  },
+  corse: {
+    name:'Corse / Porto-Vecchio', center:[41.6,9.2], zoom:8, km:1100,
+    spots:[
+      {day:1,emoji:'⛴️',name:'Ferry Nice→Bastia',lat:43.700,lon:7.300,price:80},
+      {day:2,emoji:'💧',name:'Canyoning Bavella',lat:41.810,lon:9.220,price:45},
+      {day:3,emoji:'🧗',name:'Escalade Bavella',lat:41.790,lon:9.200,price:40},
+      {day:3,emoji:'🛶',name:'Kayak mer Palombaggia',lat:41.560,lon:9.320,price:30},
+      {day:4,emoji:'🥾',name:'Rando GR20',lat:42.050,lon:9.150,price:0},
+      {day:5,emoji:'🏊',name:'Plage + Retour',lat:41.590,lon:9.280,price:0},
+    ]
+  },
+  verdon: {
+    name:'Verdon / Castellane', center:[43.85,6.4], zoom:9, km:800,
+    spots:[
+      {day:1,emoji:'🚗',name:'Arrivée Castellane',lat:43.847,lon:6.514,price:0},
+      {day:1,emoji:'🛶',name:'Kayak Gorges Verdon',lat:43.790,lon:6.390,price:28},
+      {day:2,emoji:'💧',name:'Canyoning Verdon',lat:43.820,lon:6.470,price:42},
+      {day:3,emoji:'🧗',name:'Via Ferrata Verdon',lat:43.830,lon:6.510,price:30},
+      {day:3,emoji:'🥾',name:'Rando Crêtes',lat:43.850,lon:6.490,price:0},
+      {day:4,emoji:'🪂',name:'Parapente (option)',lat:43.840,lon:6.500,price:85},
+      {day:5,emoji:'🏊',name:'Lac Sainte-Croix',lat:43.770,lon:6.240,price:0},
+    ]
+  }
+};
+
+const DEPART_COORDS = {lat:48.618, lon:1.940}; // Bonnelles
+
+let map, markers=[], routes=[];
+
+function initMap() {
+  if (map) { map.remove(); }
+  map = L.map('map').setView([46.5, 3.5], 6);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18}).addTo(map);
+}
+
+initMap();
+
+function mI(emoji, bg, s) {
+  return L.divIcon({html:`<div style="background:${bg};color:#fff;border-radius:50%;width:${s}px;height:${s}px;display:flex;align-items:center;justify-content:center;font-size:${s*0.45}px;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)">${emoji}</div>`,iconSize:[s,s],iconAnchor:[s/2,s/2],popupAnchor:[0,-s/2]});
+}
+
+const COLORS = ['#1abc9c','#e74c3c','#f39c12','#2ecc71','#9b59b6','#3498db','#e67e22'];
+
+function update() {
+  const dest = document.getElementById('dest').value;
+  const jours = parseInt(document.getElementById('jours').value);
+  const pers = parseInt(document.getElementById('pers').value);
+  const budget = parseInt(document.getElementById('budget').value);
+  const heberg = document.getElementById('heberg').value;
+  const d = DB[dest];
+  if (!d) return;
+
+  // Filtrer spots selon activités cochées
+  let spots = d.spots.filter(s => {
+    if (s.emoji === '🛶' && !document.getElementById('act-kayak').checked) return false;
+    if ((s.emoji === '💧') && !document.getElementById('act-canyon').checked) return false;
+    if ((s.emoji === '🧗'||s.emoji==='🪢') && !document.getElementById('act-escalade').checked) return false;
+    if (s.emoji === '🥾' && !document.getElementById('act-rando').checked) return false;
+    if (s.emoji === '🤿' && !document.getElementById('act-snorkel').checked) return false;
+    if (s.emoji === '⛴️' && !document.getElementById('act-ferry').checked) return false;
+    // Toujours garder arrivée, nuits, retour
+    if (s.emoji === '🚗' || s.emoji === '🏊' || s.emoji === '⛺' || s.emoji === '🏕️') return true;
+    return true;
+  });
+
+  // Limiter au nombre de jours
+  spots = spots.filter(s => s.day <= jours);
+
+  // Calcul budget
+  const kmTotal = d.km * 2;
+  const essence = Math.round(kmTotal * 0.07 * 1.80 / pers);
+  const peages = Math.round(kmTotal * 0.07 / pers);
+  const trajet = essence + peages;
+  let activites = spots.filter(s => s.price > 0).reduce((sum,s) => sum + s.price, 0);
+  let nuits = 0;
+  if (heberg === 'bivouac') nuits = 0;
+  else if (heberg === 'mixte') nuits = (jours-1) * 10; // 1 bivouac + reste camping
+  else nuits = (jours-1) * 14;
+  const bouffe = jours * 15;
+  const total = trajet + activites + nuits + bouffe;
+
+  // Budget preview
+  document.getElementById('budget-preview').innerHTML = `
+    <h2>💰 Budget ~${total}€/pers</h2>
+    <div class="budget-line"><span>⛽🛣️ Trajet</span><span>${trajet}€</span></div>
+    <div class="budget-line"><span>🎯 Activités</span><span>${activites}€</span></div>
+    <div class="budget-line"><span>⛺ Nuits</span><span>${nuits}€</span></div>
+    <div class="budget-line"><span>🍽️ Bouffe</span><span>${bouffe}€</span></div>
+    <div class="budget-total"><span>TOTAL</span><span>~${total}€ ${total <= budget ? '✅' : '⚠️ Dépasse'}</span></div>
+  `;
+
+  // Trip preview
+  let html = `<b>🗺️ ${d.name} — ${jours} jours · ${pers} pers</b><br>`;
+  for (let j=1; j<=jours; j++) {
+    const daySpots = spots.filter(s => s.day === j);
+    html += `<div class="day-preview"><b>J${j}</b> `;
+    html += daySpots.map(s => `${s.emoji} ${s.name}`).join(' · ');
+    html += `</div>`;
+  }
+  document.getElementById('trip-preview').innerHTML = html;
+
+  // Carte
+  markers.forEach(m => map.removeLayer(m));
+  routes.forEach(r => map.removeLayer(r));
+  markers = []; routes = [];
+
+  map.setView(d.center, d.zoom);
+
+  // Départ
+  markers.push(L.marker([DEPART_COORDS.lat, DEPART_COORDS.lon], {icon: mI('🚗','#1abc9c',26)})
+    .bindPopup('<b>DÉPART</b><br>Bonnelles (78)').addTo(map));
+
+  // Spots
+  const dayCoords = [[DEPART_COORDS.lat, DEPART_COORDS.lon]];
+  spots.forEach((s,i) => {
+    const color = COLORS[s.day % COLORS.length];
+    markers.push(L.marker([s.lat, s.lon], {icon: mI(s.emoji, color, 22)})
+      .bindPopup(`<b>J${s.day} — ${s.name}</b><br>${s.price > 0 ? s.price+'€/pers' : 'Gratuit'}`).addTo(map));
+    dayCoords.push([s.lat, s.lon]);
+  });
+  // Retour
+  dayCoords.push([DEPART_COORDS.lat, DEPART_COORDS.lon]);
+
+  // Routes
+  for (let i=0; i<dayCoords.length-1; i++) {
+    const color = COLORS[i % COLORS.length];
+    L.polyline([dayCoords[i], dayCoords[i+1]], {color, weight:2, opacity:.6}).addTo(map);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', update);
+</script>
+</body>
+</html>
