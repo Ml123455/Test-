@@ -14,6 +14,24 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 #map{flex:1;min-height:350px}
 .preview{background:var(--panel);max-height:450px;overflow-y:auto;border-top:2px solid var(--accent)}
 .preview-inner{padding:8px}
+
+/* JOURNÉE TYPE DEMO */
+.demo-banner{background:linear-gradient(135deg,rgba(88,166,255,.12),rgba(188,140,255,.12));border:1px solid var(--purple);border-radius:10px;padding:12px;margin:0 8px 12px;position:relative;overflow:hidden}
+.demo-banner::before{content:'✨ JOURNÉE TYPE';position:absolute;top:6px;right:8px;font-size:.55em;color:var(--purple);font-weight:700;animation:pulse 2s infinite;letter-spacing:.06em}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+.demo-timeline{position:relative;padding-left:24px}
+.demo-timeline::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),var(--purple),var(--pink),var(--gold));border-radius:1px}
+.demo-step{position:relative;padding:4px 0 4px 6px;font-size:.72em}
+.demo-step::before{content:'';position:absolute;left:-21px;top:8px;width:10px;height:10px;border-radius:50%;border:2px solid var(--bg)}
+.demo-step:nth-child(1)::before{background:var(--accent);border-color:var(--accent)}
+.demo-step:nth-child(2)::before{background:var(--gold);border-color:var(--gold)}
+.demo-step:nth-child(3)::before{background:var(--purple);border-color:var(--purple)}
+.demo-step:nth-child(4)::before{background:var(--pink);border-color:var(--pink)}
+.demo-step .step-time{color:var(--muted);font-size:.85em;margin-right:6px}
+.demo-step .step-label{font-weight:600}
+.demo-icons{display:flex;gap:8px;margin-top:8px;font-size:.7em;color:var(--muted)}
+.demo-icons span{background:var(--bg);padding:3px 8px;border-radius:6px;border:1px solid var(--border)}
+.demo-call{text-align:center;font-size:.68em;color:var(--muted);margin-top:8px;font-style:italic}
 label{font-size:.65em;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-top:2px}
 input,select{width:100%;padding:6px 7px;background:var(--bg);border:1px solid var(--border);border-radius:5px;color:var(--text);font-size:.76em}
 input:focus,select:focus{outline:none;border-color:var(--accent)}
@@ -178,7 +196,21 @@ input:focus,select:focus{outline:none;border-color:var(--accent)}
 
 <div class="right">
   <div id="map"></div>
-  <div class="preview"><div class="preview-inner" id="trip-preview">1. Choisis ton ambiance · 2. Coche tes activités · 3. Définis ta zone · 4. Génère →</div></div>
+  <div class="preview"><div class="preview-inner" id="trip-preview">
+  <div class="demo-banner" id="demoBanner">
+    <div class="demo-timeline">
+      <div class="demo-step"><span class="step-time">☀️ 9h</span><span class="step-label">Réveil & café</span> — lever dans la nature, prépa</div>
+      <div class="demo-step"><span class="step-time">🌤️ 10h-17h</span><span class="step-label">Activité(s) du jour</span> — kayak, rando, escalade... ce que t'as coché</div>
+      <div class="demo-step"><span class="step-time">🌙 19h-2h</span><span class="step-label">Soirée</span> — bar à cocktails, boîte de nuit OSM réelle</div>
+      <div class="demo-step"><span class="step-time">⛺ Nuit</span><span class="step-label">Bivouac ou camping</span> — proche du spot, vérifié OSM</div>
+    </div>
+    <div class="demo-icons">
+      <span>🛶 Kayak</span><span>🕺 Boîte</span><span>📸 Photo</span><span>🚁 Drone</span>
+      <span>🍷 Dégust</span><span>🧗 Escalade</span>
+    </div>
+    <div class="demo-call">👆 Choisis ton kiff, coche tes activités, mets tes dates → Générer</div>
+  </div>
+</div></div>
   <div id="budget-preview" style="padding:6px 8px;background:#0d1117;border-top:1px solid var(--border);display:none"></div>
 </div>
 
