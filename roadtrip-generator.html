@@ -168,7 +168,8 @@ input:focus,select:focus{border-color:var(--acc);outline:none}
   <div style="display:flex;gap:4px"><input id="stepInput" placeholder="Ex: Lyon" style="flex:1"><button onclick="addStep()" style="padding:4px 10px;background:var(--bdr);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;cursor:pointer;font-size:.7em">+</button></div>
   <div id="stepsList" style="margin-top:1px"></div>
 
-  <h3>🎯 Activités</h3>
+  <h3>🎯 Activités <span style="font-weight:400;color:var(--muted);font-size:.75em">— coche/décoche</span></h3>
+  <div style="font-size:.6em;color:var(--muted);margin-bottom:2px">⚠️ Les activités extrêmes (parachute, hélico, ULM) sont à cocher toi-même</div>
   <div id="actCats"></div>
 
   <button class="btn" onclick="go()">🔄 GÉNÉRER</button>
@@ -208,11 +209,11 @@ const OBDATA=[
   ]},
   {h2:'Tu veux faire quoi ? 🎯',sub:'Coche (plusieurs possibles) :',opts:[
     {e:'🌊',t:'Sports d\'eau',act(){catOn('🌊 Eau')}},
-    {e:'⛰️',t:'Montagne / air',act(){catOn('⛰️ Montagne');catOn('🪂 Air/Adrénaline')}},
+    {e:'⛰️',t:'Montagne / air',act(){catOn('⛰️ Montagne');catOnSafe('🪂 Air/Adrénaline')}},
     {e:'🌙',t:'Soirées / boîtes',act(){catOn('🌙 Nuit')}},
     {e:'🍷',t:'Détente / culture',act(){catOn('🍷 Détente/Culture')}},
     {e:'📸',t:'Spots photo / drone',act(){catOn('📸 Photo/Drone')}},
-    {e:'🔥',t:'TOUT (je veux tout faire)',act(){Object.keys(ACTS).forEach(k=>catOn(k))}},
+    {e:'🔥',t:'TOUT (activités classiques)',act(){Object.keys(ACTS).forEach(k=>k==='🪂 Air/Adrénaline'?catOnSafe(k):catOn(k))}},
   ],multi:true},
   {h2:'Quelle ambiance ? 🎭',sub:'Comment tu vois les journées :',opts:[
     {e:'🏃',t:'Dynamique — 3-4 activités/jour',act(){S.vibe='dyn'}},
@@ -243,6 +244,11 @@ function dSet(t){
 }
 
 function catOn(name){const a=ACTS[name];if(a)a.forEach(x=>{const c=document.getElementById('act_'+x.id);if(c)c.checked=true})}
+// Safe check: only ticks reasonable activities (excludes extreme/expensive ones)
+function catOnSafe(name){
+  const EXTREME=['saut','ulm','helico','montgolfiere']; // parachute, ULM, hélico, montgolfière
+  const a=ACTS[name];if(a)a.forEach(x=>{if(!EXTREME.includes(x.id)){const c=document.getElementById('act_'+x.id);if(c)c.checked=true}});
+}
 
 function renderOb(){
   const d=OBDATA[obStep-1];
