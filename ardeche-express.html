@@ -144,7 +144,7 @@ footer { text-align:center; padding:30px; color:#aaa; font-size:.8em; }
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const map = L.map('map').setView([44.42, 4.35], 10);
+const map = L.map('map').setView([45.2, 3.0], 7);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18}).addTo(map);
 
 function toggleFS(){
@@ -153,56 +153,81 @@ function toggleFS(){
   setTimeout(()=>map.invalidateSize(),300);
 }
 
-// Routage OSRM (vraie route, pas ligne droite)
+// Routage OSRM
 async function loadRoute(waypoints, color){
   const coords = waypoints.map(w => `${w[1]},${w[0]}`).join(';');
   try {
     const r = await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?geometries=geojson&overview=full`);
     const d = await r.json();
     const geom = d.routes[0].geometry;
-    L.geoJSON(geom,{style:{color:color,weight:3,opacity:.7,dashArray:'10,6'}}).addTo(map);
+    L.geoJSON(geom,{style:{color:color,weight:3,opacity:.8}}).addTo(map);
   }catch(e){
-    // Fallback ligne droite
-    L.polyline(waypoints,{color:color,weight:2,opacity:.5,dashArray:'4,8'}).addTo(map);
+    L.polyline(waypoints,{color:color,weight:2,opacity:.5}).addTo(map);
   }
 }
-loadRoute([[46.8,2.4],[44.384,4.418]],'#1abc9c');
-loadRoute([[44.384,4.418],[44.425,4.295]],'#1abc9c');
-loadRoute([[44.384,4.418],[46.8,2.4]],'#1abc9c');
 
-// J1 — Canoë Ardèche
-const aI = L.divIcon({html:'<div style="background:#3498db;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid #fff;">🛶</div>',iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-12]});
-L.marker([44.384,4.418],{icon:aI}).bindPopup('<b>🛶 Canoë Ardèche J1</b><br>Vallon → Sauze, 24 km<br>~22€/pers, navette incluse',{maxWidth:250}).addTo(map);
+// Coordonnées
+const DEPART = [46.80, 2.40];    // Centre France
+const CAMPING = [44.384, 4.418]; // Vallon-Pont-d'Arc
+const CHASSEZAC = [44.425, 4.295];
+const VIAFERRATA = [44.408, 4.395];
+const BALAZUC = [44.507, 4.374];
+const STMARCEL = [44.332, 4.534];
+const RAYPIC = [44.717, 4.273];
 
-// J2 — Canyoning Chassezac
-const canI = L.divIcon({html:'<div style="background:#e74c3c;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid #fff;">💧</div>',iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-12]});
-L.marker([44.425,4.295],{icon:canI}).bindPopup('<b>💧 Canyon du Chassezac J2</b><br>3h, débutants OK<br>~40€/pers guide + matos',{maxWidth:250}).addTo(map);
+// Routes par jour (couleurs différentes)
+// J1 : Départ → Vallon (ALLER)
+loadRoute([DEPART, CAMPING], '#1abc9c');
+// J2 : Camping → Chassezac → Camping
+loadRoute([CAMPING, CHASSEZAC], '#e74c3c');
+// J3 : Camping → Via Ferrata → Balazuc → Camping
+loadRoute([CAMPING, VIAFERRATA], '#f39c12');
+loadRoute([VIAFERRATA, BALAZUC], '#f39c12');
+loadRoute([BALAZUC, CAMPING], '#f39c12');
+// J4 : Camping → Grotte St-Marcel → Camping
+loadRoute([CAMPING, STMARCEL], '#9b59b6');
+// J5 : Camping → Cascade → Départ (RETOUR)
+loadRoute([CAMPING, RAYPIC], '#2ecc71');
+loadRoute([RAYPIC, DEPART], '#2ecc71');
 
-// J3 — Via Ferrata des Coudes
-const fI = L.divIcon({html:'<div style="background:#e74c3c;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid #fff;">🧗</div>',iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-12]});
-L.marker([44.408,4.395],{icon:fI}).bindPopup('<b>🧗 Via Ferrata des Coudes J3</b><br>Barreaux, ponts de singe, tyroliennes<br>Location matos ~30€/pers',{maxWidth:250}).addTo(map);
+// Icônes
+function makeIcon(emoji, bg) {
+  return L.divIcon({html:`<div style="background:${bg};color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:13px;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)">${emoji}</div>`,iconSize:[26,26],iconAnchor:[13,13],popupAnchor:[0,-13]});
+}
+function makeSmall(emoji, bg) {
+  return L.divIcon({html:`<div style="background:${bg};color:#fff;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:9px;border:2px solid #fff;">${emoji}</div>`,iconSize:[18,18],iconAnchor:[9,9],popupAnchor:[0,-9]});
+}
 
-// J3 — Escalade Balazuc
-const eI2 = L.divIcon({html:'<div style="background:#f39c12;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid #fff;">🪢</div>',iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-12]});
-L.marker([44.507,4.374],{icon:eI2}).bindPopup('<b>🪢 Escalade Balazuc J3</b><br>Voies 4c-6b, guide diplômé<br>~35€/pers',{maxWidth:250}).addTo(map);
+// 🚗 DÉPART
+L.marker(DEPART, {icon: makeIcon('🚗','#1abc9c')}).bindPopup('<b>🚗 DÉPART J1</b><br>Centre France<br>Départ 6h · ~650 km').addTo(map);
 
-// J4 — Grotte Saint-Marcel
-const sI = L.divIcon({html:'<div style="background:#9b59b6;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid #fff;">🕳️</div>',iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-12]});
-L.marker([44.332,4.534],{icon:sI}).bindPopup('<b>🕳️ Grotte de Saint-Marcel J4</b><br>Concrétions, parcours 1h<br>~15€/pers',{maxWidth:250}).addTo(map);
+// J1 — Canoë + Camping
+L.marker(CAMPING, {icon: makeIcon('🛶','#1abc9c')}).bindPopup('<b>J1 — Vallon-Pont-d\'Arc</b><br>🛶 Canoë 24 km · 22€/pers<br>⛺ Camping 4 nuits').addTo(map);
 
-// J5 — Cascade Ray-Pic
-const rI = L.divIcon({html:'<div style="background:#2ecc71;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid #fff;">🏊</div>',iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-12]});
-L.marker([44.717,4.273],{icon:rI}).bindPopup('<b>🏊 Cascade du Ray-Pic J5</b><br>Site volcanique, baignade<br>Gratuit',{maxWidth:250}).addTo(map);
+// J2 — Canyoning
+L.marker(CHASSEZAC, {icon: makeIcon('💧','#e74c3c')}).bindPopup('<b>J2 — Canyon du Chassezac</b><br>💧 Canyoning 3h · 40€/pers<br>Aller-retour depuis Vallon').addTo(map);
 
-// Bivouacs / Camping
-const nI = L.divIcon({html:'<div style="background:#27ae60;color:#fff;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:9px;border:2px solid #fff;">⛺</div>',iconSize:[16,16],iconAnchor:[8,8],popupAnchor:[0,-8]});
-L.marker([44.390,4.390],{icon:nI}).bindTooltip('Camping Vallon J1-J4').addTo(map);
+// J3 — Via Ferrata + Escalade
+L.marker(VIAFERRATA, {icon: makeIcon('🧗','#f39c12')}).bindPopup('<b>J3 — Via Ferrata des Coudes</b><br>🧗 Matin · ~30€/pers').addTo(map);
+L.marker(BALAZUC, {icon: makeIcon('🪢','#f39c12')}).bindPopup('<b>J3 — Escalade Balazuc</b><br>🪢 Après-midi · ~35€/pers').addTo(map);
+
+// J4 — Spéléo
+L.marker(STMARCEL, {icon: makeIcon('🕳️','#9b59b6')}).bindPopup('<b>J4 — Grotte de Saint-Marcel</b><br>🕳️ Spéléo 1h · 15€/pers<br>🥾 Rando aquatique le matin (gratuit)').addTo(map);
+
+// J5 — Cascade
+L.marker(RAYPIC, {icon: makeIcon('🏊','#2ecc71')}).bindPopup('<b>J5 — Cascade du Ray-Pic</b><br>🏊 Dernier plouf · Gratuit<br>Puis retour ~650 km').addTo(map);
 
 // Légende
 const legend = L.control({position:'bottomright'});
 legend.onAdd = function(){
   const d=L.DomUtil.create('div','legend');
-  d.innerHTML='<b>Légende</b> 🛶 Canoë · 💧 Canyoning · 🧗 Via Ferrata · 🪢 Escalade · 🕳️ Spéléo · 🏊 Baignade · ⛺ Camping<br><span style="color:#1abc9c">━</span> Itinéraire A/R';
+  d.innerHTML='<b>🗺️ Itinéraire</b><br>'
+    +'<span style="color:#1abc9c">━</span> J1 Aller<br>'
+    +'<span style="color:#e74c3c">━</span> J2 Canyoning<br>'
+    +'<span style="color:#f39c12">━</span> J3 Via Ferrata+Escalade<br>'
+    +'<span style="color:#9b59b6">━</span> J4 Spéléo<br>'
+    +'<span style="color:#2ecc71">━</span> J5 Retour<br>'
+    +'🚗 Départ · 🛶 Canoë · 💧 Canyon · 🧗 Ferrata · 🪢 Escalade · 🕳️ Grotte · 🏊 Cascade';
   return d;
 };
 legend.addTo(map);
