@@ -7,29 +7,32 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:system-ui,sans-serif; background:#1a1a2e; color:#eee; display:flex; min-height:100vh; }
-.left { width:380px; background:#0f3460; padding:18px; overflow-y:auto; flex-shrink:0; display:flex; flex-direction:column; }
+body { font-family:'Segoe UI',system-ui,sans-serif; background:#0d1117; color:#c9d1d9; display:flex; min-height:100vh; }
+.left { width:380px; background:#161b22; padding:20px; overflow-y:auto; flex-shrink:0; display:flex; flex-direction:column; border-right:1px solid #21262d; }
 .right { flex:1; display:flex; flex-direction:column; }
 #map { flex:1; min-height:400px; }
-.preview { background:#16213e; padding:0; max-height:340px; overflow-y:auto; border-top:2px solid #1abc9c; }
+.preview { background:#161b22; max-height:380px; overflow-y:auto; border-top:2px solid #58a6ff; }
 .preview-inner { padding:12px; }
-label { display:block; margin:10px 0 3px; font-size:.75em; text-transform:uppercase; letter-spacing:.05em; color:#aaa; }
-input, select { width:100%; padding:7px 10px; background:#16213e; border:1px solid #333; border-radius:4px; color:#eee; font-size:.85em; }
-input:focus, select:focus { outline:none; border-color:#1abc9c; }
-.btn { display:block; width:100%; margin-top:14px; padding:11px; background:#1abc9c; color:#1a1a2e; border:none; border-radius:6px; font-weight:bold; font-size:.95em; cursor:pointer; }
-.btn:hover { background:#16a085; }
-h2 { font-size:1.1em; margin-bottom:6px; color:#1abc9c; }
-.budget-line { display:flex; justify-content:space-between; padding:2px 0; border-bottom:1px solid #1a1a2e; font-size:.82em; }
-.budget-total { font-weight:bold; font-size:1em; color:#f39c12; margin-top:4px; }
-.day-card { background:#0f3460; margin:6px 8px; border-radius:8px; overflow:hidden; }
-.day-card-header { display:flex; align-items:center; padding:4px 8px; gap:6px; font-size:.75em; font-weight:bold; }
-.day-card-body { display:flex; gap:8px; padding:0 8px 8px 8px; }
-.day-card-img { width:80px; height:60px; border-radius:6px; object-fit:cover; flex-shrink:0; background:#1a1a2e; }
-.day-card-info { flex:1; font-size:.72em; line-height:1.5; }
+label { display:block; margin:9px 0 3px; font-size:.7em; text-transform:uppercase; letter-spacing:.06em; color:#8b949e; }
+input, select { width:100%; padding:8px 10px; background:#0d1117; border:1px solid #30363d; border-radius:6px; color:#c9d1d9; font-size:.82em; transition:border-color .15s; }
+input:focus, select:focus { outline:none; border-color:#58a6ff; box-shadow:0 0 0 3px rgba(88,166,255,.15); }
+.btn { display:block; width:100%; margin-top:14px; padding:11px; background:linear-gradient(135deg,#58a6ff,#1f6feb); color:#fff; border:none; border-radius:6px; font-weight:600; font-size:.9em; cursor:pointer; transition:opacity .15s; }
+.btn:hover { opacity:.9; }
+h2 { font-size:1em; margin-bottom:4px; color:#58a6ff; font-weight:600; }
+.budget-line { display:flex; justify-content:space-between; padding:3px 8px; border-bottom:1px solid #21262d; font-size:.78em; }
+.budget-total { font-weight:700; font-size:.95em; color:#f78166; }
+.day-card { background:#0d1117; margin:4px 8px; border-radius:8px; overflow:hidden; border:1px solid #21262d; }
+.day-card-header { display:flex; align-items:center; padding:5px 10px; gap:6px; font-size:.75em; font-weight:600; border-bottom:1px solid #21262d; }
+.day-card-body { display:flex; gap:10px; padding:8px 10px; }
+.day-card-img { width:100px; height:70px; border-radius:6px; object-fit:cover; flex-shrink:0; background:#1a1f2b; border:1px solid #21262d; }
+.day-card-info { flex:1; font-size:.74em; line-height:1.65; }
 .day-card-info span { display:block; }
-.hero-img { width:100%; height:120px; object-fit:cover; border-radius:0; margin-bottom:8px; background:#1a1a2e; }
-.info { font-size:.7em; color:#888; margin-top:4px; }
-.spinner { display:inline-block; width:14px; height:14px; border:2px solid #1abc9c; border-top-color:transparent; border-radius:50%; animation:spin .6s linear infinite; vertical-align:middle; margin-left:6px; }
+.hero-img-wrap { position:relative; margin:0 8px 8px 8px; border-radius:10px; overflow:hidden; height:160px; }
+.hero-img { width:100%; height:100%; object-fit:cover; }
+.hero-overlay { position:absolute; bottom:0; left:0; right:0; padding:20px 14px 10px; background:linear-gradient(transparent,rgba(0,0,0,.75)); }
+.hero-overlay b { font-size:1em; color:#fff; }
+.info { font-size:.7em; color:#8b949e; margin-top:4px; min-height:1.2em; }
+.spinner { display:inline-block; width:13px; height:13px; border:2px solid #58a6ff; border-top-color:transparent; border-radius:50%; animation:spin .6s linear infinite; vertical-align:middle; margin-left:6px; }
 @keyframes spin { to { transform:rotate(360deg); } }
 @media (max-width:768px) { body { flex-direction:column; } .left { width:100%; max-height:55vh; } }
 </style>
@@ -98,7 +101,7 @@ h2 { font-size:1.1em; margin-bottom:6px; color:#1abc9c; }
 
 <div class="right">
   <div id="map"></div>
-  <div class="preview"><div class="preview-inner" id="trip-preview">Entre une destination et clique sur Générer →</div></div>
+  <div class="preview"><div class="preview-inner" id="trip-preview">Entre une destination et clique Générer →</div></div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -108,12 +111,12 @@ let map, markers=[], routeLayers=[];
 function initMap() {
   if (map) { map.remove(); markers=[]; routeLayers=[]; }
   map = L.map('map').setView([46.5, 3.5], 6);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18}).addTo(map);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18, attribution:'&copy; <a href="https://openstreetmap.org">OSM</a>'}).addTo(map);
 }
 initMap();
 
 function mI(emoji, bg, s) {
-  return L.divIcon({html:`<div style="background:${bg};color:#fff;border-radius:50%;width:${s}px;height:${s}px;display:flex;align-items:center;justify-content:center;font-size:${s*0.45}px;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)">${emoji}</div>`,iconSize:[s,s],iconAnchor:[s/2,s/2],popupAnchor:[0,-s/2]});
+  return L.divIcon({html:`<div style="background:${bg};color:#fff;border-radius:50%;width:${s}px;height:${s}px;display:flex;align-items:center;justify-content:center;font-size:${s*0.45}px;border:2px solid #0d1117;box-shadow:0 2px 8px rgba(0,0,0,.5)">${emoji}</div>`,iconSize:[s,s],iconAnchor:[s/2,s/2],popupAnchor:[0,-s/2]});
 }
 
 async function geocode(q) {
@@ -131,48 +134,44 @@ async function getRouteOSRM(waypoints) {
     const coords = waypoints.map(w => `${w.lon},${w.lat}`).join(';');
     const r = await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?geometries=geojson&overview=full`);
     const d = await r.json();
+    if (!d.routes || !d.routes.length) return null;
     return {km:Math.round(d.routes[0].distance/1000), geom:d.routes[0].geometry};
   } catch(e) { return null; }
 }
 
-// --- WIKIPEDIA IMAGE FETCH ---
+// --- WIKIPEDIA IMAGE FETCH (high-res) ---
 const imageCache = {};
 async function fetchCityImage(cityName, fullName) {
-  // clean city name
   let clean = cityName.replace(/^(En route|Étape|proche)\s*/i, '').trim();
   if (!clean || clean.match(/^\d+$/)) clean = fullName || cityName;
-
   if (imageCache[clean]) return imageCache[clean];
 
-  // Try multiple queries
-  const queries = [
-    clean,
-    clean + ' France',
-    clean.replace(/\s*\(.*\)/, '').trim()
-  ];
+  const queries = [clean, clean + ' France', clean.replace(/\s*\(.*\)/, '').trim()];
 
   for (const q of queries) {
     try {
       const r = await fetch(`https://fr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(q)}`);
       if (!r.ok) continue;
       const d = await r.json();
-      if (d.thumbnail && d.thumbnail.source) {
-        imageCache[clean] = d.thumbnail.source;
-        return d.thumbnail.source;
-      }
+
+      // Prefer originalimage (full res), fallback to thumbnail upgraded to 800px
+      let imgUrl = null;
       if (d.originalimage && d.originalimage.source) {
-        imageCache[clean] = d.originalimage.source;
-        return d.originalimage.source;
+        imgUrl = d.originalimage.source;
+      } else if (d.thumbnail && d.thumbnail.source) {
+        // Upgrade thumbnail resolution: replace /320px- → /800px-
+        imgUrl = d.thumbnail.source.replace(/\/\d+px-/, '/800px-');
+      }
+      if (imgUrl) {
+        imageCache[clean] = imgUrl;
+        return imgUrl;
       }
     } catch(e) { continue; }
   }
-
-  // Fallback: Unsplash search via Wikimedia didn't work, use generic
   imageCache[clean] = null;
   return null;
 }
 
-// Reverse geocode to get real city name from coords
 async function reverseGeocode(lat, lon) {
   try {
     const r = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`);
@@ -192,10 +191,8 @@ const ACT = {
 };
 
 function getEnv(lat, lon) {
-  if (lon < -1.5 && lat > 43 && lat < 48) return 'mer';
-  if (lon > 5 && lat > 43 && lat < 44.5) return 'mer';
+  if ((lon < -1.5 || lon > 5) && lat > 43 && lat < 44.5) return 'mer';
   if (lat > 44.5 && lon > 6.5) return 'mont';
-  if (lat < 43.5 && lon > 2 && lon < 7) return 'mer';
   if (lat > 42.5 && lat < 43.5 && lon > -2 && lon < 2) return 'mont';
   if (lat > 45 && lon > 6) return 'mont';
   return 'riv';
@@ -233,8 +230,8 @@ async function generate() {
   const route = await getRouteOSRM(allWaypoints);
   if (!route) { statusEl.textContent='❌ Pas de route'; return; }
 
-  statusEl.innerHTML = `✅ ${depart.name} → ${dest.name} (${route.km} km)`;
-  statusEl.style.color = '#1abc9c';
+  statusEl.innerHTML = `✅ ${depart.name} → ${dest.name} (${route.km} km aller)`;
+  statusEl.style.color = '#58a6ff';
 
   let days = [];
   const env = getEnv(dest.lat, dest.lon);
@@ -262,7 +259,7 @@ async function generate() {
         day: j,
         name: dayName,
         lat, lon, acts,
-        nuit: heberg==='bivouac'?0:(heberg==='mixte'&&j<=1?0:(heberg==='mixte'?12:14)),
+        nuit: heberg==='bivouac'?0:(heberg==='mixte'&&j<=1?0:14),
         nuitLabel: j===1&&heberg!=='camping'?'Bivouac':'Camping'
       });
     }
@@ -281,27 +278,31 @@ async function generate() {
     }
   }
 
-  // Budget
-  const kmTotal = route.km * 2;
-  const trajet = Math.round(kmTotal * 0.07 * 1.80 / pers + kmTotal * 0.06 / pers);
+  // --- BUDGET: clearer calculation, all integers ---
+  const kmAllerRetour = route.km * 2;
+  const essenceL_100km = 7;        // 7L/100km
+  const prixLitre = 1.80;           // €/L
+  const coutKmEssence = (essenceL_100km / 100) * prixLitre; // 0.126 €/km
+  const coutKmPeage = 0.06;         // €/km péage
+  const coutTotalVoiture = Math.round(kmAllerRetour * (coutKmEssence + coutKmPeage)); // total voiture
+  const trajet = Math.round(coutTotalVoiture / pers); // par personne
+
   let actTotal = 0, nuits = 0;
   days.forEach(d => { d.acts.forEach(a => actTotal += a.p); nuits += d.nuit; });
   const bouffe = jours * 15;
   const total = trajet + actTotal + nuits + bouffe;
 
   document.getElementById('budget-preview').innerHTML = `
-    <h2>💰 ~${total}€/pers ${total<=budget?'✅':'⚠️+'+ (total-budget)+'€'}</h2>
-    <div class="budget-line"><span>⛽🛣️ Trajet (${kmTotal} km A/R)</span><span>${trajet}€</span></div>
+    <h2>💰 ${total}€/pers ${total<=budget?'✅':'⚠️ +'+ (total-budget)+'€'}</h2>
+    <div class="budget-line"><span>⛽🛣️ Trajet A/R (${kmAllerRetour} km)</span><span>${trajet}€/pers</span></div>
     <div class="budget-line"><span>🎯 Activités</span><span>${actTotal}€</span></div>
-    <div class="budget-line"><span>⛺ Nuits</span><span>${nuits}€</span></div>
-    <div class="budget-line"><span>🍽️ Bouffe</span><span>${bouffe}€</span></div>
+    <div class="budget-line"><span>⛺ Nuits (${heberg==='bivouac'?'bivouac':heberg})</span><span>${nuits}€</span></div>
+    <div class="budget-line" style="font-weight:600;"><span>🍽️ Bouffe (${jours}j × 15€)</span><span>${bouffe}€</span></div>
   `;
 
-  // --- FETCH IMAGES FOR EACH DAY ---
-  // Fetch all images in parallel
+  // --- FETCH IMAGES ---
   const imgPromises = days.map(async d => {
     let city = d.name;
-    // Try reverse geocode for generic "Étape N" names
     if (city.match(/^Étape\s*\d+$/i) || city.match(/^En route/i)) {
       const realCity = await reverseGeocode(d.lat, d.lon);
       if (realCity) city = realCity;
@@ -310,55 +311,54 @@ async function generate() {
     return { day: d.day, img, city };
   });
   const dayImages = await Promise.all(imgPromises);
-
-  // Build image map
   const imgMap = {};
   dayImages.forEach(di => { imgMap[di.day] = di.img; });
 
-  // Hero image = destination image
+  // Hero image
   const destImg = imgMap[days.length] || null;
 
-  // Build preview with photos
+  // Preview
   let html = '';
   if (destImg) {
-    html += `<img class="hero-img" src="${destImg}" alt="${dest.name}" loading="lazy" onerror="this.style.display='none'">`;
+    html += `<div class="hero-img-wrap"><img class="hero-img" src="${destImg}" alt="${dest.name}" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="hero-overlay"><b>${depart.name} → ${dest.name}</b> · ${jours}j · ${pers} pers</div></div>`;
+  } else {
+    html += `<div style="padding:0 8px 6px 8px;"><b>🗺️ ${depart.name} → ${dest.name}</b> · ${jours}j · ${pers} pers</div>`;
   }
-  html += `<div style="padding:0 8px 6px 8px;"><b>🗺️ ${depart.name} → ${dest.name} — ${jours}j · ${pers} pers</b></div>`;
 
   days.forEach(d => {
     const img = imgMap[d.day];
+    const color = COLORS[(d.day-1)%COLORS.length];
     html += `<div class="day-card">`;
-    html += `<div class="day-card-header" style="color:${COLORS[(d.day-1)%COLORS.length]}">📍 J${d.day} — ${d.name}</div>`;
+    html += `<div class="day-card-header" style="color:${color}">📍 J${d.day} — ${d.name}</div>`;
     html += `<div class="day-card-body">`;
     if (img) {
       html += `<img class="day-card-img" src="${img}" alt="${d.name}" loading="lazy" onerror="this.style.display='none'">`;
     } else {
-      html += `<div class="day-card-img" style="display:flex;align-items:center;justify-content:center;font-size:1.5em;">🗺️</div>`;
+      html += `<div class="day-card-img" style="display:flex;align-items:center;justify-content:center;font-size:1.6em;background:#161b22;">🗺️</div>`;
     }
     html += `<div class="day-card-info">`;
     d.acts.forEach(a => { html += `<span>${a.e} ${a.n} (${a.p}€)</span>`; });
-    html += `<span style="margin-top:2px;">⛺ ${d.nuitLabel} (${d.nuit}€)</span>`;
+    html += `<span style="margin-top:3px;color:#8b949e;">⛺ ${d.nuitLabel} · ${d.nuit}€</span>`;
     html += `</div></div></div>`;
   });
 
   document.getElementById('trip-preview').innerHTML = html;
 
-  // Carte
+  // Map
   markers.forEach(m => map.removeLayer(m));
   routeLayers.forEach(l => map.removeLayer(l));
   markers = []; routeLayers = [];
 
-  L.geoJSON(route.geom, {style:{color:'#1abc9c',weight:3,opacity:.6,dashArray:'8,6'}}).addTo(map);
-  routeLayers.push('route');
+  L.geoJSON(route.geom, {style:{color:'#58a6ff',weight:3,opacity:.5,dashArray:'8,6'}}).addTo(map);
 
-  markers.push(L.marker([depart.lat, depart.lon], {icon: mI('🚗','#1abc9c',28)})
+  markers.push(L.marker([depart.lat, depart.lon], {icon: mI('🚗','#58a6ff',28)})
     .bindPopup(`<b>🚗 DÉPART</b><br>${depart.name}`).addTo(map));
 
   days.forEach(d => {
     const c = COLORS[(d.day-1)%COLORS.length];
     const img = imgMap[d.day];
-    let popupContent = `<b>J${d.day} — ${d.name}</b><br>${d.acts.map(a=>a.e+' '+a.n+' ('+a.p+'€)').join('<br>')}<br>⛺ ${d.nuitLabel}`;
-    if (img) popupContent += `<br><img src="${img}" style="width:200px;border-radius:6px;margin-top:4px" loading="lazy">`;
+    let popupContent = `<b>J${d.day} — ${d.name}</b><br>${d.acts.map(a=>a.e+' '+a.n+' ('+a.p+'€)').join('<br>')}<br>⛺ ${d.nuitLabel} · ${d.nuit}€`;
+    if (img) popupContent += `<br><img src="${img}" style="width:200px;border-radius:6px;margin-top:6px" loading="lazy">`;
     markers.push(L.marker([d.lat, d.lon], {icon: mI(d.day.toString(),c,24)})
       .bindPopup(popupContent, {maxWidth:250}).addTo(map));
   });
@@ -366,7 +366,7 @@ async function generate() {
   map.fitBounds([[depart.lat,depart.lon],[dest.lat,dest.lon]], {padding:[50,50]});
 }
 
-const COLORS = ['#1abc9c','#e74c3c','#f39c12','#2ecc71','#9b59b6','#3498db','#e67e22','#e84393','#00b894','#6c5ce7'];
+const COLORS = ['#58a6ff','#f78166','#d2a850','#3fb950','#bc8cff','#f0883e','#79c0ff','#ff7b72','#56d364','#e3b341'];
 </script>
 </body>
 </html>
