@@ -166,7 +166,12 @@ input:focus,select:focus{border-color:var(--ac);outline:none}
   <div id="actCats"></div>
 
   <button class="btn" onclick="go()">🔄 GÉNÉRER</button>
+  <button id="cancelBtn" onclick="cancelGen()" style="display:none;width:100%;padding:8px;margin-top:2px;background:var(--red);color:#fff;border:none;border-radius:6px;font-weight:700;font-size:.82em;cursor:pointer">✕ ANNULER</button>
   <div class="status" id="status"></div>
+  <div style="display:flex;gap:4px;margin-top:4px">
+    <button onclick="shareLink()" style="flex:1;padding:5px;background:var(--bdr);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;cursor:pointer;font-size:.65em">🔗 Partager</button>
+    <button onclick="exportPDF()" style="flex:1;padding:5px;background:var(--bdr);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;cursor:pointer;font-size:.65em">🖨️ PDF</button>
+  </div>
 </div>
 
 <div class="main">
@@ -396,8 +401,19 @@ function removeStep(i){steps.splice(i,1);renderSteps()}
 function renderSteps(){document.getElementById('stepsList').innerHTML=steps.map(function(s,i){return'<span>📍'+s+'<span onclick="removeStep('+i+')">×</span></span>'}).join('')}
 
 // ═══ GENERATE ═══
+let abortCtrl=null;
+
 async function go(){
-  var st=document.getElementById('status');
+  // Cancel previous generation if running
+  if(abortCtrl){abortCtrl.abort();abortCtrl=null}
+  abortCtrl=new AbortController();
+  const signal=abortCtrl.signal;
+  
+  // Show cancel button
+  const cancelBtn=document.getElementById('cancelBtn');
+  if(cancelBtn)cancelBtn.style.display='inline-block';
+
+  const st=document.getElementById('status');
   st.innerHTML='Géocodage<span class="spin"></span>';
 
   var departName=document.getElementById('depart').value.trim()||'Bonnelles';
@@ -552,7 +568,9 @@ async function go(){
   // Map
   markers.forEach(function(m){map.removeLayer(m)});markers=[];
   map.eachLayer(function(l){if(l instanceof L.GeoJSON||(!l._url&&l instanceof L.Marker))map.removeLayer(l)});
-  L.geoJSON(route.geom,{style:{color:'#58a6ff',weight:4,opacity:.7}}).addTo(map);
+  // Route with halo for visibility
+  L.geoJSON(route.geom,{style:{color:'#fff',weight:6,opacity:.35}}).addTo(map);
+  L.geoJSON(route.geom,{style:{color:'#58a6ff',weight:3,opacity:.85}}).addTo(map);
   L.circle([dest.lat,dest.lon],{radius:radius*1000,color:COLORS[2],weight:1,opacity:.25,fillOpacity:.04}).addTo(map);
   markers.push(L.marker([depart.lat,depart.lon],{icon:mI('🚗',COLORS[0],26)}).bindPopup('<b>🚗 DÉPART</b><br>'+depart.name).addTo(map));
   for(var i=1;i<allGeo.length-1;i++)markers.push(L.marker([allGeo[i].lat,allGeo[i].lon],{icon:mI('📍',COLORS[2],18)}).bindPopup('<b>📍 ÉTAPE</b><br>'+allGeo[i].name).addTo(map));
@@ -572,7 +590,77 @@ async function go(){
 var COLORS=['#58a6ff','#f78166','#d2a850','#3fb950','#bc8cff','#f0883e','#79c0ff','#ff7b72','#56d364','#e3b341','#a371f7','#db6d28'];
 
 // Default dates
-(function(){var n=new Date();var d=new Date(n);d.setDate(n.getDate()+(5-n.getDay()+1));document.getElementById('dateStart').value=d.toISOString().split('T')[0];d.setDate(d.getDate()+4);document.getElementById('dateEnd').value=d.toISOString().split('T')[0]})();
+(function(){const n=new Date();const d=new Date(n);d.setDate(n.getDate()+(5-n.getDay()+1));document.getElementById('dateStart').value=d.toISOString().split('T')[0];d.setDate(d.getDate()+4);document.getElementById('dateEnd').value=d.toISOString().split('T')[0]})();
+
+// ═══ CANCEL / SHARE / EXPORT ═══
+function cancelGen(){if(abortCtrl){abortCtrl.abort();abortCtrl=null}document.getElementById('cancelBtn').style.display='none';document.getElementById('status').textContent='Annulé'}
+
+function shareLink(){
+  // Encode current form state in URL params
+  const p=new URLSearchParams();
+  const f=['depart','dest','jours','pers','radius','mode','heberg','dateStart','dateEnd'];
+  f.forEach(id=>{const el=document.getElementById(id);if(el&&el.value)p.set(id,el.value)});
+  p.set('kiff',S.kiff);
+  p.set('vibe',S.vibe);
+  // Active activities
+  const checked=[];
+  document.querySelectorAll('#actCats input[type=checkbox]:checked').forEach(c=>checked.push(c.id.replace('act_','')));
+  if(checked.length)p.set('acts',checked.join(','));
+  // Active prefs
+  const prefs=[];document.querySelectorAll('.pt.on').forEach(pt=>prefs.push(pt.dataset.pref));
+  if(prefs.length)p.set('prefs',prefs.join(','));
+  
+  const url=location.origin+location.pathname+'?'+p.toString();
+  navigator.clipboard.writeText(url).then(()=>{
+    document.getElementById('status').textContent='✅ Lien copié !';
+    document.getElementById('status').style.color='var(--grn)';
+    setTimeout(()=>{document.getElementById('status').textContent='';document.getElementById('status').style.color=''},3000);
+  }).catch(()=>{
+    // Fallback: show in prompt
+    prompt('Copie ce lien :',url);
+  });
+}
+
+function exportPDF(){window.print()}
+
+// ═══ LOCALSTORAGE — save/restore ═══
+function saveState(){
+  const state={};
+  ['depart','dest','jours','pers','radius','mode','heberg','dateStart','dateEnd'].forEach(id=>{
+    const el=document.getElementById(id);if(el)state[id]=el.value;
+  });
+  state.kiff=S.kiff;state.vibe=S.vibe;
+  state.acts=[];document.querySelectorAll('#actCats input[type=checkbox]:checked').forEach(c=>state.acts.push(c.id));
+  state.prefs=[];document.querySelectorAll('.pt.on').forEach(pt=>state.prefs.push(pt.dataset.pref));
+  try{localStorage.setItem('roadtrip_state',JSON.stringify(state))}catch(e){}
+}
+
+function restoreState(){
+  try{
+    const raw=localStorage.getItem('roadtrip_state');
+    if(!raw)return;
+    const s=JSON.parse(raw);
+    ['depart','dest'].forEach(id=>{if(s[id])document.getElementById(id).value=s[id]});
+    if(s.jours)document.getElementById('jours').value=s.jours;
+    if(s.pers)document.getElementById('pers').value=s.pers;
+    if(s.radius)document.getElementById('radius').value=s.radius;
+    if(s.mode)document.getElementById('mode').value=s.mode;
+    if(s.heberg)document.getElementById('heberg').value=s.heberg;
+    if(s.dateStart)document.getElementById('dateStart').value=s.dateStart;
+    if(s.dateEnd)document.getElementById('dateEnd').value=s.dateEnd;
+    if(s.kiff){S.kiff=s.kiff;setKiff(s.kiff)}
+    if(s.vibe)S.vibe=s.vibe;
+    if(s.prefs){document.querySelectorAll('.pt').forEach(pt=>pt.classList.toggle('on',s.prefs.includes(pt.dataset.pref)))}
+    if(s.acts){s.acts.forEach(id=>{const c=document.getElementById(id);if(c)c.checked=true})}
+  }catch(e){}
+}
+
+// Save on change
+document.addEventListener('change',saveState);
+document.addEventListener('input',function(e){if(e.target.tagName==='SELECT')saveState()});
+
+// Restore on load
+restoreState();
 </script>
 </body>
 </html>
