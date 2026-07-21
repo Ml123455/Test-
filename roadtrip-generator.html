@@ -8,10 +8,11 @@
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:system-ui,sans-serif; background:#1a1a2e; color:#eee; display:flex; min-height:100vh; }
-.left { width:360px; background:#0f3460; padding:18px; overflow-y:auto; flex-shrink:0; }
+.left { width:380px; background:#0f3460; padding:18px; overflow-y:auto; flex-shrink:0; display:flex; flex-direction:column; }
 .right { flex:1; display:flex; flex-direction:column; }
 #map { flex:1; min-height:400px; }
-.preview { background:#16213e; padding:12px; max-height:280px; overflow-y:auto; font-size:.82em; border-top:2px solid #1abc9c; }
+.preview { background:#16213e; padding:0; max-height:340px; overflow-y:auto; border-top:2px solid #1abc9c; }
+.preview-inner { padding:12px; }
 label { display:block; margin:10px 0 3px; font-size:.75em; text-transform:uppercase; letter-spacing:.05em; color:#aaa; }
 input, select { width:100%; padding:7px 10px; background:#16213e; border:1px solid #333; border-radius:4px; color:#eee; font-size:.85em; }
 input:focus, select:focus { outline:none; border-color:#1abc9c; }
@@ -20,8 +21,16 @@ input:focus, select:focus { outline:none; border-color:#1abc9c; }
 h2 { font-size:1.1em; margin-bottom:6px; color:#1abc9c; }
 .budget-line { display:flex; justify-content:space-between; padding:2px 0; border-bottom:1px solid #1a1a2e; font-size:.82em; }
 .budget-total { font-weight:bold; font-size:1em; color:#f39c12; margin-top:4px; }
-.day-preview { background:#0f3460; padding:6px 8px; margin:3px 0; border-radius:4px; font-size:.8em; }
+.day-card { background:#0f3460; margin:6px 8px; border-radius:8px; overflow:hidden; }
+.day-card-header { display:flex; align-items:center; padding:4px 8px; gap:6px; font-size:.75em; font-weight:bold; }
+.day-card-body { display:flex; gap:8px; padding:0 8px 8px 8px; }
+.day-card-img { width:80px; height:60px; border-radius:6px; object-fit:cover; flex-shrink:0; background:#1a1a2e; }
+.day-card-info { flex:1; font-size:.72em; line-height:1.5; }
+.day-card-info span { display:block; }
+.hero-img { width:100%; height:120px; object-fit:cover; border-radius:0; margin-bottom:8px; background:#1a1a2e; }
 .info { font-size:.7em; color:#888; margin-top:4px; }
+.spinner { display:inline-block; width:14px; height:14px; border:2px solid #1abc9c; border-top-color:transparent; border-radius:50%; animation:spin .6s linear infinite; vertical-align:middle; margin-left:6px; }
+@keyframes spin { to { transform:rotate(360deg); } }
 @media (max-width:768px) { body { flex-direction:column; } .left { width:100%; max-height:55vh; } }
 </style>
 </head>
@@ -89,7 +98,7 @@ h2 { font-size:1.1em; margin-bottom:6px; color:#1abc9c; }
 
 <div class="right">
   <div id="map"></div>
-  <div class="preview" id="trip-preview">Entre une destination et clique sur Générer →</div>
+  <div class="preview"><div class="preview-inner" id="trip-preview">Entre une destination et clique sur Générer →</div></div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -110,7 +119,7 @@ function mI(emoji, bg, s) {
 async function geocode(q) {
   try {
     const r = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q+' France')}&format=json&limit=1`);
-    await new Promise(r2=>setTimeout(r2,1100)); // respect rate limit
+    await new Promise(r2=>setTimeout(r2,1100));
     const d = await r.json();
     if (d.length) return {lat:parseFloat(d[0].lat), lon:parseFloat(d[0].lon), name:d[0].display_name.split(',')[0]};
   } catch(e) {}
@@ -126,7 +135,56 @@ async function getRouteOSRM(waypoints) {
   } catch(e) { return null; }
 }
 
-// Activités par type de terrain
+// --- WIKIPEDIA IMAGE FETCH ---
+const imageCache = {};
+async function fetchCityImage(cityName, fullName) {
+  // clean city name
+  let clean = cityName.replace(/^(En route|Étape|proche)\s*/i, '').trim();
+  if (!clean || clean.match(/^\d+$/)) clean = fullName || cityName;
+
+  if (imageCache[clean]) return imageCache[clean];
+
+  // Try multiple queries
+  const queries = [
+    clean,
+    clean + ' France',
+    clean.replace(/\s*\(.*\)/, '').trim()
+  ];
+
+  for (const q of queries) {
+    try {
+      const r = await fetch(`https://fr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(q)}`);
+      if (!r.ok) continue;
+      const d = await r.json();
+      if (d.thumbnail && d.thumbnail.source) {
+        imageCache[clean] = d.thumbnail.source;
+        return d.thumbnail.source;
+      }
+      if (d.originalimage && d.originalimage.source) {
+        imageCache[clean] = d.originalimage.source;
+        return d.originalimage.source;
+      }
+    } catch(e) { continue; }
+  }
+
+  // Fallback: Unsplash search via Wikimedia didn't work, use generic
+  imageCache[clean] = null;
+  return null;
+}
+
+// Reverse geocode to get real city name from coords
+async function reverseGeocode(lat, lon) {
+  try {
+    const r = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`);
+    await new Promise(r2=>setTimeout(r2,1100));
+    const d = await r.json();
+    if (d.address) {
+      return d.address.city || d.address.town || d.address.village || d.address.municipality || d.name || '';
+    }
+  } catch(e) {}
+  return '';
+}
+
 const ACT = {
   mer:  [{e:'🛶',n:'Kayak de mer',p:28},{e:'🤿',n:'Snorkeling',p:5},{e:'🏄',n:'Surf',p:30},{e:'🏊',n:'Baignade',p:0},{e:'🥾',n:'Rando côtière',p:0}],
   riv:  [{e:'🛶',n:'Canoë/Kayak',p:22},{e:'💧',n:'Canyoning',p:40},{e:'🏊',n:'Baignade rivière',p:0},{e:'🥾',n:'Rando',p:0},{e:'🕳️',n:'Spéléo',p:15}],
@@ -149,13 +207,13 @@ function pickActs(env, type, count) {
   else if (type==='eau') pool = [...(ACT.mer||[]), ...(ACT.riv||[])];
   else if (type==='montagne') pool = [...ACT.mont];
   else pool = ACT[env]?.filter(a=>a.p<20) || ACT.riv;
-  // shuffle + take
   const shuffled = [...pool].sort(()=>Math.random()-.5);
   return shuffled.slice(0, Math.min(count, shuffled.length));
 }
 
 async function generate() {
-  document.getElementById('status').textContent = 'Recherche...';
+  const statusEl = document.getElementById('status');
+  statusEl.innerHTML = 'Recherche<span class="spinner"></span>';
   const departName = document.getElementById('depart').value.trim()||'Bonnelles';
   const destName = document.getElementById('dest').value.trim()||'Cassis';
   const jours = parseInt(document.getElementById('jours').value);
@@ -167,48 +225,50 @@ async function generate() {
 
   const [depart, dest] = await Promise.all([geocode(departName), geocode(destName)]);
   if (!depart || !dest) {
-    document.getElementById('status').textContent = '❌ Ville introuvable';
+    statusEl.textContent = '❌ Ville introuvable';
     return;
   }
 
-  // Route principale
   const allWaypoints = [depart, dest];
   const route = await getRouteOSRM(allWaypoints);
-  if (!route) { document.getElementById('status').textContent='❌ Pas de route'; return; }
+  if (!route) { statusEl.textContent='❌ Pas de route'; return; }
 
-  document.getElementById('status').textContent = `✅ ${depart.name} → ${dest.name} (${route.km} km)`;
-  document.getElementById('status').style.color = '#1abc9c';
+  statusEl.innerHTML = `✅ ${depart.name} → ${dest.name} (${route.km} km)`;
+  statusEl.style.color = '#1abc9c';
 
-  // Générer les étapes itinérantes le long de la route
   let days = [];
   const env = getEnv(dest.lat, dest.lon);
-  
+
   if (itinerant === 'oui' && jours >= 3) {
-    // Interpoler des points le long de la géométrie de la route
     const coords = route.geom.coordinates;
     const segment = Math.floor(coords.length / (jours - 1));
-    
+
     for (let j = 1; j <= jours; j++) {
       let idx;
-      if (j === 1) idx = 0 + Math.floor(segment * 0.3);
-      else if (j === jours) idx = coords.length - 1 - Math.floor(segment * 0.3);
-      else idx = Math.floor(segment * (j - 1));
-      
+      if (j === 1) idx = Math.floor(segment * 0.25);
+      else if (j === jours) idx = coords.length - 1;
+      else idx = Math.floor(segment * (j - 0.5));
+
       const c = coords[Math.min(idx, coords.length-1)];
       const lat = c[1], lon = c[0];
-      const acts = pickActs(env, type, 2);
+      const acts = pickActs(env, type, j===1?1:2);
+
+      let dayName;
+      if (j === 1) dayName = `Départ ${depart.name}`;
+      else if (j === jours) dayName = dest.name;
+      else dayName = `Étape ${j}`;
+
       days.push({
         day: j,
-        name: j===1 ? `En route (proche ${depart.name})` : j===jours ? dest.name : `Étape ${j}`,
+        name: dayName,
         lat, lon, acts,
         nuit: heberg==='bivouac'?0:(heberg==='mixte'&&j<=1?0:(heberg==='mixte'?12:14)),
         nuitLabel: j===1&&heberg!=='camping'?'Bivouac':'Camping'
       });
     }
   } else {
-    // Camp de base fixe
     for (let j = 1; j <= jours; j++) {
-      const acts = pickActs(env, type, j===1?1:(j===jours?2:2));
+      const acts = pickActs(env, type, j===1?1:2);
       days.push({
         day: j,
         name: dest.name,
@@ -231,19 +291,56 @@ async function generate() {
 
   document.getElementById('budget-preview').innerHTML = `
     <h2>💰 ~${total}€/pers ${total<=budget?'✅':'⚠️+'+ (total-budget)+'€'}</h2>
-    <div class="budget-line"><span>⛽🛣️ Trajet (${kmTotal*2} km A/R)</span><span>${trajet}€</span></div>
+    <div class="budget-line"><span>⛽🛣️ Trajet (${kmTotal} km A/R)</span><span>${trajet}€</span></div>
     <div class="budget-line"><span>🎯 Activités</span><span>${actTotal}€</span></div>
     <div class="budget-line"><span>⛺ Nuits</span><span>${nuits}€</span></div>
     <div class="budget-line"><span>🍽️ Bouffe</span><span>${bouffe}€</span></div>
   `;
 
-  // Preview
-  let html = `<b>🗺️ ${depart.name} → ${dest.name} — ${jours}j · ${pers} pers</b><br>`;
-  days.forEach(d => {
-    html += `<div class="day-preview"><b>J${d.day}</b> 📍 ${d.name}<br>`;
-    html += d.acts.map(a=>`${a.e} ${a.n} (${a.p}€)`).join(' · ');
-    html += ` | ⛺ ${d.nuitLabel} (${d.nuit}€)</div>`;
+  // --- FETCH IMAGES FOR EACH DAY ---
+  // Fetch all images in parallel
+  const imgPromises = days.map(async d => {
+    let city = d.name;
+    // Try reverse geocode for generic "Étape N" names
+    if (city.match(/^Étape\s*\d+$/i) || city.match(/^En route/i)) {
+      const realCity = await reverseGeocode(d.lat, d.lon);
+      if (realCity) city = realCity;
+    }
+    const img = await fetchCityImage(city, d.name);
+    return { day: d.day, img, city };
   });
+  const dayImages = await Promise.all(imgPromises);
+
+  // Build image map
+  const imgMap = {};
+  dayImages.forEach(di => { imgMap[di.day] = di.img; });
+
+  // Hero image = destination image
+  const destImg = imgMap[days.length] || null;
+
+  // Build preview with photos
+  let html = '';
+  if (destImg) {
+    html += `<img class="hero-img" src="${destImg}" alt="${dest.name}" loading="lazy" onerror="this.style.display='none'">`;
+  }
+  html += `<div style="padding:0 8px 6px 8px;"><b>🗺️ ${depart.name} → ${dest.name} — ${jours}j · ${pers} pers</b></div>`;
+
+  days.forEach(d => {
+    const img = imgMap[d.day];
+    html += `<div class="day-card">`;
+    html += `<div class="day-card-header" style="color:${COLORS[(d.day-1)%COLORS.length]}">📍 J${d.day} — ${d.name}</div>`;
+    html += `<div class="day-card-body">`;
+    if (img) {
+      html += `<img class="day-card-img" src="${img}" alt="${d.name}" loading="lazy" onerror="this.style.display='none'">`;
+    } else {
+      html += `<div class="day-card-img" style="display:flex;align-items:center;justify-content:center;font-size:1.5em;">🗺️</div>`;
+    }
+    html += `<div class="day-card-info">`;
+    d.acts.forEach(a => { html += `<span>${a.e} ${a.n} (${a.p}€)</span>`; });
+    html += `<span style="margin-top:2px;">⛺ ${d.nuitLabel} (${d.nuit}€)</span>`;
+    html += `</div></div></div>`;
+  });
+
   document.getElementById('trip-preview').innerHTML = html;
 
   // Carte
@@ -251,25 +348,25 @@ async function generate() {
   routeLayers.forEach(l => map.removeLayer(l));
   markers = []; routeLayers = [];
 
-  const COLORS = ['#1abc9c','#e74c3c','#f39c12','#2ecc71','#9b59b6','#3498db','#e67e22','#e84393','#00b894','#6c5ce7'];
-  
-  // Route réelle via OSRM
   L.geoJSON(route.geom, {style:{color:'#1abc9c',weight:3,opacity:.6,dashArray:'8,6'}}).addTo(map);
   routeLayers.push('route');
 
-  // Départ
   markers.push(L.marker([depart.lat, depart.lon], {icon: mI('🚗','#1abc9c',28)})
     .bindPopup(`<b>🚗 DÉPART</b><br>${depart.name}`).addTo(map));
 
-  // Jours
   days.forEach(d => {
     const c = COLORS[(d.day-1)%COLORS.length];
+    const img = imgMap[d.day];
+    let popupContent = `<b>J${d.day} — ${d.name}</b><br>${d.acts.map(a=>a.e+' '+a.n+' ('+a.p+'€)').join('<br>')}<br>⛺ ${d.nuitLabel}`;
+    if (img) popupContent += `<br><img src="${img}" style="width:200px;border-radius:6px;margin-top:4px" loading="lazy">`;
     markers.push(L.marker([d.lat, d.lon], {icon: mI(d.day.toString(),c,24)})
-      .bindPopup(`<b>J${d.day} — ${d.name}</b><br>${d.acts.map(a=>a.e+' '+a.n+' ('+a.p+'€)').join('<br>')}<br>⛺ ${d.nuitLabel}`).addTo(map));
+      .bindPopup(popupContent, {maxWidth:250}).addTo(map));
   });
 
   map.fitBounds([[depart.lat,depart.lon],[dest.lat,dest.lon]], {padding:[50,50]});
 }
+
+const COLORS = ['#1abc9c','#e74c3c','#f39c12','#2ecc71','#9b59b6','#3498db','#e67e22','#e84393','#00b894','#6c5ce7'];
 </script>
 </body>
 </html>
