@@ -223,33 +223,66 @@ const onboardData = {
     {id:'kiff',emoji:'',label:'T\'es plutôt quel budget ?',type:'kiff'},
   ]},
   2:{title:'Où tu veux aller ? 🗺️',sub:'Choisis ta zone et ton environnement :',choices:[
-    {id:'dest',emoji:'🌊',label:'Bord de mer',action:()=>{document.getElementById('dest').value='Cassis';document.querySelectorAll('.pref-tag').forEach(t=>{t.classList.remove('active');if(t.dataset.pref==='mer')t.classList.add('active')})}},
-    {id:'dest',emoji:'⛰️',label:'Montagne',action:()=>{document.getElementById('dest').value='Chamonix';document.querySelectorAll('.pref-tag').forEach(t=>{t.classList.remove('active');if(t.dataset.pref==='montagne')t.classList.add('active')})}},
-    {id:'dest',emoji:'🏞️',label:'Nature / isolé',action:()=>{document.getElementById('dest').value='Ardèche';document.querySelectorAll('.pref-tag').forEach(t=>{t.classList.remove('active');if(t.dataset.pref==='isole')t.classList.add('active')})}},
-    {id:'dest',emoji:'🎉',label:'Festif / ville',action:()=>{document.getElementById('dest').value='Biarritz';document.querySelectorAll('.pref-tag').forEach(t=>{t.classList.remove('active');if(t.dataset.pref==='festif')t.classList.add('active')})}},
-    {id:'custom',emoji:'✏️',label:'Je choisis ma ville',action:()=>{document.getElementById('dest').focus()}},
+    {id:'dest_mer',emoji:'🌊',label:'Bord de mer',action:'dest_mer'},
+    {id:'dest_mont',emoji:'⛰️',label:'Montagne',action:'dest_mont'},
+    {id:'dest_iso',emoji:'🏞️',label:'Nature / isolé',action:'dest_iso'},
+    {id:'dest_fest',emoji:'🎉',label:'Festif / ville',action:'dest_fest'},
+    {id:'dest_custom',emoji:'✏️',label:'Je choisis ma ville',action:'dest_custom'},
   ]},
   3:{title:'Tu veux faire quoi ? 🎯',sub:'Coche les activités qui te branchent :',choices:[
-    {id:'all_water',emoji:'🌊',label:'Sports d\'eau',action:()=>{checkCat(true,'🌊 Eau')}},
-    {id:'all_mont',emoji:'⛰️',label:'Montagne / air',action:()=>{checkCat(true,'⛰️ Montagne');checkCat(true,'🪂 Air/Adrénaline')}},
-    {id:'all_night',emoji:'🌙',label:'Soirées / boîtes',action:()=>{checkCat(true,'🌙 Nuit')}},
-    {id:'all_detente',emoji:'🍷',label:'Détente / culture',action:()=>{checkCat(true,'🍷 Détente/Culture')}},
-    {id:'all_photo',emoji:'📸',label:'Spots photo / drone',action:()=>{checkCat(true,'📸 Photo/Drone')}},
-    {id:'all_everything',emoji:'🔥',label:'TOUT (je veux tout faire)',action:()=>{for(const k of Object.keys(ACTIVITY_CATEGORIES))checkCat(true,k)}},
+    {id:'all_water',emoji:'🌊',label:'Sports d\'eau',action:'act_water'},
+    {id:'all_mont',emoji:'⛰️',label:'Montagne / air',action:'act_mont'},
+    {id:'all_night',emoji:'🌙',label:'Soirées / boîtes',action:'act_night'},
+    {id:'all_detente',emoji:'🍷',label:'Détente / culture',action:'act_detente'},
+    {id:'all_photo',emoji:'📸',label:'Spots photo / drone',action:'act_photo'},
+    {id:'all_everything',emoji:'🔥',label:'TOUT (je veux tout faire)',action:'act_all'},
   ]},
   4:{title:'Quelle ambiance ? 🎭',sub:'Comment tu vois les journées :',choices:[
-    {id:'vibe_dyn',emoji:'🏃',label:'Dynamique — sport à fond, 3-4 activités/jour'},
-    {id:'vibe_mix',emoji:'⚖️',label:'Équilibré — sport le matin, chill l\'aprèm'},
-    {id:'vibe_chill',emoji:'🧘',label:'Chill — tranquille, 1 activité cool par jour'},
-    {id:'vibe_social',emoji:'🤝',label:'Rencontres — l\'ambiance prime sur le sport'},
+    {id:'vibe_dyn',emoji:'🏃',label:'Dynamique — sport à fond, 3-4 activités/jour',action:'vibe_dyn'},
+    {id:'vibe_mix',emoji:'⚖️',label:'Équilibré — sport le matin, chill l\'aprèm',action:'vibe_mix'},
+    {id:'vibe_chill',emoji:'🧘',label:'Chill — tranquille, 1 activité cool par jour',action:'vibe_chill'},
+    {id:'vibe_social',emoji:'🤝',label:'Rencontres — l\'ambiance prime sur le sport',action:'vibe_social'},
   ]},
   5:{title:'Dernière étape ! 📅',sub:'Tu pars quand et combien de temps ?',choices:[
-    {id:'date_we',emoji:'📅',label:'Week-end (3 jours)',action:()=>{setDates('weekend');document.getElementById('jours').value='3'}},
-    {id:'date_sem',emoji:'📅',label:'1 semaine (5-7 jours)',action:()=>{setDates('week');document.getElementById('jours').value='7'}},
-    {id:'date_10',emoji:'📅',label:'10 jours',action:()=>{setDates('10d');document.getElementById('jours').value='10'}},
-    {id:'date_custom',emoji:'✏️',label:'Je choisis mes dates',action:()=>{document.getElementById('dateStart').focus()}},
+    {id:'date_we',emoji:'📅',label:'Week-end (3 jours)',action:'date_we'},
+    {id:'date_sem',emoji:'📅',label:'1 semaine (5-7 jours)',action:'date_sem'},
+    {id:'date_10',emoji:'📅',label:'10 jours',action:'date_10'},
+    {id:'date_custom',emoji:'✏️',label:'Je choisis mes dates',action:'date_custom'},
   ]},
 };
+
+// Action runner — called by ID instead of broken string serialization
+function runAction(actionId){
+  const actions = {
+    dest_mer: ()=>{document.getElementById('dest').value='Cassis';togglePrefs('mer')},
+    dest_mont: ()=>{document.getElementById('dest').value='Chamonix';togglePrefs('montagne')},
+    dest_iso: ()=>{document.getElementById('dest').value='Ardèche';togglePrefs('isole')},
+    dest_fest: ()=>{document.getElementById('dest').value='Biarritz';togglePrefs('festif')},
+    dest_custom: ()=>{document.getElementById('dest').focus()},
+    act_water: ()=>{checkCat(true,'🌊 Eau')},
+    act_mont: ()=>{checkCat(true,'⛰️ Montagne');checkCat(true,'🪂 Air/Adrénaline')},
+    act_night: ()=>{checkCat(true,'🌙 Nuit')},
+    act_detente: ()=>{checkCat(true,'🍷 Détente/Culture')},
+    act_photo: ()=>{checkCat(true,'📸 Photo/Drone')},
+    act_all: ()=>{for(const k of Object.keys(ACTIVITY_CATEGORIES))checkCat(true,k)},
+    vibe_dyn: ()=>{sessionStorage.setItem('vibe','dyn')},
+    vibe_mix: ()=>{sessionStorage.setItem('vibe','mix')},
+    vibe_chill: ()=>{sessionStorage.setItem('vibe','chill')},
+    vibe_social: ()=>{sessionStorage.setItem('vibe','social')},
+    date_we: ()=>{setDates('weekend');document.getElementById('jours').value='3'},
+    date_sem: ()=>{setDates('week');document.getElementById('jours').value='7'},
+    date_10: ()=>{setDates('10d');document.getElementById('jours').value='10'},
+    date_custom: ()=>{document.getElementById('dateStart').focus()},
+  };
+  const fn = actions[actionId];
+  if(fn) fn();
+}
+
+function togglePrefs(pref){
+  document.querySelectorAll('.pref-tag').forEach(t=>{
+    t.classList.toggle('active', t.dataset.pref===pref);
+  });
+}
 
 function setDates(type){
   const now=new Date();
@@ -276,8 +309,10 @@ function renderOnboard(){
     }
     html+=`</div>`;
   }else{
-    data.choices.forEach(c=>{
-      html+=`<div class="onboard-choice" onclick="${c.action?'onboardPickAction(this, '+JSON.stringify(c.action.toString())+')':'onboardPick(this)'}"><span class="emoji">${c.emoji}</span>${c.label}</div>`;
+    // Non-kiff choices: use action IDs (not broken string serialization)
+    data.choices.forEach((c,i)=>{
+      const actionId = c.action || `choice_${onboardStep}_${i}`;
+      html+=`<div class="onboard-choice" onclick="onboardPickAction(this,'${actionId}')"><span class="emoji">${c.emoji}</span>${c.label}</div>`;
     });
   }
   html+=`</div>`;
@@ -301,13 +336,12 @@ function onboardPickKiff(lvl){
   document.querySelectorAll('.budget-opt')[Object.keys(KIFF_LEVELS).indexOf(String(lvl))]?.classList.add('sel');
 }
 
-function onboardPick(el){el.classList.toggle('sel')}
-
-function onboardPickAction(el, actionFn){
+function onboardPickAction(el, actionId){
   document.querySelectorAll('.onboard-choice').forEach(c=>c.classList.remove('sel'));
   el.classList.add('sel');
-  if(actionFn) actionFn();
+  if(actionId) runAction(actionId);
 }
+function onboardPick(el){el.classList.toggle('sel')}
 
 function onboardNext(){
   if(onboardStep>=totalOnboardSteps){
@@ -447,15 +481,8 @@ async function generate(){
   const dateStart=document.getElementById('dateStart').value;
   const dateEnd=document.getElementById('dateEnd').value;
 
-  // Get selected vibe from onboarding
-  const vibeEl=document.querySelector('.onboard-choice.sel');
-  let vibe='mix';
-  if(vibeEl){
-    const txt=vibeEl.textContent||'';
-    if(txt.includes('Dynamique')) vibe='dyn';
-    else if(txt.includes('Chill')) vibe='chill';
-    else if(txt.includes('Rencontre')) vibe='social';
-  }
+  // Get vibe from sessionStorage (set by onboarding)
+  const vibe = sessionStorage.getItem('vibe') || 'mix';
 
   const prefs=[];document.querySelectorAll('.pref-tag.active').forEach(t=>prefs.push(t.dataset.pref));
   const [depart,dest]=await Promise.all([geocode(departName),geocode(destName)]);
