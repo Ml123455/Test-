@@ -539,7 +539,7 @@ async function go(){
   // Map
   markers.forEach(m=>map.removeLayer(m));markers=[];
   map.eachLayer(l=>{if(l instanceof L.GeoJSON||(!l._url&&l instanceof L.Marker))map.removeLayer(l)});
-  L.geoJSON(route.geom,{style:{color:COLORS[0],weight:3,opacity:.3,dashArray:'8,6'}}).addTo(map);
+  L.geoJSON(route.geom,{style:{color:'#58a6ff',weight:4,opacity:.7}}).addTo(map);
   L.circle([dest.lat,dest.lon],{radius:radius*1000,color:COLORS[2],weight:1,opacity:.25,fillOpacity:.04}).addTo(map);
   markers.push(L.marker([depart.lat,depart.lon],{icon:mI('🚗',COLORS[0],26)}).bindPopup(`<b>🚗 DÉPART</b><br>${depart.name}`).addTo(map));
   for(let i=1;i<allGeo.length-1;i++)markers.push(L.marker([allGeo[i].lat,allGeo[i].lon],{icon:mI('📍',COLORS[2],18)}).bindPopup(`<b>📍 ÉTAPE</b><br>${allGeo[i].name}`).addTo(map));
