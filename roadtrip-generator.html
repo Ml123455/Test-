@@ -3,386 +3,437 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Road Trip Generator PRO — France</title>
+<title>Road Trip Generator — France</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--border:#21262d;--accent:#58a6ff;--gold:#d2a850;--text:#c9d1d9;--muted:#8b949e;--danger:#f85149;--green:#3fb950;--pink:#ff7b72;--purple:#bc8cff}
+:root { --bg:#0d1117; --panel:#161b22; --border:#21262d; --accent:#58a6ff; --gold:#d2a850; --text:#c9d1d9; --muted:#8b949e; --danger:#f85149; --green:#3fb950; --pink:#ff7b72; --purple:#a371f7; }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh}
-.left{width:420px;background:var(--panel);padding:12px;overflow-y:auto;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:4px}
+.left{width:420px;background:var(--panel);padding:14px;overflow-y:auto;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:5px;position:relative}
 .right{flex:1;display:flex;flex-direction:column}
 #map{flex:1;min-height:350px}
-.preview{background:var(--panel);max-height:450px;overflow-y:auto;border-top:2px solid var(--accent)}
-.preview-inner{padding:8px}
-
-/* JOURNÉE TYPE DEMO */
-.demo-banner{background:linear-gradient(135deg,rgba(88,166,255,.12),rgba(188,140,255,.12));border:1px solid var(--purple);border-radius:10px;padding:12px;margin:0 8px 12px;position:relative;overflow:hidden}
-.demo-banner::before{content:'✨ JOURNÉE TYPE';position:absolute;top:6px;right:8px;font-size:.55em;color:var(--purple);font-weight:700;animation:pulse 2s infinite;letter-spacing:.06em}
-@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
-.demo-timeline{position:relative;padding-left:24px}
-.demo-timeline::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),var(--purple),var(--pink),var(--gold));border-radius:1px}
-.demo-step{position:relative;padding:4px 0 4px 6px;font-size:.72em}
-.demo-step::before{content:'';position:absolute;left:-21px;top:8px;width:10px;height:10px;border-radius:50%;border:2px solid var(--bg)}
-.demo-step:nth-child(1)::before{background:var(--accent);border-color:var(--accent)}
-.demo-step:nth-child(2)::before{background:var(--gold);border-color:var(--gold)}
-.demo-step:nth-child(3)::before{background:var(--purple);border-color:var(--purple)}
-.demo-step:nth-child(4)::before{background:var(--pink);border-color:var(--pink)}
-.demo-step .step-time{color:var(--muted);font-size:.85em;margin-right:6px}
-.demo-step .step-label{font-weight:600}
-.demo-icons{display:flex;gap:8px;margin-top:8px;font-size:.7em;color:var(--muted)}
-.demo-icons span{background:var(--bg);padding:3px 8px;border-radius:6px;border:1px solid var(--border)}
-.demo-call{text-align:center;font-size:.68em;color:var(--muted);margin-top:8px;font-style:italic}
-label{font-size:.65em;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-top:2px}
-input,select{width:100%;padding:6px 7px;background:var(--bg);border:1px solid var(--border);border-radius:5px;color:var(--text);font-size:.76em}
+.preview{background:var(--panel);max-height:430px;overflow-y:auto;border-top:2px solid var(--accent)}
+.preview-inner{padding:10px}
+label{font-size:.67em;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:3px}
+input,select{width:100%;padding:7px 8px;background:var(--bg);border:1px solid var(--border);border-radius:5px;color:var(--text);font-size:.78em}
 input:focus,select:focus{outline:none;border-color:var(--accent)}
-.btn{width:100%;margin-top:4px;padding:12px;background:linear-gradient(135deg,var(--accent),#1f6feb);color:#fff;border:none;border-radius:6px;font-weight:700;font-size:.9em;cursor:pointer;transition:opacity .15s}
-.btn:hover{opacity:.85}
-.row2{display:flex;gap:6px}.row2>*{flex:1}
+.btn{width:100%;margin-top:5px;padding:11px;background:linear-gradient(135deg,var(--accent),#1f6feb);color:#fff;border:none;border-radius:6px;font-weight:700;font-size:.88em;cursor:pointer;transition:opacity .15s}
+.btn:hover{opacity:.88}
+.row2{display:flex;gap:8px}.row2>*{flex:1}
+.row3{display:flex;gap:6px}.row3>*{flex:1}
+
+.section-label{font-size:.65em;color:var(--muted);text-transform:uppercase;margin-top:4px}
+h3{font-size:.8em;color:var(--accent);font-weight:600;margin:4px 0 2px}
+
+/* ONBOARDING */
+.onboard-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:9999;display:flex;align-items:center;justify-content:center}
+.onboard-card{background:var(--panel);border:1px solid var(--border);border-radius:16px;width:440px;max-height:90vh;overflow-y:auto;padding:0;box-shadow:0 16px 48px rgba(0,0,0,.6)}
+.onboard-steps{display:flex;padding:12px 16px;gap:6px;border-bottom:1px solid var(--border)}
+.onboard-dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:all .3s}
+.onboard-dot.done{background:var(--green)}
+.onboard-dot.active{background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.onboard-body{padding:20px}
+.onboard-body h3{font-size:1.05em;margin-bottom:10px}
+.onboard-body p{font-size:.78em;color:var(--muted);margin-bottom:12px}
+.onboard-choices{display:flex;flex-direction:column;gap:8px}
+.onboard-choice{padding:12px 14px;background:var(--bg);border:2px solid var(--border);border-radius:10px;cursor:pointer;transition:all .15s;font-size:.82em;display:flex;align-items:center;gap:8px}
+.onboard-choice:hover{border-color:var(--accent);background:rgba(88,166,255,.05)}
+.onboard-choice.sel{border-color:var(--accent);background:rgba(88,166,255,.1)}
+.onboard-choice .emoji{font-size:1.3em}
+.onboard-nav{display:flex;gap:8px;justify-content:flex-end;padding:12px 20px;border-top:1px solid var(--border)}
+.onboard-nav button{padding:8px 18px;border-radius:6px;border:none;font-weight:600;font-size:.8em;cursor:pointer}
+.onboard-prev{background:var(--border);color:var(--text)}
+.onboard-next{background:var(--accent);color:#fff}
+.onboard-skip{background:transparent;color:var(--muted);font-size:.7em;cursor:pointer;margin-top:10px;text-align:center}
+.onboard-skip:hover{color:var(--text)}
+.budget-slider{display:flex;gap:8px;margin-top:6px}
+.budget-opt{flex:1;padding:8px 4px;background:var(--bg);border:2px solid var(--border);border-radius:8px;text-align:center;cursor:pointer;transition:all .15s;font-size:.68em}
+.budget-opt:hover{border-color:var(--accent)}
+.budget-opt.sel{border-color:var(--accent);background:rgba(88,166,255,.1)}
+.budget-opt .b-emoji{font-size:1.2em;display:block}
+.budget-opt .b-label{font-weight:600;display:block}
+.budget-opt .b-price{color:var(--muted);display:block}
 
 /* KIFF */
-.kiff-grid{display:flex;gap:5px;margin:2px 0}
-.kiff-card{flex:1;padding:7px 4px;background:var(--bg);border:2px solid var(--border);border-radius:8px;text-align:center;cursor:pointer;transition:all .15s;user-select:none}
-.kiff-card:hover{border-color:var(--accent)}
+.kiff-grid{display:flex;gap:6px;margin:3px 0}
+.kiff-card{flex:1;padding:8px;background:var(--bg);border:2px solid var(--border);border-radius:8px;text-align:center;cursor:pointer;transition:all .15s;user-select:none}
+.kiff-card:hover{border-color:var(--accent);background:rgba(88,166,255,.05)}
 .kiff-card.active{border-color:var(--accent);background:rgba(88,166,255,.08)}
-.kiff-emoji{font-size:1.2em;display:block}
-.kiff-name{font-size:.6em;font-weight:600}
-.kiff-price{font-size:.55em;color:var(--muted)}
-
-/* PREFERENCES */
-.pref-tags{display:flex;gap:3px;flex-wrap:wrap;margin:1px 0}
-.pref-tag{padding:3px 7px;background:var(--bg);border:1px solid var(--border);border-radius:12px;font-size:.66em;cursor:pointer;user-select:none;transition:all .15s}
+.kiff-emoji{font-size:1.3em;display:block;margin-bottom:2px}
+.kiff-name{font-size:.65em;font-weight:600;display:block}
+.kiff-price{font-size:.58em;color:var(--muted);display:block;margin-top:1px}
+.pref-tags{display:flex;gap:4px;flex-wrap:wrap;margin:2px 0}
+.pref-tag{padding:3px 8px;background:var(--bg);border:1px solid var(--border);border-radius:12px;font-size:.68em;cursor:pointer;user-select:none;transition:all .15s}
 .pref-tag:hover{border-color:var(--accent)}
 .pref-tag.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-
-/* AMBIANCE */
-.ambiance-tags{display:flex;gap:3px;flex-wrap:wrap;margin:1px 0}
-.ambiance-tag{padding:3px 7px;background:var(--bg);border:1px solid var(--border);border-radius:12px;font-size:.66em;cursor:pointer;user-select:none;transition:all .15s}
-.ambiance-tag:hover{border-color:var(--pink)}
-.ambiance-tag.active{background:var(--pink);color:#fff;border-color:var(--pink)}
-
-/* ACTIVITIES */
-.cat-toggle{display:flex;align-items:center;gap:3px;padding:3px 4px;background:var(--bg);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:.68em;font-weight:600;user-select:none}
+.cat-toggle{display:flex;align-items:center;gap:4px;padding:3px 5px;background:var(--bg);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:.7em;font-weight:600;user-select:none}
 .cat-toggle:hover{border-color:var(--accent)}
 .cat-body{display:none;padding:1px 0 1px 6px}
 .cat-body.open{display:block}
-.act-item{display:flex;align-items:center;gap:4px;padding:1px 2px;font-size:.68em;cursor:pointer;border-radius:3px}
-.act-item:hover{background:rgba(88,166,255,.05)}
+.act-item{display:flex;align-items:center;gap:4px;padding:1px 3px;font-size:.7em;cursor:pointer;border-radius:3px}
+.act-item:hover{background:rgba(88,166,255,.06)}
 .act-item input[type=checkbox]{width:auto;accent-color:var(--accent)}
-.act-price{color:var(--muted);font-size:.85em;margin-left:auto}
-
-/* BUDGET */
-.budget-bar{height:4px;background:var(--border);border-radius:2px;margin-top:2px;overflow:hidden}
+.act-price{color:var(--muted);font-size:.88em;margin-left:auto}
+.budget-bar{height:4px;background:var(--border);border-radius:2px;margin-top:3px;overflow:hidden}
 .budget-bar-inner{height:100%;border-radius:2px;transition:width .3s}
-.budget-line{display:flex;justify-content:space-between;padding:2px 3px;font-size:.7em;border-bottom:1px solid var(--border)}
+.budget-line{display:flex;justify-content:space-between;padding:2px 4px;font-size:.72em;border-bottom:1px solid var(--border)}
 .budget-line:last-child{border-bottom:none}
-
-/* DAY CARDS */
-.day-card{background:var(--bg);margin:3px 4px;border-radius:7px;overflow:hidden;border:1px solid var(--border)}
-.day-card-h{display:flex;align-items:center;padding:4px 7px;gap:5px;font-size:.7em;font-weight:600;border-bottom:1px solid var(--border)}
-.day-card-b{display:flex;gap:6px;padding:5px 7px}
-.day-img{width:80px;height:58px;border-radius:5px;object-fit:cover;flex-shrink:0;background:#1a1f2b;border:1px solid var(--border)}
-.day-info{flex:1;font-size:.68em;line-height:1.5}
-.day-section{margin:1px 0;padding-left:2px}
-.day-section .s-title{color:var(--accent);font-size:.85em;font-weight:600}
-.day-section .s-content{color:var(--muted);font-size:.9em}
-.nuitee{color:var(--gold);font-size:.9em}
-.club-line{color:var(--pink);font-size:.9em}
-.festival-badge{display:inline-block;padding:0 3px;background:rgba(188,140,255,.15);color:var(--purple);border-radius:3px;font-size:.75em;margin:1px 0}
-.hero-wrap{position:relative;margin:0 4px 5px;border-radius:9px;overflow:hidden;height:130px}
+.day-card{background:var(--bg);margin:3px 5px;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.day-card-h{display:flex;align-items:center;padding:4px 8px;gap:6px;font-size:.73em;font-weight:600;border-bottom:1px solid var(--border)}
+.day-card-b{display:flex;gap:7px;padding:6px 8px}
+.day-img{width:85px;height:62px;border-radius:6px;object-fit:cover;flex-shrink:0;background:#1a1f2b;border:1px solid var(--border)}
+.day-info{flex:1;font-size:.7em;line-height:1.55}
+.day-info .nuit{color:var(--gold)}
+.day-info .club{color:var(--pink);font-weight:500}
+.hero-wrap{position:relative;margin:0 5px 6px;border-radius:10px;overflow:hidden;height:140px}
 .hero-img{width:100%;height:100%;object-fit:cover}
-.hero-overlay{position:absolute;bottom:0;left:0;right:0;padding:12px 8px 5px;background:linear-gradient(transparent,rgba(0,0,0,.9))}
-.hero-overlay b{font-size:.85em;color:#fff}
-
-.status{font-size:.63em;color:var(--muted);min-height:1em}
-.spinner{display:inline-block;width:10px;height:10px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-left:3px}
+.hero-overlay{position:absolute;bottom:0;left:0;right:0;padding:14px 10px 6px;background:linear-gradient(transparent,rgba(0,0,0,.85))}
+.hero-overlay b{font-size:.9em;color:#fff}
+.status{font-size:.65em;color:var(--muted);min-height:1em}
+.spinner{display:inline-block;width:11px;height:11px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-left:4px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.badge{display:inline-block;padding:1px 4px;border-radius:3px;font-size:.68em;font-weight:600}
+.badge{display:inline-block;padding:1px 4px;border-radius:3px;font-size:.7em;font-weight:600}
 .badge-real{background:rgba(63,185,80,.15);color:var(--green)}
 .badge-osm{background:rgba(210,168,80,.15);color:var(--gold)}
-.badge-fest{background:rgba(188,140,255,.15);color:var(--purple)}
-.poi-section{margin-top:2px;font-size:.7em;line-height:1.35}
+.poi-section{margin-top:3px;font-size:.7em;line-height:1.4}
 .poi-section b{color:var(--accent)}
-#stepsList span{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:1px 4px;font-size:.65em;display:inline-flex;align-items:center;gap:2px;margin:1px}
+#stepsList span{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:1px 5px;font-size:.68em;display:inline-flex;align-items:center;gap:3px;margin:1px}
 #stepsList span span{cursor:pointer;color:var(--danger);font-weight:bold}
-.legend{font-size:.6em;color:var(--muted);margin-top:4px;display:flex;gap:8px;flex-wrap:wrap}
-.legend span{display:inline-flex;align-items:center;gap:3px}
-@media(max-width:768px){body{flex-direction:column}.left{width:100%;max-height:50vh}}
+.zone-hint{font-size:.62em;color:var(--gold);margin-top:1px;display:none}
+/* DEMO */
+.demo-banner{background:linear-gradient(135deg,rgba(163,113,247,.08),rgba(88,166,255,.05));border:1px solid #2a1f3d;border-radius:12px;padding:14px;text-align:center;animation:fadeIn .4s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.demo-banner .demo-badge{display:inline-block;background:var(--purple);color:#fff;padding:2px 10px;border-radius:10px;font-size:.65em;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+.demo-timeline{text-align:left;display:flex;flex-direction:column;gap:6px}
+.demo-step{padding:4px 0;font-size:.72em;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+.demo-step .step-time{font-weight:700;font-size:.85em;min-width:65px}
+.demo-step .step-label{color:var(--accent);font-weight:600;min-width:90px}
+.demo-icons{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+.demo-icons span{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:3px 6px;font-size:.65em}
+.demo-call{margin-top:8px;font-size:.74em;color:var(--accent);font-weight:600}
+@media(max-width:768px){body{flex-direction:column}.left{width:100%;max-height:50vh}.onboard-card{width:95vw}}
 </style>
 </head>
 <body>
 
-<div class="left">
-  <h3>🛣️ ROAD TRIP PRO — v2.0</h3>
+<!-- ONBOARDING OVERLAY -->
+<div class="onboard-overlay" id="onboardOverlay">
+<div class="onboard-card" id="onboardCard">
+  <div class="onboard-steps"><span class="onboard-dot active" data-step="1"></span><span class="onboard-dot" data-step="2"></span><span class="onboard-dot" data-step="3"></span><span class="onboard-dot" data-step="4"></span><span class="onboard-dot" data-step="5"></span></div>
+  <div class="onboard-body" id="onboardBody"></div>
+  <div class="onboard-nav">
+    <button class="onboard-prev" id="onboardPrev" onclick="onboardPrev()" style="display:none">← Retour</button>
+    <button class="onboard-next" id="onboardNext" onclick="onboardNext()">Suivant →</button>
+  </div>
+</div>
+</div>
 
-  <!-- KIFF -->
-  <div class="kiff-grid">
-    <div class="kiff-card" data-kiff="1" onclick="setKiff(1)"><span class="kiff-emoji">💸</span><span class="kiff-name">Éco</span><span class="kiff-price">~200€</span></div>
-    <div class="kiff-card active" data-kiff="2" onclick="setKiff(2)"><span class="kiff-emoji">😎</span><span class="kiff-name">Cool</span><span class="kiff-price">~400€</span></div>
-    <div class="kiff-card" data-kiff="3" onclick="setKiff(3)"><span class="kiff-emoji">🔥</span><span class="kiff-name">Kiff</span><span class="kiff-price">~650€</span></div>
-    <div class="kiff-card" data-kiff="4" onclick="setKiff(4)"><span class="kiff-emoji">💎</span><span class="kiff-name">Folie</span><span class="kiff-price">~900€</span></div>
+<div class="left" id="leftPanel">
+  <h3>🛣️ ROAD TRIP GENERATOR</h3>
+
+  <div class="section-label">⚡ Niveau de kiff</div>
+  <div class="kiff-grid" id="kiffGrid">
+    <div class="kiff-card" data-kiff="1" onclick="setKiff(1)"><span class="kiff-emoji">💸</span><span class="kiff-name">Éco</span><span class="kiff-price">~250€/pers</span></div>
+    <div class="kiff-card active" data-kiff="2" onclick="setKiff(2)"><span class="kiff-emoji">😎</span><span class="kiff-name">Cool</span><span class="kiff-price">~400€/pers</span></div>
+    <div class="kiff-card" data-kiff="3" onclick="setKiff(3)"><span class="kiff-emoji">🔥</span><span class="kiff-name">Kiff</span><span class="kiff-price">~650€/pers</span></div>
+    <div class="kiff-card" data-kiff="4" onclick="setKiff(4)"><span class="kiff-emoji">💎</span><span class="kiff-name">Folie</span><span class="kiff-price">~900€/pers</span></div>
   </div>
 
-  <!-- AMBIANCE -->
-  <label style="margin-top:2px">🎭 Ambiance recherchée</label>
-  <div class="ambiance-tags">
-    <span class="ambiance-tag" data-amb="rencontre" onclick="toggleAmbiance(this)">🤝 Rencontres</span>
-    <span class="ambiance-tag" data-amb="dynamique" onclick="toggleAmbiance(this)">⚡ Dynamique</span>
-    <span class="ambiance-tag active" data-amb="chill" onclick="toggleAmbiance(this)">🧘 Chill</span>
-    <span class="ambiance-tag" data-amb="fetard" onclick="toggleAmbiance(this)">🎉 Fêtard</span>
-    <span class="ambiance-tag" data-amb="nature" onclick="toggleAmbiance(this)">🌿 Nature</span>
-  </div>
-
-  <!-- PREFERENCES -->
-  <label style="margin-top:2px">🌍 Environnement</label>
-  <div class="pref-tags">
-    <span class="pref-tag" data-pref="mer" onclick="togglePref(this)">🌊 Mer</span>
+  <div class="section-label">🎯 Préférence</div>
+  <div class="pref-tags" id="prefTags">
+    <span class="pref-tag active" data-pref="mer" onclick="togglePref(this)">🌊 Mer</span>
     <span class="pref-tag" data-pref="montagne" onclick="togglePref(this)">⛰️ Montagne</span>
     <span class="pref-tag" data-pref="isole" onclick="togglePref(this)">🏞️ Isolé</span>
     <span class="pref-tag" data-pref="festif" onclick="togglePref(this)">🎉 Festif</span>
   </div>
 
-  <!-- ZONE + DEPART -->
+  <div class="section-label">📍 Zone de recherche</div>
   <div class="row2">
-    <div><label>🏠 Départ</label><input id="depart" value="Bonnelles"></div>
-    <div><label>📍 Région cible</label><input id="dest" value="Cassis"></div>
+    <div><label>Région / ville</label><input id="dest" value="Cassis" placeholder="Ex: Cassis, Chamonix..."></div>
+    <div style="flex:0.5"><label>Rayon</label><select id="radius"><option value="30">30 km</option><option value="50" selected>50 km</option><option value="100">100 km</option><option value="150">150 km</option></select></div>
   </div>
-  <div class="row2">
-    <div><label>📅 Jours</label><select id="jours"><option value="3">3j</option><option value="5" selected>5j</option><option value="7">7j</option><option value="10">10j</option><option value="14">14j</option></select></div>
-    <div><label>👥 Pers</label><select id="pers"><option value="2">2</option><option value="4" selected>4</option><option value="6">6</option></select></div>
-    <div><label>🔍 Rayon</label><select id="radius"><option value="30">30 km</option><option value="50" selected>50 km</option><option value="100">100 km</option><option value="150">150 km</option></select></div>
-  </div>
+  <div class="zone-hint" id="zoneHint"></div>
 
-  <!-- MODE -->
-  <div class="row2">
-    <div>
-      <label>🔄 Mode exploration</label>
-      <select id="mode">
-        <option value="itin">Itinérant (change/jour)</option>
-        <option value="semi">Semi (2-3j par spot)</option>
-        <option value="fixe" selected>Camp de base</option>
-      </select>
-    </div>
-    <div>
-      <label>⛺ Hébergement</label>
-      <select id="heberg">
-        <option value="bivouac">Bivouac</option>
-        <option value="mixte" selected>Mixte</option>
-        <option value="camping">Camping</option>
-      </select>
-    </div>
+  <div class="row3">
+    <div><label>🏠 Départ</label><input id="depart" value="Bonnelles"></div>
+    <div><label>📅 Jours</label><select id="jours"><option value="3">3j</option><option value="5" selected>5j</option><option value="7">7j</option><option value="10">10j</option></select></div>
+    <div><label>👥 Pers</label><select id="pers"><option value="2">2</option><option value="4" selected>4</option><option value="6">6</option></select></div>
   </div>
 
   <!-- DATES -->
   <div class="row2">
-    <div><label>📆 Départ</label><input type="date" id="dateDepart"></div>
-    <div><label>📆 Retour</label><input type="date" id="dateRetour"></div>
+    <div><label>📅 Départ</label><input type="date" id="dateStart"></div>
+    <div><label>📅 Retour</label><input type="date" id="dateEnd"></div>
   </div>
 
-  <!-- ETAPES -->
-  <label>➕ Étapes sur la route</label>
-  <div style="display:flex;gap:3px"><input id="stepInput" placeholder="Ex: Lyon" style="flex:1"><button onclick="addStep()" style="padding:5px 8px;background:var(--border);color:var(--text);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:.7em">+</button></div>
-  <div id="stepsList"></div>
+  <div class="row2">
+    <div><label>🔄 Mode</label><select id="mode"><option value="itin" selected>Road trip</option><option value="semi">Semi (2-3j/spot)</option><option value="fixe">Camp de base</option></select></div>
+    <div><label>⛺ Nuit</label><select id="heberg"><option value="bivouac">Bivouac</option><option value="mixte" selected>Mixte</option><option value="camping">Camping</option></select></div>
+  </div>
 
-  <!-- ACTIVITES -->
-  <h3 style="margin-top:4px">🎯 Activités <span style="font-weight:400;color:var(--muted);font-size:.8em">— coche juste ce que tu veux</span></h3>
+  <label>➕ Étapes</label>
+  <div style="display:flex;gap:4px"><input id="stepInput" placeholder="Ex: Lyon" style="flex:1"><button onclick="addStep()" style="padding:5px 10px;background:var(--border);color:var(--text);border:1px solid var(--border);border-radius:5px;cursor:pointer;font-size:.73em">+</button></div>
+  <div id="stepsList" style="margin-top:1px"></div>
+
+  <h3>🎯 Activités <span style="font-weight:400;color:var(--muted);font-size:.85em">— coche</span></h3>
   <div id="actCats"></div>
 
-  <button class="btn" onclick="generate()">🔄 GÉNÉRER LE ROAD TRIP</button>
+  <button class="btn" onclick="generate()">🔄 GÉNÉRER</button>
   <div class="status" id="status"></div>
-  <div class="legend">
-    <span>🟢 OSM vérifié</span><span>🟣 Festival</span><span>🟡 Camping/club réel</span>
-  </div>
 </div>
 
 <div class="right">
   <div id="map"></div>
   <div class="preview"><div class="preview-inner" id="trip-preview">
   <div class="demo-banner" id="demoBanner">
+    <div class="demo-badge">JOURNÉE TYPE</div>
     <div class="demo-timeline">
-      <div class="demo-step"><span class="step-time">☀️ 9h</span><span class="step-label">Réveil & café</span> — lever dans la nature, prépa</div>
-      <div class="demo-step"><span class="step-time">🌤️ 10h-17h</span><span class="step-label">Activité(s) du jour</span> — kayak, rando, escalade... ce que t'as coché</div>
-      <div class="demo-step"><span class="step-time">🌙 19h-2h</span><span class="step-label">Soirée</span> — bar à cocktails, boîte de nuit OSM réelle</div>
-      <div class="demo-step"><span class="step-time">⛺ Nuit</span><span class="step-label">Bivouac ou camping</span> — proche du spot, vérifié OSM</div>
+      <div class="demo-step"><span class="step-time">☀️ 9h</span><span class="step-label">Réveil & café</span> — lever dans la nature</div>
+      <div class="demo-step"><span class="step-time">🌤️ 10h-17h</span><span class="step-label">Activités</span> — kayak, rando, escalade...</div>
+      <div class="demo-step"><span class="step-time">🌙 19h-2h</span><span class="step-label">Soirée</span> — bar, boîte de nuit</div>
+      <div class="demo-step"><span class="step-time">⛺ Nuit</span><span class="step-label">Bivouac/camping</span> — proche du spot</div>
     </div>
     <div class="demo-icons">
-      <span>🛶 Kayak</span><span>🕺 Boîte</span><span>📸 Photo</span><span>🚁 Drone</span>
-      <span>🍷 Dégust</span><span>🧗 Escalade</span>
+      <span>🛶 Kayak</span><span>🕺 Boîte</span><span>📸 Photo</span><span>🚁 Drone</span><span>🍷 Dégust</span><span>🧗 Escalade</span>
     </div>
-    <div class="demo-call">👆 Choisis ton kiff, coche tes activités, mets tes dates → Générer</div>
+    <div class="demo-call">👆 Réponds au questionnaire ci-dessus → puis Génère</div>
   </div>
-</div></div>
+  </div></div>
   <div id="budget-preview" style="padding:6px 8px;background:#0d1117;border-top:1px solid var(--border);display:none"></div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-/* ═══════════════════════════════════════════════════
-   ROAD TRIP PRO v2.0 — Sources vérifiées uniquement
-   ═══════════════════════════════════════════════════
-   - Campings/clubs/viewpoints : OpenStreetMap (Overpass)
-   - Photos : Wikipedia
-   - Routes : OSRM
-   - Géocodage : Nominatim
-   - Festivals : Wikidata
-   - Prix : marché FR 2026
-   ═══════════════════════════════════════════════════ */
+// ═══════════════════════════════════════════════════
+// SOURCES VÉRIFIÉES — OpenStreetMap / Wikipedia / OSRM / Wikidata
+// ═══════════════════════════════════════════════════
 
-let map,markers=[],steps=[],currentKiff=2;
+let map, markers=[],steps=[],currentKiff=2, onboardStep=1, totalOnboardSteps=5;
 
-const KIFF={1:{budget:200,actsDay:1,bouffe:12,emoji:'💸',label:'Éco'},
-            2:{budget:400,actsDay:2,bouffe:15,emoji:'😎',label:'Cool'},
-            3:{budget:650,actsDay:3,bouffe:20,emoji:'🔥',label:'Kiff'},
-            4:{budget:900,actsDay:4,bouffe:30,emoji:'💎',label:'Folie'}};
+const KIFF_LEVELS = {
+  1:{budget:250,actsPerDay:1,bouffe:12,label:'Éco',emoji:'💸'},
+  2:{budget:400,actsPerDay:2,bouffe:15,label:'Cool',emoji:'😎'},
+  3:{budget:650,actsPerDay:3,bouffe:20,label:'Kiff',emoji:'🔥'},
+  4:{budget:900,actsPerDay:4,bouffe:30,label:'Folie',emoji:'💎'},
+};
 
-function setKiff(l){currentKiff=l;document.querySelectorAll('.kiff-card').forEach(c=>c.classList.toggle('active',c.dataset.kiff==l))}
-function togglePref(e){e.classList.toggle('active')}
-function toggleAmbiance(e){e.classList.toggle('active')}
+// ═══ ONBOARDING ═══
+const onboardData = {
+  1:{title:'Salut ! 👋',sub:'Crée ton road trip en 3 min. On commence par le plus important :',choices:[
+    {id:'kiff',emoji:'',label:'T\'es plutôt quel budget ?',type:'kiff'},
+  ]},
+  2:{title:'Où tu veux aller ? 🗺️',sub:'Choisis ta zone et ton environnement :',choices:[
+    {id:'dest',emoji:'🌊',label:'Bord de mer',action:()=>{document.getElementById('dest').value='Cassis';document.querySelectorAll('.pref-tag').forEach(t=>{t.classList.remove('active');if(t.dataset.pref==='mer')t.classList.add('active')})}},
+    {id:'dest',emoji:'⛰️',label:'Montagne',action:()=>{document.getElementById('dest').value='Chamonix';document.querySelectorAll('.pref-tag').forEach(t=>{t.classList.remove('active');if(t.dataset.pref==='montagne')t.classList.add('active')})}},
+    {id:'dest',emoji:'🏞️',label:'Nature / isolé',action:()=>{document.getElementById('dest').value='Ardèche';document.querySelectorAll('.pref-tag').forEach(t=>{t.classList.remove('active');if(t.dataset.pref==='isole')t.classList.add('active')})}},
+    {id:'dest',emoji:'🎉',label:'Festif / ville',action:()=>{document.getElementById('dest').value='Biarritz';document.querySelectorAll('.pref-tag').forEach(t=>{t.classList.remove('active');if(t.dataset.pref==='festif')t.classList.add('active')})}},
+    {id:'custom',emoji:'✏️',label:'Je choisis ma ville',action:()=>{document.getElementById('dest').focus()}},
+  ]},
+  3:{title:'Tu veux faire quoi ? 🎯',sub:'Coche les activités qui te branchent :',choices:[
+    {id:'all_water',emoji:'🌊',label:'Sports d\'eau',action:()=>{checkCat(true,'🌊 Eau')}},
+    {id:'all_mont',emoji:'⛰️',label:'Montagne / air',action:()=>{checkCat(true,'⛰️ Montagne');checkCat(true,'🪂 Air/Adrénaline')}},
+    {id:'all_night',emoji:'🌙',label:'Soirées / boîtes',action:()=>{checkCat(true,'🌙 Nuit')}},
+    {id:'all_detente',emoji:'🍷',label:'Détente / culture',action:()=>{checkCat(true,'🍷 Détente/Culture')}},
+    {id:'all_photo',emoji:'📸',label:'Spots photo / drone',action:()=>{checkCat(true,'📸 Photo/Drone')}},
+    {id:'all_everything',emoji:'🔥',label:'TOUT (je veux tout faire)',action:()=>{for(const k of Object.keys(ACTIVITY_CATEGORIES))checkCat(true,k)}},
+  ]},
+  4:{title:'Quelle ambiance ? 🎭',sub:'Comment tu vois les journées :',choices:[
+    {id:'vibe_dyn',emoji:'🏃',label:'Dynamique — sport à fond, 3-4 activités/jour'},
+    {id:'vibe_mix',emoji:'⚖️',label:'Équilibré — sport le matin, chill l\'aprèm'},
+    {id:'vibe_chill',emoji:'🧘',label:'Chill — tranquille, 1 activité cool par jour'},
+    {id:'vibe_social',emoji:'🤝',label:'Rencontres — l\'ambiance prime sur le sport'},
+  ]},
+  5:{title:'Dernière étape ! 📅',sub:'Tu pars quand et combien de temps ?',choices:[
+    {id:'date_we',emoji:'📅',label:'Week-end (3 jours)',action:()=>{setDates('weekend');document.getElementById('jours').value='3'}},
+    {id:'date_sem',emoji:'📅',label:'1 semaine (5-7 jours)',action:()=>{setDates('week');document.getElementById('jours').value='7'}},
+    {id:'date_10',emoji:'📅',label:'10 jours',action:()=>{setDates('10d');document.getElementById('jours').value='10'}},
+    {id:'date_custom',emoji:'✏️',label:'Je choisis mes dates',action:()=>{document.getElementById('dateStart').focus()}},
+  ]},
+};
 
-function getActive(cls){return [...document.querySelectorAll('.'+cls+'.active')].map(e=>e.dataset[cls.slice(0,4)])}
+function setDates(type){
+  const now=new Date();
+  if(type==='weekend'){const d=new Date(now);d.setDate(now.getDate()+(5-now.getDay()+1));document.getElementById('dateStart').value=d.toISOString().split('T')[0];d.setDate(d.getDate()+2);document.getElementById('dateEnd').value=d.toISOString().split('T')[0]}
+  else if(type==='week'){document.getElementById('dateStart').value=now.toISOString().split('T')[0];const d=new Date(now);d.setDate(now.getDate()+6);document.getElementById('dateEnd').value=d.toISOString().split('T')[0]}
+  else if(type==='10d'){document.getElementById('dateStart').value=now.toISOString().split('T')[0];const d=new Date(now);d.setDate(now.getDate()+9);document.getElementById('dateEnd').value=d.toISOString().split('T')[0]}
+}
 
-/* ═══ ACTIVITIES — ALL UNCHECKED BY DEFAULT ═══ */
-const ACTS={
-  "🌊 Eau":[
-    {id:'kayak',e:'🛶',n:'Kayak/Paddle',p:[15,30],env:['mer','riv','lac']},
-    {id:'snorkel',e:'🤿',n:'Snorkeling',p:[0,15],env:['mer']},
-    {id:'surf',e:'🏄',n:'Surf',p:[25,45],env:['mer']},
-    {id:'voile',e:'⛵',n:'Voile',p:[35,60],env:['mer','lac']},
-    {id:'canyon',e:'💧',n:'Canyoning',p:[35,55],env:['mont','riv']},
-    {id:'jetski',e:'🛥️',n:'Jet-ski',p:[60,100],env:['mer','lac']},
-    {id:'plongee',e:'🤿',n:'Plongée',p:[45,80],env:['mer']},
-    {id:'baignade',e:'🏊',n:'Plage/Baignade',p:[0,0],env:['mer','riv','lac']},
+function checkCat(val,catName){
+  const acts=ACTIVITY_CATEGORIES[catName];
+  if(acts) acts.forEach(a=>{const cb=document.getElementById('act_'+a.id);if(cb)cb.checked=val});
+}
+
+function renderOnboard(){
+  const data=onboardData[onboardStep];
+  if(!data) return;
+  let html=`<h3>${data.title}</h3><p>${data.sub}</p><div class="onboard-choices">`;
+
+  if(data.choices[0]?.type==='kiff'){
+    // Special kiff selector
+    html+=`<div style="display:flex;gap:8px">`;
+    for(const[lvl,k]of Object.entries(KIFF_LEVELS)){
+      html+=`<div class="budget-opt${currentKiff==lvl?' sel':''}" onclick="onboardPickKiff(${lvl})"><span class="b-emoji">${k.emoji}</span><span class="b-label">${k.label}</span><span class="b-price">~${k.budget}€/pers</span></div>`;
+    }
+    html+=`</div>`;
+  }else{
+    data.choices.forEach(c=>{
+      html+=`<div class="onboard-choice" onclick="${c.action?'onboardPickAction(this, '+JSON.stringify(c.action.toString())+')':'onboardPick(this)'}"><span class="emoji">${c.emoji}</span>${c.label}</div>`;
+    });
+  }
+  html+=`</div>`;
+  document.getElementById('onboardBody').innerHTML=html;
+
+  // Steps dots
+  document.querySelectorAll('.onboard-dot').forEach(d=>{
+    const s=parseInt(d.dataset.step);
+    d.classList.remove('done','active');
+    if(s<onboardStep) d.classList.add('done');
+    else if(s===onboardStep) d.classList.add('active');
+  });
+
+  document.getElementById('onboardPrev').style.display=onboardStep>1?'inline-block':'none';
+  document.getElementById('onboardNext').textContent=onboardStep===totalOnboardSteps?'✨ C\'est parti !':'Suivant →';
+}
+
+function onboardPickKiff(lvl){
+  currentKiff=lvl;setKiff(lvl);
+  document.querySelectorAll('.budget-opt').forEach(o=>o.classList.remove('sel'));
+  document.querySelectorAll('.budget-opt')[Object.keys(KIFF_LEVELS).indexOf(String(lvl))]?.classList.add('sel');
+}
+
+function onboardPick(el){el.classList.toggle('sel')}
+
+function onboardPickAction(el, actionFn){
+  document.querySelectorAll('.onboard-choice').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  if(actionFn) actionFn();
+}
+
+function onboardNext(){
+  if(onboardStep>=totalOnboardSteps){
+    // Finish!
+    document.getElementById('onboardOverlay').style.display='none';
+    return;
+  }
+  onboardStep++;
+  renderOnboard();
+}
+
+function onboardPrev(){
+  if(onboardStep>1){onboardStep--;renderOnboard()}
+}
+
+// Auto-start onboarding now
+renderOnboard();
+
+function setKiff(lvl){
+  currentKiff=lvl;
+  document.querySelectorAll('.kiff-card').forEach(c=>c.classList.toggle('active', c.dataset.kiff==lvl));
+}
+
+function togglePref(el){el.classList.toggle('active')}
+
+const ACTIVITY_CATEGORIES = {
+  "🌊 Eau": [
+    {id:'kayak',emoji:'🛶',name:'Kayak/Paddle',price:[15,30],env:['mer','riv','lac']},
+    {id:'snorkel',emoji:'🤿',name:'Snorkeling/PMT',price:[0,15],env:['mer']},
+    {id:'surf',emoji:'🏄',name:'Surf/Bodyboard',price:[25,45],env:['mer']},
+    {id:'voile',emoji:'⛵',name:'Voile/Catamaran',price:[35,60],env:['mer','lac']},
+    {id:'canyon',emoji:'💧',name:'Canyoning',price:[35,55],env:['mont','riv']},
+    {id:'jetski',emoji:'🛥️',name:'Jet-ski',price:[60,100],env:['mer','lac']},
+    {id:'plongee',emoji:'🤿',name:'Plongée baptême',price:[45,80],env:['mer']},
+    {id:'baignade',emoji:'🏊',name:'Baignade/Plage',price:[0,0],env:['mer','riv','lac']},
   ],
-  "⛰️ Montagne":[
-    {id:'escalade',e:'🧗',n:'Escalade',p:[30,45],env:['mont']},
-    {id:'rando',e:'🥾',n:'Rando guidée',p:[0,25],env:['all']},
-    {id:'viaferrata',e:'⛓️',n:'Via Ferrata',p:[25,40],env:['mont']},
-    {id:'vtt',e:'🚵',n:'VTT/Enduro',p:[25,45],env:['mont','riv']},
-    {id:'speleo',e:'🕳️',n:'Spéléo',p:[20,35],env:['mont','riv']},
-    {id:'accrobranche',e:'🌿',n:'Accrobranche',p:[20,30],env:['riv','mont']},
+  "⛰️ Montagne": [
+    {id:'escalade',emoji:'🧗',name:'Escalade/Falaise',price:[30,45],env:['mont']},
+    {id:'rando',emoji:'🥾',name:'Rando guidée',price:[0,25],env:['mont','riv','mer']},
+    {id:'viaferrata',emoji:'⛓️',name:'Via Ferrata',price:[25,40],env:['mont']},
+    {id:'vtt',emoji:'🚵',name:'VTT/Enduro',price:[25,45],env:['mont','riv']},
+    {id:'speleo',emoji:'🕳️',name:'Spéléo',price:[20,35],env:['mont','riv']},
   ],
-  "🪂 Adrénaline":[
-    {id:'parapente',e:'🪂',n:'Parapente',p:[75,120],env:['mont','mer']},
-    {id:'saut',e:'🪂',n:'Saut parachute',p:[200,300],env:['all']},
-    {id:'ulm',e:'✈️',n:'Baptême ULM',p:[80,150],env:['all']},
-    {id:'helico',e:'🚁',n:'Baptême hélico',p:[80,150],env:['all']},
-    {id:'montgolfiere',e:'🎈',n:'Montgolfière',p:[150,250],env:['all']},
+  "🪂 Air/Adrénaline": [
+    {id:'parapente',emoji:'🪂',name:'Parapente',price:[75,120],env:['mont','mer']},
+    {id:'saut',emoji:'🪂',name:'Saut parachute',price:[200,300],env:['all']},
+    {id:'ulm',emoji:'✈️',name:'Baptême ULM',price:[80,150],env:['all']},
+    {id:'helico',emoji:'🚁',name:'Baptême hélico',price:[80,150],env:['all']},
+    {id:'montgolfiere',emoji:'🎈',name:'Montgolfière',price:[150,250],env:['all']},
+    {id:'acrobranche',emoji:'🌿',name:'Accrobranche',price:[20,30],env:['riv','mont']},
   ],
-  "🍷 Détente":[
-    {id:'degust',e:'🍷',n:'Dégustation vin',p:[15,35],env:['all']},
-    {id:'musee',e:'🏛️',n:'Musée',p:[5,15],env:['all']},
-    {id:'spa',e:'🧖',n:'Spa/Thermal',p:[30,60],env:['all']},
-    {id:'equitation',e:'🐴',n:'Équitation',p:[25,50],env:['riv','mont']},
-    {id:'peche',e:'🎣',n:'Pêche',p:[15,30],env:['mer','riv','lac']},
+  "🍷 Détente/Culture": [
+    {id:'degust',emoji:'🍷',name:'Dégustation vin',price:[15,35],env:['all']},
+    {id:'musee',emoji:'🏛️',name:'Musée/Visite',price:[5,15],env:['all']},
+    {id:'spa',emoji:'🧖',name:'Spa/Thermal',price:[30,60],env:['all']},
+    {id:'equitation',emoji:'🐴',name:'Équitation',price:[25,50],env:['riv','mont']},
+    {id:'peche',emoji:'🎣',name:'Pêche',price:[15,30],env:['mer','riv','lac']},
   ],
-  "🌙 Soirée":[
-    {id:'nightclub',e:'🕺',n:'Boîte de nuit',p:[0,15],env:['all']},
-    {id:'bar',e:'🍸',n:'Bar à cocktails',p:[10,20],env:['all']},
-    {id:'concert',e:'🎸',n:'Concert',p:[15,40],env:['all']},
+  "🌙 Nuit": [
+    {id:'nightclub',emoji:'🕺',name:'Boîte de nuit',price:[0,15],env:['all']},
+    {id:'bar',emoji:'🍸',name:'Bar à cocktails',price:[10,20],env:['all']},
+    {id:'concert',emoji:'🎸',name:'Concert/Festival',price:[15,40],env:['all']},
   ],
-  "📸 Photo":[
-    {id:'viewpoint',e:'🌅',n:'Point de vue',p:[0,0],env:['all']},
-    {id:'drone',e:'🚁',n:'Spot drone',p:[0,0],env:['all']},
-    {id:'sunset',e:'🌇',n:'Coucher soleil',p:[0,0],env:['mer','mont']},
+  "📸 Photo/Drone": [
+    {id:'viewpoint',emoji:'🌅',name:'Point de vue/Photo',price:[0,0],env:['all']},
+    {id:'drone',emoji:'🚁',name:'Spot drone aérien',price:[0,0],env:['all']},
+    {id:'sunset',emoji:'🌇',name:'Coucher de soleil',price:[0,0],env:['mer','mont']},
   ],
 };
 
-function buildActs(){
+function buildActivityUI(){
+  const c=document.getElementById('actCats');
   let h='';
-  for(const[cat,acts]of Object.entries(ACTS)){
-    h+=`<div class="cat-toggle" onclick="this.nextElementSibling.classList.toggle('open')">▸ ${cat}</div>`;
-    h+=`<div class="cat-body">`;
+  for(const[cat,acts]of Object.entries(ACTIVITY_CATEGORIES)){
+    h+=`<div class="cat-toggle" onclick="this.nextElementSibling.classList.toggle('open')">▸ ${cat} <span style="color:var(--muted);font-weight:400;margin-left:3px">(${acts.length})</span></div>`;
+    h+=`<div class="cat-body open">`;
     acts.forEach(a=>{
-      h+=`<label class="act-item"><input type="checkbox" id="act_${a.id}">${a.e} ${a.n} <span class="act-price">${a.p[0]===a.p[1]?(a.p[0]===0?'gratuit':a.p[0]+'€'):a.p[0]+'-'+a.p[1]+'€'}</span></label>`;
+      // DÉCOCHÉ PAR DÉFAUT
+      h+=`<label class="act-item"><input type="checkbox" id="act_${a.id}">${a.emoji} ${a.name}<span class="act-price">${a.price[0]===a.price[1]?(a.price[0]===0?'gratuit':a.price[0]+'€'):a.price[0]+'-'+a.price[1]+'€'}</span></label>`;
     });
     h+=`</div>`;
   }
-  document.getElementById('actCats').innerHTML=h;
+  c.innerHTML=h;
 }
-buildActs();
+buildActivityUI();
 
-function getCheckedActs(env){
-  const r=[];
-  for(const[cat,acts]of Object.entries(ACTS)){
+function getSelectedActs(env){
+  const s=[];
+  for(const[cat,acts]of Object.entries(ACTIVITY_CATEGORIES)){
     for(const a of acts){
       const cb=document.getElementById('act_'+a.id);
-      if(cb&&cb.checked&&(a.env.includes('all')||a.env.includes(env))) r.push(a);
+      if(cb&&cb.checked&&(a.env.includes('all')||a.env.includes(env))) s.push(a);
     }
   }
-  return r;
+  return s;
 }
 
-function addStep(){const n=document.getElementById('stepInput').value.trim();if(n){steps.push(n);document.getElementById('stepInput').value='';renderSteps()}}
+function addStep(){const inp=document.getElementById('stepInput');const n=inp.value.trim();if(!n)return;steps.push(n);inp.value='';renderSteps()}
 function removeStep(i){steps.splice(i,1);renderSteps()}
 function renderSteps(){document.getElementById('stepsList').innerHTML=steps.map((s,i)=>`<span>📍${s}<span onclick="removeStep(${i})">×</span></span>`).join('')}
 
-/* ═══ DATES ═══ */
-(function setDefaultDates(){
-  const now=new Date();
-  // next Friday
-  const day=now.getDay();
-  const daysToFri=day<=5?5-day:12-day;
-  const fri=new Date(now);fri.setDate(fri.getDate()+daysToFri);
-  const sun=new Date(fri);sun.setDate(sun.getDate()+9); // 10 days later
-  document.getElementById('dateDepart').value=fri.toISOString().slice(0,10);
-  document.getElementById('dateRetour').value=sun.toISOString().slice(0,10);
-})();
-
-/* ═══ MAP ═══ */
-function initMap(){
-  if(map){map.remove();markers=[]}
-  map=L.map('map').setView([46.5,3.5],6);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OSM'}).addTo(map);
-}
+// ═══ MAP ═══
+function initMap(){if(map){map.remove();markers=[]}map=L.map('map').setView([46.5,3.5],6);L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OSM'}).addTo(map)}
 initMap();
 
-function mI(e,bg,s){return L.divIcon({html:`<div style="background:${bg};color:#fff;border-radius:50%;width:${s}px;height:${s}px;display:flex;align-items:center;justify-content:center;font-size:${s*.42}px;border:2px solid #0d1117;box-shadow:0 2px 8px rgba(0,0,0,.5)">${e}</div>`,iconSize:[s,s],iconAnchor:[s/2,s/2],popupAnchor:[0,-s/2]})}
+function mI(emoji,bg,s){return L.divIcon({html:`<div style="background:${bg};color:#fff;border-radius:50%;width:${s}px;height:${s}px;display:flex;align-items:center;justify-content:center;font-size:${s*.42}px;border:2px solid #0d1117;box-shadow:0 2px 8px rgba(0,0,0,.5)">${emoji}</div>`,iconSize:[s,s],iconAnchor:[s/2,s/2],popupAnchor:[0,-s/2]})}
 
-async function geocode(q){
-  try{const r=await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q+' France')}&format=json&limit=1`);await sleep(1100);const d=await r.json();if(d.length)return{lat:parseFloat(d[0].lat),lon:parseFloat(d[0].lon),name:d[0].display_name.split(',')[0]}}catch(e){}return null}
+async function geocode(q){try{const r=await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q+' France')}&format=json&limit=1`);await sleep(1100);const d=await r.json();if(d.length) return {lat:parseFloat(d[0].lat),lon:parseFloat(d[0].lon),name:d[0].display_name.split(',')[0]}}catch(e){}return null}
 
-async function revGeo(lat,lon){
-  try{const r=await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`);await sleep(1100);const d=await r.json();if(d.address)return d.address.city||d.address.town||d.address.village||''}catch(e){}return''}
+async function reverseGeocode(lat,lon){try{const r=await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`);await sleep(1100);const d=await r.json();if(d.address) return d.address.city||d.address.town||d.address.village||''}catch(e){}return''}
 
-async function getRoute(wpts){
-  try{const c=wpts.map(w=>`${w.lon},${w.lat}`).join(';');const r=await fetch(`https://router.project-osrm.org/route/v1/driving/${c}?geometries=geojson&overview=full`);const d=await r.json();if(!d.routes?.length)return null;return{km:Math.round(d.routes[0].distance/1000),geom:d.routes[0].geometry}}catch(e){return null}}
+async function getRouteOSRM(wpts){try{const coords=wpts.map(w=>`${w.lon},${w.lat}`).join(';');const r=await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?geometries=geojson&overview=full`);const d=await r.json();if(!d.routes?.length) return null;return {km:Math.round(d.routes[0].distance/1000),geom:d.routes[0].geometry}}catch(e){return null}}
 
-/* ═══ OVERPASS — OSM réel ═══ */
-async function osmQ(bbox,amenity,tourism){
-  try{let tag='';if(amenity)tag=`[amenity=${amenity}]`;else if(tourism)tag=`[tourism=${tourism}]`;const r=await fetch('https://overpass-api.de/api/interpreter',{method:'POST',headers:{'Accept':'application/json','Content-Type':'text/plain'},body:'data='+encodeURIComponent(`[out:json];node(${bbox})${tag};out 20;`)});if(!r.ok)return[];const d=await r.json();return d.elements.map(e=>({name:e.tags?.name||'Sans nom',lat:e.lat,lon:e.lon}))}catch(e){return[]}}
+async function queryOSM(bbox,amenity,tourism){try{let tag='';if(amenity) tag=`[amenity=${amenity}]`;else if(tourism) tag=`[tourism=${tourism}]`;const q=`[out:json];node(${bbox})${tag};out 20;`;const r=await fetch('https://overpass-api.de/api/interpreter',{method:'POST',headers:{'Accept':'application/json','Content-Type':'text/plain'},body:'data='+encodeURIComponent(q)});if(!r.ok) return[];const d=await r.json();return d.elements.map(e=>({name:e.tags?.name||'Sans nom',lat:e.lat,lon:e.lon}))}catch(e){return[]}}
+function bbox(lat,lon,r=0.15){return `${lat-r},${lon-r},${lat+r},${lon+r}`}
 
-function bb(lat,lon,r=0.2){return`${lat-r},${lon-r},${lat+r},${lon+r}`}
+const imgCache={};
+async function fetchCityImage(city){let clean=city.replace(/^(En route|Étape|proche|Spot)\s*/i,'').trim();if(!clean||clean.match(/^\d+$/)) return null;if(imgCache[clean]!==undefined) return imgCache[clean];for(const q of [clean,clean+' France',clean.replace(/\s*\(.*\)/,'').trim()]){try{const r=await fetch(`https://fr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(q)}`);if(!r.ok) continue;const d=await r.json();let url=null;if(d.originalimage?.source) url=d.originalimage.source;else if(d.thumbnail?.source) url=d.thumbnail.source.replace(/\/\d+px-/,'/800px-');if(url){imgCache[clean]=url;return url}}catch(e){continue}}imgCache[clean]=null;return null}
 
-/* ═══ WIKIPEDIA ═══ */
-const imgC={};
-async function getImg(city){
-  let cl=city.replace(/^(En route|Étape|proche|Spot)\s*/i,'').trim();
-  if(!cl||cl.match(/^\d+$/))return null;
-  if(imgC[cl]!==undefined)return imgC[cl];
-  for(const q of[cl,cl+' France',cl.replace(/\s*\(.*\)/,'').trim()]){
-    try{const r=await fetch(`https://fr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(q)}`);if(!r.ok)continue;const d=await r.json();let u=null;if(d.originalimage?.source)u=d.originalimage.source;else if(d.thumbnail?.source)u=d.thumbnail.source.replace(/\/\d+px-/,'/800px-');if(u){imgC[cl]=u;return u}}catch(e){continue}}
-  imgC[cl]=null;return null}
-
-/* ═══ WIKIDATA — FESTIVALS ═══ */
-async function getFestivals(dates,lat,lon,r){
-  try{
-    const q=`SELECT ?item ?itemLabel ?date WHERE {?item wdt:P31 wd:Q132241;wdt:P585 ?date;wdt:P625 ?loc. SERVICE wikibase:around {?item wdt:P625 ?loc. bd:serviceParam wikibase:center "Point(${lon} ${lat})"^^geo:wktLiteral;wikibase:radius ${r}}}. SERVICE wikibase:label {bd:serviceParam wikibase:language "fr,en".}} LIMIT 10`;
-    const r2=await fetch(`https://query.wikidata.org/sparql?format=json&query=${encodeURIComponent(q)}`);
-    if(!r2.ok)return[];
-    const d=await r2.json();
-    return d.results.bindings.map(b=>({name:b.itemLabel.value,date:b.date.value}));
-  }catch(e){return[]}
-}
-
-function isInDateRange(dateStr,dStart,dEnd){if(!dateStr||!dStart||!dEnd)return false;try{const d=new Date(dateStr.slice(0,10));return d>=dStart&&d<=dEnd}catch(e){return false}}
-
-function getEnv(lat,lon){if(lon<-1.5&&lat>43&&lat<48)return'mer';if(lon>5&&lat>43&&lat<44.5)return'mer';if(lat>44.5&&lon>6.5)return'mont';if(lat>42.5&&lat<43.5&&lon>2&&lon<7)return'mont';if(lat>45&&lon>6)return'mont';return'riv'}
-
+function getEnv(lat,lon){if(lon<-1.5&&lat>43&&lat<48) return'mer';if(lon>5&&lat>43&&lat<44.5) return'mer';if(lat>44.5&&lon>6.5) return'mont';if(lat>42.5&&lat<43.5&&lon>2&&lon<7) return'mont';if(lat>45&&lon>6) return'mont';return'riv'}
 function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
 
-/* ═══ GENERATE ═══ */
+// ═══ GENERATE ═══
 async function generate(){
-  const S=document.getElementById('status');
-  S.innerHTML='Géocodage<span class="spinner"></span>';
+  const statusEl=document.getElementById('status');
+  statusEl.innerHTML='Géocodage<span class="spinner"></span>';
 
   const departName=document.getElementById('depart').value.trim()||'Bonnelles';
   const destName=document.getElementById('dest').value.trim()||'Cassis';
@@ -391,275 +442,186 @@ async function generate(){
   const radius=parseInt(document.getElementById('radius').value);
   const mode=document.getElementById('mode').value;
   const heberg=document.getElementById('heberg').value;
-  const kiff=KIFF[currentKiff];
-  const dateStart=new Date(document.getElementById('dateDepart').value);
-  const dateEnd=new Date(document.getElementById('dateRetour').value);
+  const kiff=KIFF_LEVELS[currentKiff];
+  const budgetMax=kiff.budget;
+  const dateStart=document.getElementById('dateStart').value;
+  const dateEnd=document.getElementById('dateEnd').value;
 
-  const ambiances=getActive('ambiance');
-  const prefs=getActive('pref');
+  // Get selected vibe from onboarding
+  const vibeEl=document.querySelector('.onboard-choice.sel');
+  let vibe='mix';
+  if(vibeEl){
+    const txt=vibeEl.textContent||'';
+    if(txt.includes('Dynamique')) vibe='dyn';
+    else if(txt.includes('Chill')) vibe='chill';
+    else if(txt.includes('Rencontre')) vibe='social';
+  }
 
-  // Geocode
-  const[depart,dest]=await Promise.all([geocode(departName),geocode(destName)]);
-  if(!depart||!dest){S.textContent='❌ Ville introuvable';return}
+  const prefs=[];document.querySelectorAll('.pref-tag.active').forEach(t=>prefs.push(t.dataset.pref));
+  const [depart,dest]=await Promise.all([geocode(departName),geocode(destName)]);
+  if(!depart||!dest){statusEl.textContent='❌ Ville introuvable';return}
 
   let env=getEnv(dest.lat,dest.lon);
-  if(prefs.includes('mer')&&!prefs.includes('montagne'))env='mer';
-  if(prefs.includes('montagne')&&!prefs.includes('mer'))env='mont';
+  if(prefs.includes('mer')&&!prefs.includes('montagne')) env='mer';
+  if(prefs.includes('montagne')&&!prefs.includes('mer')) env='mont';
 
-  // Steps
-  const allGeo=[depart];
-  for(const s of steps){const g=await geocode(s);if(!g){S.textContent=`❌ "${s}"`;return};allGeo.push(g)}
-  allGeo.push(dest);
+  statusEl.innerHTML='Calcul route<span class="spinner"></span>';
+  const allGeo=[depart];for(const s of steps){const g=await geocode(s);if(!g){statusEl.textContent=`❌ "${s}" introuvable`;return}allGeo.push(g)}allGeo.push(dest);
 
-  S.innerHTML='Calcul route<span class="spinner"></span>';
-  const route=await getRoute(allGeo);
-  if(!route){S.textContent='❌ Pas de route';return}
+  const route=await getRouteOSRM(allGeo);
+  if(!route){statusEl.textContent='❌ Pas de route';return}
+  const kmAllerRetour=route.km*2;
 
-  const kmOneWay=route.km;
-  const kmAR=kmOneWay*2;
-  const distFromDep=kmOneWay>300?'loin':(kmOneWay>150?'moyen':'proche');
+  const zoneHint=document.getElementById('zoneHint');
+  zoneHint.style.display='block';
+  zoneHint.textContent=`📍 Zone ${radius}km autour de ${dest.name} · ${env==='mer'?'🌊 Côte':env==='mont'?'⛰️ Montagne':'🏞️ Nature'}${vibe==='dyn'?' · Dynamique':vibe==='chill'?' · Chill':vibe==='social'?' · Rencontres':''}`;
 
-  // Activities
-  const chex=getCheckedActs(env);
-  if(!chex.length){S.textContent='❌ Coche au moins une activité';return}
+  statusEl.innerHTML=`✅ ${depart.name} → ${dest.name} (${route.km}km) <span class="badge badge-real">OSRM</span>`;
+  statusEl.style.color=steps.length?'var(--gold)':'var(--green)';
 
-  // ═══ BUILD DAYS — DRIVE+EXPLORE LOGIC ═══
-  // How much time to spend driving vs exploring
-  // If >400km: 1-2 drive days (there+back), rest explore radius
-  // If 200-400km: 0-1 drive days
-  // If <200km: 0 drive days, all explore
+  const selectedActs=getSelectedActs(env);
+  if(!selectedActs.length){statusEl.textContent='❌ Sélectionne au moins une activité';return}
 
-  const needDriveDays=kmOneWay>400?2:(kmOneWay>200?1:0); // drive days (aller + retour)
-  const exploreDays=jours-needDriveDays; // days in the zone
-  const exploreBase=Math.max(1,exploreDays); // minimum 1 day exploring
+  // ═══ DRIVE + EXPLORE ═══
+  const driveDays=route.km>400?2:(route.km>200?1:0);
+  const exploreDays=Math.max(1,jours-driveDays);
+  const days=[];
+  const coords=route.geom.coordinates;
 
-  // Generate explore spots within radius of destination
-  const radDeg=radius/111; // rough km to degrees
-  const nExploreSpots=mode==='fixe'?1:(mode==='semi'?Math.max(1,Math.ceil(exploreBase/2.5)):Math.max(1,Math.min(exploreBase,5)));
-
-  // Generate real-ish spots around destination
-  const exploreSpots=[];
-  // Always include destination as a spot
-  exploreSpots.push({lat:dest.lat,lon:dest.lon,city:dest.name});
-
-  for(let i=1;i<nExploreSpots;i++){
-    const angle=(i/nExploreSpots)*Math.PI*2+Math.random()*0.3;
-    const r=radDeg*(0.3+Math.random()*0.7);
-    const lat=dest.lat+Math.cos(angle)*r;
-    const lon=dest.lon+Math.sin(angle)*r/1.4; // compensate for latitude distortion
-    const city=await revGeo(lat,lon);
-    exploreSpots.push({lat,lon,city:city||`Spot ${i+1}`});
-  }
-
-  // Distribute explore days across spots
-  const spotsBase=Math.floor(exploreBase/nExploreSpots);
-  const spotsRem=exploreBase%nExploreSpots;
-  const spotDays=exploreSpots.map((_,i)=>spotsBase+(i<spotsRem?1:0));
-
-  // Build day plan
-  let days=[],dn=1;
-
-  // DRIVE DAY (aller)
-  if(needDriveDays>=1){
-    // Day 1: drive from departure
-    const driveSpot=allGeo.length>2?allGeo[Math.floor(allGeo.length/2)]:dest;
-    const eveActs=chex.filter(a=>['bar','nightclub','concert','baignade','rando','viewpoint','sunset'].includes(a.id));
+  // Drive days (transit)
+  for(let i=0;i<driveDays;i++){
+    const idx=Math.floor(coords.length*(i+1)/(driveDays+1));
+    const c=coords[Math.min(idx,coords.length-1)];
+    const transitActs=selectedActs.filter(a=>['baignade','rando','musee'].includes(a.id)||a.price[0]===0);
     days.push({
-      day:dn++,name:`🚗 Trajet — ${depart.name}→${dest.name} (${kmOneWay}km)`,
-      lat:driveSpot.lat,lon:driveSpot.lon,
-      isDrive:true,
-      morning:{icon:'🚗',text:`Départ de ${depart.name}`,detail:kmOneWay>400?'Long trajet, prévoir pauses':''},
-      aprem:{icon:'🛣️',text:`Route — ${Math.round(kmOneWay/2)}km restants`,detail:''},
-      soir:{icon:eveActs[0]?.e||'🍽️',text:eveActs[0]?.n||'Installation',detail:'Arrivée en zone'},
-      dodo:{icon:'⛺',text:'Bivouac arrivée',detail:'0€'},
-      nuitLabel:'Bivouac',nuitPrice:0,
-      actsCost:0
+      day:i+1,name:`En route — Jour ${i+1}`,lat:c[1],lon:c[0],
+      acts:transitActs.slice(0,2),nightAct:null,
+      nuitLabel:'Bivouac',nuitPrice:0,isTransit:true
     });
   }
 
-  // EXPLORE DAYS
-  for(let s=0;s<exploreSpots.length;s++){
-    const spot=exploreSpots[s];
-    for(let d=0;d<spotDays[s];d++){
-      const isLastDay=(dn===jours);
-      const dayActs=[...chex]; // copy
+  // Explore days (in zone)
+  const actsPerDay=vibe==='dyn'?kiff.actsPerDay+1:vibe==='chill'?Math.max(1,kiff.actsPerDay-1):kiff.actsPerDay;
+  const photoActs=selectedActs.filter(a=>['viewpoint','drone','sunset'].includes(a.id));
+  const paidActs=selectedActs.filter(a=>!['viewpoint','drone','sunset','nightclub','bar','concert','baignade','rando'].includes(a.id));
+  const nightActs=selectedActs.filter(a=>['nightclub','bar','concert'].includes(a.id));
+  const freeActs=selectedActs.filter(a=>['baignade','rando'].includes(a.id));
 
-      // Pick 1-2 paid activities for morning/afternoon
-      const paid=dayActs.filter(a=>!['viewpoint','drone','sunset','nightclub','bar','concert','baignade','rando'].includes(a.id));
-      const free=dayActs.filter(a=>['viewpoint','drone','sunset','baignade','rando'].includes(a.id));
-      const night=dayActs.filter(a=>['nightclub','bar','concert'].includes(a.id));
-
-      // Morning: 1 paid activity
-      const morningAct=paid.length?paid[Math.floor(Math.random()*paid.length)]:null;
-      // Afternoon: 1 paid (different) or 1 free
-      const apremPool=paid.filter(a=>a!==morningAct);
-      const apremAct=apremPool.length?apremPool[Math.floor(Math.random()*apremPool.length)]:(free.length?free[0]:null);
-      // Evening: nightlife
-      const soirAct=night.length&&ambiances.includes('fetard')?night[Math.floor(Math.random()*night.length)]:null;
-      // Photo spot
-      const photo=dayActs.find(a=>['viewpoint','drone','sunset'].includes(a.id));
-
-      const nuitP=isLastDay&&heberg!=='camping'?0:(heberg==='bivouac'?0:14);
-      const nuitL=isLastDay&&heberg!=='camping'?'Bivouac':(heberg==='bivouac'?'Bivouac':'Camping');
-
-      const actsCost=[
-        morningAct?Math.round((morningAct.p[0]+morningAct.p[1])/2):0,
-        apremAct?Math.round((apremAct.p[0]+apremAct.p[1])/2):0,
-        soirAct?Math.round((soirAct.p[0]+soirAct.p[1])/2):0,
-      ].reduce((a,b)=>a+b,0);
-
-      days.push({
-        day:dn++,name:spot.city,
-        lat:spot.lat,lon:spot.lon,isDrive:false,
-        morning:{icon:morningAct?.e||'☀️',text:morningAct?.n||'Exploration',detail:morningAct?`~${Math.round((morningAct.p[0]+morningAct.p[1])/2)}€`:''},
-        aprem:{icon:apremAct?.e||'🌤️',text:apremAct?.n||'Détente',detail:apremAct?`~${Math.round((apremAct.p[0]+apremAct.p[1])/2)}€`:''},
-        soir:{icon:soirAct?.e||(night.length?'🌙':'🍽️'),text:soirAct?.n||'Soirée libre',detail:soirAct?`~${Math.round((soirAct.p[0]+soirAct.p[1])/2)}€`:''},
-        dodo:{icon:'⛺',text:nuitL,detail:`${nuitP}€`},
-        photoAct:photo,
-        nuitLabel:nuitL,nuitPrice:nuitP,
-        actsCost
-      });
-    }
+  // Zone spots — distribute around destination within radius circle
+  const zoneSpots=[];
+  for(let i=0;i<Math.min(exploreDays,5);i++){
+    const angle=(i/exploreDays)*Math.PI*2;
+    const r=(radius/111)*(0.3 + i*0.25/exploreDays);
+    zoneSpots.push({lat:dest.lat+Math.cos(angle)*r,lon:dest.lon+Math.sin(angle)*r});
   }
 
-  // RETURN DRIVE DAY (if needed)
-  if(needDriveDays>=2){
+  // Add dest itself as a spot
+  zoneSpots.unshift({lat:dest.lat,lon:dest.lon});
+
+  for(let i=0;i<exploreDays;i++){
+    const spot=zoneSpots[i%zoneSpots.length];
+    const dayActs=[];
+    const shuf=[...paidActs].sort(()=>Math.random()-.5);
+    dayActs.push(...shuf.slice(0,Math.min(actsPerDay,shuf.length)));
+    if(freeActs.length) dayActs.push(freeActs[Math.floor(Math.random()*freeActs.length)]);
+    if(photoActs.length) dayActs.push(photoActs[Math.floor(Math.random()*photoActs.length)]);
+    const nightAct=nightActs.length?nightActs[Math.floor(Math.random()*nightActs.length)]:null;
+
+    // Reverse geocode for real city name
+    const rc=await reverseGeocode(spot.lat,spot.lon);
+    const dayName=rc||(i===0?dest.name:`Spot ${i+1}`);
+
     days.push({
-      day:dn++,name:`🚗 Retour — ${dest.name}→${depart.name}`,
-      lat:depart.lat,lon:depart.lon,
-      isDrive:true,
-      morning:{icon:'🛣️',text:`Départ de ${dest.name}`,detail:''},
-      aprem:{icon:'🚗',text:`Route retour`,detail:`Arrivée à ${depart.name}`},
-      soir:{icon:'🏠',text:'Arrivée maison',detail:'Fin du road trip!'},
-      dodo:{icon:'🏠',text:'Maison',detail:'0€'},
-      nuitLabel:'Maison',nuitPrice:0,
-      actsCost:0
+      day:driveDays+i+1,name:dayName,
+      lat:spot.lat,lon:spot.lon,
+      acts:dayActs,nightAct,
+      nuitLabel:(i===0&&driveDays===0&&heberg!=='camping')?'Bivouac':(heberg==='bivouac'?'Bivouac':'Camping'),
+      nuitPrice:(i===0&&driveDays===0&&heberg!=='camping')?0:(heberg==='bivouac'?0:14),
+      isTransit:false
     });
   }
-
-  // Ensure exact number of days
-  while(days.length<jours){days.push({...days[days.length-1],day:days.length+1});}
-  days=days.slice(0,jours);
-  days.forEach((d,i)=>{d.day=i+1});
 
   // ═══ BUDGET ═══
-  const coutKmEssence=0.07*1.80;const coutKmPeage=.06;
-  const coutVoiture=Math.round(kmAR*(coutKmEssence+coutKmPeage));
+  const coutKmEssence=0.07*1.80,coutKmPeage=0.06;
+  const coutVoiture=Math.round(kmAllerRetour*(coutKmEssence+coutKmPeage));
   const trajet=Math.round(coutVoiture/pers);
-
-  let actT=0,nuitT=0;
-  days.forEach(d=>{actT+=d.actsCost||0;nuitT+=d.nuitPrice||0});
+  let actTotal=0,nuitTotal=0;
+  days.forEach(d=>{d.acts.forEach(a=>actTotal+=Math.round((a.price[0]+a.price[1])/2));nuitTotal+=d.nuitPrice});
   const bouffe=jours*kiff.bouffe;
-  let total=trajet+actT+nuitT+bouffe;
+  let total=trajet+actTotal+nuitTotal+bouffe;
 
   // Scale up if under budget
-  const tgtMin=kiff.budget*.75;
-  if(total<tgtMin){
-    const extra=tgtMin-total;
-    const paidActs=chex.filter(a=>a.p[0]>=50);
-    if(paidActs.length) days.forEach(d=>{
-      if(total>=tgtMin)return;
-      const pa=paidActs[Math.floor(Math.random()*paidActs.length)];
-      const ep=Math.round((pa.p[0]+pa.p[1])/2);
-      if(total+ep<=kiff.budget*.95&&!d.isDrive){
-        d.aprem={icon:pa.e,text:pa.n,detail:`~${ep}€`};
-        total+=ep;actT+=ep;
-      }
-    });
+  if(total<budgetMax*0.75){
+    const premiumActs=selectedActs.filter(a=>a.price[0]>=50);
+    if(premiumActs.length){days.forEach(d=>{const pa=premiumActs[Math.floor(Math.random()*premiumActs.length)];const ep=Math.round((pa.price[0]+pa.price[1])/2);if(total+ep<=budgetMax*0.95&&!d.acts.find(a=>a.id===pa.id)){d.acts.push(pa);total+=ep}})}
   }
 
-  const pct=Math.round(total/kiff.budget*100);
-  const bc=total<=kiff.budget?'green':(total<=kiff.budget*1.1?'gold':'pink');
+  actTotal=0;days.forEach(d=>d.acts.forEach(a=>actTotal+=Math.round((a.price[0]+a.price[1])/2)));
+  total=trajet+actTotal+nuitTotal+bouffe;
+  const budgetPct=Math.round(total/budgetMax*100);
+  const barColor=total<=budgetMax?'var(--green)':(total<=budgetMax*1.1?'var(--gold)':'var(--danger)');
 
   document.getElementById('budget-preview').style.display='block';
   document.getElementById('budget-preview').innerHTML=`
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">
-      <b style="font-size:.8em">💰 ${total}€/pers <span style="color:var(--muted);font-size:.78em">${kiff.emoji} ${kiff.label}</span></b>
-      <span style="font-size:.65em;color:var(--${bc})">${pct}%${total<=kiff.budget?' ✅':''}</span>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
+      <b style="font-size:.82em">💰 ${total}€/pers <span style="color:var(--muted);font-size:.8em">· ${kiff.emoji} ${kiff.label}</span></b>
+      <span style="font-size:.68em;color:${barColor}">${budgetPct}%${total<=budgetMax?' ✅':''}</span>
     </div>
-    <div class="budget-bar"><div class="budget-bar-inner" style="width:${Math.min(100,pct)}%;background:var(--${bc})"></div></div>
-    <div class="budget-line"><span>⛽🛣️ A/R ${kmAR}km · voiture ${coutVoiture}€</span><span>${trajet}€/pers</span></div>
-    <div class="budget-line"><span>🎯 Activités</span><span>${actT}€</span></div>
-    <div class="budget-line"><span>⛺ Nuits</span><span>${nuitT}€</span></div>
-    <div class="budget-line"><span>🍽️ Bouffe ${jours}j×${kiff.bouffe}€</span><span>${bouffe}€</span></div>
+    <div class="budget-bar"><div class="budget-bar-inner" style="width:${Math.min(100,budgetPct)}%;background:${barColor}"></div></div>
+    <div class="budget-line"><span>⛽🛣️ Trajet A/R (${kmAllerRetour} km · ${driveDays}j route + ${exploreDays}j zone)</span><span>${trajet}€/pers</span></div>
+    <div class="budget-line"><span>🎯 ${days.reduce((c,d)=>c+d.acts.length,0)} activités</span><span>${actTotal}€</span></div>
+    <div class="budget-line"><span>⛺ Nuits</span><span>${nuitTotal}€</span></div>
+    <div class="budget-line"><span>🍽️ Bouffe (${jours}j × ${kiff.bouffe}€)</span><span>${bouffe}€</span></div>
   `;
 
-  // ═══ POIs + IMAGES ═══
-  S.innerHTML='Recherche POIs réels + photos<span class="spinner"></span>';
+  // ═══ POIs & IMAGES ═══
+  statusEl.innerHTML='Recherche lieux réels & photos<span class="spinner"></span>';
+  const uniqueSpots=[];const seen=new Set();
+  days.forEach(d=>{const k=`${d.lat.toFixed(3)},${d.lon.toFixed(3)}`;if(!seen.has(k)){seen.add(k);uniqueSpots.push(d)}});
+  const searchRadius=radius>100?0.5:(radius>50?0.25:0.15);
 
-  const uspots={};
-  days.filter(d=>!d.isDrive).forEach(d=>{const k=`${d.lat.toFixed(2)},${d.lon.toFixed(2)}`;uspots[k]=d});
+  const poiPromises=uniqueSpots.map(async d=>{const bb=bbox(d.lat,d.lon,searchRadius);const[campings,clubs,viewpoints]=await Promise.all([queryOSM(bb,null,'camp_site'),queryOSM(bb,'nightclub',null),queryOSM(bb,null,'viewpoint')]);return{key:`${d.lat.toFixed(3)},${d.lon.toFixed(3)}`,campings,clubs,viewpoints}});
+  const imgPromises=days.map(async d=>{let city=d.name;if(city.match(/^(Étape|En route|Spot)/i)||city.includes('Départ')){const rc=await reverseGeocode(d.lat,d.lon);if(rc) city=rc}const img=await fetchCityImage(city);return{day:d.day,img}});
 
-  const poiP=Object.entries(uspots).map(async([k,d])=>{
-    const bb2=bb(d.lat,d.lon,radius>100?.5:.25);
-    const[camps,clubs,views]=await Promise.all([osmQ(bb2,null,'camp_site'),osmQ(bb2,'nightclub',null),osmQ(bb2,null,'viewpoint')]);
-    return{key:k,camps:clubs.filter(c=>c.name!=='Sans nom'),clubs:clubs.filter(c=>c.name!=='Sans nom'),views:views.filter(v=>v.name!=='Sans nom')};
-  });
+  const[poiResults,imgResults]=await Promise.all([Promise.all(poiPromises),Promise.all(imgPromises)]);
+  const poiMap={};poiResults.forEach(p=>{poiMap[p.key]=p});
+  const imgMap={};imgResults.forEach(r=>{imgMap[r.day]=r.img});
+  days.forEach(d=>{const k=`${d.lat.toFixed(3)},${d.lon.toFixed(3)}`;const pois=poiMap[k];if(pois){d.campings=(pois.campings||[]).filter(c=>c.name!=='Sans nom');d.clubs=(pois.clubs||[]).filter(c=>c.name!=='Sans nom');d.viewpoints=(pois.viewpoints||[]).filter(v=>v.name!=='Sans nom')}});
 
-  const imgP=days.map(async d=>{
-    if(d.isDrive)return{day:d.day,img:null};
-    const city=d.name;
-    const img=await getImg(city);
-    return{day:d.day,img};
-  });
-
-  const[poiR,imgR]=await Promise.all([Promise.all(poiP),Promise.all(imgP)]);
-
-  const poiM={};poiR.forEach(p=>{poiM[p.key]=p});
-  const imgM={};imgR.forEach(r=>{imgM[r.day]=r.img});
-
-  days.forEach(d=>{
-    if(d.isDrive)return;
-    const k=`${d.lat.toFixed(2)},${d.lon.toFixed(2)}`;
-    const pois=poiM[k];
-    if(pois){d.campings=pois.camps;d.clubs=pois.clubs;d.viewpoints=pois.views}
-  });
-
-  // Festivals
-  let festivals=[];
-  if(dateStart&&dateEnd){
-    try{
-      festivals=await getFestivals(null,dest.lat,dest.lon,radius*1000);
-      festivals=festivals.filter(f=>isInDateRange(f.date,dateStart,dateEnd));
-    }catch(e){}
-  }
-
-  S.innerHTML=`✅ ${days.filter(d=>!d.isDrive).length}j en zone · ${Math.min(nExploreSpots,exploreSpots.length)} spots <span class="badge badge-osm">OSM</span>`;
-  S.style.color='var(--green)';
+  statusEl.innerHTML=`✅ ${driveDays}j route + ${exploreDays}j zone · ${dest.name} <span class="badge badge-osm">OSM</span>`;
+  statusEl.style.color='var(--green)';
 
   // ═══ RENDER ═══
-  const dImg=imgM[days.findLast(d=>imgM[d.day])?.day];
+  const destImg=imgMap[days.length]||imgMap[days.findLast(d=>imgMap[d.day])?.day];
   let html='';
-  if(dImg){
-    html+=`<div class="hero-wrap"><img class="hero-img" src="${dImg}" loading=lazy onerror="this.parentElement.style.display='none'"><div class="hero-overlay"><b>${depart.name} → ${dest.name}</b> · ${jours}j · ${kiff.emoji} ${kiff.label} · ${radius}km</div></div>`;
-  }else{
-    html+=`<div style="padding:2px 4px"><b>${depart.name} → ${dest.name}</b> · ${jours}j · ${kiff.emoji} ${kiff.label} · zone ${radius}km</div>`;
-  }
-
-  if(festivals.length) html+=`<div class="festival-badge" style="margin:2px 4px">🎪 Festivals : ${festivals.map(f=>f.name).join(', ')} <span class="badge badge-fest">Wikidata</span></div>`;
+  if(destImg){html+=`<div class="hero-wrap"><img class="hero-img" src="${destImg}" alt="${dest.name}" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="hero-overlay"><b>${depart.name} → ${dest.name}</b> · ${jours}j · ${pers} pers · ${kiff.emoji} ${kiff.label}${vibe==='social'?' · 🤝 Rencontres':vibe==='dyn'?' · 🏃 Dynamique':vibe==='chill'?' · 🧘 Chill':''}</div></div>`}
+  else html+=`<div style="padding:3px 6px"><b>🗺️ ${depart.name} → ${dest.name}</b> · ${jours}j · ${kiff.emoji} ${kiff.label}</div>`;
 
   days.forEach(d=>{
-    const img=imgM[d.day];
-    const col=d.isDrive?'var(--muted)':COLORS[(d.day-1)%COLORS.length];
+    const img=imgMap[d.day];
+    const color=COLORS[(d.day-1)%COLORS.length];
     html+=`<div class="day-card">`;
-    html+=`<div class="day-card-h" style="color:${col}">${d.isDrive?'🚗':`📍`} J${d.day} — ${d.name}</div>`;
+    html+=`<div class="day-card-h" style="color:${color}">${d.isTransit?'🚗':'📍'} J${d.day} — ${d.name}${d.isTransit?' <span style="font-size:.75em;color:var(--muted)">(transit)</span>':''}</div>`;
     html+=`<div class="day-card-b">`;
-    if(img) html+=`<img class="day-img" src="${img}" loading=lazy onerror="this.style.display='none'">`;
-    else html+=`<div class="day-img" style="display:flex;align-items:center;justify-content:center;font-size:1.3em">${d.isDrive?'🛣️':'🗺️'}</div>`;
-
+    if(img) html+=`<img class="day-img" src="${img}" alt="${d.name}" loading="lazy" onerror="this.style.display='none'">`;
+    else html+=`<div class="day-img" style="display:flex;align-items:center;justify-content:center;font-size:1.4em">${d.isTransit?'🛣️':'🗺️'}</div>`;
     html+=`<div class="day-info">`;
-    if(d.morning)html+=`<div class="day-section"><span class="s-title">${d.morning.icon} Matin</span> <span class="s-content">${d.morning.text}${d.morning.detail?' · '+d.morning.detail:''}</span></div>`;
-    if(d.aprem)html+=`<div class="day-section"><span class="s-title">${d.aprem.icon} Aprèm</span> <span class="s-content">${d.aprem.text}${d.aprem.detail?' · '+d.aprem.detail:''}</span></div>`;
-    if(d.soir)html+=`<div class="day-section"><span class="s-title">${d.soir.icon} Soir</span> <span class="s-content">${d.soir.text}${d.soir.detail?' · '+d.soir.detail:''}</span></div>`;
-    if(d.dodo)html+=`<div class="day-section"><span class="s-title">${d.dodo.icon} Dodo</span> <span class="s-content nuitee">${d.dodo.text} · ${d.dodo.detail}</span></div>`;
-    if(d.photoAct)html+=`<div class="day-section"><span class="s-title">📸</span> <span class="s-content">${d.photoAct.e} ${d.photoAct.n}</span></div>`;
 
-    // POI
+    // Morning → Afternoon → Evening sections
+    if(d.isTransit){
+      html+=`<span>🚗 Route — trajet</span>`;
+      d.acts.forEach(a=>html+=`<span>${a.emoji} Pause ${a.name}</span>`);
+    }else{
+      if(d.acts.length>0) html+=`<span>☀️ Matin : ${d.acts[0]?.emoji||''} ${d.acts[0]?.name||''}</span>`;
+      if(d.acts.length>1) html+=`<span>🌤️ Aprèm : ${d.acts.slice(1).map(a=>a.emoji+' '+a.name).join(' · ')}</span>`;
+      if(d.nightAct) html+=`<span class="club">🌙 Soir : ${d.nightAct.emoji} ${d.nightAct.name} (~${Math.round((d.nightAct.price[0]+d.nightAct.price[1])/2)}€)</span>`;
+    }
+    html+=`<span class="nuit">⛺ ${d.nuitLabel} · ${d.nuitPrice}€</span>`;
     if(d.campings?.length||d.clubs?.length||d.viewpoints?.length){
-      html+=`<div class="poi-section"><b>📍 Proches :</b>`;
-      if(d.campings?.length)html+=`<br>⛺ ${d.campings.slice(0,3).map(c=>c.name).join(', ')} <span class="badge badge-osm">OSM</span>`;
-      if(d.clubs?.length)html+=`<br>🕺 ${d.clubs.slice(0,3).map(c=>c.name).join(', ')} <span class="badge badge-osm">OSM</span>`;
-      if(d.viewpoints?.length)html+=`<br>📸 ${d.viewpoints.slice(0,3).map(v=>v.name).join(', ')} <span class="badge badge-osm">OSM</span>`;
+      html+=`<div class="poi-section"><b>📍 À proximité :</b>`;
+      if(d.campings?.length) html+=`<br>⛺ ${d.campings.slice(0,3).map(c=>c.name).join(', ')} <span class="badge badge-osm">OSM</span>`;
+      if(d.clubs?.length) html+=`<br>🕺 ${d.clubs.slice(0,3).map(c=>c.name).join(', ')} <span class="badge badge-osm">OSM</span>`;
+      if(d.viewpoints?.length) html+=`<br>📸 ${d.viewpoints.slice(0,3).map(v=>v.name).join(', ')} <span class="badge badge-osm">OSM</span>`;
       html+=`</div>`;
     }
     html+=`</div></div></div>`;
@@ -669,40 +631,20 @@ async function generate(){
 
   // ═══ MAP ═══
   markers.forEach(m=>map.removeLayer(m));markers=[];
-  map.eachLayer(l=>{if(l instanceof L.Circle||l instanceof L.GeoJSON||(!l._url&&l instanceof L.Marker))map.removeLayer(l)});
-
-  // Route
-  L.geoJSON(route.geom,{style:{color:'var(--accent)',weight:2,opacity:.3,dashArray:'8,6'}}).addTo(map);
-
-  // ZONE CIRCLE
-  L.circle([dest.lat,dest.lon],{radius:radius*1000,color:'var(--gold)',weight:2,opacity:.4,fillOpacity:.06,fillColor:'var(--accent)'}).addTo(map);
-
-  // Depart
-  markers.push(L.marker([depart.lat,depart.lon],{icon:mI('🚗','var(--accent)',30)}).bindPopup(`<b>🏠 DÉPART</b><br>${depart.name}`).addTo(map));
-
-  // Steps
-  for(let i=1;i<allGeo.length-1;i++){
-    markers.push(L.marker([allGeo[i].lat,allGeo[i].lon],{icon:mI('📍','var(--gold)',18)}).bindPopup(`<b>📍 ÉTAPE</b><br>${allGeo[i].name}`).addTo(map));
-  }
-
-  // Day markers
-  days.forEach(d=>{
-    const c=d.isDrive?'var(--muted)':COLORS[(d.day-1)%COLORS.length];
-    const img=imgM[d.day];
-    let pc=`<b>J${d.day} — ${d.name}</b>`;
-    if(d.morning)pc+=`<br>☀️ ${d.morning.text}`;
-    if(d.aprem)pc+=`<br>🌤️ ${d.aprem.text}`;
-    if(d.soir)pc+=`<br>🌙 ${d.soir.text}`;
-    if(img)pc+=`<br><img src="${img}" style="width:140px;border-radius:5px;margin-top:3px" loading=lazy>`;
-    markers.push(L.marker([d.lat,d.lon],{icon:mI(d.isDrive?'🛣️':d.day.toString(),c,d.isDrive?20:24)}).bindPopup(pc,{maxWidth:220}).addTo(map));
-  });
-
-  const bounds=L.latLngBounds(allGeo.map(g=>[g.lat,g.lon]));
-  map.fitBounds(bounds,{padding:[40,40]});
+  map.eachLayer(l=>{if(l instanceof L.GeoJSON||(!l._url&&l instanceof L.Marker))map.removeLayer(l)});
+  L.geoJSON(route.geom,{style:{color:'var(--accent)',weight:3,opacity:.35,dashArray:'8,6'}}).addTo(map);
+  if(mode==='fixe'||true){L.circle([dest.lat,dest.lon],{radius:radius*1000,color:'var(--gold)',weight:1,opacity:.3,fillOpacity:.05,dashArray:'4,4'}).addTo(map)}
+  markers.push(L.marker([depart.lat,depart.lon],{icon:mI('🚗','var(--accent)',28)}).bindPopup(`<b>🚗 DÉPART</b><br>${depart.name}`).addTo(map));
+  for(let i=1;i<allGeo.length-1;i++){markers.push(L.marker([allGeo[i].lat,allGeo[i].lon],{icon:mI('📍','var(--gold)',20)}).bindPopup(`<b>📍 ÉTAPE</b><br>${allGeo[i].name}`).addTo(map))}
+  days.forEach(d=>{const c=COLORS[(d.day-1)%COLORS.length];const img=imgMap[d.day];let pc=`<b>J${d.day} — ${d.name}</b>${d.isTransit?'<br>🚗 Transit':''}<br>${d.acts.map(a=>a.emoji+' '+a.name).join('<br>')}<br>⛺ ${d.nuitLabel}`;if(d.nightAct) pc+=`<br>🌙 ${d.nightAct.emoji} ${d.nightAct.name}`;if(d.campings?.length) pc+=`<br>⛺ ${d.campings.slice(0,2).map(c=>c.name).join(', ')}`;if(d.clubs?.length) pc+=`<br>🕺 ${d.clubs.slice(0,2).map(c=>c.name).join(', ')}`;if(img) pc+=`<br><img src="${img}" style="width:160px;border-radius:6px;margin-top:4px" loading="lazy">`;markers.push(L.marker([d.lat,d.lon],{icon:mI(d.isTransit?'🚗':d.day.toString(),c,22)}).bindPopup(pc,{maxWidth:240}).addTo(map))});
+  const bounds=L.latLngBounds(allGeo.map(g=>[g.lat,g.lon]));map.fitBounds(bounds,{padding:[40,40]});
   document.querySelector('.preview').scrollTop=0;
 }
 
 const COLORS=['#58a6ff','#f78166','#d2a850','#3fb950','#bc8cff','#f0883e','#79c0ff','#ff7b72','#56d364','#e3b341','#a371f7','#db6d28','#2ea043','#d55b8e'];
+
+// Set default dates to next weekend
+(function(){const now=new Date();const d=new Date(now);d.setDate(now.getDate()+(5-now.getDay()+1));document.getElementById('dateStart').value=d.toISOString().split('T')[0];d.setDate(d.getDate()+4);document.getElementById('dateEnd').value=d.toISOString().split('T')[0]})();
 </script>
 </body>
 </html>
