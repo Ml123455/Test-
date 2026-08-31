@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panier — Nido</title>
+  <meta name="description" content="Votre panier Nido. Paiement sécurisé Stripe.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#fafaf7">
+  <meta name="color-scheme" content="light only">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">Nido<span>.</span></a>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      <div class="nav-links">
+        <a href="produit.html">Produit</a>
+        <a href="index.html#avis">Avis</a>
+        <a href="faq.html">FAQ</a>
+        <a href="index.html#bundles" class="btn btn-primary btn-sm">Commander</a>
+        <a href="panier.html" class="nav-cart" aria-label="Panier">🛒 <span class="nav-cart-count">0</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ⚠️ CONFIG : colle ici ton lien Stripe Payment Link (après avoir créé le produit sur dashboard.stripe.com) -->
+  <script>var STRIPE_PAYMENT_LINK = '';</script>
+
+  <div class="cart-wrap">
+    <div class="container">
+      <div id="cart-root"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Nido<span>.</span></div>
+          <p>L'art du rangement. Des accessoires pensés pour remettre de l'ordre dans votre maison, simplement.</p>
+        </div>
+        <div>
+          <h4>Boutique</h4>
+          <a href="produit.html">Produit</a>
+          <a href="index.html#bundles">Offres</a>
+          <a href="panier.html">Panier</a>
+        </div>
+        <div>
+          <h4>Aide</h4>
+          <a href="faq.html">FAQ</a>
+          <a href="retours.html">Retours &amp; remboursements</a>
+          <a href="cgv.html">Livraison</a>
+        </div>
+        <div>
+          <h4>Légal</h4>
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="cgv.html">CGV</a>
+          <a href="confidentialite.html">Confidentialité</a>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 Nido — Tous droits réservés.</div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
