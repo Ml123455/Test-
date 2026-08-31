@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quelle app pour apprendre l'anglais ?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f3; --card:#ffffff; --bd:#eae4d6; --bd2:#ddd5c2;
+  --tx:#2d2a24; --mt:#8b8473; --ac:#b8893a; --ac-soft:#f4ead8;
+  --teal:#2e7d6b; --teal-soft:#e3f0ec; --red:#b3452f; --red-soft:#f6e4de;
+  --blue:#3b6ea5; --blue-soft:#e6eef6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto;padding:40px 20px 80px}
+header{text-align:center;margin-bottom:34px}
+header h1{font-family:'Lora',serif;font-size:2.1rem;font-weight:700;letter-spacing:-.01em}
+header .sub{color:var(--mt);margin-top:8px;font-size:1rem;max-width:640px;margin-left:auto;margin-right:auto}
+.kicker{display:inline-block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);font-weight:700;margin-bottom:10px}
+
+section{margin-bottom:34px}
+.sec-title{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sec-title .n{width:22px;height:22px;border-radius:50%;background:var(--ac);color:#fff;font-size:.7rem;display:flex;align-items:center;justify-content:center}
+
+/* Objectives */
+.obj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.obj{background:var(--card);border:2px solid var(--bd);border-radius:14px;padding:18px 16px;cursor:pointer;user-select:none;transition:border-color .15s,transform .1s,box-shadow .15s;text-align:left}
+.obj:hover{border-color:var(--bd2);transform:translateY(-1px)}
+.obj.sel{border-color:var(--ac);box-shadow:0 4px 16px rgba(184,137,58,.14);background:var(--ac-soft)}
+.obj .e{font-size:1.7rem;display:block;margin-bottom:8px}
+.obj .t{font-weight:700;font-size:.95rem}
+.obj .d{color:var(--mt);font-size:.8rem;margin-top:3px}
+.obj .chk{float:right;width:20px;height:20px;border-radius:50%;border:2px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:transparent;margin-top:2px}
+.obj.sel .chk{background:var(--ac);border-color:var(--ac);color:#fff}
+
+/* Filters */
+.filters{display:flex;flex-wrap:wrap;gap:24px}
+.f-group{flex:1;min-width:220px}
+.f-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mt);font-weight:700;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:7px 14px;background:var(--card);border:1.5px solid var(--bd);border-radius:20px;font-size:.82rem;cursor:pointer;user-select:none;transition:all .12s;font-weight:500}
+.chip:hover{border-color:var(--bd2)}
+.chip.on{background:var(--tx);color:#fff;border-color:var(--tx)}
+
+/* Results meta */
+.res-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.res-count{color:var(--mt);font-size:.9rem}
+.res-count b{color:var(--tx)}
+#reset{background:none;border:none;color:var(--ac);font-size:.82rem;cursor:pointer;font-weight:600;text-decoration:underline}
+#reset:hover{opacity:.8}
+
+/* Cards */
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px;transition:box-shadow .15s,transform .12s;position:relative;overflow:hidden}
+.card:hover{box-shadow:0 8px 28px rgba(45,42,36,.08);transform:translateY(-2px)}
+.card.top{border:2px solid var(--ac);background:linear-gradient(180deg,var(--ac-soft),#fff 60%)}
+.badge-top{position:absolute;top:14px;right:14px;background:var(--ac);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.04em;padding:4px 10px;border-radius:12px;text-transform:uppercase}
+.c-head{display:flex;align-items:center;gap:12px}
+.c-logo{width:46px;height:46px;border-radius:12px;background:var(--blue-soft);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
+.c-name{font-family:'Lora',serif;font-weight:700;font-size:1.12rem;line-height:1.2}
+.c-rating{color:var(--ac);font-size:.8rem;font-weight:600;margin-top:2px}
+.c-rating .stars{color:#d9a53a}
+.c-price{font-size:.78rem;color:var(--mt);margin-top:2px}
+.c-match{display:flex;align-items:center;gap:8px;font-size:.75rem;color:var(--mt)}
+.m-bar{flex:1;height:6px;background:var(--bd);border-radius:3px;overflow:hidden}
+.m-fill{height:100%;border-radius:3px;background:var(--ac)}
+.m-pct{font-weight:700;color:var(--tx);min-width:34px;text-align:right}
+.c-desc{font-size:.86rem;color:var(--tx)}
+.c-tags{display:flex;flex-wrap:wrap;gap:5px}
+.ctag{font-size:.68rem;padding:3px 9px;border-radius:10px;background:var(--blue-soft);color:var(--blue);font-weight:600}
+.ctag.gold{background:var(--ac-soft);color:var(--ac)}
+.c-pc{border-top:1px solid var(--bd);padding-top:10px;font-size:.8rem;display:grid;gap:3px}
+.c-pc .p{color:var(--teal)}
+.c-pc .p::before{content:"+ "}
+.c-pc .c{color:var(--red)}
+.c-pc .c::before{content:"− "}
+.c-cta{display:flex;gap:8px;margin-top:auto}
+.c-cta a{flex:1;text-align:center;padding:9px;border-radius:8px;font-size:.82rem;font-weight:600;text-decoration:none;transition:opacity .12s}
+.c-cta .go{background:var(--tx);color:#fff}
+.c-cta .go:hover{opacity:.85}
+.c-cta .why{background:var(--ac-soft);color:var(--ac);cursor:pointer;user-select:none}
+.c-cta .why:hover{opacity:.8}
+.why-note{display:none;font-size:.78rem;color:var(--mt);background:var(--bg);border:1px dashed var(--bd2);border-radius:8px;padding:8px 10px;margin-top:8px}
+.why-note.show{display:block}
+
+.note{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px 18px;font-size:.8rem;color:var(--mt);margin-top:30px}
+.note b{color:var(--tx)}
+.empty{text-align:center;color:var(--mt);padding:40px;font-size:.95rem}
+
+footer{text-align:center;color:var(--mt);font-size:.78rem;margin-top:50px}
+footer a{color:var(--ac)}
+
+@media(max-width:720px){
+  .obj-grid{grid-template-columns:1fr 1fr}
+  .cards{grid-template-columns:1fr}
+  header h1{font-size:1.7rem}
+}
+@media(max-width:420px){.obj-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="kicker">Guide comparatif</span>
+    <h1>Quelle app pour apprendre l'anglais&nbsp;?</h1>
+    <p class="sub">La meilleure application dépend de <b>ton objectif</b> : créer une habitude, maîtriser la grammaire, ou parler à l'oral. Choisis ton but principal, on te classe les apps qui y répondent vraiment.</p>
+  </header>
+
+  <section>
+    <div class="sec-title"><span class="n">1</span> Ton objectif principal</div>
+    <div class="obj-grid" id="objGrid"></div>
+  </section>
+
+  <section>
+    <div class="sec-title"><span class="n">2</span> Filtres optionnels</div>
+    <div class="filters">
+      <div class="f-group">
+        <div class="f-label">Budget</div>
+        <div class="chips" id="budgetChips">
+          <div class="chip on" data-budget="all">Tous budgets</div>
+          <div class="chip" data-budget="free">Gratuit</div>
+          <div class="chip" data-budget="cheap">&lt; 12€/mois</div>
+        </div>
+      </div>
+      <div class="f-group">
+        <div class="f-label">Format</div>
+        <div class="chips" id="formatChips">
+          <div class="chip on" data-format="all">Tous</div>
+          <div class="chip" data-format="app">📱 App auto-didacte</div>
+          <div class="chip" data-format="tuteur">👨‍🏫 Prof particulier</div>
+          <div class="chip" data-format="echange">💬 Échange linguistique</div>
+          <div class="chip" data-format="cours">🏫 Cours en groupe</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="res-head">
+      <div class="res-count" id="resCount"></div>
+      <button id="reset">↺ Réinitialiser</button>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <div class="note">💡 <b>Prix indicatifs (août 2026)</b>, susceptibles de varier selon pays, durée d'abonnement et promos. Les notes proviennent des stores (App Store / Google Play). Objectif : te faire gagner du temps, pas remplacer un essai gratuit.</div>
+
+  <footer>
+    Sources : sites officiels des éditeurs, comparatifs publics (Babbel, Vocably, Rennes Language Center).<br>
+    Ce site est un comparatif indépendant — aucun lien sponsorisé.
+  </footer>
+</div>
+
+<script>
+"use strict";
+
+const OBJ = {
+  habitude:{label:"Habitude quotidienne", emoji:"🎯", desc:"Créer une routine et rester motivé chaque jour"},
+  grammaire:{label:"Grammaire", emoji:"📚", desc:"Comprendre les règles et progresser de façon structurée"},
+  oral:{label:"Oral / conversation", emoji:"🗣️", desc:"Parler et être à l'aise à l'oral"},
+  vocab:{label:"Vocabulaire", emoji:"🧠", desc:"Mémoriser des mots et des expressions"},
+  ecoute:{label:"Compréhension orale", emoji:"🎧", desc:"Comprendre l'anglais parlé (podcasts, vidéos)"},
+  ecrit:{label:"Écrit / professionnel", emoji:"✍️", desc:"Rédiger des emails et textes propres"}
+};
+
+const RELATED = {
+  habitude:["vocab","oral","ecoute"],
+  grammaire:["ecrit","vocab"],
+  oral:["ecoute","habitude"],
+  vocab:["habitude","ecoute","grammaire"],
+  ecoute:["vocab","oral"],
+  ecrit:["grammaire"]
+};
+
+const APPS = [
+  {name:"Duolingo", logo:"🦉", url:"https://www.duolingo.com", rating:4.7,
+   tags:["habitude","vocab"], format:["app"], free:true, minPrice:0,
+   price:"Gratuit · Super 7€/mois · Max 13€/mois",
+   desc:"La référence du jeu d'apprentissage. Séries quotidiennes, ligues et gamification pour ancrer une routine.",
+   pros:["100% utilisable gratuitement","Streaks et ligues ultra motivants","Très ludique, 5 min/jour suffisent"],
+   cons:["Grammaire peu expliquée","Oral limité","Plafonne autour du niveau B1-B2"],
+   why:"Parfait pour installer une habitude sans effort : le streak te ramène chaque jour."},
+  {name:"Babbel", logo:"🟠", url:"https://www.babbel.com", rating:4.5,
+   tags:["grammaire","ecrit"], format:["app"], free:false, minPrice:7,
+   price:"Essai gratuit · dès ~7€/mois (annuel)",
+   desc:"Cours structurés conçus par des linguistes, du A1 au C1. La grammaire est expliquée, pas seulement devinée.",
+   pros:["Grammaire clairement expliquée","Progression structurée par niveau","Dialogues réalistes"],
+   cons:["Pas de vrai mode gratuit","Pratique orale payante en plus (Babbel Live)"],
+   why:"Si tu veux comprendre les règles au lieu de répéter des phrases, Babbel structure tout pour toi."},
+  {name:"Busuu", logo:"🌍", url:"https://www.busuu.com", rating:4.4,
+   tags:["grammaire","ecrit","vocab"], format:["app"], free:true, minPrice:0,
+   price:"Gratuit · Premium ~6€/mois",
+   desc:"Cours alignés sur le CECRL avec correction de tes exercices par des natifs de la communauté.",
+   pros:["Corrections par de vrais locuteurs","Parcours structuré CECRL","Version gratuite correcte"],
+   cons:["Gratuit limité en contenu","Qualité des corrections inégale"],
+   why:"Le seul à combiner grammaire structurée + feedback humain sur tes écrits."},
+  {name:"Memrise", logo:"🌱", url:"https://www.memrise.com", rating:4.5,
+   tags:["vocab","habitude","ecoute"], format:["app"], free:true, minPrice:0,
+   price:"Gratuit · Pro ~8€/mois",
+   desc:"Vocabulaire en contexte via de courtes vidéos de natifs + répétition espacée pour retenir durablement.",
+   pros:["Vidéos de vrais locuteurs (accents réels)","Répétition espacée efficace","Bon pour le vocabulaire de survie"],
+   cons:["Moins structuré que Babbel","Contenu communautaire variable"],
+   why:"Pour mémoriser des mots et expressions qui restent, avec le bonus d'entendre de vrais accents."},
+  {name:"Anki", logo:"🗂️", url:"https://apps.ankiweb.net", rating:4.5,
+   tags:["vocab"], format:["app"], free:true, minPrice:0,
+   price:"Gratuit (desktop/Android/web) · iOS ~25€ one-shot",
+   desc:"Le système de cartes à répétition espacée le plus puissant. Tu crées tes propres decks, sans limite.",
+   pros:["SRS redoutablement efficace","Gratuit et illimité","100% personnalisable"],
+   cons:["Courbe d'apprentissage (pas intuitif)","Pas de contenu intégré : à créer","Interface austère"],
+   why:"La solution des apprenants sérieux : rien ne bat Anki pour mémoriser du vocabulaire sur la durée."},
+  {name:"MosaLingua", logo:"🎓", url:"https://www.mosalingua.com", rating:4.3,
+   tags:["vocab","habitude"], format:["app"], free:false, minPrice:5,
+   price:"~5-8€/mois",
+   desc:"Méthode française basée sur la répétition espacée + audio, orientée efficacité plutôt que jeu.",
+   pros:["Méthode SRS éprouvée","Conçu et suivi en français","Pratique pour les débutants FR→EN"],
+   cons:["Moins fun que Duolingo","Interface un peu datée"],
+   why:"Un bon compromis français : vocabulaire utile + méthode sérieuse sans bling-bling."},
+  {name:"italki", logo:"👨‍🏫", url:"https://www.italki.com", rating:4.9,
+   tags:["oral","grammaire"], format:["tuteur"], free:false, minPrice:8,
+   price:"8-30€ / leçon · sans abonnement",
+   desc:"La plateforme de profs particuliers la plus large. Tu paies à la séance, profs certifiés ou natifs.",
+   pros:["Profs certifiés et notés","Paiement à la séance (zéro engagement)","Flexibilité totale"],
+   cons:["Coût à la séance","Trouver le bon prof demande des essais"],
+   why:"Rien ne remplace un prof pour l'oral : italki te laisse essayer sans t'engager."},
+  {name:"Preply", logo:"💬", url:"https://www.preply.com", rating:4.5,
+   tags:["oral"], format:["tuteur"], free:false, minPrice:5,
+   price:"5-40€ / leçon · abonnement mensuel",
+   desc:"Cours particuliers avec un très large choix de profs, à des prix qui varient selon le pays du tuteur.",
+   pros:["Très grand choix de profs","Prix variables (dès ~5€)","Cours personnalisés"],
+   cons:["Qualité inégale selon les profs","Engagement mensuel (leçons à consommer)"],
+   why:"Pour de l'oral 1-à-1 à petit budget, avec un prof que tu choisis toi-même."},
+  {name:"Cambly", logo:"🎙️", url:"https://www.cambly.com", rating:4.3,
+   tags:["oral"], format:["tuteur"], free:false, minPrice:50,
+   price:"~50-120€/mois (abonnement)",
+   desc:"Conversation illimitée avec des natifs anglophones, ambiance décontractée, sans préparation de cours.",
+   pros:["Natifs anglophones","Sessions illimitées selon le plan","Ambiance détendue, dispo 24/7"],
+   cons:["Cher","Profs pas forcément formés à la pédagogie"],
+   why:"Pour débloquer la fluidité en parlant beaucoup, sans la pression d'un cours formel."},
+  {name:"HelloTalk", logo:"🌐", url:"https://www.hellotalk.com", rating:4.4,
+   tags:["oral","ecrit"], format:["echange"], free:true, minPrice:0,
+   price:"Gratuit · VIP ~7€/mois",
+   desc:"Échange linguistique : tu discutes avec des natifs qui apprennent le français. Correction intégrée.",
+   pros:["Gratuit","Immersion réelle avec des natifs","Correction de tes messages intégrée"],
+   cons:["Pas de profs (échange informel)","Partenaires irréguliers","Fonctionnalités type rencontre à surveiller"],
+   why:"Le moyen gratuit de pratiquer avec de vrais anglophones, à l'écrit comme à l'oral."},
+  {name:"Tandem", logo:"🔄", url:"https://www.tandem.net", rating:4.3,
+   tags:["oral"], format:["echange"], free:true, minPrice:0,
+   price:"Gratuit · Pro ~7€/mois",
+   desc:"L'alternative à HelloTalk : mise en relation avec des partenaires pour s'entraîner mutuellement.",
+   pros:["Gratuit","Grande communauté internationale","Appels audio/vidéo intégrés"],
+   cons:["Pas structuré","Dépend de la régularité des partenaires"],
+   why:"Pour troquer ton français contre leur anglais, gratuitement et à l'oral."},
+  {name:"Lingoda", logo:"🏫", url:"https://www.lingoda.com", rating:4.4,
+   tags:["oral","grammaire","ecrit"], format:["cours","tuteur"], free:false, minPrice:120,
+   price:"~120-150€/mois (cours en groupe)",
+   desc:"Cours en ligne en petits groupes (max 5) avec des profs certifiés CELTA, programme CECRL complet.",
+   pros:["Profs certifiés CELTA","Petits groupes (max 5)","Sprint avec remboursement","Certificats CECRL"],
+   cons:["Cher","Engagement et horaires fixes"],
+   why:"Le plus proche d'une vraie école de langue, avec un vrai cadre et des diplômes."},
+  {name:"Loora", logo:"🤖", url:"https://www.loora.ai", rating:4.3,
+   tags:["oral","habitude"], format:["app"], free:false, minPrice:10,
+   price:"~10€/mois",
+   desc:"Coach d'oral par IA : tu parles en anglais, l'IA te corrige en temps réel (prononciation, grammaire).",
+   pros:["Pratique orale illimitée 24/7","Feedback instantané","Sans la peur du jugement humain"],
+   cons:["Une IA, pas un humain","Nuances culturelles limitées"],
+   why:"Pour oser parler tous les jours sans pression, avec correction immédiate."},
+  {name:"TalkPal", logo:"🗨️", url:"https://www.talkpal.ai", rating:4.2,
+   tags:["oral","habitude"], format:["app"], free:true, minPrice:0,
+   price:"Gratuit · Premium ~10€/mois",
+   desc:"Conversations par IA dans des scénarios réels (resto, entretien…), avec retour sur ton expression.",
+   pros:["Version gratuite généreuse","Scénarios de la vraie vie","Dispo à toute heure"],
+   cons:["Voix IA parfois artificielle","Moins précis qu'un prof"],
+   why:"Le pendant gratuit de Loora pour s'entraîner à l'oral au quotidien."},
+  {name:"Grammarly", logo:"✅", url:"https://www.grammarly.com", rating:4.6,
+   tags:["ecrit","grammaire"], format:["app"], free:true, minPrice:0,
+   price:"Gratuit · Premium ~12€/mois",
+   desc:"Correcteur d'anglais en temps réel : grammaire, ponctuation, ton. S'intègre partout où tu écris.",
+   pros:["Correction en temps réel","Explique tes erreurs","Suggestions de ton (pro)"],
+   cons:["Pas pour l'oral","Pensé pour les natifs","Premium cher pour ce que c'est"],
+   why:"L'allié parfait pour des emails et textes professionnels impeccables."},
+  {name:"LingQ", logo:"📖", url:"https://www.lingq.com", rating:4.4,
+   tags:["ecoute","vocab"], format:["app"], free:false, minPrice:12,
+   price:"~12€/mois",
+   desc:"Immersion par la lecture et l'écoute : des milliers de contenus réels avec audio synchronisé.",
+   pros:["Contenu réel massif (articles, podcasts)","Lecture + audio synchronisés","Vocabulaire en contexte"],
+   cons:["Interface complexe","Moins adapté aux grands débutants"],
+   why:"Pour apprendre l'anglais en le consommant, pas en l'étudiant."},
+  {name:"BBC Learning English", logo:"🎧", url:"https://www.bbc.co.uk/learningenglish", rating:4.7,
+   tags:["ecoute","vocab"], format:["app"], free:true, minPrice:0,
+   price:"100% gratuit",
+   desc:"Leçons audio et vidéo de la BBC : grammaire, vocabulaire, actualité, avec tous les accents.",
+   pros:["100% gratuit","Contenu BBC de haute qualité","Accents variés (UK, US, monde)"],
+   cons:["Pas d'app interactive (site/podcasts)","Pas de feedback ni de correction"],
+   why:"La meilleure ressource gratuite pour muscler ta compréhension orale."}
+];
+
+let primary = null;
+let budget = "all";
+let format = "all";
+
+function score(app){
+  let s = 0;
+  if(app.tags.includes(primary)) s = 85;
+  else {
+    const rel = RELATED[primary] || [];
+    const cov = rel.filter(r => app.tags.includes(r)).length;
+    s = Math.min(68, 28 + cov * 14);
+  }
+  if(budget === "free" && !app.free) s -= 42;
+  if(budget === "cheap" && app.minPrice > 12) s -= 38;
+  if(format !== "all" && !app.format.includes(format)) s -= 55;
+  return Math.max(0, Math.min(99, Math.round(s)));
+}
+
+function matchLabel(s){
+  if(s >= 75) return "⭐ Excellent match";
+  if(s >= 50) return "👍 Très bon";
+  if(s >= 30) return "👌 Correct";
+  return "🔍 À considérer";
+}
+
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+function renderObjectives(){
+  const g = document.getElementById("objGrid");
+  g.innerHTML = Object.entries(OBJ).map(([k,o])=>`
+    <div class="obj ${primary===k?"sel":""}" data-ob="${k}">
+      <span class="chk">✓</span>
+      <span class="e">${o.emoji}</span>
+      <div class="t">${o.label}</div>
+      <div class="d">${o.desc}</div>
+    </div>`).join("");
+}
+
+function renderChips(){
+  document.querySelectorAll("#budgetChips .chip").forEach(c=>c.classList.toggle("on", c.dataset.budget===budget));
+  document.querySelectorAll("#formatChips .chip").forEach(c=>c.classList.toggle("on", c.dataset.format===format));
+}
+
+function render(){
+  renderObjectives();
+  renderChips();
+  const cards = document.getElementById("cards");
+  const count = document.getElementById("resCount");
+  if(!primary){
+    cards.innerHTML = '<div class="empty">👆 Choisis d\'abord ton objectif principal pour voir les recommandations.</div>';
+    count.innerHTML = "";
+    return;
+  }
+  const ranked = APPS.map(a=>({app:a, s:score(a)})).sort((x,y)=>y.s-x.s);
+  const visible = ranked.filter(r => r.s >= 20);
+  count.innerHTML = `<b>${visible.length}</b> app${visible.length>1?"s":""} · triées par pertinence pour « ${OBJ[primary].label} »`;
+  cards.innerHTML = visible.map((r,i)=>{
+    const a = r.app;
+    const isTop = i===0;
+    const barColor = r.s>=75 ? "var(--teal)" : r.s>=50 ? "var(--ac)" : "#c9b891";
+    const tags = a.tags.map(t=>{
+      const gold = t===primary;
+      return `<span class="ctag ${gold?"gold":""}">${gold?"★ ":""}${OBJ[t].emoji} ${OBJ[t].label}</span>`;
+    }).join("");
+    return `<div class="card ${isTop?"top":""}">
+      ${isTop?'<span class="badge-top">Top choix</span>':""}
+      <div class="c-head">
+        <div class="c-logo">${a.logo}</div>
+        <div>
+          <div class="c-name">${esc(a.name)}</div>
+          <div class="c-rating"><span class="stars">★</span> ${a.rating.toFixed(1)}</div>
+          <div class="c-price">${a.price}</div>
+        </div>
+      </div>
+      <div class="c-match">
+        <div class="m-bar"><div class="m-fill" style="width:${r.s}%;background:${barColor}"></div></div>
+        <span class="m-pct">${r.s}%</span>
+        <span>${matchLabel(r.s)}</span>
+      </div>
+      <div class="c-desc">${esc(a.desc)}</div>
+      <div class="c-tags">${tags}</div>
+      <div class="c-pc">
+        ${a.pros.map(p=>`<span class="p">${esc(p)}</span>`).join("")}
+        ${a.cons.map(c=>`<span class="c">${esc(c)}</span>`).join("")}
+      </div>
+      <div class="c-cta">
+        <a class="go" href="${a.url}" target="_blank" rel="noopener">Voir le site ↗</a>
+        <span class="why" data-why="${a.name}">Pourquoi ?</span>
+      </div>
+      <div class="why-note" id="why-${a.name.replace(/\s+/g,"")}">${esc(a.why)}</div>
+    </div>`;
+  }).join("");
+}
+
+document.addEventListener("click", e=>{
+  const ob = e.target.closest("[data-ob]");
+  if(ob){ primary = ob.dataset.ob; render(); return; }
+  const bc = e.target.closest("#budgetChips .chip");
+  if(bc){ budget = bc.dataset.budget; render(); return; }
+  const fc = e.target.closest("#formatChips .chip");
+  if(fc){ format = fc.dataset.format; render(); return; }
+  const w = e.target.closest("[data-why]");
+  if(w){
+    const el = document.getElementById("why-"+w.dataset.why.replace(/\s+/g,""));
+    if(el) el.classList.toggle("show");
+    return;
+  }
+  if(e.target.id === "reset"){ primary=null; budget="all"; format="all"; render(); }
+});
+
+render();
+</script>
+</body>
+</html>
