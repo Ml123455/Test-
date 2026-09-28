@@ -105,15 +105,27 @@
   <main id="list"></main>
 
   <footer>
-    <div class="note">⚠️ Micro MAX9814 : ton plan disait 1, mais la synchro « double écoute » en veut 2 → j'ai mis 2.</div>
+    <div class="note">⚠️ Micro MAX9814 : planche à shot = 2 (double écoute), fontaine = 1 (beat). La fontaine se monte en DIY (pompe 12V + LED), pas d'achat tout fait.</div>
     <button id="reset" type="button">Tout décocher</button>
   </footer>
 
 <script>
 ;(function(){
   var CATS = [
-    { emoji:'🍹', name:'Fontaine à punch (cocktails)', items:[
-      ['Fontaine à punch 5 L','× 1'],
+    { emoji:'🔧', name:'Fontaine à punch (montage DIY)', items:[
+      ['Pompe immergée 12V 600–800 L/h (food-grade)','× 1'],
+      ['Alim 12V 2A','× 1'],
+      ['Buck LM2596 (12V → 5V LED)','× 1'],
+      ['Arduino Nano','× 1'],
+      ['Ruban LED WS2812B 1 m 60/m (BTF-LIGHTING)','× 1'],
+      ['Micro MAX9814 (beat)','× 1'],
+      ['Tube silicone alimentaire Ø8','× 1'],
+      ['Tube transparent Ø30 (cache LED)','× 1'],
+      ['Saladier inox Ø32 cm (bac ~20 L)','× 1'],
+      ['Bols inox Ø20 + Ø12 (étages)','× 2'],
+      ['Tige filetée inox M8 40 cm + écrous','× 1']
+    ]},
+    { emoji:'🍹', name:'Punch & cocktails (consommables)', items:[
       ['Jus de fruits (ananas, multi, orange)','30 L'],
       ['Fruits frais punch (ananas, citrons verts)','1 lot'],
       ['Rhum blanc (rhum arrangé)','1 L'],
