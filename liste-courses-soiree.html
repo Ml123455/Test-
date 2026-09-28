@@ -154,6 +154,19 @@
     ]}
   ];
 
+  var DEFAULT_PRICES = {
+    '0-0':'15','0-1':'10','0-2':'5','0-3':'5','0-4':'11','0-5':'5','0-6':'3','0-7':'5','0-8':'17','0-9':'6','0-10':'8',
+    '1-0':'24','1-1':'5','1-2':'15','1-3':'8','1-4':'2','1-5':'24','1-6':'16','1-7':'49',
+    '2-0':'190','2-1':'88','2-2':'10','2-3':'12','2-4':'15','2-5':'18','2-6':'8','2-7':'5',
+    '3-0':'18','3-1':'5','3-2':'5','3-3':'5',
+    '4-0':'10',
+    '5-0':'40','5-1':'12','5-2':'33','5-3':'20','5-4':'15',
+    '6-0':'20','6-1':'15','6-2':'50','6-3':'5',
+    '7-0':'90','7-1':'80',
+    '8-0':'70','8-1':'216',
+    '9-0':'20','9-1':'5'
+  };
+
   var STORAGE_KEY = 'liste-courses-soiree-v1';
   var LINK_KEY = 'liste-courses-liens-v1';
   var list = document.getElementById('list');
@@ -214,7 +227,7 @@
         qty.addEventListener('click', function(){ openQtyEdit(id, qty); });
         var price = document.createElement('span');
         price.className = 'price';
-        price.textContent = formatPrice(prix[id]);
+        price.textContent = formatPrice(prix[id] !== undefined ? prix[id] : DEFAULT_PRICES[id]);
         price.title = 'cliquer pour saisir le prix (€)';
         price.addEventListener('click', function(){ openPriceEdit(id, price); });
         var url = links[id] !== undefined ? links[id] : (it[2] || '');
@@ -341,8 +354,8 @@
     CATS.forEach(function(cat, ci){
       cat.items.forEach(function(it, ii){
         var id = ci + '-' + ii;
-        var v = prix[id];
-        if (v === undefined || v === '') return;
+        var v = prix[id] !== undefined ? prix[id] : DEFAULT_PRICES[id];
+        if (v === undefined || v === '' || v === null) return;
         var n = parseFloat(String(v).replace(',', '.'));
         if (!isNaN(n)) t += n;
       });
