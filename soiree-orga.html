@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soirée 28-29 nov — Orga (bouffe & boissons)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background:#fafaf7; color:#1f1f1f; font-family:"Inter",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; max-width:600px; margin:0 auto; padding:18px 16px 40px; }
+  h1 { font-family:"Lora",Georgia,serif; font-size:23px; font-weight:700; letter-spacing:-0.3px; }
+  .sub { font-size:13px; color:#8a8a80; margin:2px 0 14px; }
+  .cat { background:#fff; border:1px solid #ece7da; border-radius:12px; padding:12px 14px; margin-bottom:12px; }
+  .cat h2 { display:flex; align-items:center; justify-content:space-between; font-size:16px; font-weight:700; border-left:4px solid #c8a45c; padding-left:10px; margin-bottom:6px; }
+  .cat-count { font-size:12px; font-weight:600; color:#c8a45c; background:#f4efe2; border-radius:99px; padding:2px 9px; }
+  .item { display:flex; align-items:center; gap:9px; padding:8px 2px; border-bottom:1px dashed #ece7da; }
+  .item:last-child { border-bottom:none; }
+  .item input.cb { appearance:none; -webkit-appearance:none; width:20px; height:20px; flex:0 0 20px; border:2px solid #c8a45c; border-radius:6px; cursor:pointer; position:relative; background:#fff; }
+  .item input.cb:checked { background:#c8a45c; }
+  .item input.cb:checked::after { content:""; position:absolute; left:5px; top:1px; width:5px; height:11px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg); }
+  .item .name { flex:1; font-size:15px; line-height:1.25; }
+  .item .qty { font-size:13px; font-weight:600; color:#8a8a80; white-space:nowrap; cursor:pointer; border-bottom:1px dotted #c9c4b6; }
+  .item input.cb:checked ~ .name { text-decoration:line-through; color:#b5b1a5; }
+  .item a.lnk { text-decoration:none; font-size:16px; opacity:.7; }
+  .idea-box { background:#fff; border:1px dashed #d9cba3; border-radius:12px; padding:14px; margin-bottom:12px; }
+  .idea-box h3 { font-size:15px; font-weight:700; margin-bottom:8px; }
+  .idea-box input, .idea-box textarea { width:100%; font-size:14px; font-family:inherit; padding:9px 10px; border:1px solid #d9cba3; border-radius:8px; margin-bottom:8px; }
+  .idea-box textarea { min-height:64px; resize:vertical; }
+  .idea-box button { width:100%; padding:12px; font-size:14px; font-weight:600; font-family:inherit; background:#c8a45c; color:#fff; border:none; border-radius:10px; cursor:pointer; }
+  .note { font-size:12.5px; color:#a05a2c; font-style:italic; background:#fbf3ea; border:1px solid #f0dcc3; border-radius:8px; padding:10px 12px; margin-top:12px; }
+  .toast { position:fixed; bottom:18px; left:50%; transform:translateX(-50%); background:#1f1f1f; color:#fff; padding:10px 16px; border-radius:99px; font-size:13px; opacity:0; pointer-events:none; transition:opacity .25s; z-index:99; }
+  .toast.show { opacity:1; }
+</style>
+</head>
+<body>
+  <h1>🎉 Soirée 28-29 nov — Orga</h1>
+  <div class="sub">Bouffe & boissons · coche ce qui est OK · propose des idées en bas</div>
+  <main id="list"></main>
+
+  <div class="idea-box">
+    <h3>💡 Proposer une idée / un commentaire</h3>
+    <input id="iname" type="text" placeholder="Ton prénom">
+    <textarea id="imsg" placeholder="Ton idée ou ton commentaire…"></textarea>
+    <button id="isend" type="button">📋 Copier ma proposition</button>
+  </div>
+
+  <div class="note">⚠️ Ta proposition est copiée dans le presse-papiers : colle-la dans le groupe (Discord/WhatsApp) et Marius l'ajoute à la liste.</div>
+  <div class="toast" id="toast"></div>
+
+<script>
+;(function(){
+  var CATS = [
+    { emoji:'🍸', name:'Alcool', items:[
+      ['Alcool fort (vodka/rhum/whisky)','18 btl',''],
+      ['Rhum blanc (rhum arrangé)','1 L',''],
+      ['Fruits rhum arrangé (ananas, mangue, gingembre)','1 lot',''],
+      ['Sucre de canne','300 g','']
+    ]},
+    { emoji:'🍕', name:'Bouffe', items:[
+      ['Pizzas surgelées','30',''],
+      ['Chips / olives / cacahuètes / saucisson','~6 kg',''],
+      ['Citrons + menthe','1 lot','']
+    ]},
+    { emoji:'🥤', name:'Boissons & mixers', items:[
+      ['Cola 1,75 L','70 btl',''],
+      ['Jus de fruits (ananas, multi, orange)','30 L',''],
+      ['Fruits frais punch (ananas, citrons verts)','1 lot',''],
+      ['Glaçons','10 sacs','']
+    ]},
+    { emoji:'🧃', name:'Punch & cocktails', items:[
+      ['Fontaine à punch (montage DIY)','1',''],
+      ['Pichets en verre','× 3',''],
+      ['Doseurs + shaker','× 1',''],
+      ['Verres long drink 270 ml (Action)','84 pcs',''],
+      ['Verres à shot','× 30','']
+    ]}
+  ];
+
+  var STORAGE_KEY = 'soiree-orga-v1';
+  var list = document.getElementById('list');
+  var toast = document.getElementById('toast');
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e){}
+
+  function showToast(m){ toast.textContent = m; toast.classList.add('show'); setTimeout(function(){ toast.classList.remove('show'); }, 1800); }
+
+  CATS.forEach(function(cat, ci){
+    var sec = document.createElement('section');
+    sec.className = 'cat';
+    var h = document.createElement('h2');
+    h.textContent = cat.emoji + ' ' + cat.name;
+    var cnt = document.createElement('span');
+    cnt.className = 'cat-count';
+    h.appendChild(cnt);
+    sec.appendChild(h);
+    cat.items.forEach(function(it, ii){
+      var id = ci + '-' + ii;
+      var row = document.createElement('div');
+      row.className = 'item';
+      var cb = document.createElement('input');
+      cb.type = 'checkbox'; cb.className = 'cb';
+      cb.checked = !!state[id];
+      cb.addEventListener('change', function(){
+        var s = {};
+        var all = document.querySelectorAll('input.cb');
+        for (var i=0; i<all.length; i++){ s[all[i].getAttribute('data-id')] = all[i].checked; }
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+        updateCounts();
+      });
+      cb.setAttribute('data-id', id);
+      var name = document.createElement('span');
+      name.className = 'name'; name.textContent = it[0];
+      name.addEventListener('click', function(){ cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); });
+      var qty = document.createElement('span');
+      qty.className = 'qty'; qty.textContent = it[1];
+      row.appendChild(cb); row.appendChild(name); row.appendChild(qty);
+      if (it[2]) { var a = document.createElement('a'); a.className = 'lnk'; a.href = it[2]; a.target = '_blank'; a.rel = 'noopener'; a.textContent = '🔗'; row.appendChild(a); }
+      sec.appendChild(row);
+    });
+    list.appendChild(sec);
+  });
+
+  function updateCounts(){
+    var secs = document.querySelectorAll('.cat');
+    for (var s=0; s<secs.length; s++){
+      var cbs = secs[s].querySelectorAll('input.cb');
+      var d = 0;
+      for (var c=0; c<cbs.length; c++){ if (cbs[c].checked) d++; }
+      secs[s].querySelector('.cat-count').textContent = d + '/' + cbs.length;
+    }
+  }
+  updateCounts();
+
+  document.getElementById('isend').addEventListener('click', function(){
+    var n = document.getElementById('iname').value.trim() || 'Anonyme';
+    var m = document.getElementById('imsg').value.trim();
+    if (!m) { showToast('Écris d\'abord ton idée'); return; }
+    var txt = '💡 Idée de ' + n + ' : ' + m;
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){ showToast('Copié ! Colle-le dans le groupe'); }, function(){ fallback(txt); });
+    } else { fallback(txt); }
+  });
+
+  function fallback(txt){
+    var ta = document.createElement('textarea');
+    ta.value = txt; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast('Copié ! Colle-le dans le groupe'); } catch(e){ prompt('Copie manuelle :', txt); }
+    document.body.removeChild(ta);
+  }
+})();
+</script>
+</body>
+</html>

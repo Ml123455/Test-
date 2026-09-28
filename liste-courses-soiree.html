@@ -148,10 +148,13 @@
   var plabel = document.getElementById('plabel');
   var toast = document.getElementById('toast');
 
+  var QTYS_KEY = 'liste-courses-qtys-v1';
   var state = {};
   var links = {};
+  var qtys = {};
   try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e){}
   try { links = JSON.parse(localStorage.getItem(LINK_KEY) || '{}'); } catch(e){}
+  try { qtys = JSON.parse(localStorage.getItem(QTYS_KEY) || '{}'); } catch(e){}
 
   function showToast(msg){
     toast.textContent = msg;
@@ -186,7 +189,9 @@
         name.addEventListener('click', function(){ cb.checked = !cb.checked; save(); update(); });
         var qty = document.createElement('span');
         qty.className = 'qty';
-        qty.textContent = it[1];
+        qty.textContent = qtys[id] !== undefined ? qtys[id] : it[1];
+        qty.title = 'cliquer pour modifier la quantité';
+        qty.addEventListener('click', function(){ openQtyEdit(id, qty); });
         var url = links[id] !== undefined ? links[id] : (it[2] || '');
         var lnk = document.createElement('a');
         lnk.className = 'lnk';
@@ -251,6 +256,29 @@
     var parts = id.split('-');
     var it = CATS[parseInt(parts[0],10)].items[parseInt(parts[1],10)];
     return it[2] || '';
+  }
+
+  function openQtyEdit(id, qtyEl){
+    var cur = qtys[id] !== undefined ? qtys[id] : getDefaultQty(id);
+    var inp = document.createElement('input');
+    inp.type = 'text';
+    inp.value = cur || '';
+    inp.style.cssText = 'flex:0 1 74px;font-size:13px;padding:4px 6px;border:1px solid #d9cba3;border-radius:6px;';
+    qtyEl.replaceWith(inp);
+    inp.focus();
+    function done(){
+      var v = inp.value.trim();
+      if (v) { qtys[id] = v; } else { delete qtys[id]; }
+      localStorage.setItem(QTYS_KEY, JSON.stringify(qtys));
+      render();
+    }
+    inp.addEventListener('blur', done);
+    inp.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ inp.blur(); } });
+  }
+
+  function getDefaultQty(id){
+    var p = id.split('-');
+    return CATS[parseInt(p[0],10)].items[parseInt(p[1],10)][1];
   }
 
   function save(){
