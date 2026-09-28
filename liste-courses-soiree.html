@@ -40,6 +40,13 @@
   .edit-row button { padding:8px 12px; font-size:14px; font-weight:600; border-radius:8px; border:1px solid #c8a45c; cursor:pointer; }
   .edit-row button.ok { background:#c8a45c; color:#fff; }
   .edit-row button.no { background:#fff; color:#8a6d2f; }
+  .budget { background:#fff; border:1px solid #ece7da; border-radius:12px; padding:12px 14px; margin-bottom:14px; }
+  .brow { display:flex; justify-content:space-between; align-items:center; font-size:14px; padding:4px 0; }
+  .brow b { font-size:16px; }
+  .brow input { width:56px; font-size:14px; padding:3px 6px; border:1px solid #d9cba3; border-radius:6px; text-align:center; }
+  .brow.bmarge b { color:#2e7d32; }
+  .brow.bmarge b.neg { color:#c62828; }
+  .item .price { font-size:13px; font-weight:700; color:#8a6d2f; white-space:nowrap; cursor:pointer; border-bottom:1px dotted #c9c4b6; min-width:38px; text-align:right; }
   footer { margin-top:16px; }
   .note { font-size:12.5px; color:#a05a2c; font-style:italic; background:#fbf3ea; border:1px solid #f0dcc3; border-radius:8px; padding:10px 12px; margin-bottom:12px; }
   .toolbar { display:flex; gap:8px; margin-bottom:12px; }
@@ -52,6 +59,12 @@
 <body>
   <h1>📋 Liste de courses</h1>
   <div class="sub">Soirée 28-29 nov · coche + liens achat · ✏️ pour corriger un lien</div>
+
+  <div class="budget">
+    <div class="brow"><span>💶 Dépenses</span><b id="btotal">— €</b></div>
+    <div class="brow"><span>🎟️ Entrées — <input id="bnb" type="number" min="0" value="55"> pers × 10 €</span><b id="bentrees">— €</b></div>
+    <div class="brow bmarge"><span>📈 Marge</span><b id="bmarge">— €</b></div>
+  </div>
 
   <div class="progress-wrap">
     <div class="progress"><div class="progress-fill" id="bar"></div></div>
@@ -156,6 +169,13 @@
   try { links = JSON.parse(localStorage.getItem(LINK_KEY) || '{}'); } catch(e){}
   try { qtys = JSON.parse(localStorage.getItem(QTYS_KEY) || '{}'); } catch(e){}
 
+  var PRICES_KEY = 'liste-courses-prix-v1';
+  var NPERS_KEY = 'liste-courses-npers-v1';
+  var prix = {};
+  var npers = 55;
+  try { prix = JSON.parse(localStorage.getItem(PRICES_KEY) || '{}'); } catch(e){}
+  try { npers = parseInt(localStorage.getItem(NPERS_KEY) || '55', 10); } catch(e){}
+
   function showToast(msg){
     toast.textContent = msg;
     toast.classList.add('show');
@@ -192,6 +212,11 @@
         qty.textContent = qtys[id] !== undefined ? qtys[id] : it[1];
         qty.title = 'cliquer pour modifier la quantité';
         qty.addEventListener('click', function(){ openQtyEdit(id, qty); });
+        var price = document.createElement('span');
+        price.className = 'price';
+        price.textContent = formatPrice(prix[id]);
+        price.title = 'cliquer pour saisir le prix (€)';
+        price.addEventListener('click', function(){ openPriceEdit(id, price); });
         var url = links[id] !== undefined ? links[id] : (it[2] || '');
         var lnk = document.createElement('a');
         lnk.className = 'lnk';
@@ -208,6 +233,7 @@
         row.appendChild(cb);
         row.appendChild(name);
         row.appendChild(qty);
+        row.appendChild(price);
         row.appendChild(lnk);
         row.appendChild(edt);
         sec.appendChild(row);
@@ -215,6 +241,7 @@
       list.appendChild(sec);
     });
     update();
+    updateBudget();
   }
 
   function openEdit(id, row){
@@ -281,6 +308,61 @@
     return CATS[parseInt(p[0],10)].items[parseInt(p[1],10)][1];
   }
 
+  function formatPrice(v){
+    if (v === undefined || v === '' || v === null) return '—';
+    var n = parseFloat(String(v).replace(',', '.'));
+    if (isNaN(n)) return '—';
+    return n.toFixed(2).replace('.', ',') + ' €';
+  }
+
+  function openPriceEdit(id, priceEl){
+    var cur = prix[id] !== undefined ? String(prix[id]).replace('.', ',') : '';
+    var inp = document.createElement('input');
+    inp.type = 'text';
+    inp.inputMode = 'decimal';
+    inp.placeholder = '0,00';
+    inp.value = cur;
+    inp.style.cssText = 'flex:0 1 66px;font-size:13px;padding:4px 6px;border:1px solid #d9cba3;border-radius:6px;text-align:right;';
+    priceEl.replaceWith(inp);
+    inp.focus();
+    function done(){
+      var v = inp.value.trim().replace(',', '.');
+      if (v === '') { delete prix[id]; }
+      else { prix[id] = v; }
+      localStorage.setItem(PRICES_KEY, JSON.stringify(prix));
+      render();
+    }
+    inp.addEventListener('blur', done);
+    inp.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ inp.blur(); } });
+  }
+
+  function sumPrices(){
+    var t = 0;
+    CATS.forEach(function(cat, ci){
+      cat.items.forEach(function(it, ii){
+        var id = ci + '-' + ii;
+        var v = prix[id];
+        if (v === undefined || v === '') return;
+        var n = parseFloat(String(v).replace(',', '.'));
+        if (!isNaN(n)) t += n;
+      });
+    });
+    return t;
+  }
+
+  function updateBudget(){
+    var total = sumPrices();
+    var entr = npers * 10;
+    var marge = entr - total;
+    document.getElementById('btotal').textContent = total ? total.toFixed(2).replace('.', ',') + ' €' : '— €';
+    document.getElementById('bentrees').textContent = entr + ' €';
+    var bm = document.getElementById('bmarge');
+    bm.textContent = (marge >= 0 ? '+' : '') + marge.toFixed(2).replace('.', ',') + ' €';
+    bm.classList.toggle('neg', marge < 0);
+    var nb = document.getElementById('bnb');
+    if (document.activeElement !== nb) nb.value = npers;
+  }
+
   function save(){
     var s = {};
     var all = document.querySelectorAll('input.cb');
@@ -340,6 +422,12 @@
   }
 
   render();
+
+  document.getElementById('bnb').addEventListener('change', function(){
+    npers = Math.max(0, parseInt(this.value, 10) || 0);
+    localStorage.setItem(NPERS_KEY, String(npers));
+    updateBudget();
+  });
 })();
 </script>
 </body>
