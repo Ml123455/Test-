@@ -10,92 +10,48 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body {
-    background:#fafaf7;
-    color:#1f1f1f;
+    background:#fafaf7; color:#1f1f1f;
     font-family:"Inter",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    max-width:600px;
-    margin:0 auto;
-    padding:18px 16px 40px;
+    max-width:600px; margin:0 auto; padding:18px 16px 40px;
   }
-  h1 {
-    font-family:"Lora",Georgia,serif;
-    font-size:24px; font-weight:700; letter-spacing:-0.3px;
-  }
+  h1 { font-family:"Lora",Georgia,serif; font-size:24px; font-weight:700; letter-spacing:-0.3px; }
   .sub { font-size:13px; color:#8a8a80; margin:2px 0 14px; }
-  .progress-wrap { margin-bottom:18px; }
-  .progress {
-    height:10px; background:#e9e4d6; border-radius:99px; overflow:hidden;
-  }
-  .progress-fill {
-    height:100%; width:0%;
-    background:linear-gradient(90deg,#c8a45c,#a8873e);
-    border-radius:99px; transition:width .25s ease;
-  }
+  .progress-wrap { margin-bottom:16px; }
+  .progress { height:10px; background:#e9e4d6; border-radius:99px; overflow:hidden; }
+  .progress-fill { height:100%; width:0%; background:linear-gradient(90deg,#c8a45c,#a8873e); border-radius:99px; transition:width .25s ease; }
   .progress-label { font-size:13px; color:#6f6a5a; font-weight:600; margin-top:5px; }
-  .cat {
-    background:#fff;
-    border:1px solid #ece7da;
-    border-radius:12px;
-    padding:12px 14px;
-    margin-bottom:12px;
-  }
-  .cat h2 {
-    display:flex; align-items:center; justify-content:space-between;
-    font-size:16px; font-weight:700;
-    border-left:4px solid #c8a45c;
-    padding-left:10px; margin-bottom:8px;
-  }
-  .cat-count {
-    font-size:12px; font-weight:600; color:#c8a45c;
-    background:#f4efe2; border-radius:99px; padding:2px 9px;
-  }
-  .item {
-    display:flex; align-items:center; gap:10px;
-    padding:9px 4px;
-    border-bottom:1px dashed #ece7da;
-    cursor:pointer;
-    -webkit-user-select:none; user-select:none;
-  }
+  .cat { background:#fff; border:1px solid #ece7da; border-radius:12px; padding:12px 14px; margin-bottom:12px; }
+  .cat h2 { display:flex; align-items:center; justify-content:space-between; font-size:16px; font-weight:700; border-left:4px solid #c8a45c; padding-left:10px; margin-bottom:6px; }
+  .cat-count { font-size:12px; font-weight:600; color:#c8a45c; background:#f4efe2; border-radius:99px; padding:2px 9px; }
+  .item { display:flex; align-items:center; gap:9px; padding:8px 2px; border-bottom:1px dashed #ece7da; }
   .item:last-child { border-bottom:none; }
-  .item input[type=checkbox] {
-    appearance:none; -webkit-appearance:none;
-    width:20px; height:20px; flex:0 0 20px;
-    border:2px solid #c8a45c; border-radius:6px;
-    cursor:pointer; position:relative; background:#fff;
-    transition:background .15s;
-  }
-  .item input[type=checkbox]:checked {
-    background:#c8a45c;
-  }
-  .item input[type=checkbox]:checked::after {
-    content:""; position:absolute; left:5px; top:1px;
-    width:5px; height:11px;
-    border:solid #fff; border-width:0 2px 2px 0;
-    transform:rotate(45deg);
-  }
+  .item input.cb { appearance:none; -webkit-appearance:none; width:20px; height:20px; flex:0 0 20px; border:2px solid #c8a45c; border-radius:6px; cursor:pointer; position:relative; background:#fff; transition:background .15s; }
+  .item input.cb:checked { background:#c8a45c; }
+  .item input.cb:checked::after { content:""; position:absolute; left:5px; top:1px; width:5px; height:11px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg); }
   .item .name { flex:1; font-size:15px; line-height:1.25; }
   .item .qty { font-size:13px; font-weight:600; color:#8a8a80; white-space:nowrap; }
-  .item input[type=checkbox]:checked ~ .name {
-    text-decoration:line-through; color:#b5b1a5;
-  }
+  .item input.cb:checked ~ .name { text-decoration:line-through; color:#b5b1a5; }
+  .item a.lnk { text-decoration:none; font-size:16px; flex:0 0 auto; opacity:.7; }
+  .item a.lnk:hover { opacity:1; }
+  .item button.edt { border:none; background:none; font-size:15px; cursor:pointer; opacity:.55; flex:0 0 auto; padding:2px; }
+  .item button.edt:hover { opacity:1; }
+  .edit-row { display:flex; gap:6px; padding:6px 2px 10px 31px; }
+  .edit-row input { flex:1; font-size:14px; padding:8px 10px; border:1px solid #d9cba3; border-radius:8px; font-family:inherit; }
+  .edit-row button { padding:8px 12px; font-size:14px; font-weight:600; border-radius:8px; border:1px solid #c8a45c; cursor:pointer; }
+  .edit-row button.ok { background:#c8a45c; color:#fff; }
+  .edit-row button.no { background:#fff; color:#8a6d2f; }
   footer { margin-top:16px; }
-  .note {
-    font-size:12.5px; color:#a05a2c; font-style:italic;
-    background:#fbf3ea; border:1px solid #f0dcc3; border-radius:8px;
-    padding:10px 12px; margin-bottom:14px;
-  }
-  button {
-    width:100%; padding:13px; font-size:15px; font-weight:600;
-    font-family:inherit; color:#8a6d2f;
-    background:#f4efe2; border:1px solid #d9cba3; border-radius:10px;
-    cursor:pointer;
-  }
-  button:active { background:#ece4cf; }
+  .note { font-size:12.5px; color:#a05a2c; font-style:italic; background:#fbf3ea; border:1px solid #f0dcc3; border-radius:8px; padding:10px 12px; margin-bottom:12px; }
+  .toolbar { display:flex; gap:8px; margin-bottom:12px; }
+  button.act { flex:1; padding:12px; font-size:14px; font-weight:600; font-family:inherit; color:#8a6d2f; background:#f4efe2; border:1px solid #d9cba3; border-radius:10px; cursor:pointer; }
+  button.act:active { background:#ece4cf; }
+  .toast { position:fixed; bottom:18px; left:50%; transform:translateX(-50%); background:#1f1f1f; color:#fff; padding:10px 16px; border-radius:99px; font-size:13px; opacity:0; pointer-events:none; transition:opacity .25s; z-index:99; }
+  .toast.show { opacity:1; }
 </style>
 </head>
 <body>
   <h1>📋 Liste de courses</h1>
-  <div class="sub">Soirée 28-29 nov · coche au fur et à mesure</div>
+  <div class="sub">Soirée 28-29 nov · coche + liens achat · ✏️ pour corriger un lien</div>
 
   <div class="progress-wrap">
     <div class="progress"><div class="progress-fill" id="bar"></div></div>
@@ -105,133 +61,207 @@
   <main id="list"></main>
 
   <footer>
-    <div class="note">⚠️ Micro MAX9814 : laser 1 + planche à shot 1 + fontaine 1 = 3 au total (double écoute = chaque système a le sien). Fontaine en DIY (pompe 12V + LED).</div>
-    <button id="reset" type="button">Tout décocher</button>
+    <div class="toolbar">
+      <button class="act" id="export" type="button">📋 Copier mes liens (à vérifier)</button>
+    </div>
+    <div class="note">⚠️ Micro MAX9814 : laser 1 + planche à shot 1 + fontaine 1 = 3 au total. Quand tu modifies un lien, clique « Copier mes liens » et colle-moi le résultat ici : je vérifie chaque lien.</div>
+    <button class="act" id="reset" type="button">Tout décocher</button>
   </footer>
+  <div class="toast" id="toast"></div>
 
 <script>
 ;(function(){
   var CATS = [
     { emoji:'🔧', name:'Fontaine à punch (montage DIY)', items:[
-      ['Pompe immergée 12V 600–800 L/h (food-grade)','× 1'],
-      ['Alim 12V 2A','× 1'],
-      ['Buck LM2596 (12V → 5V LED)','× 1'],
-      ['Arduino Nano','× 1'],
-      ['Ruban LED WS2812B 1 m 60/m (BTF-LIGHTING)','× 1'],
-      ['Micro MAX9814 (beat)','× 1'],
-      ['Tube silicone alimentaire Ø8','× 1'],
-      ['Tube transparent Ø30 (cache LED)','× 1'],
-      ['Saladier inox Ø32 cm (bac ~20 L)','× 1'],
-      ['Bols inox Ø20 + Ø12 (étages)','× 2'],
-      ['Tige filetée inox M8 40 cm + écrous','× 1']
+      ['Pompe immergée 12V 600–800 L/h (food-grade)','× 1','https://www.amazon.fr/Pompe-qualité-alimentaire-submersible-silencieuse/dp/B07WMNG6YW'],
+      ['Alim 12V 2A','× 1','https://www.amazon.fr/s?k=alimentation+12v+2a'],
+      ['Buck LM2596 (12V → 5V LED)','× 1','https://www.amazon.fr/s?k=lm2596+step+down+5v'],
+      ['Arduino Nano','× 1','https://www.amazon.fr/s?k=arduino+nano+ch340'],
+      ['Ruban LED WS2812B 1 m 60/m (BTF-LIGHTING)','× 1','https://www.amazon.fr/s?k=ws2812b+btf+1m+60+leds'],
+      ['Micro MAX9814 (beat)','× 1','https://www.lextronic.fr/module-microphone-amplifie-max9814-64858.html'],
+      ['Tube silicone alimentaire Ø8','× 1','https://www.amazon.fr/s?k=tube+silicone+alimentaire+8mm'],
+      ['Tube transparent Ø30 (cache LED)','× 1','https://www.amazon.fr/s?k=tube+acrylique+transparent+30mm'],
+      ['Saladier inox Ø32 cm (bac ~20 L)','× 1','https://www.amazon.fr/s?k=saladier+inox+32cm'],
+      ['Bols inox Ø20 + Ø12 (étages)','× 2','https://www.amazon.fr/s?k=bol+inox+20cm'],
+      ['Tige filetée inox M8 40 cm + écrous','× 1','https://www.amazon.fr/s?k=tige+filetee+inox+m8']
     ]},
     { emoji:'🍹', name:'Punch & cocktails (consommables)', items:[
-      ['Jus de fruits (ananas, multi, orange)','30 L'],
-      ['Fruits frais punch (ananas, citrons verts)','1 lot'],
-      ['Rhum blanc (rhum arrangé)','1 L'],
-      ['Fruits rhum arrangé (ananas, mangue, gingembre)','1 lot'],
-      ['Sucre de canne','300 g'],
-      ['Pichets en verre','× 3'],
-      ['Doseurs + shaker','× 1'],
-      ['Verres long drink 270 ml (Action)','84 pcs']
+      ['Jus de fruits (ananas, multi, orange)','30 L',''],
+      ['Fruits frais punch (ananas, citrons verts)','1 lot',''],
+      ['Rhum blanc (rhum arrangé)','1 L',''],
+      ['Fruits rhum arrangé (ananas, mangue, gingembre)','1 lot',''],
+      ['Sucre de canne','300 g',''],
+      ['Pichets en verre','× 3',''],
+      ['Doseurs + shaker','× 1',''],
+      ['Verres long drink 270 ml (Action)','84 pcs','']
     ]},
     { emoji:'🔦', name:'Système lasers', items:[
-      ['Lasers verts 5mW 532nm 5V','20 (+2)'],
-      ['Servos SG90 9g','40 (+2)'],
-      ['Embouts diffraction étoile','× 20'],
-      ['ESP32','× 1'],
-      ['PCA9685 16 canaux','× 3'],
-      ['Alimentation 5V 10A','× 1'],
-      ['Câbles dupont','1 lot'],
-      ['Micro MAX9814 (beat)','× 1']
+      ['Lasers verts 5mW 532nm 5V','20 (+2)','https://fr.aliexpress.com/item/1005007084007539.html'],
+      ['Servos SG90 9g','40 (+2)','https://www.amazon.fr/owootecc-Moteur-Hélicoptère-Bateau-Robots/dp/B07S2QSXY5'],
+      ['Embouts diffraction étoile','× 20','https://www.amazon.fr/s?k=embout+diffraction+laser+etoile'],
+      ['ESP32 (WROOM-32 38 broches)','× 1','https://www.amazon.fr/s?k=esp32+wroom+32+38pins+usb+c'],
+      ['PCA9685 16 canaux','× 3','https://www.amazon.fr/LICAEVEY-PCA9685-Canaux-Servo-Driver/dp/B0HK7S9XYP'],
+      ['Alimentation 5V 10A','× 1','https://www.amazon.fr/s?k=alimentation+5v+10a'],
+      ['Câbles dupont','1 lot','https://www.amazon.fr/s?k=cables+dupont+lot'],
+      ['Micro MAX9814 (beat)','× 1','https://www.lextronic.fr/module-microphone-amplifie-max9814-64858.html']
     ]},
     { emoji:'🥃', name:'Planche à shot', items:[
-      ['Verres à shot','× 30'],
-      ['Arduino Nano','× 1'],
-      ['Buck LM2596 (7,4V → 5V)','× 1'],
-      ['Micro MAX9814 (beat)','× 1']
+      ['Verres à shot','× 30','https://www.amazon.fr/s?k=verre+a+shot+lot'],
+      ['Arduino Nano','× 1','https://www.amazon.fr/s?k=arduino+nano+ch340'],
+      ['Buck LM2596 (7,4V → 5V)','× 1','https://www.amazon.fr/s?k=lm2596+step+down+5v'],
+      ['Micro MAX9814 (beat)','× 1','https://www.lextronic.fr/module-microphone-amplifie-max9814-64858.html']
     ]},
     { emoji:'🎛️', name:'Boîte contrôle lumières (potards)', items:[
-      ['Potards linéaires 10 kΩ','× 8']
+      ['Potards linéaires 10 kΩ','× 8','https://www.amazon.fr/s?k=potentiometre+10k+lineaire']
     ]},
     { emoji:'🌫️', name:'Ambiance (fumée + déco + buffet)', items:[
-      ['Machine à fumée BeamZ S500','× 1'],
-      ['Liquide à fumée 1 L','× 1'],
-      ['Franges métalliques (6 pièces 1×2m)','3 packs'],
-      ['Nappes élégantes','× 2'],
-      ['Tréteaux + planche (buffet DIY)','× 1']
+      ['Machine à fumée BeamZ S500','× 1','https://www.amazon.fr/s?k=beamz+s500+machine+a+fumee'],
+      ['Liquide à fumée 1 L','× 1','https://www.amazon.fr/s?k=liquide+fumee+1l'],
+      ['Franges métalliques (6 pièces 1×2m)','3 packs','https://www.amazon.fr/s?k=rideau+franges+metalliques'],
+      ['Nappes élégantes','× 2','https://www.amazon.fr/s?k=nappe+de+table+elegante'],
+      ['Tréteaux + planche (buffet DIY)','× 1','']
     ]},
     { emoji:'🧊', name:'Bar & glace', items:[
-      ['Seaux à glace métal','× 2'],
-      ['Grand bac à bouteilles / glacière','× 1'],
-      ['Glaçons','10 sacs'],
-      ['Citrons + menthe','1 lot']
+      ['Seaux à glace métal','× 2','https://www.amazon.fr/s?k=seau+a+glace+metal'],
+      ['Grand bac à bouteilles / glacière','× 1','https://www.amazon.fr/s?k=bac+a+bouteilles+glaciere'],
+      ['Glaçons','10 sacs',''],
+      ['Citrons + menthe','1 lot','']
     ]},
     { emoji:'🍕', name:'Nourriture', items:[
-      ['Pizzas surgelées','× 30'],
-      ['Chips / olives / cacahuètes / saucisson','~6 kg']
+      ['Pizzas surgelées','× 30',''],
+      ['Chips / olives / cacahuètes / saucisson','~6 kg','']
     ]},
     { emoji:'🥤', name:'Boissons & mixers', items:[
-      ['Cola 1,75 L','70 btl'],
-      ['Alcool fort (vodka/rhum/whisky)','18 btl']
+      ['Cola 1,75 L','70 btl',''],
+      ['Alcool fort (vodka/rhum/whisky)','18 btl','']
     ]},
     { emoji:'🧻', name:'Vaisselle & divers', items:[
-      ['Gobelets, pailles, assiettes','1 lot'],
-      ['Sacs poubelle','1 lot']
+      ['Gobelets, pailles, assiettes','1 lot',''],
+      ['Sacs poubelle','1 lot','']
     ]}
   ];
 
   var STORAGE_KEY = 'liste-courses-soiree-v1';
+  var LINK_KEY = 'liste-courses-liens-v1';
   var list = document.getElementById('list');
   var bar = document.getElementById('bar');
   var plabel = document.getElementById('plabel');
+  var toast = document.getElementById('toast');
 
   var state = {};
-  try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e){ state = {}; }
+  var links = {};
+  try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e){}
+  try { links = JSON.parse(localStorage.getItem(LINK_KEY) || '{}'); } catch(e){}
 
-  CATS.forEach(function(cat, ci){
-    var sec = document.createElement('section');
-    sec.className = 'cat';
-    var h = document.createElement('h2');
-    h.textContent = cat.emoji + ' ' + cat.name;
-    var cnt = document.createElement('span');
-    cnt.className = 'cat-count';
-    h.appendChild(cnt);
-    sec.appendChild(h);
-    cat.items.forEach(function(it, ii){
-      var id = ci + '-' + ii;
-      var lab = document.createElement('label');
-      lab.className = 'item';
-      var cb = document.createElement('input');
-      cb.type = 'checkbox';
-      cb.setAttribute('data-id', id);
-      if (state[id]) { cb.checked = true; }
-      cb.addEventListener('change', function(){ save(); update(); });
-      var name = document.createElement('span');
-      name.className = 'name';
-      name.textContent = it[0];
-      var qty = document.createElement('span');
-      qty.className = 'qty';
-      qty.textContent = it[1];
-      lab.appendChild(cb);
-      lab.appendChild(name);
-      lab.appendChild(qty);
-      sec.appendChild(lab);
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(function(){ toast.classList.remove('show'); }, 1800);
+  }
+
+  function render(){
+    list.innerHTML = '';
+    CATS.forEach(function(cat, ci){
+      var sec = document.createElement('section');
+      sec.className = 'cat';
+      var h = document.createElement('h2');
+      h.textContent = cat.emoji + ' ' + cat.name;
+      var cnt = document.createElement('span');
+      cnt.className = 'cat-count';
+      h.appendChild(cnt);
+      sec.appendChild(h);
+      cat.items.forEach(function(it, ii){
+        var id = ci + '-' + ii;
+        var row = document.createElement('div');
+        row.className = 'item';
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.className = 'cb';
+        cb.setAttribute('data-id', id);
+        cb.checked = !!state[id];
+        cb.addEventListener('change', function(){ save(); update(); });
+        var name = document.createElement('span');
+        name.className = 'name';
+        name.textContent = it[0];
+        name.addEventListener('click', function(){ cb.checked = !cb.checked; save(); update(); });
+        var qty = document.createElement('span');
+        qty.className = 'qty';
+        qty.textContent = it[1];
+        var url = links[id] !== undefined ? links[id] : (it[2] || '');
+        var lnk = document.createElement('a');
+        lnk.className = 'lnk';
+        lnk.textContent = '🔗';
+        lnk.title = url ? 'ouvrir le lien' : 'pas encore de lien';
+        if (url) { lnk.href = url; lnk.target = '_blank'; lnk.rel = 'noopener'; }
+        else { lnk.style.opacity = '.2'; }
+        var edt = document.createElement('button');
+        edt.className = 'edt';
+        edt.type = 'button';
+        edt.textContent = '✏️';
+        edt.title = 'modifier le lien';
+        edt.addEventListener('click', function(){ openEdit(id, row); });
+        row.appendChild(cb);
+        row.appendChild(name);
+        row.appendChild(qty);
+        row.appendChild(lnk);
+        row.appendChild(edt);
+        sec.appendChild(row);
+      });
+      list.appendChild(sec);
     });
-    list.appendChild(sec);
-  });
+    update();
+  }
+
+  function openEdit(id, row){
+    var existing = list.querySelector('.edit-row');
+    if (existing) existing.remove();
+    var cur = links[id] !== undefined ? links[id] : getDefault(id);
+    var ed = document.createElement('div');
+    ed.className = 'edit-row';
+    var inp = document.createElement('input');
+    inp.type = 'url';
+    inp.placeholder = 'https://… (colle le lien)';
+    inp.value = cur || '';
+    var ok = document.createElement('button');
+    ok.className = 'ok';
+    ok.type = 'button';
+    ok.textContent = 'OK';
+    ok.addEventListener('click', function(){
+      var v = inp.value.trim();
+      if (v) { links[id] = v; }
+      else { delete links[id]; }
+      localStorage.setItem(LINK_KEY, JSON.stringify(links));
+      ed.remove();
+      render();
+      showToast('Lien enregistré ✔');
+    });
+    var no = document.createElement('button');
+    no.className = 'no';
+    no.type = 'button';
+    no.textContent = '✕';
+    no.addEventListener('click', function(){ ed.remove(); });
+    ed.appendChild(inp);
+    ed.appendChild(ok);
+    ed.appendChild(no);
+    row.parentNode.insertBefore(ed, row.nextSibling);
+    inp.focus();
+  }
+
+  function getDefault(id){
+    var parts = id.split('-');
+    var it = CATS[parseInt(parts[0],10)].items[parseInt(parts[1],10)];
+    return it[2] || '';
+  }
 
   function save(){
     var s = {};
-    var all = document.querySelectorAll('input[type=checkbox]');
-    for (var i=0; i<all.length; i++){
-      s[all[i].getAttribute('data-id')] = all[i].checked;
-    }
+    var all = document.querySelectorAll('input.cb');
+    for (var i=0; i<all.length; i++){ s[all[i].getAttribute('data-id')] = all[i].checked; }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
   }
 
   function update(){
-    var all = document.querySelectorAll('input[type=checkbox]');
+    var all = document.querySelectorAll('input.cb');
     var done = 0;
     for (var i=0; i<all.length; i++){ if (all[i].checked) done++; }
     var pct = all.length ? Math.round(done/all.length*100) : 0;
@@ -239,7 +269,7 @@
     plabel.textContent = done + ' / ' + all.length + ' · ' + pct + '%';
     var secs = document.querySelectorAll('.cat');
     for (var s=0; s<secs.length; s++){
-      var cbs = secs[s].querySelectorAll('input[type=checkbox]');
+      var cbs = secs[s].querySelectorAll('input.cb');
       var d = 0;
       for (var c=0; c<cbs.length; c++){ if (cbs[c].checked) d++; }
       var cc = secs[s].querySelector('.cat-count');
@@ -249,12 +279,39 @@
 
   document.getElementById('reset').addEventListener('click', function(){
     if (!confirm('Tout décocher ?')) return;
-    var all = document.querySelectorAll('input[type=checkbox]');
+    var all = document.querySelectorAll('input.cb');
     for (var i=0; i<all.length; i++){ all[i].checked = false; }
     save(); update();
   });
 
-  update();
+  document.getElementById('export').addEventListener('click', function(){
+    var lines = [];
+    CATS.forEach(function(cat, ci){
+      cat.items.forEach(function(it, ii){
+        var id = ci + '-' + ii;
+        var url = links[id] !== undefined ? links[id] : (it[2] || '');
+        if (url) lines.push(it[0] + ' → ' + url);
+      });
+    });
+    var txt = lines.join('\n');
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){
+        showToast('Liens copiés (' + lines.length + ') — colle-les à Hermes');
+      }, function(){ promptCopy(txt); });
+    } else { promptCopy(txt); }
+  });
+
+  function promptCopy(txt){
+    var ta = document.createElement('textarea');
+    ta.value = txt;
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); showToast('Liens copiés (' + txt.split('\n').length + ')'); }
+    catch(e){ prompt('Copie manuelle :', txt); }
+    document.body.removeChild(ta);
+  }
+
+  render();
 })();
 </script>
 </body>
