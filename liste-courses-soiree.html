@@ -47,6 +47,7 @@
   .brow.bmarge b { color:#2e7d32; }
   .brow.bmarge b.neg { color:#c62828; }
   .item .price { font-size:13px; font-weight:700; color:#8a6d2f; white-space:nowrap; cursor:pointer; border-bottom:1px dotted #c9c4b6; min-width:38px; text-align:right; }
+  .subtotal { text-align:right; font-size:13px; font-weight:700; color:#8a6d2f; padding-top:7px; margin-top:2px; border-top:1px solid #ece7da; }
   footer { margin-top:16px; }
   .note { font-size:12.5px; color:#a05a2c; font-style:italic; background:#fbf3ea; border:1px solid #f0dcc3; border-radius:8px; padding:10px 12px; margin-bottom:12px; }
   .toolbar { display:flex; gap:8px; margin-bottom:12px; }
@@ -251,6 +252,10 @@
         row.appendChild(edt);
         sec.appendChild(row);
       });
+      var sub = document.createElement('div');
+      sub.className = 'subtotal';
+      sub.textContent = 'Total : ' + formatPrice(sumCatPrices(ci));
+      sec.appendChild(sub);
       list.appendChild(sec);
     });
     update();
@@ -349,17 +354,26 @@
     inp.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ inp.blur(); } });
   }
 
+  function itemPrice(id){
+    var v = prix[id] !== undefined ? prix[id] : DEFAULT_PRICES[id];
+    if (v === undefined || v === '' || v === null) return null;
+    var n = parseFloat(String(v).replace(',', '.'));
+    return isNaN(n) ? null : n;
+  }
+
+  function sumCatPrices(ci){
+    var t = 0;
+    var cat = CATS[ci];
+    for (var ii = 0; ii < cat.items.length; ii++){
+      var n = itemPrice(ci + '-' + ii);
+      if (n !== null) t += n;
+    }
+    return t;
+  }
+
   function sumPrices(){
     var t = 0;
-    CATS.forEach(function(cat, ci){
-      cat.items.forEach(function(it, ii){
-        var id = ci + '-' + ii;
-        var v = prix[id] !== undefined ? prix[id] : DEFAULT_PRICES[id];
-        if (v === undefined || v === '' || v === null) return;
-        var n = parseFloat(String(v).replace(',', '.'));
-        if (!isNaN(n)) t += n;
-      });
-    });
+    for (var ci = 0; ci < CATS.length; ci++) t += sumCatPrices(ci);
     return t;
   }
 
