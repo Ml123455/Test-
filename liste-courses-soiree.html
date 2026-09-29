@@ -76,9 +76,9 @@
 
   <footer>
     <div class="toolbar">
-      <button class="act" id="export" type="button">📋 Copier mes liens (à vérifier)</button>
+      <button class="act" id="export" type="button">📋 Copier mes liens modifiés</button>
     </div>
-    <div class="note">⚠️ Micro MAX9814 : laser 1 + planche à shot 1 + fontaine 1 = 3 au total. Quand tu modifies un lien, clique « Copier mes liens » et colle-moi le résultat ici : je vérifie chaque lien.</div>
+    <div class="note">⚠️ Micro MAX9814 : laser 1 + planche à shot 1 + fontaine 1 = 3 au total. Quand tu modifies un lien, clique « Copier mes liens modifiés » → ça copie UNIQUEMENT ceux que tu as changés → colle-moi ça ici, je vérifie chaque lien.</div>
     <button class="act" id="reset" type="button">Tout décocher</button>
   </footer>
   <div class="toast" id="toast"></div>
@@ -426,10 +426,10 @@
     CATS.forEach(function(cat, ci){
       cat.items.forEach(function(it, ii){
         var id = ci + '-' + ii;
-        var url = links[id] !== undefined ? links[id] : (it[2] || '');
-        if (url) lines.push(it[0] + ' → ' + url);
+        if (links[id] !== undefined) lines.push(it[0] + ' → ' + links[id]);
       });
     });
+    if (!lines.length) { showToast('Aucun lien modifié pour l\'instant'); return; }
     var txt = lines.join('\n');
     if (navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(txt).then(function(){
