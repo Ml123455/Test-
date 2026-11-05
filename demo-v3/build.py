@@ -13,7 +13,7 @@ def ic(nom, cls="ico"):
     return f'<svg class="{cls}" viewBox="0 0 24 24" aria-hidden="true">{inner}</svg>'
 
 
-NAV = [("index.html", "Accueil"), ("realisations.html", "Réalisations"), ("services.html", "Services &amp; prix"), ]
+NAV = [("index.html", "Accueil"), ("realisations.html", "Réalisations"), ("services.html", "Services"), ]
 
 
 def page(fichier, titre, desc, corps):
@@ -57,7 +57,7 @@ index = f"""
 </div><figure class="hero-photo"><img src="img/atelier-travail.jpg" alt="Finition à la main d'un plateau en bois" fetchpriority="high"><figcaption>{ic("hammer")} Fabriqué à l'atelier, posé chez vous</figcaption></figure></section>
 
 <section class="section"><div class="wrap"><div class="head"><div><p class="eyebrow">Ce qu'on fait</p><h2>Trois façons de <em>vous aider.</em></h2></div><p>Un besoin précis ou une simple idée : on commence par vous écouter, puis on vous propose une solution et un prix.</p></div>
-<div class="cards">{"".join(f'<article class="card"><div class="ico-big">{ic(i)}</div><h3>{t}</h3><p>{d}</p><div class="price">{p}</div></article>' for i, t, d, p in SERVICES)}</div></div></section>
+<div class="cards">{"".join(f'<article class="card"><div class="ico-big">{ic(i)}</div><h3>{t}</h3><p>{d}</p></article>' for i, t, d, p in SERVICES)}</div></div></section>
 
 <section class="section" style="padding-top:0"><div class="wrap"><div class="head"><div><p class="eyebrow">Réalisations</p><h2>Du travail <em>qui se voit.</em></h2></div><a class="btn btn-line" href="realisations.html">Voir toutes les réalisations {ic("arrow-right")}</a></div>
 <div class="gallery"><figure><img src="img/table-design.jpg" alt="Table en bois et acier" loading="lazy"><figcaption><b>La table qui rassemble</b>Mobilier</figcaption></figure>
@@ -84,9 +84,8 @@ FAQ = [("Faut-il un plan précis pour demander un devis ?", "Non. Une idée et d
        ("Combien de temps pour un meuble ?", "Comptez quelques semaines selon le projet. Le délai est écrit sur le devis avant que vous vous engagiez."),
        ("Intervenez-vous chez moi ?", "Oui, dans le secteur de l'atelier. Indiquez votre ville dans le formulaire et on vous confirme.")]
 services = f"""
-<section class="wrap page-title"><p class="eyebrow">Services &amp; prix</p><h1>Ce qu'on fait, <em>et ce que ça coûte.</em></h1><p>Des prix de départ pour vous repérer. Le prix exact est sur le devis, gratuit et sans engagement.</p></section>
-<section class="section"><div class="wrap"><div class="cards">{"".join(f'<article class="card"><div class="ico-big">{ic(i)}</div><h3>{t}</h3><p>{d}</p><div class="price">{p}</div></article>' for i, t, d, p in SERVICES)}</div>
-<p class="note">Prix d'exemple pour cette démonstration.</p></div></section>
+<section class="wrap page-title"><p class="eyebrow">Services</p><h1>Ce qu'on fait, <em>pour vous.</em></h1><p>Chaque projet est différent : le prix exact est sur le devis, gratuit et sans engagement.</p></section>
+<section class="section"><div class="wrap"><div class="cards">{"".join(f'<article class="card"><div class="ico-big">{ic(i)}</div><h3>{t}</h3><p>{d}</p></article>' for i, t, d, p in SERVICES)}</div></div></section>
 <section class="section" style="padding-top:0"><div class="wrap split"><div><p class="eyebrow">Questions fréquentes</p><h2>Avant de <em>se lancer.</em></h2></div><div>{"".join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in FAQ)}</div></div></section>{band()}"""
 
 devis = f"""
@@ -103,7 +102,7 @@ devis = f"""
 
 for f, t, d, c in [("index.html", "Menuisier sur mesure", "Meubles, agencements et extérieurs en bois sur mesure. Devis gratuit sous 48 h.", index),
                    ("realisations.html", "Réalisations", "Quelques réalisations de menuiserie sur mesure.", realisations),
-                   ("services.html", "Services et prix", "Meubles, agencement, extérieur : services et prix de départ.", services),
+                   ("services.html", "Services", "Meubles, agencement, extérieur : nos services.", services),
                    ("devis.html", "Devis gratuit", "Demandez un devis gratuit, réponse sous 48 h.", devis)]:
     (pathlib.Path(__file__).parent / f).write_text(page(f, t, d, c))
 print("4 pages générées")
