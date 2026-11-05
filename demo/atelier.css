@@ -212,3 +212,22 @@ body:not(.js-ready) .filters{display:none}
 .contact-email{display:block;width:100%;font-size:13px;text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}
 .contact-details a:focus-visible{outline-color:var(--paper)}
 .contact-phone:hover,.contact-email:hover{color:#d7c2a9}
+
+.contact-modal{position:fixed;inset:0;margin:auto;width:min(520px,calc(100% - 32px));max-width:none;max-height:calc(100dvh - 32px);padding:66px 36px 30px;border:1px solid var(--line);background:var(--paper);color:var(--ink);overflow-y:auto;box-shadow:0 25px 90px #0003}
+.contact-modal::backdrop{background:rgba(25,29,23,.78);backdrop-filter:blur(5px)}
+.contact-modal-close{position:absolute;right:20px;top:14px;display:flex;align-items:center;gap:16px;min-height:38px;padding:0 5px;border:0;background:none;font-size:12px}
+.contact-modal-close>span{font-size:28px;line-height:1}
+.contact-modal>.eyebrow{margin-bottom:16px;font-size:9px}
+.contact-modal h2{font-size:44px}
+.contact-modal>p:not(.eyebrow){font-size:14px;color:var(--muted);line-height:1.75;margin-top:17px}
+.contact-options{display:grid;gap:12px;font-style:normal;margin-top:25px}
+.contact-option{display:flex;align-items:center;gap:15px;padding:17px 15px;background:var(--white);border:1px solid var(--line);transition:background .2s,border-color .2s}
+.contact-option:hover{background:#eae8de;border-color:#93998a}
+.contact-option-icon{flex-shrink:0;width:26px;display:grid;place-items:center;font-size:25px;line-height:1;color:var(--forest)}
+.contact-option-icon svg{width:26px;height:26px}
+.contact-option>span:nth-child(2){min-width:0}
+.contact-option strong{display:block;font-size:14px;font-weight:600}
+.contact-option>span:nth-child(2)>span{display:block;font-size:12px;color:var(--muted);overflow-wrap:anywhere;margin-top:3px}
+.contact-option-arrow{margin-left:auto;font-size:20px;color:var(--copper)}
+.contact-modal>.contact-modal-note{font-size:11px!important;margin-top:22px!important}
+@media(max-width:600px){.contact-modal{padding:60px 22px 24px}.contact-modal h2{font-size:38px}.contact-option{gap:12px;padding:15px 12px}.contact-option>span:nth-child(2)>span{font-size:11px}.contact-option strong{font-size:13px}}

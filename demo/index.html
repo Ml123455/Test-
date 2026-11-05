@@ -15,8 +15,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="atelier.css">
-  <script src="atelier.js" defer></script>
+  <link rel="stylesheet" href="atelier.css?v=contact-modal-1">
+  <script src="atelier.js?v=contact-modal-1" defer></script>
 </head>
 <body>
   <a class="skip" href="#contenu">Aller au contenu</a>
@@ -118,5 +118,17 @@
   </main>
   <footer class="site-footer wrap"><div class="footer-top"><a class="brand" href="#accueil"><span class="brand-mark" aria-hidden="true">a.</span><span>L’Atelier<small>CONCEPTION WEB · MARIUS LAGRUE</small></span></a><a href="#accueil" class="back-top">Retour en haut <span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><p>Une démonstration conçue par <a href="https://lgmartisanat.com/">Marius Lagrue · LGM Artisanat ↗</a></p><p>Concept de site de menuiserie · L’Atelier est un nom de démonstration · Formulaire sans envoi.</p></div></footer>
   <dialog class="lightbox" id="project-dialog" aria-labelledby="dialog-title"><div class="lightbox-layout"><div class="lightbox-photo"><img id="dialog-image" src="img/table-design.jpg" alt=""><div class="lightbox-controls"><button type="button" id="previous-project" aria-label="Réalisation précédente">←</button><span id="dialog-counter" aria-live="polite"></span><button type="button" id="next-project" aria-label="Réalisation suivante">→</button></div></div><div class="lightbox-copy"><button class="dialog-close" type="button" aria-label="Fermer les détails">Fermer <span aria-hidden="true">×</span></button><p class="eyebrow" id="dialog-kind"></p><h2 id="dialog-title"></h2><p id="dialog-description"></p><a href="#contact" id="dialog-contact" class="button button-dark">J’ai une idée similaire <span aria-hidden="true">↗</span></a><p class="lightbox-note">Projet présenté dans cette démonstration de site. Utilisez les flèches pour parcourir les images.</p></div></div></dialog>
+  <dialog class="contact-modal" id="contact-dialog" aria-labelledby="contact-dialog-title" aria-describedby="contact-dialog-description">
+    <button class="contact-modal-close" type="button" aria-label="Fermer la fenêtre de contact" autofocus>Fermer <span aria-hidden="true">×</span></button>
+    <p class="eyebrow">MARIUS LAGRUE · LGM ARTISANAT</p>
+    <h2 id="contact-dialog-title">On en <em>parle ?</em></h2>
+    <p id="contact-dialog-description">Pour discuter de votre site, choisissez ce qui vous convient.</p>
+    <address class="contact-options">
+      <a href="tel:+33674438216" class="contact-option"><span class="contact-option-icon" aria-hidden="true">☎</span><span><strong>M’appeler</strong><span>06 74 43 82 16</span></span><span class="contact-option-arrow" aria-hidden="true">↗</span></a>
+      <a href="https://wa.me/33674438216?text=Bonjour%20Marius%2C%20je%20souhaite%20discuter%20d%E2%80%99un%20site%20internet%20pour%20mon%20activit%C3%A9." class="contact-option" target="_blank" rel="noopener noreferrer"><span class="contact-option-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.1-4.4A8.5 8.5 0 1 1 20 11.5Z"/><path d="M8 7c0 4 2 6 6 7l1-2-2-1-1 1-2-2 1-1-1-2Z" stroke-linejoin="round"/></svg></span><span><strong>WhatsApp</strong><span>M’envoyer un message <span class="sr-only">(ouvre un nouvel onglet)</span></span></span><span class="contact-option-arrow" aria-hidden="true">↗</span></a>
+      <a href="mailto:mariuslagrue@lgmartisanat.com" class="contact-option"><span class="contact-option-icon" aria-hidden="true">✉</span><span><strong>M’écrire par e-mail</strong><span>mariuslagrue@lgmartisanat.com</span></span><span class="contact-option-arrow" aria-hidden="true">↗</span></a>
+    </address>
+    <p class="contact-modal-note">Fermez cette fenêtre pour reprendre votre visite.</p>
+  </dialog>
 </body>
 </html>

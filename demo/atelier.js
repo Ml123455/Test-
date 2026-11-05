@@ -137,3 +137,30 @@ projectForm.addEventListener('submit', (event) => {
 });
 projectForm.addEventListener('input', () => { feedback.hidden = true; });
 projectForm.querySelector('[type="submit"]').disabled = false;
+
+
+const contactDialog = document.querySelector('#contact-dialog');
+let contactReturnFocus = null;
+
+if (typeof contactDialog.showModal === 'function') {
+  document.querySelectorAll('a[href="#me-contacter"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      contactReturnFocus = mobileMenu.matches && navigation.contains(link) ? menuButton : link;
+      closeMenu();
+      contactDialog.showModal();
+      document.body.classList.add('modal-open');
+    });
+  });
+  contactDialog.querySelector('.contact-modal-close').addEventListener('click', () => contactDialog.close());
+  contactDialog.addEventListener('close', () => {
+    if (!document.querySelector('dialog[open]')) document.body.classList.remove('modal-open');
+    if (contactReturnFocus) contactReturnFocus.focus({ preventScroll: true });
+  });
+  contactDialog.addEventListener('click', (event) => {
+    if (event.target !== contactDialog) return;
+    const bounds = contactDialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) contactDialog.close();
+  });
+}
