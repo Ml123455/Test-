@@ -56,6 +56,11 @@ index = f"""
 <div class="proofs"><span>{ic("clock")} Devis sous 48 h</span><span>{ic("shield-check")} Prix annoncé avant de commencer</span><span>{ic("map-pin")} Intervention dans votre secteur</span></div>
 </div><figure class="hero-photo"><img src="img/atelier-travail.jpg" alt="Finition à la main d'un plateau en bois" fetchpriority="high"><figcaption>{ic("hammer")} Fabriqué à l'atelier, posé chez vous</figcaption></figure></section>
 
+<section class="section" style="padding-block:clamp(48px,6vw,90px);background:#ece6d8"><div class="wrap"><div class="head"><div><p class="eyebrow">Pourquoi un site ?</p><h2>Trois raisons, <em>une seule idée.</em></h2></div><p>Un site, c'est ce que vos futurs clients regardent avant de décider qui appeler.</p></div>
+<div class="cards"><article class="card"><div class="ico-big">{ic("search")}</div><h3>On vous trouve</h3><p>Quand quelqu'un cherche votre métier près de chez vous sur Google ou sur Maps, il vous voit, avec votre fiche et vos photos.</p></article>
+<article class="card"><div class="ico-big">{ic("shield-check")}</div><h3>On vous fait confiance</h3><p>Vos vraies réalisations sont visibles avant même le premier appel. Un client rassuré appelle plus vite.</p></article>
+<article class="card"><div class="ico-big">{ic("phone")}</div><h3>Vous recevez des appels</h3><p>Un bouton « Appeler » et un devis en trois champs, faciles à utiliser sur téléphone.</p></article></div></div></section>
+
 <section class="section"><div class="wrap"><div class="head"><div><p class="eyebrow">Ce qu'on fait</p><h2>Trois façons de <em>vous aider.</em></h2></div><p>Un besoin précis ou une simple idée : on commence par vous écouter, puis on vous propose une solution et un prix.</p></div>
 <div class="cards">{"".join(f'<article class="card"><div class="ico-big">{ic(i)}</div><h3>{t}</h3><p>{d}</p></article>' for i, t, d, p in SERVICES)}</div></div></section>
 
