@@ -50,7 +50,7 @@ SERVICES = [
 index = f"""
 <section class="wrap hero"><div>
 <p class="eyebrow">Menuisier à votre service</p>
-<h1>Des meubles faits <em>pour chez vous.</em></h1>
+<h1>Des meubles faits <em>pour vous.</em></h1>
 <p class="lead">Table, escalier, terrasse : on dessine, on fabrique et on pose. Vous recevez un devis clair sous 48 h, sans engagement.</p>
 <div class="cta-row"><a class="btn btn-copper" href="devis.html">{ic("pencil-ruler")} Demander mon devis gratuit</a><a class="btn btn-line" href="tel:{TEL}">{ic("phone")} Appeler maintenant</a></div>
 <div class="proofs"><span>{ic("clock")} Devis sous 48 h</span><span>{ic("shield-check")} Prix annoncé avant de commencer</span><span>{ic("map-pin")} Intervention dans votre secteur</span></div>
