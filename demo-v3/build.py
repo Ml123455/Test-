@@ -24,7 +24,7 @@ def page(fichier, titre, desc, corps):
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css"><script src="site.js" defer></script></head><body>
-<div class="demo-bar"><div class="wrap"><span>Exemple de site pour artisan<span class="long"> : le vôtre aurait votre nom, vos photos, votre numéro.</span></span><a href="tel:{TEL}">Je veux le même site : 06 74 43 82 16</a></div></div>
+<div class="demo-bar"><div class="wrap"><span>Exemple de site pour artisan<span class="long"> : le vôtre aurait votre nom, vos photos, votre numéro.</span></span><a class="bar-cta" href="tel:{TEL}">{ic("phone")} Je veux le même site : <b>06 74 43 82 16</b></a></div></div>
 <header class="site-header"><div class="wrap nav">
 <a class="brand" href="index.html"><span class="brand-mark">a.</span><span>L'Atelier du Bois<small>MENUISERIE · AGENCEMENT</small></span></a>
 <button class="burger" aria-expanded="false" aria-controls="menu">{ic("menu")} Menu</button>
